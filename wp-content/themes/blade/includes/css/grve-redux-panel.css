@@ -1,0 +1,623 @@
+
+
+/* =============================================================================
+- Header
+============================================================================= */
+.grve-redux-container.redux-container #redux-intro-text {
+	display: none;
+}
+
+.grve-redux-container.redux-container #info_bar,
+.grve-redux-container.redux-container #redux-footer {
+	background-color: #ffffff  !important;
+	padding: 12px 10px;
+}
+
+.grve-redux-container.redux-container #redux-header .display_header {
+	margin: 0;
+	width: 250px;
+	height: 160px;
+	background-color: #0B0B0B;
+}
+
+.grve-redux-container.redux-container #redux-header {
+	padding: 0;
+	position: relative;
+	border-bottom: 3px solid #0fb6ea;
+}
+
+.grve-redux-container.redux-container #redux-header .grve-theme-version {
+	position: absolute;
+	right: 20px;
+	top: 50%;
+	-webkit-transform: translateY(-50%);
+	-moz-transform:    translateY(-50%);
+	-ms-transform:     translateY(-50%);
+	-o-transform:      translateY(-50%);
+	transform:         translateY(-50%);
+}
+
+.grve-redux-container.redux-container #redux-header .grve-redux-logo {
+	position: relative;
+	top: 50%;
+	height: 53px;
+}
+
+.grve-redux-container.redux-container #redux-header .grve-redux-logo img {
+	display: block;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	height: 100%;
+	top: -50%;
+	width: auto;
+	max-width: none;
+}
+
+.grve-redux-container.redux-container #redux-header .rAds,
+#redux_rAds  .rAds {
+	opacity: 0;
+	height: 0;
+	display: hidden !important;
+}
+
+.grve-redux-container.redux-container .ui-button-text-only .ui-button-text {
+    padding: 0;
+}
+
+/* =============================================================================
+- Side Area
+============================================================================= */
+.grve-redux-container .redux-sidebar {
+	width: 250px;
+}
+
+.grve-redux-container.redux-container {
+	background: #23282D !important;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li a:first-child {
+    border-top: none;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li a {
+	display: block;
+	padding: 15px 4px 15px 20px;
+	background: #23282D !important;
+	background: 0 0;
+	border-width: 1px 0;
+	border-style: solid;
+	border-bottom-color: #464447;
+	border-top-color: #F9F9F9;
+	opacity: 1;
+	color: #ffffff;
+	font-weight: 300;
+	text-decoration: none;
+	-webkit-transition: none;
+	transition: none;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-tab-link-a i {
+	vertical-align: middle;
+	font-size: 0.9em;
+	top: 20px;
+	position: absolute;
+}
+
+.grve-redux-container .redux-sidebar .subsection .redux-group-tab-link-a i {
+    display: none;
+}
+
+.grve-redux-container .redux-sidebar .redux-menu-warning i,
+.grve-redux-container .redux-sidebar .redux-menu-error i,
+.grve-redux-container .redux-sidebar .hasSubSections .extraIconSubsections i {
+	margin: 0;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li.active a,
+.grve-redux-container .redux-sidebar .redux-group-menu li.active a:hover,
+.grve-redux-container .redux-sidebar .redux-group-menu li.activeChild a,
+.grve-redux-container .redux-sidebar .redux-group-menu li.activeChild a:hover,
+.admin-color-fresh .grve-redux-container .redux-sidebar .redux-group-menu li.active.hasSubSections a {
+	background: #0B0B0B !important;
+	border-bottom-color: #0B0B0B;
+	color: #ffffff !important;
+	width: auto;
+	opacity: 1;
+	display: block;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li a:hover,
+.grve-redux-container .redux-sidebar .redux-group-menu li.active.hasSubSections ul.subsection li a:hover{
+	color:#000000;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li.active.hasSubSections a {
+	color: #ffffff;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li a:hover {
+	color: #ffffff;
+	background-color: #000000 !important;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li.active.hasSubSections ul.subsection li a,
+.grve-redux-container .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li a,
+.grve-redux-container .redux-sidebar .redux-group-menu li.active.hasSubSections ul.subsection li.hasIcon a,
+.grve-redux-container .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li.hasIcon a {
+	width: auto;
+	border-top: 0!important;
+	padding: 15px;
+	color: #ffffff;
+	background-color: #32373C !important;
+	-webkit-transition: all .2;
+	-moz-transition: all .2;
+	-ms-transition: all .2;
+	-o-transition: all .2;
+	transition: all .2;
+}
+
+.grve-redux-container .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li.active a {
+	color: #35cfff !important;
+}
+
+/* =============================================================================
+- Table Style
+============================================================================= */
+.grve-redux-container .redux-main {
+	background-color: #ffffff;
+	margin-left: 250px;
+	border-left: none;
+}
+
+.grve-redux-container.redux-container .redux-main .redux-group-tab > h2 {
+	margin: 20px 0 30px 0;
+	padding: 15px;
+	background-color: #f3f3f3;
+	line-height: 1.500em;
+	color: #000000;
+}
+
+.grve-redux-container.redux-container .redux-main .redux-section-desc {
+	font-size: 16px;
+	line-height: 1.500em;
+	font-weight: 300;
+	color: #000000;
+	margin-bottom: 30px;
+}
+
+.grve-redux-container.redux-container .redux-main .redux-group-tab > h2 + .redux-section-desc {
+	margin-top: -10px;
+}
+
+.grve-redux-container.redux-container .redux-main .form-table th .redux_field_th {
+    padding: 40px 60px 40px 0;
+}
+
+.grve-redux-container .redux-main .redux-field-container {
+    padding: 25px 0;
+}
+
+.redux_field_th {
+    display: block;
+    font-weight: 600;
+}
+
+.redux_field_th .description {
+    display: block;
+    font-weight: normal;
+}
+
+/* =============================================================================
+- Description Title
+============================================================================= */
+.grve-redux-container.redux-container .redux-main .redux-notice-field {
+	margin: 15px 0 0;
+	background-color: #0fb6ea;
+	color: #ffffff;
+	border-left: none;
+	-webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,0);
+	box-shadow: 0 1px 1px 0 rgba(0,0,0,0);
+	padding: 1px 12px;
+}
+
+/* =============================================================================
+- General Items Style
+============================================================================= */
+.grve-redux-container.redux-container .redux-main .media_upload_button,
+.grve-redux-container.redux-container .redux-main .button-small,
+.grve-redux-container.redux-container .redux-main .cb-enable,
+.grve-redux-container.redux-container .redux-main .cb-disable,
+.grve-redux-container.redux-container .redux-main .select2-choice,
+.grve-redux-container.redux-container .redux-main .select2-drop,
+.grve-redux-container.redux-container .redux-main .select2-arrow,
+.grve-redux-container.redux-container .redux-main .select2-choice,
+.grve-redux-container.redux-container .redux-main .select2-drop,
+.grve-redux-container.redux-container .redux-main .select2-container-multi .select2-choices,
+.grve-redux-container.redux-container .redux-main input[type=text] {
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+
+	transition: all 200ms ease-in-out;
+	line-height: 30px;
+	margin: 0 !important;
+	border-color: #cccccc !important;
+	background: #f4f2f2 !important;
+	height: 32px !important;
+}
+
+.grve-redux-container.redux-container .redux-main textarea {
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+
+	margin: 0 !important;
+	border-color: #cccccc !important;
+	background: #f4f2f2 !important;
+}
+
+.grve-redux-container.redux-container .redux-main .select2-container,
+.grve-redux-container.redux-container .redux-main input[type=text]:not(.mini),
+.grve-redux-container.redux-container .redux-main textarea {
+	width: 100% !important;
+}
+
+
+/* =============================================================================
+- Color Picker
+============================================================================= */
+.grve-redux-container.redux-container .redux-main .wp-color-result {
+	height: 30px;
+	box-sizing: border-box;
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	border-color: #cccccc !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-color-result-text{
+	box-sizing: border-box;
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	border-color: #cccccc !important;
+	line-height: 28px;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-color-result:after {
+	line-height: 28px;
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	background: #f4f2f2 !important;
+	border-color: #cccccc !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container {
+	padding-top: 0;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-color-result {
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container .wp-color-result > span {
+	border-top-left-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container input[type="text"] {
+	width: 174px !important;
+	margin: 0 3px !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container .iris-picker .iris-picker-inner > .iris-strip {
+	left: 0;
+	margin-left: 0 !important;
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+}
+
+.iris-picker .iris-square,
+.iris-picker .iris-slider,
+.iris-picker .iris-square-inner,
+.iris-picker .iris-palette {
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container .iris-picker .iris-picker-inner > .iris-alpha-slider {
+	margin-left: 23px !important;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container .iris-picker {
+	margin-top: 3px;
+}
+
+.grve-redux-container.redux-container .redux-main .wp-picker-container .iris-border {
+	border-radius: 0;
+	-moz-border-radius: 0;
+	-webkit-border-radius: 0;
+    width: 352px !important;
+	background: #f4f2f2 !important;
+	border-color: #cccccc !important;
+}
+
+/* =============================================================================
+- Switcher
+============================================================================= */
+.grve-redux-container.redux-container .redux-main .grve-redux-container.redux-container-switch .cb-enable span,
+.grve-redux-container.redux-container .redux-main .grve-redux-container.redux-container-switch .cb-disable span {
+	line-height: 30px;
+}
+.grve-redux-container.redux-container .redux-main .grve-redux-container.redux-container-switch .switch-options {
+	min-height: 32px !important;
+}
+
+.grve-redux-container.redux-container .redux-main .cb-enable.selected {
+	background-image: none !important;
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	border-color: rgba(0,0,0,0.1) !important;
+	background-color: #0fb6ea !important;
+	color: #fff;
+}
+
+.grve-redux-container.redux-container .redux-main .cb-disable.selected {
+	background: #23282d !important;
+	color: #eee;
+}
+
+
+/* =============================================================================
+- Select2 Item
+============================================================================= */
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice {
+	height: 30px !important;
+}
+
+.grve-redux-container.redux-container .redux-main .select2-container.select2-allowclear .select2-choice .select2-chosen {
+	margin-right: 52px;
+}
+
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice > .select2-chosen {
+	margin-right: 35px;
+}
+
+/* Select clear button */
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice abbr {
+	right: 37px;
+	top: 0px;
+	height: 100%;
+	background: none !important;
+}
+
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice abbr:after {
+	content: "\f335";
+	font-family: dashicons;
+	font-size: 12px;
+	color: #777;
+}
+
+/* Select arrow */
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice .select2-arrow {
+	width: 30px;
+	height: 30px !important;
+	background-image: none !important;
+	background-color: #fff;
+}
+
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice .select2-arrow b {
+	text-align: center;
+	background: none !important;
+}
+
+.grve-redux-container.redux-container .redux-main .select2-container .select2-choice .select2-arrow b:after {
+	content: "\f347";
+	font-family: dashicons;
+	font-size: 12px;
+	color: #777;
+}
+
+
+/* =============================================================================
+- Checkbox
+============================================================================= */
+.grve-redux-container.redux-container .redux-main input[type="checkbox"] {
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	transition: all 200ms ease-in-out;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	border-color: #cccccc !important;
+	background: #f4f2f2 !important;
+	height: 22px;
+	width: 22px;
+}
+
+.grve-redux-container.redux-container .redux-main input[type="checkbox"]:checked {
+	background-color: #0fb6ea !important;
+	border-color: rgba(0,0,0,0.1) !important;
+}
+
+.grve-redux-container.redux-container .redux-main input[type="checkbox"]:checked::before {
+	color: #fff;
+	margin: 0 0 0 -1px;
+	height: 20px;
+	line-height: 20px;
+	width: 20px;
+	text-align: center;
+}
+
+
+/* =============================================================================
+- Input Prepend - Append
+============================================================================= */
+.grve-redux-container.redux-container .redux-main .input-append .add-on,
+.grve-redux-container.redux-container .redux-main .input-prepend .add-on {
+	border: 1px solid !important;
+	border-color: #cccccc !important;
+	height: 32px;
+	width: 32px;
+	font-size: 12px;
+	background-color: #fff;
+	box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	-webkit-border-radius: 0 !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	border-top-left-radius: 0 !important;
+	border-top-right-radius: 0 !important;
+	box-sizing: border-box;
+	color: rgba(0,0,0,0.5);
+	border: none;
+	padding: 0;
+}
+
+.grve-redux-container.redux-container .redux-main .input-append .add-on .icon-large,
+.grve-redux-container.redux-container .redux-main .input-prepend .add-on .icon-large {
+	height: 30px;
+	line-height: 30px;
+}
+
+.grve-redux-container.redux-container .redux-main .add-on .el-arrow-up:before {
+	content: "\f343";
+	font-family: dashicons;
+	font-size: 12px;
+	color: #777;
+}
+
+.grve-redux-container.redux-container .redux-main .add-on .el-arrow-down:before {
+	content: "\f347";
+	font-family: dashicons;
+	font-size: 12px;
+	color: #777;
+}
+
+.grve-redux-container.redux-container .redux-main .input-append input.mini,
+.grve-redux-container.redux-container .redux-main .input-prepend input.mini {
+	width: 68px;
+}
+
+.grve-redux-container.redux-container .redux-main .input-append input.redux-typography-letter {
+	width: 140px;
+}
+
+.grve-redux-container .redux-main .redux-typography-container .input_wrapper {
+	min-width: auto;
+	width: auto;
+	max-width: 50%;
+	margin: 0;
+}
+
+
+/* =============================================================================
+- Redux Buttons
+============================================================================= */
+.grve-redux-container.redux-container #redux_save {
+	background: #0fb6ea;
+	height: 35px;
+	line-height: 35px;
+	box-shadow: none;
+	margin-top: 0;
+	margin-left: 5px;
+	border: none;
+	text-shadow: none;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-transition : all .3s;
+	-moz-transition    : all .3s;
+	-ms-transition     : all .3s;
+	-o-transition      : all .3s;
+	transition         : all .3s;
+}
+
+.grve-redux-container.redux-container #redux-defaults-section,
+.grve-redux-container.redux-container #redux-defaults {
+	background: #f3f3f3;
+	height: 35px;
+	line-height: 35px;
+	box-shadow: none;
+	margin-top: 0;
+	margin-left: 5px;
+	border: none;
+	text-shadow: none;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-transition : all .3s;
+	-moz-transition    : all .3s;
+	-ms-transition     : all .3s;
+	-o-transition      : all .3s;
+	transition         : all .3s;
+}
+
+.grve-redux-container.redux-container #redux_save:hover,
+.grve-redux-container.redux-container #redux-defaults-section:hover,
+.grve-redux-container.redux-container #redux-defaults:hover {
+	background-color: #0B0B0B;
+	color: #ffffff;
+}
+
+.grve-redux-container.redux-container #redux_save:hover {
+	background-color: #0B0B0B;
+}
+
+@media screen and (max-width: 600px) {
+	.grve-redux-container .redux-sidebar {
+		width: 44px;
+	}
+	.grve-redux-container .redux-main {
+		margin-left: 43px;
+		max-width: 100%;
+		width: auto;
+	}
+
+	.grve-redux-container .redux-sidebar .subsection .redux-group-tab-link-a i {
+		display: block;
+	}
+}
+
+/* =============================================================================
+- Checkboxes Columns
+============================================================================= */
+.grve-redux-container .redux-main .grve-redux-columns .data-full li {
+    float: left;
+    width: 33%;
+}
+
+/* =============================================================================
+- RTL
+============================================================================= */
+.rtl .grve-redux-container.redux-container #redux-header .display_header {
+	float: right;
+}
+
+.rtl .grve-redux-container.redux-container #redux-header .grve-theme-version {
+	right: auto;
+	left: 20px;
+}
+
+.rtl .grve-redux-container .redux-main {
+	margin-left: 0;
+	margin-right: 250px;
+}
+
+.rtl .grve-redux-container #redux-footer {
+	right: auto !important;
+}

@@ -1,0 +1,12 @@
+[23-May-2018 12:15:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function blade_grve_visibility() in /home/anandap/public_html/wp-content/themes/blade/footer.php:2
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/themes/blade/footer.php on line 2
+[23-May-2018 12:15:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function language_attributes() in /home/anandap/public_html/wp-content/themes/blade/header.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/themes/blade/header.php on line 3
+[23-May-2018 12:15:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function get_header() in /home/anandap/public_html/wp-content/themes/blade/index.php:1
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/themes/blade/index.php on line 1

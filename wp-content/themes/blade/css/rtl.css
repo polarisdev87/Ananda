@@ -1,0 +1,430 @@
+body {
+	direction: rtl;
+	unicode-bidi: embed;
+}
+
+/* =============================================================================
+- Top Bar
+============================================================================= */
+
+#grve-top-bar ul.grve-left-side li.grve-topbar-item {
+	margin-right: 0;
+	margin-left: 15px;
+}
+
+#grve-top-bar ul.grve-left-side li.grve-topbar-item ul li {
+	margin-right: 0;
+	margin-left: 15px;
+}
+
+#grve-top-bar ul.grve-right-side li.grve-topbar-item {
+	margin-left: 0;
+	margin-right: 15px;
+}
+
+#grve-top-bar ul.grve-right-side li.grve-topbar-item ul li {
+	margin-left: 0;
+	margin-right: 15px;
+}
+/* =============================================================================
+- Main Menu
+============================================================================= */
+#grve-header .grve-horizontal-menu ul.grve-menu > li {
+	float: right;
+}
+
+#grve-header .grve-horizontal-menu ul.grve-menu li {
+	direction: ltr;
+}
+
+#grve-header .grve-horizontal-menu ul.grve-menu ul {
+	left: auto;
+	right: 0;
+}
+
+#grve-header .grve-horizontal-menu ul.grve-menu li:not(.megamenu) ul ul {
+	left: auto;
+	right: 100%;
+	margin-left: 0;
+	margin-right: 2px;
+}
+
+/* Menu Description */
+#grve-main-menu .sub-menu .grve-menu-description {
+	text-align: right;
+	padding-right: 0;
+	padding-left: 30px;
+}
+
+/* Side Menu */
+#grve-main-header.grve-header-side .grve-main-header-wrapper {
+	padding-right: 0;
+	padding-left: 30px;
+}
+.grve-slide-menu ul.grve-menu .grve-arrow {
+    left: 0;
+	right: auto;
+}
+
+.grve-slide-menu ul.grve-menu .grve-arrow:after {
+	content: '\e60c';
+}
+
+.grve-slide-menu ul.grve-menu .grve-goback .grve-arrow:after {
+	content: '\e60b';
+}
+.grve-slide-menu ul.grve-menu ul {
+	left: 0;
+	right: 100%;
+}
+
+#grve-hidden-menu:not(.grve-align-center) ul li {
+	text-align: right;
+}
+
+/* Sub Menu */
+#grve-main-menu ul li {
+	text-align: right;
+}
+
+/* Header Elements */
+.grve-header-element {
+	direction: ltr;
+}
+
+/* Menu Label */
+#grve-main-menu .grve-item .label,
+#grve-hidden-menu .grve-item .label {
+	float: left;
+	margin-left: 0;
+	margin-right: 8px;
+}
+
+/* Arrows */
+#grve-main-menu.grve-horizontal-menu.grve-arrow ul li.menu-item-has-children > a:after {
+	content: '\f104';
+	right: 100%;
+	margin-left: 0px;
+	margin-right: 5px
+}
+
+#grve-main-menu.grve-horizontal-menu.grve-arrow li ul li.menu-item-has-children > a:after {
+	right: auto;
+	left: 0px;
+}
+
+/* Toggle Arrows */
+.grve-toggle-menu:not(.grve-align-center) ul.grve-menu li.menu-item-has-children a {
+	padding-left: 40px;
+	padding-right: 0;
+}
+
+.grve-toggle-menu ul.grve-menu li a .grve-arrow {
+	right: auto;
+	left: 0;
+}
+
+/* Menu Icon */
+#grve-top-bar  .grve-menu-icon,
+#grve-footer  .grve-menu-icon,
+.grve-anchor-menu   .grve-menu-icon,
+#grve-main-menu .grve-menu-icon,
+#grve-hidden-menu .grve-menu-icon {
+	margin-right: 0;
+	margin-left: 5px;
+}
+
+
+
+/* =============================================================================
+- Background Image
+============================================================================= */
+.grve-background-wrapper {
+	direction: ltr;
+}
+
+/* =============================================================================
+--- Blog Meta
+============================================================================= */
+.grve-blog-large ul.grve-post-meta {
+	padding-right: 30px;
+}
+
+/* =============================================================================
+--- Blog Small Media
+============================================================================= */
+.grve-blog-small .grve-blog-item {
+	direction: ltr;
+}
+
+.grve-blog-small .grve-blog-item .grve-post-content {
+	direction: rtl;
+}
+
+/* =============================================================================
+- Owl Carousel
+============================================================================= */
+#grve-feature-slider,
+.owl-carousel {
+	direction: ltr;
+}
+
+#grve-feature-slider .grve-content {
+	direction: rtl;
+}
+
+.grve-carousel.grve-carousel-element .owl-item,
+.grve-flexible-carousel.grve-carousel-element .owl-item {
+	float: right;
+}
+
+/* =============================================================================
+- Magnific Popup
+============================================================================= */
+.mfp-counter {
+	right: auto;
+	left: 0;
+}
+
+.mfp-title {
+	text-align: right;
+	padding-left: 36px;
+	padding-right: 0;
+}
+
+/* =============================================================================
+- Navigation Bar
+============================================================================= */
+.grve-navigation-bar {
+	direction: ltr;
+}
+
+.grve-navigation-bar .grve-nav-item .grve-title,
+.grve-navigation-bar .grve-related-content .grve-title {
+	direction: rtl;
+}
+
+/* =============================================================================
+- Single Post Tags
+============================================================================= */
+.grve-single-post-tags ul li {
+	margin-right: 0;
+	margin-left: 14px;
+}
+
+/* =============================================================================
+- Dropcap
+============================================================================= */
+p.grve-dropcap:first-letter {
+	float: none;
+}
+
+/* =============================================================================
+- Woocommerce
+============================================================================= */
+.woocommerce div.product form.cart div.quantity {
+	float: right;
+	margin: 0 0 0 15px;
+}
+.woocommerce div.product form.cart .button {
+	float: right;
+}
+.woocommerce ul.cart_list li img,
+.woocommerce ul.product_list_widget li img {
+	margin-left: 20px;
+}
+.woocommerce span.onsale {
+	left: inherit;
+	right: 15px;
+}
+
+/* =============================================================================
+- Select Drop Down
+============================================================================= */
+#grve-theme-wrapper select  {
+	background-position: center left;
+}
+
+/* =============================================================================
+- Search
+============================================================================= */
+#grve-theme-wrapper .grve-search input[type='text'] {
+	padding-right: 10px;
+	padding-left: 50px;
+}
+
+#grve-theme-wrapper .grve-search button[type='submit'] {
+	right: auto;
+	left: 6px;
+}
+
+
+/* =============================================================================
+- Widget Contact Info (GRVE WIDGET)
+============================================================================= */
+.grve-widget.grve-contact-info li i {
+	margin-right: 0;
+	margin-left: 20px;
+	float: right;
+}
+
+/* =============================================================================
+- Widget Archive
+============================================================================= */
+.widget.widget_archive ul li {
+	text-align: left;
+}
+
+.widget.widget_archive ul li a {
+	float: right;
+}
+
+/* =============================================================================
+- Widget Categories
+============================================================================= */
+.widget.widget_categories ul li {
+	text-align: left;
+}
+
+.widget.widget_categories ul li ul {
+	padding-left: 0;
+	padding-right: 10px;
+}
+
+.widget.widget_categories ul li a {
+	float: right;
+}
+
+/* =============================================================================
+- Widget Pages
+============================================================================= */
+.widget.widget_pages li ul {
+	padding-left: 0;
+	padding-right: 10px;
+}
+
+/* =============================================================================
+- Widget Calendar
+============================================================================= */
+.widget.widget_calendar caption {
+	text-align: right;
+}
+
+/* =============================================================================
+- Widget Tagcloud
+============================================================================= */
+.widget.widget_tag_cloud a {
+	margin-left: 4px;
+	margin-right: 0;
+}
+
+/* =============================================================================
+- Woo Tag Cloud
+============================================================================= */
+.grve-widget.woocommerce.widget_product_tag_cloud a {
+	margin-left: 4px;
+	margin-right: 0;
+}
+
+/* =============================================================================
+- Woo Categories Widget
+============================================================================= */
+
+.widget.woocommerce.widget_product_categories li {
+	text-align: left;
+}
+
+.widget.woocommerce.widget_product_categories ul li a {
+	float: right;
+}
+/* =============================================================================
+- Widget Custom Menu
+============================================================================= */
+.widget.widget_nav_menu li ul {
+	padding-left: 0;
+	padding-right: 10px;
+}
+
+.widget.widget_nav_menu ul li.menu-item-has-children a {
+	padding-left: 40px;
+	padding-right: 0;
+}
+
+.widget li a .grve-arrow {
+	left: 0;
+	right: auto;
+}
+
+/* =============================================================================
+- Widget Latest Comments (GRVE WIDGET)
+============================================================================= */
+.grve-widget.grve-comments li img {
+	float: right;
+}
+
+.grve-widget.grve-comments li img + .grve-comment-content {
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+/* =============================================================================
+- Widget Latest News (GRVE WIDGET)
+============================================================================= */
+.grve-widget.grve-latest-news li a.grve-post-thumb + .grve-news-content {
+	padding-left: 0;
+	padding-right: 20px;
+}
+
+
+/* =============================================================================
+- Pagination
+============================================================================= */
+.grve-pagination ul li a .grve-icon-arrow-right:before {
+	content: "\e60c";
+}
+
+.grve-pagination ul li a .grve-icon-arrow-left:before {
+	content: "\e60b";
+}
+
+/* =============================================================================
+- Magnific Popup Galleries
+============================================================================= */
+.mfp-arrow-right:before {
+	content: '\e60c';
+}
+
+.mfp-arrow-left:before {
+	content: '\e60b';
+}
+
+.mfp-arrow-left {
+	left: auto;
+	right: 20px;
+}
+
+.mfp-arrow-right {
+	left: 20px;
+	right: auto;
+}
+
+/* =============================================================================
+- Contact Forms
+============================================================================= */
+.wpcf7-form {
+	direction: rtl;
+}
+/* Form with icons */
+.wpcf7-form .grve-with-icon i {
+	position: absolute;
+	top: 14px;
+	left: auto;
+	right: 16px;
+	width: 40px;
+	text-align: center;
+}
+
+#grve-theme-wrapper .wpcf7-form .grve-with-icon input {
+	padding-left: 0;
+	padding-right: 40px;
+}
