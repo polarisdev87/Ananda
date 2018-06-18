@@ -262,3 +262,4 @@ function wptp_add_tags_to_attachments() {
 add_action( 'init' , 'wptp_add_tags_to_attachments' );
 
 
+show_admin_bar(false);

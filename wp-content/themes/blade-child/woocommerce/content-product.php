@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 
 // Ensure visibility
-if ( empty( $product ) || ! $product->is_visible() ) {
-	return;
-}
+// if ( empty( $product ) || ! $product->is_visible() ) {
+// 	return;
+// }
 
 // Extra post classes
 $classes = array();
@@ -76,7 +76,7 @@ add_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_produc
 	<div class="grve-product-item">
 		<div class="grve-product-media grve-image-hover">
 
-			<a href="<?php echo esc_url( get_permalink() ); ?>">
+			<a href="<?php echo is_user_logged_in() ? esc_url( get_permalink() ) : esc_url('/my-account'); ?>">
 
 				<?php
 					/**
@@ -110,6 +110,8 @@ add_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_produc
 			</a>
 
 			<?php woocommerce_template_loop_rating(); ?>
+
+			<?php if (is_user_logged_in()) : ?>
 			<div class="grve-product-content">
 				<div class="grve-product-switcher">
 					<div class="grve-product-price grve-link-text">
@@ -120,6 +122,7 @@ add_action('woocommerce_after_shop_loop_item', 'woocommerce_template_loop_produc
 					</div>
 				</div>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 	<?php
