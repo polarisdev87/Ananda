@@ -10,7 +10,7 @@ $customer_orders = get_posts( array(
     'meta_key'    => '_customer_user',
     'meta_value'  => get_current_user_id(),
     'post_type'   => wc_get_order_types(),
-    'post_status' => array_keys( wc_get_order_statuses() ),
+    'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
 ) );
 
 $loyal_count = 1;
