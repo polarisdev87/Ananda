@@ -228,7 +228,11 @@ function show_checkout_notice() {
         ob_end_flush();
     } else ob_end_clean();
 }
+
 add_filter( 'wc_product_sku_enabled', 'filter_wc_product_sku_enabled', 10, 1 ); 
+function filter_wc_product_sku_enabled($true) {
+    return $true;
+}
 
 function ananda_get_coa_attachments() {
 
