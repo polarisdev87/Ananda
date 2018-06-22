@@ -274,3 +274,26 @@ add_action( 'init' , 'wptp_add_tags_to_attachments' );
 
 
 show_admin_bar(false);
+
+
+
+function wpb_woo_my_account_order() {
+    $myorder = array(
+        'dashboard'          => __( 'Dashboard', 'woocommerce' ),
+        'orders'             => __( 'Orders', 'woocommerce' ),
+        'edit-address'       => __( 'Addresses', 'woocommerce' ),
+        'edit-account'       => __( 'Manage account', 'woocommerce' ),
+        // 'my-custom-endpoint' => __( 'My Stuff', 'woocommerce' ),
+        // 'downloads'          => __( 'Download MP4s', 'woocommerce' ),
+        // 'payment-methods'    => __( 'Payment Methods', 'woocommerce' ),
+        'customer-logout'    => __( 'Logout', 'woocommerce' ),
+    );
+    return $myorder;
+}
+add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_order' );
+
+add_filter('woocommerce_save_account_details_required_fields', 'wc_save_account_details_required_fields' );
+function wc_save_account_details_required_fields( $required_fields ){
+    unset( $required_fields['account_display_name'] );
+    return $required_fields;
+}
