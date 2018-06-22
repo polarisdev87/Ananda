@@ -52,6 +52,11 @@ class WC_XR_Contact_Manager {
 		$billing_country = $old_wc ? $order->billing_country : $order->get_billing_country();
 		$address->set_country( $billing_country );
 
+		// Set AttentionTo
+		$billing_first_name = $old_wc ? $order->billing_first_name : $order->get_billing_first_name();
+		$billing_last_name  = $old_wc ? $order->billing_last_name : $order->get_billing_last_name();
+		$address->set_attentionto( $billing_first_name . ' ' . $billing_last_name );
+
 		// Set line 2
 		$billing_address_2 = $old_wc ? $order->billing_address_2 : $order->get_billing_address_2();
 		if ( strlen( $billing_address_2 ) > 0 ) {

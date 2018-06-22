@@ -13,6 +13,7 @@ class WC_XR_Address {
 	private $region = '';
 	private $postal_code = '';
 	private $country = '';
+	private $attentionto = '';
 
 	/**
 	 * @return string
@@ -113,6 +114,20 @@ class WC_XR_Address {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function get_attentionto() {
+		return apply_filters( 'woocommerce_xero_address_attentionto', $this->attentionto, $this );
+	}
+
+	/**
+	 * @param string $attentionto
+	 */
+	public function set_attentionto( $attentionto ) {
+		$this->attentionto = htmlspecialchars( $attentionto );
+	}
+
+	/**
 	 * Return XML of address
 	 *
 	 * @return string
@@ -142,6 +157,9 @@ class WC_XR_Address {
 
 		// Country
 		$xml .= '<Country>' . $this->get_country() . '</Country>';
+
+		// AttentionTo
+		$xml .= '<AttentionTo>' . $this->get_attentionto() . '</AttentionTo>';
 
 		$xml .= '</Address>';
 
