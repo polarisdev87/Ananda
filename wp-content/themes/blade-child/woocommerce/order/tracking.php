@@ -2,6 +2,15 @@
 /**
  * Order tracking
  *
+ * This template can be overridden by copying it to yourtheme/woocommerce/order/tracking.php.
+ *
+ * HOWEVER, on occasion WooCommerce will need to update template files and you
+ * (the theme developer) will need to copy the new files to your theme to
+ * maintain compatibility. We try to do this as little as possible, but it does
+ * happen. When this occurs the version of the template file will be bumped and
+ * the readme will list any important changes.
+ *
+ * @see 	https://docs.woocommerce.com/document/template-structure/
  * @author  WooThemes
  * @package WooCommerce/Templates
  * @version 2.2.0
@@ -44,4 +53,3 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <?php do_action( 'woocommerce_view_order', $order->get_id() );
 	
-//Omit closing PHP tag to avoid accidental whitespace output errors.

@@ -1,14 +1,13 @@
 <?php
 /**
- * Checkout terms and conditions checkbox
+ * Checkout terms and conditions area.
  *
- * @author 		WooThemes
- * @package 	WooCommerce/Templates
- * @version     3.1.1
+ * @package WooCommerce/Templates
+ * @version 3.4.0
  */
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
+
+defined( 'ABSPATH' ) || exit;
+
 $terms_page_id = wc_get_page_id( 'terms' );
 
 if ( $terms_page_id > 0 && apply_filters( 'woocommerce_checkout_show_terms', true ) ) :

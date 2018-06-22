@@ -87,4 +87,3 @@ foreach ($customer_orders as $order) {
 	 */
 	do_action( 'woocommerce_after_my_account' );
 
-/* Omit closing PHP tag at the end of PHP files to avoid "headers already sent" issues. */

@@ -10,7 +10,7 @@
  * happen. When this occurs the version of the template file will be bumped and
  * the readme will list any important changes.
  *
- * @see 	    https://docs.woothemes.com/document/template-structure/
+ * @see 	    https://docs.woocommerce.com/document/template-structure/
  * @author 		WooThemes
  * @package 	WooCommerce/Templates
  * @version     3.0.0
@@ -102,5 +102,3 @@ if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 	<?php endif;
 }
 wp_reset_postdata();
-
-//Omit closing PHP tag to avoid accidental whitespace output errors.
