@@ -460,6 +460,9 @@ class WC_XR_Invoice {
 		// Total
 		$xml .= '<Total>' . $this->get_total() . '</Total>';
 
+		// BrandingThemeID
+		$xml .= '<BrandingThemeID>d415c810-ccc3-4e10-b6ae-4c7cd17030e8</BrandingThemeID>';
+
 		// End Invoice
 		$xml .= '</Invoice>';
 

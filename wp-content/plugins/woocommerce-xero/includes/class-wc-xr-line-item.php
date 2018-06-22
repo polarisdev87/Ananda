@@ -460,6 +460,16 @@ class WC_XR_Line_Item {
 			$xml .= '<DiscountRate>' . $discount_rate . '</DiscountRate>';
 		}
 
+		$xml .= '
+	        <Tracking>
+	          <TrackingCategory>
+	            <TrackingCategoryID>9e66fb8b-fc16-4f6e-b1cd-188bd5a914a7</TrackingCategoryID>
+	            <Name>Cost Centres</Name>
+	            <Option>Medicine Sales & Marketing - RX</Option>
+	          </TrackingCategory>
+	        </Tracking>
+	    ';
+
 		$xml .= '</LineItem>';
 
 		return $xml;
