@@ -1,0 +1,20 @@
+[07-Jun-2018 09:37:45 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php on line 57
+[07-Jun-2018 16:20:39 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php on line 57
+[07-Jun-2018 19:20:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php on line 57
+[07-Jun-2018 22:22:44 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php on line 57
+[09-Jun-2018 02:06:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-xero/woo-includes/woo-functions.php on line 57
