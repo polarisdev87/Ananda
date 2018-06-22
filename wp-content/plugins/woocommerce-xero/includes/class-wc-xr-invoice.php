@@ -380,17 +380,18 @@ class WC_XR_Invoice {
 		$xml .= '<Type>' . $this->get_type() . '</Type>';
 
 		// Add Contact
-		if ( $this->get_contact()->get_id() ) {
-			$xml .= $this->get_contact()->id_to_xml();
+		$contact = $this->get_contact();
+		if ( $contact->get_id() ) {
+			$xml .= $contact->id_to_xml();
 		} else {
-			$xml .= $this->get_contact()->to_xml();
+			$xml .= $contact->to_xml();
 		}
 
 		// Date
 		$xml .= '<Date>' . $this->get_date() . '</Date>';
 
 		// Due Date
-		$xml .= '<DueDate>' . $this->get_due_date() . '</DueDate>';
+		$xml .= '<DueDate>' . $this->get_date() . '</DueDate>';
 
 		// Invoice Number
 		$invoice_number = $this->get_invoice_number();
@@ -400,18 +401,20 @@ class WC_XR_Invoice {
 
 		// Reference
 		$order = $this->get_order();
-		$reference_pieces = array();
-		$payment_method = $old_wc ? $order->payment_method : $order->get_payment_method();
-		if ( ! empty( $payment_method ) ) {
-			$reference_pieces[] = $payment_method;
-		}
-		$transaction_id = $old_wc ? $order->transaction_id : $order->get_transaction_id();
-		if ( ! empty( $transaction_id ) ) {
-			$reference_pieces[] = $transaction_id;
-		}
-		if ( 0 < count( $reference_pieces ) ) {
-			$xml .= '<Reference>' . implode( ' ', $reference_pieces ) . '</Reference>';
-		}
+		// $reference_pieces = array();
+		// $payment_method = $old_wc ? $order->payment_method : $order->get_payment_method();
+		// if ( ! empty( $payment_method ) ) {
+		// 	$reference_pieces[] = $payment_method;
+		// }
+		// $transaction_id = $old_wc ? $order->transaction_id : $order->get_transaction_id();
+		// if ( ! empty( $transaction_id ) ) {
+		// 	$reference_pieces[] = $transaction_id;
+		// }
+		// if ( 0 < count( $reference_pieces ) ) {
+		// 	$xml .= '<Reference>' . implode( ' ', $reference_pieces ) . '</Reference>';
+		// }
+		$current_user = $order->get_user();
+		$xml .= '<Reference>' . ($current_user ? $current_user->display_name : $contact->get_name()). '</Reference>';
 
 		// URL
 		$order_id = $old_wc ? $order->id : $order->get_id();
