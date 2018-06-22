@@ -461,14 +461,14 @@ class WC_XR_Line_Item {
 		}
 
 		$xml .= '
-	        <Tracking>
-	          <TrackingCategory>
-	            <TrackingCategoryID>9e66fb8b-fc16-4f6e-b1cd-188bd5a914a7</TrackingCategoryID>
-	            <Name>Cost Centres</Name>
-	            <Option>Medicine Sales & Marketing - RX</Option>
-	          </TrackingCategory>
-	        </Tracking>
-	    ';
+			<Tracking>
+				<TrackingCategory>
+					<TrackingCategoryID>9e66fb8b-fc16-4f6e-b1cd-188bd5a914a7</TrackingCategoryID>
+					<Name>Cost Centres</Name>
+					<Option>Medicine Sales &amp; Marketing - RX</Option>
+				</TrackingCategory>
+			</Tracking>
+		';
 
 		$xml .= '</LineItem>';
 
