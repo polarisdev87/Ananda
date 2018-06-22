@@ -15,9 +15,9 @@ $customer_orders = get_posts( array(
 
 $loyal_count = 1;
 
-if ( count( $customer_orders ) < $loyal_count ) {
-	header("Location: /products");
-} else {
+// if ( count( $customer_orders ) < $loyal_count ) {
+// 	header("Location: /products");
+// } else {
 
 ?>
 <?php get_header(); ?>
@@ -65,6 +65,6 @@ if ( count( $customer_orders ) < $loyal_count ) {
 
 <?php
 	}
-}
+// }
 
 //Omit closing PHP tag to avoid accidental whitespace output errors.
