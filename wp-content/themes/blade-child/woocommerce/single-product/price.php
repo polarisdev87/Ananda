@@ -23,4 +23,4 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $product;
 
 ?>
-<p class="price"><?php echo $product->get_price_html(); ?></p>
+<h3 class="price"><?php echo wp_kses_post($product->get_price_html()); ?></h3>
