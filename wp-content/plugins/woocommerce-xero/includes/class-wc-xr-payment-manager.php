@@ -25,7 +25,7 @@ class WC_XR_Payment_Manager {
 		if ( 'on' === $this->settings->get_option( 'send_payments' ) ) {
 			add_action( 'woocommerce_order_status_completed', array( $this, 'send_payment' ) );
 		} else {
-			add_filter( 'woocommerce_payment_complete_order_status', array( $this, 'send_payment' ) );
+			add_action( 'woocommerce_pre_payment_complete', array( $this, 'send_payment' ), 20 );
 		}
 
 		add_filter( 'woocommerce_xero_order_payment_date', array( $this, 'cod_payment_set_payment_date_as_current_date' ), 10, 2 );
