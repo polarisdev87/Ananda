@@ -373,6 +373,8 @@ class WC_XR_Invoice {
 
 		$old_wc = version_compare( WC_VERSION, '3.0', '<' );
 
+		$order = $this->get_order();
+
 		// Start Invoice
 		$xml = '<Invoice>';
 
@@ -399,8 +401,18 @@ class WC_XR_Invoice {
 			$xml .= '<InvoiceNumber>' . $invoice_number . '</InvoiceNumber>';
 		}
 
+		// URL
+		$order_id = $old_wc ? $order->id : $order->get_id();
+		$path = '/post.php?post=' . esc_attr( intval( $order_id ) ) . '&amp;action=edit';
+		$url =  admin_url( $path );
+		// Check for port number (port numbers in URLs are not allowed by Xero)
+		$port = parse_url( $url, PHP_URL_PORT );
+		// Only add the Url to the XML if a port number is NOT present
+		if ( empty( $port ) ) {
+			$xml .= '<Url>' . esc_url( $url ) . '</Url>';
+		}
+
 		// Reference
-		$order = $this->get_order();
 		// $reference_pieces = array();
 		// $payment_method = $old_wc ? $order->payment_method : $order->get_payment_method();
 		// if ( ! empty( $payment_method ) ) {
@@ -413,19 +425,7 @@ class WC_XR_Invoice {
 		// if ( 0 < count( $reference_pieces ) ) {
 		// 	$xml .= '<Reference>' . implode( ' ', $reference_pieces ) . '</Reference>';
 		// }
-		$current_user = $order->get_user();
-		$xml .= '<Reference>' . ($current_user ? $current_user->display_name : $contact->get_name()). '</Reference>';
-
-		// URL
-		$order_id = $old_wc ? $order->id : $order->get_id();
-		$path = '/post.php?post=' . esc_attr( intval( $order_id ) ) . '&amp;action=edit';
-		$url =  admin_url( $path );
-		// Check for port number (port numbers in URLs are not allowed by Xero)
-		$port = parse_url( $url, PHP_URL_PORT );
-		// Only add the Url to the XML if a port number is NOT present
-		if ( empty( $port ) ) {
-			$xml .= '<Url>' . esc_url( $url ) . '</Url>';
-		}
+		$xml .= '<Reference>' . get_post_meta( $order_id, 'rep_name', true ) '</Reference>';
 
 		// Line Amount Types. Always send prices exclusive VAT.
 		$xml .= '<LineAmountTypes>Exclusive</LineAmountTypes>';
