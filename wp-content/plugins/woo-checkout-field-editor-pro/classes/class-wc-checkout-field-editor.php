@@ -492,7 +492,9 @@ class WC_Checkout_Field_Editor {
 						}
 												
 						if( isset( $options['options'] ) && is_array($options['options']) ) {
-							$options['options'] = implode("|", $options['options']);
+							$options['options'] = implode("|", array_map(function ($key, $value) {
+								return $key . ':' . $value;
+							}, array_keys($options['options']), array_values($options['options'])));
 						}else{
 							$options['options'] = '';
 						}
@@ -691,7 +693,16 @@ class WC_Checkout_Field_Editor {
 			$fields[$name]['order']       = isset($f_order[$i]) && is_numeric($f_order[$i]) ? wc_clean( $f_order[$i] ) : '';
 					
 			if (!empty( $fields[$name]['options'] )) {
-				$fields[$name]['options'] = array_combine( $fields[$name]['options'], $fields[$name]['options'] );
+				$f_t_options_keys = [];
+				$f_t_options_values = [];
+				foreach ($fields[$name]['options'] as $option) {
+					$f_t_options_temp = explode(':', $option);
+					$f_t_options_keys[] = $f_t_options_temp[0];
+					$f_t_options_values[] = $f_t_options_temp[count($f_t_options_temp) - 1];
+				}
+				$fields[$name]['options'] = array_combine( $f_t_options_keys, $f_t_options_values );
+				// $fields[$name]['options'] = array_combine( $fields[$name]['options'], $fields[$name]['options'] );
+
 			}
 
 			if (!in_array( $name, $this->locale_fields ) || apply_filters('thwcfd_allow_address_field_validation_override', false, $name)){
