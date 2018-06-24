@@ -81,6 +81,7 @@ Thumbs.db
 #!wp-content/plugins/samples-data/
 #!wp-content/plugins/samples-core/
 #!wp-content/plugins/samples-cross-post/
+!wp-content/plugins/woo-checkout-field-editor-pro/
 !wp-content/plugins/woocommerce-xero/
 !wp-content/themes/blade/
 !wp-content/themes/blade-child/
