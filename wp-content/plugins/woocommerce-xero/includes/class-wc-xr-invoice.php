@@ -425,7 +425,7 @@ class WC_XR_Invoice {
 		// if ( 0 < count( $reference_pieces ) ) {
 		// 	$xml .= '<Reference>' . implode( ' ', $reference_pieces ) . '</Reference>';
 		// }
-		$xml .= '<Reference>' . get_post_meta( $order_id, 'rep_name', true ) '</Reference>';
+		$xml .= '<Reference>' . get_post_meta( $order_id, 'rep_name', true ) . '</Reference>';
 
 		// Line Amount Types. Always send prices exclusive VAT.
 		$xml .= '<LineAmountTypes>Exclusive</LineAmountTypes>';
