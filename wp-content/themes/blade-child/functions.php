@@ -297,3 +297,14 @@ function wc_save_account_details_required_fields( $required_fields ){
     unset( $required_fields['account_display_name'] );
     return $required_fields;
 }
+
+add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
+function add_loginout_link( $items, $args ) {
+    if (is_user_logged_in() && $args->theme_location == 'grve_header_nav') {
+        $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account"><span class="grve-item">My Account</span></a></li>';
+    }
+    elseif (!is_user_logged_in() && $args->theme_location == 'grve_header_nav') {
+        $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account"><span class="grve-item">Register</span></a></li>';
+    }
+    return $items;
+}

@@ -31,7 +31,8 @@ $product_gallery_classes = array( 'thumbnails' );
 
 if ( $attachment_ids ) {
 	$loop 		= 0;
-	$columns 	= apply_filters( 'woocommerce_product_thumbnails_columns', 3 );
+	// $columns 	= apply_filters( 'woocommerce_product_thumbnails_columns', 3 );
+	$columns = 1;
 	$product_gallery_classes[] = 'columns-' . $columns;
 
 	$product_gallery_class_string = implode( ' ', $product_gallery_classes );

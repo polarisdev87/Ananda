@@ -66,5 +66,3 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 <?php
 	}
 }
-
-//Omit closing PHP tag to avoid accidental whitespace output errors.

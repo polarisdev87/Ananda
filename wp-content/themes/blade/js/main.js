@@ -49,6 +49,11 @@ var deviceDoubleTap =  true;
 	// ============================================================================= //
 	GRVE.documentReady = {
 		init: function(){
+			// $( ".product .images .thumbnails a").on( 'click', function(event) {
+			// 	console.log('dsfdsfds');
+			// 	event.preventDefault();
+			// });
+
 			GRVE.pageSettings.bodyLoader();
 			GRVE.pageSettings.removeVideoBg();
 			GRVE.header.init();
@@ -77,6 +82,20 @@ var deviceDoubleTap =  true;
 			GRVE.fullPage.init();
 			GRVE.pillingPage.init();
 
+			var cache_dateTime = new Date();
+			$( ".product .images .thumbnails a").on( 'mouseenter', function(event) {
+				var imageLargeUrl = $(this).attr('href') + '?timestamp=' + cache_dateTime.getTime();
+				var cachedUrl = imageLargeUrl + '?timestamp=' + cache_dateTime.getTime();
+				$(this).parents('.images').find('.grve-product-image .woocommerce-main-image').attr('href', imageLargeUrl).html('<img src="' + imageLargeUrl + '" class="attachment-shop_single size-shop_single wp-post-image" data-large_image="' + imageLargeUrl + '" />');
+				// $(this).parents('.images').find('.grve-product-image .woocommerce-main-image img').attr('src', imageLargeUrl).attr('data-large_image', imageLargeUrl);
+
+				if ( $(this).parents('.images').find('.grve-product-image.easyzoom').length ) {
+					var __$easyzoom = $(this).parents('.images').find('.grve-product-image.easyzoom').easyZoom();
+					var __api = $easyzoom.data('easyZoom');
+					__api.swap( imageLargeUrl , imageLargeUrl );
+				}
+
+			});
 		}
 	};
 
@@ -2286,6 +2305,7 @@ var deviceDoubleTap =  true;
 				if ( $('.grve-product-image.easyzoom').length ) {
 					var $easyzoom = $('.grve-product-image.easyzoom').easyZoom();
 					var api = $easyzoom.data('easyZoom');
+
 					$( ".variations_form" ).on( 'woocommerce_variation_has_changed', function( event, variation ){
 						var imageZoom = $('.grve-product-image .woocommerce-main-image').attr('href');
 

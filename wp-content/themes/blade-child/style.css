@@ -148,3 +148,59 @@ abbr.required {
 .member-logged-in .hide-no-member, .admin-bar .hide-no-member {
     display: list-item;
 }*/
+
+
+.woocommerce div.product div#grve-product-feature-image {
+    display: flex;
+}
+
+.woocommerce div.product div#grve-product-feature-image .grve-product-image {
+    margin-left: 1em;
+    order: 2;
+}
+
+.woocommerce div.product div#grve-product-feature-image .thumbnails {
+    flex: 0 0 80px;
+}
+
+.woocommerce div.product div#grve-product-feature-image .thumbnails a {
+    margin-bottom: 1em;
+    display: block;
+}
+
+.woocommerce table.cart td.product-remove {
+    padding-left: 8px;
+}
+
+
+/* login form on homepage */
+.with_login_form #log_forms {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0px;
+    width: 320px;
+    background: #fff;
+    padding: 15px 30px;
+}
+.with_login_form .logged-in {
+    display: none;
+}
+.with_login_form .log-form-group {
+    margin: 1rem 0;
+}
+.with_login_form .log-form-group input {
+    margin: 0 !important;
+}
+.with_login_form .log-form-group label.lw-error {
+    display: none !important;
+}
+.with_login_form .log-form-group input.lw-error {
+    border-color: #a30 !important;
+}
+
+@media only screen and (max-width: 768px) {
+    .with_login_form #log_forms {
+        display: none;
+    }
+}
