@@ -465,7 +465,7 @@ function blade_grve_frontend_scripts() {
 
 	$grve_ver = BLADE_GRVE_THEME_MAJOR_VERSION . '.' . BLADE_GRVE_THEME_MINOR_VERSION . '.' . BLADE_GRVE_THEME_HOTFIX_VERSION;
 
-	wp_register_style( 'blade-grve-style', get_stylesheet_directory_uri()."/style.css", array(), esc_attr( $grve_ver ), 'all' );
+	wp_register_style( 'blade-grve-style', get_stylesheet_directory_uri()."/style.css?v=1", array(), esc_attr( $grve_ver ), 'all' );
 	wp_enqueue_style( 'blade-grve-awesome-fonts', get_template_directory_uri() . '/css/font-awesome.min.css', array(), '4.7.0' );
 
 
