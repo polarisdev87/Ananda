@@ -328,6 +328,7 @@ if( !is_admin() )
         <?php
 
         foreach ($checkout->checkout_fields['billing'] as $key => $field) :
+            if ($key === 'billing_email') continue;
             woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
         endforeach;
     }
@@ -357,9 +358,8 @@ if( !is_admin() )
 
 
     // Registration page billing address form Validation
-    function custom_validation()
-    {
-        global $woocommerce;
+    function wooc_validate_billing_address_register_fields( $errors, $username, $email ) {
+
         $address = $_POST;
 
         foreach ($address as $key => $field) :
@@ -370,52 +370,56 @@ if( !is_admin() )
 
                 if($key == 'billing_country' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please select a country.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please select a country.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_first_name' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter first name.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter first name.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_last_name' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter last name.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter last name.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_address_1' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter address.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter address.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_city' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter city.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter city.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_state' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter state.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter state.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_postcode' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter a postcode.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter a postcode.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_email' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter billing email address.', 'woocommerce' ) );
+                    // $errors->add( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter billing email address.', 'woocommerce' ) );
                 }
 
                 if($key == 'billing_phone' && $field == '')
                 {
-                    $woocommerce->add_error( '' . __( 'ERROR', 'woocommerce' ) . ': ' . __( 'Please enter phone number.', 'woocommerce' ) );
+                    $errors->add( __( 'ERROR', 'woocommerce' ), __( 'Please enter phone number.', 'woocommerce' ) );
                 }
             }
 
         endforeach;
+
+        return $errors;
     }
-    add_action('register_post','custom_validation');
+    add_filter( 'woocommerce_registration_errors', 'wooc_validate_billing_address_register_fields', 10, 3 );
+
+    // add_action('woocommerce_register_post','custom_validation');
 
 }
