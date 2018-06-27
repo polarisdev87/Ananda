@@ -52,6 +52,7 @@ if ( count( $customer_orders ) < $loyal_count ) {
 
 					</div>
 				</div>
+				<style type="text/css">.add_to_cart_button{display:block !important;}.added_to_cart{display:none !important;}</style>
 				<!-- END MAIN CONTENT -->
 
 				<?php blade_grve_set_current_view( 'page' ); ?>

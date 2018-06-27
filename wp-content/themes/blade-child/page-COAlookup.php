@@ -70,7 +70,7 @@
 				}else{
 					$('#lookup-error').text('');
 					var url = batches[index].attachment_url;
-					var win = window.open(url, '_blank');
+					var win = window.open(url + '?v=1', '_blank');
   			 		win.focus();
 				}
 

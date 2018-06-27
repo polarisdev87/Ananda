@@ -70,10 +70,10 @@ function wooc_validate_extra_register_fields( $errors, $username, $email ) {
     } else if (strlen($_POST['npi_id']) !== 10) {
         $errors->add( 'npi_id_error', __( 'NPI # is invalid!', 'woocommerce' ) );
     } else {
-        $npi_response = json_decode(file_get_contents('https://npiregistry.cms.hhs.gov/api/?number=' . $_POST['npi_id']));
-        if (!$npi_response->result_count) {
-            $errors->add( 'npi_id_error', __( 'This NPI # does not exist!', 'woocommerce' ) );
-        }
+        // $npi_response = json_decode(file_get_contents('https://npiregistry.cms.hhs.gov/api/?number=' . $_POST['npi_id']));
+        // if (!$npi_response->result_count) {
+        //     $errors->add( 'npi_id_error', __( 'This NPI # does not exist!' . $npi_response->result_count, 'woocommerce' ) );
+        // }
     }
     
     return $errors;
