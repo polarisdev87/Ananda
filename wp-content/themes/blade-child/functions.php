@@ -47,7 +47,7 @@ function wooc_extra_register_fields() {
     ?>
 
     <p class="form-row form-row-wide">
-    <label for="reg_npi_id"><?php _e( 'NPI #', 'woocommerce' ); ?> <!--<span class="required">*</span>--></label>
+    <label for="reg_npi_id"><?php _e( 'NPI #', 'woocommerce' ); ?> <abbr class="required" title="required">*</abbr></label>
     <input type="text" class="input-text" name="npi_id" id="reg_npi_id" value="<?php if ( ! empty( $_POST['npi_id'] ) ) esc_attr_e( $_POST['npi_id'] ); ?>" />
     </p>
 
@@ -323,12 +323,8 @@ if( !is_admin() )
         global $woocommerce;
         $checkout = $woocommerce->checkout();
 
-        ?>
-            <h3><?php _e( 'Billing Address', 'woocommerce' ); ?></h3>
-        <?php
-
         foreach ($checkout->checkout_fields['billing'] as $key => $field) :
-            if ($key === 'billing_email') continue;
+            if ($key === 'billing_email' || $key === 'rep_name' || $key === 'tax_cert') continue;
             woocommerce_form_field( $key, $field, $checkout->get_value( $key ) );
         endforeach;
     }
