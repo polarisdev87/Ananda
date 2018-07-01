@@ -52,7 +52,23 @@ if ( count( $customer_orders ) < $loyal_count ) {
 
 					</div>
 				</div>
-				<style type="text/css">.add_to_cart_button{display:block !important;}.added_to_cart{display:none !important;}</style>
+				<style type="text/css">
+					.add_to_cart_button{display:block !important;}.added_to_cart{display:none !important;}
+					@media only screen and (min-width: 769px) {
+						.grve-row {
+							display: flex;
+						}
+						.grve-column {
+							display: flex;
+							flex-direction: column;
+						}
+						.grve-image {
+						    flex: 1;
+						    display: flex;
+						    align-items: center;
+						}
+					}
+				</style>
 				<!-- END MAIN CONTENT -->
 
 				<?php blade_grve_set_current_view( 'page' ); ?>
