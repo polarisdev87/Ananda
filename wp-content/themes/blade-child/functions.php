@@ -419,3 +419,97 @@ if( !is_admin() )
     // add_action('woocommerce_register_post','custom_validation');
 
 }
+
+
+add_filter( 'cron_schedules', 'schedule_salesforce_interval' ); 
+function schedule_salesforce_interval( $schedules ) {
+    $schedules['salesforce_interval'] = array(
+        'interval' => 60 * 15, // seconds
+        'display'  => esc_html__( 'Every 15 Minutes' ),
+    );
+ 
+    return $schedules;
+}
+
+if (! wp_next_scheduled ( 'salesforce_retain_customers_hook' )) {
+    wp_schedule_event(time(), 'salesforce_interval', 'salesforce_retain_customers_hook');
+}
+
+add_action('salesforce_retain_customers_hook', 'salesforce_retain_customers_exec');
+function salesforce_retain_customers_exec() {
+
+    // get customers
+    $customer_args = array(
+        'role' => 'customer',
+        'meta_query' => array(
+            'relation' => 'OR',
+            array(
+                'key' => 'has_salesforce_checked',
+                'value' => '1',
+                'compare' => '!='
+            ),
+            array(
+                'key' => 'has_salesforce_checked',
+                'value' => '1',
+                'compare' => 'NOT EXISTS'
+            )
+        )
+    );
+    $customers = get_users($customer_args);
+
+    $cnt = 0;
+
+    foreach($customers as $customer) {
+
+        $args = array(
+            'customer_id' => $customer->ID
+        );
+
+        $orders = wc_get_orders($args);
+
+        if (count($orders) > 0) {
+            update_user_meta($customer->ID, 'has_salesforce_checked', '1');
+        } else {
+            if (strtotime($customer->user_registered) < strtotime('-1 hour')) {
+
+                if ($customer->user_email) {
+                    $data = [
+                        // 'captcha_settings' => '{"keyname":"AnandaProfessional","fallback":"true","orgId":"00D6A000002zNXn","ts":""}',
+                        'oid' => '00D6A000002zNXn',
+                        'retURL' => 'https://anandaprofessional.com/products/',
+                        'company' => $customer->billing_company,
+                        'first_name' => $customer->billing_first_name,
+                        'last_name' => $customer->billing_last_name,
+                        'street' => $customer->billing_address_1,
+                        'city' => $customer->billing_city,
+                        'state' => $customer->billing_state,
+                        'zip' => $customer->billing_postcode,
+                        '00N6A00000NXP1d' => 'Ananda Professional', // brand
+                        'phone' => $customer->billing_phone,
+                        'email' => $customer->user_email,
+                        '00N6A00000NXfPA' => $customer->npi_id, // NPI Number
+                    ];
+
+
+                    $ch = curl_init();
+
+                    curl_setopt($ch, CURLOPT_URL,"https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8");
+                    curl_setopt($ch, CURLOPT_POST, 1);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    $server_output = curl_exec ($ch);
+                    curl_close ($ch);
+
+                    $cnt ++;
+                }
+
+                update_user_meta($customer->ID, 'has_salesforce_checked', '1');
+            }
+        }
+    }
+
+    if ($cnt > 0) {
+        update_option('cron_status', date(DATE_RFC2822) . '------' . count($customers) . '------' . $cnt . ' ------- ' . $server_output);
+    }
+}
