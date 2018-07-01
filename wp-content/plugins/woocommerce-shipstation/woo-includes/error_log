@@ -1,0 +1,16 @@
+[07-Jun-2018 09:37:19 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php on line 57
+[07-Jun-2018 16:25:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php on line 57
+[07-Jun-2018 19:19:48 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php on line 57
+[08-Jun-2018 14:29:21 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function add_filter() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php:57
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/woo-includes/woo-functions.php on line 57

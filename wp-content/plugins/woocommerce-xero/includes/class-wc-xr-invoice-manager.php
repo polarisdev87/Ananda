@@ -48,6 +48,11 @@ class WC_XR_Invoice_Manager {
 		// Get the order
 		$order = wc_get_order( $order_id );
 
+		if ($order->get_payment_method() === 'cheque' ) {
+			$order->add_order_note( __( "Ignore sending invoice to xero because payment method is ACH") );
+			return false;
+		}
+
 		try {
 			// Write exception message to log
 			$logger = new WC_XR_Logger( $this->settings );

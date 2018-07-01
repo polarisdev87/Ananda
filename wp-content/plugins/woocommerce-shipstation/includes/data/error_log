@@ -1,0 +1,12 @@
+[09-Jun-2018 05:36:05 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_order_statuses() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/includes/data/data-settings.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/includes/data/data-settings.php on line 3
+[09-Jun-2018 13:26:47 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_order_statuses() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/includes/data/data-settings.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/includes/data/data-settings.php on line 3
+[10-Jun-2018 20:36:28 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function wc_get_order_statuses() in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/includes/data/data-settings.php:3
+Stack trace:
+#0 {main}
+  thrown in /home/anandap/public_html/wp-content/plugins/woocommerce-shipstation/includes/data/data-settings.php on line 3
