@@ -108,6 +108,14 @@ class WC_Shipstation_API_Export extends WC_Shipstation_API_Request {
 			}
 
 			$order     = wc_get_order( $order_id );
+
+
+			if ($order->get_payment_method() === 'cheque' ) {
+				$order->add_order_note( __( "Ignore exporting to shipstation because payment method is ACH") );
+				continue;
+			}
+
+
 			$order_xml = $xml->createElement( 'Order' );
 			$wc_gte_30 = version_compare( WC_VERSION, '3.0', '>=' );// gte greater than or equal to 3.0
 			$formatted_order_number = ltrim( $order->get_order_number(), '#' );
