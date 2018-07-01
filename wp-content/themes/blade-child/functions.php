@@ -513,11 +513,3 @@ function salesforce_retain_customers_exec() {
         update_option('cron_status', date(DATE_RFC2822) . '------' . count($customers) . '------' . $cnt . ' ------- ' . $server_output);
     }
 }
-
-
-add_action('init', 'runOnInit', 10, 0);
-function runOnInit() { 
-    $order = wc_get_order( '10100' );
-    // var_dump($order);
-    // var_dump($order->get_payment_method());
-}
