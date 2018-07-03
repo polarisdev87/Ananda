@@ -53,7 +53,15 @@ if ( count( $customer_orders ) < $loyal_count ) {
 					</div>
 				</div>
 				<style type="text/css">
-					.add_to_cart_button{display:block !important;}.added_to_cart{display:none !important;}
+					.add_to_cart_button {
+						display:block !important;
+					}
+					.added_to_cart {
+						display:none !important;
+					}
+					.mfp-bg {
+						background: rgba(255,255,255,0.95) !important;
+					}
 					@media only screen and (min-width: 769px) {
 						.grve-row {
 							display: flex;
