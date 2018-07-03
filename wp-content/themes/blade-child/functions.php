@@ -495,9 +495,10 @@ function salesforce_retain_customers_exec() {
 
                     curl_setopt($ch, CURLOPT_URL,"https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8");
                     curl_setopt($ch, CURLOPT_POST, 1);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+                    curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36');
 
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
                     $server_output = curl_exec ($ch);
                     curl_close ($ch);
 
@@ -512,4 +513,9 @@ function salesforce_retain_customers_exec() {
     if ($cnt > 0) {
         update_option('cron_status', date(DATE_RFC2822) . '------' . count($customers) . '------' . $cnt . ' ------- ' . $server_output);
     }
+}
+
+
+add_action('init', 'runOnInit', 10, 0);
+function runOnInit() { 
 }
