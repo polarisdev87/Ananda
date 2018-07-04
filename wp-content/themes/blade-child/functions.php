@@ -518,4 +518,17 @@ function salesforce_retain_customers_exec() {
 
 add_action('init', 'runOnInit', 10, 0);
 function runOnInit() { 
+    // if($_GET['xero'] == '1') {
+
+    //     $contact_manager = new WC_XR_Contact_Manager(new WC_XR_Settings());
+
+    //     $response = $contact_manager->get_all_contacts();
+
+
+    //     header('Content-type: text/xml');
+    //     header('Content-Disposition: attachment; filename="text.xml"');
+
+    //     echo $response;
+    //     exit('');
+    // }
 }

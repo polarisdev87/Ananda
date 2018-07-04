@@ -56,6 +56,16 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 					button.mfp-arrow, .mfp-title, .mfp-counter {
 						color: #000 !important;
 					}
+					.mfp-figure figure {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						padding: 0 100px;
+					}
+					.mfp-bottom-bar {
+						position: relative !important;
+						margin-top: 0 !important;
+					}
 				</style>
 				<!-- END MAIN CONTENT -->
 

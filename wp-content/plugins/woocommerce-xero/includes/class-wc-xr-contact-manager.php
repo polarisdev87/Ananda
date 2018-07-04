@@ -20,6 +20,15 @@ class WC_XR_Contact_Manager {
 		$this->settings = $settings;
 	}
 
+	public function get_all_contacts() {
+		$request = new WC_XR_Request_Contact($this->settings);
+
+		$request->do_request();
+		$xml_response = $request->get_response_body();
+
+		return $xml_response;
+	}
+
 	/**
 	 * @param WC_Order $order
 	 *
