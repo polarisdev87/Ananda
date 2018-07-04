@@ -52,6 +52,11 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 
 					</div>
 				</div>
+				<style type="text/css">
+					button.mfp-arrow, .mfp-title, .mfp-counter {
+						color: #000 !important;
+					}
+				</style>
 				<!-- END MAIN CONTENT -->
 
 				<?php blade_grve_set_current_view( 'page' ); ?>

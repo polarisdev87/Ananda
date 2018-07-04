@@ -56,6 +56,8 @@ $product_image_class_string = implode( ' ', $product_image_classes );
 					$attributes = array(
 						'title' => $image_title,
 						'alt'	=> $image_title,
+						'data-title' => $image_title,
+						'data-desc' => $image_caption,
 					);
 				} else {
 					$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
@@ -63,6 +65,8 @@ $product_image_class_string = implode( ' ', $product_image_classes );
 					$attributes = array(
 						'title' => $image_title,
 						'alt'	=> $image_title,
+						'data-title' => $image_title,
+						'data-desc' => $image_caption,
 						'data-large_image'        => $full_size_image[0],
 						'data-large_image_width'  => $full_size_image[1],
 						'data-large_image_height' => $full_size_image[2],
@@ -85,7 +89,7 @@ $product_image_class_string = implode( ' ', $product_image_classes );
 					$gallery = '';
 				}
 
-				echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="woocommerce-main-image zoom" title="%s" data-rel="prettyPhoto' . $gallery . '">%s</a>', $image_link, $image_caption, $image ), $post->ID );
+				echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="woocommerce-main-image zoom" title="%s" data-rel="prettyPhoto' . $gallery . '" data-title="%s" data-desc="%s">%s</a>', $image_link, $image_caption, $image_title, $image_caption, $image ), $post->ID );
 
 			} else {
 
