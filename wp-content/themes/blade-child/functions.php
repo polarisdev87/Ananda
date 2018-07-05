@@ -516,6 +516,50 @@ function salesforce_retain_customers_exec() {
 }
 
 
+function restrictly_get_current_user_role() {
+    if( is_user_logged_in() ) {
+        $user = wp_get_current_user();
+        $role = ( array ) $user->roles;
+        return $role[0];
+    } else {
+        return false;
+    }
+}
+
+if (is_admin()) {
+    if (restrictly_get_current_user_role() === 'pharmacy_manager') {
+        if (strpos($_GET['page'], 'agile') === false) {
+            wp_redirect('/wp-admin/admin.php?page=agile-dashboard');
+        } else {
+
+?>
+            <style type="text/css">
+                #adminmenu>li {
+                    display: none;
+                }
+                #adminmenu>.toplevel_page_asl-plugin {
+                    display: block;
+                }
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li {
+                    display: none;
+                }
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(1),
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(2),
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(3),
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(6) {
+                    display: block;
+                }
+                #wp-admin-bar-comments, #wp-admin-bar-new-content, #wp-admin-bar-kinsta-cache, #wp-admin-bar-purge-cdn, #wp-admin-bar-edit-profile, #wp-admin-bar-user-info {
+                    display: none;
+                }
+            </style>
+
+<?php
+        }
+    }
+}
+
+
 add_action('init', 'runOnInit', 10, 0);
 function runOnInit() { 
     // if($_GET['xero'] == '1') {

@@ -62,8 +62,22 @@ if ( count( $customer_orders ) < $loyal_count ) {
 					.mfp-bg {
 						background: rgba(255,255,255,0.95) !important;
 					}
-					button.mfp-arrow {
+					button.mfp-arrow, .mfp-title, .mfp-counter {
 						color: #000 !important;
+					}
+					.mfp-figure figure {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						padding: 0 100px;
+					}
+					.mfp-bottom-bar {
+						position: relative !important;
+						margin-top: 0 !important;
+					}
+					img.mfp-img {
+						max-width: 60% !important;
+						margin-right: 1rem !important;
 					}
 					@media only screen and (min-width: 769px) {
 						.grve-row {

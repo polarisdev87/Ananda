@@ -66,6 +66,10 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 						position: relative !important;
 						margin-top: 0 !important;
 					}
+					img.mfp-img {
+						max-width: 60% !important;
+						margin-right: 1rem !important;
+					}
 				</style>
 				<!-- END MAIN CONTENT -->
 
