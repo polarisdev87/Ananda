@@ -19,6 +19,22 @@ if ( count( $customer_orders ) < $loyal_count ) {
 	header("Location: /products");
 } else {
 
+	$user_state = get_user_meta( get_current_user_id(), 'billing_state', true );
+
+	if (in_array(strtoupper($user_state), ['OK', 'MS', 'KS'])) {
+		?>
+		<style type="text/css">
+			.product-section {
+				display: none;
+			}
+			.product-section#product-section-10251 {
+				display: block;
+				margin: 0 auto;
+			}
+		</style>
+		<?php
+	}
+
 ?>
 <?php get_header(); ?>
 
@@ -75,9 +91,13 @@ if ( count( $customer_orders ) < $loyal_count ) {
 						position: relative !important;
 						margin-top: 0 !important;
 					}
+					.mfp-title {
+						max-width: 450px;
+					}
 					img.mfp-img {
 						max-width: 60% !important;
 						margin-right: 1rem !important;
+						object-fit: contain;
 					}
 					@media only screen and (min-width: 769px) {
 						.grve-row {

@@ -24,9 +24,46 @@ class WC_XR_Contact_Manager {
 		$request = new WC_XR_Request_Contact($this->settings);
 
 		$request->do_request();
-		$xml_response = $request->get_response_body();
+		$xml_response = $request->get_response_body_xml();
 
-		return $xml_response;
+		$start = 2500;
+		$end = 2600;
+
+		$ind = -1;
+
+		foreach ($xml_response->Contacts->children() as $key => $contact) {
+			$ind ++;
+			if ($ind < $start || $ind > $end) continue;
+
+			$historyRequest = new WC_XR_Request_Contact_History($this->settings, $contact->ContactID);
+			$historyRequest->do_request();
+			$history_response = $historyRequest->get_response_body_xml();
+			// var_dump($history_response);
+			foreach ($history_response->HistoryRecords as $historyRecord) {
+				if ($historyRecord->HistoryRecord->Changes == 'Created') {
+					$contact->addChild('ContactOwnerName', htmlspecialchars($historyRecord->HistoryRecord->User));
+					break;
+				}
+			}
+
+			if (!$contact->FirstName || !$contact->LastName ) {
+				$parts = explode(' ', $contact->Name);
+				$lastname = array_pop($parts);
+				$firstname = implode(' ', $parts);
+
+				$contact->addChild('FirstName', htmlspecialchars($firstname));
+				$contact->addChild('LastName', htmlspecialchars($lastname));
+			}
+
+			// $ind++;
+			// var_dump($history_response);
+		}
+
+		// return '';
+		return $xml_response->asXML();
+		// echo($xml_response->asXML());
+		// return '';
+		// return $history_response;
 	}
 
 	/**

@@ -301,7 +301,12 @@ function wc_save_account_details_required_fields( $required_fields ){
 add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
     if (is_user_logged_in() && $args->theme_location == 'grve_header_nav') {
-        $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account"><span class="grve-item">My Account</span></a></li>';
+        $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"><a href="/my-account"><span class="grve-item">My Account</span></a><ul class="sub-menu">
+                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/orders/"><span class="grve-item">Orders</span></a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/edit-address/"><span class="grve-item">Addresses</span></a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/edit-account/"><span class="grve-item">Manage Account</span></a></li>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . wp_logout_url( home_url() ) . '"><span class="grve-item">Logout</span></a></li>
+            </ul></li>';
     }
     elseif (!is_user_logged_in() && $args->theme_location == 'grve_header_nav') {
         $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account"><span class="grve-item">Register</span></a></li>';
@@ -528,10 +533,12 @@ function restrictly_get_current_user_role() {
 
 if (is_admin()) {
     if (restrictly_get_current_user_role() === 'pharmacy_manager') {
-        if (strpos($_GET['page'], 'agile') === false) {
+        if (!wp_doing_ajax() && strpos($_GET['page'], 'agile') === false) {
             wp_redirect('/wp-admin/admin.php?page=agile-dashboard');
-        } else {
+        }
+         // else {
 
+        if (!wp_doing_ajax()) {
 ?>
             <style type="text/css">
                 #adminmenu>li {
@@ -560,6 +567,68 @@ if (is_admin()) {
 }
 
 
+add_filter('woocommerce_login_redirect', 'wc_login_redirect');
+ 
+function wc_login_redirect( $redirect_to ) {
+     $redirect_to = 'https://anandaprofessional.com/products';
+     return $redirect_to;
+}
+
+
+// Hook in
+add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields_rep_name', 10 );
+
+// Our hooked in function - $fields is passed via the filter!
+function custom_override_checkout_fields_rep_name( $fields ) {
+
+    // Get all customer orders
+    $customer_orders = get_posts( array(
+        'numberposts' => -1,
+        'meta_key'    => '_customer_user',
+        'meta_value'  => get_current_user_id(),
+        'post_type'   => wc_get_order_types(),
+        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
+    ) );
+
+    $loyal_count = 1;
+    if ( count( $customer_orders ) >= $loyal_count ) {
+        unset($fields['billing']['rep_name']);
+    }
+
+    return $fields;
+}
+
+add_action ( 'woocommerce_checkout_after_customer_details', 'woocommerce_update_cart_ajax_by_tax_cert');
+function woocommerce_update_cart_ajax_by_tax_cert() {
+?>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#tax_cert').change(function() {
+                jQuery('body').trigger('update_checkout');
+            });
+        });
+    </script>
+<?php
+}
+
+add_action( 'woocommerce_after_calculate_totals', 'custom_wc_after_calculate_totals' );
+function custom_wc_after_calculate_totals() {
+    if (is_ajax() && !empty( $_POST['post_data'] ) ) {
+        parse_str( $_POST['post_data'], $post_data );
+    }else {
+        $post_data = $_POST;
+    }
+    if(!empty($post_data['tax_cert']) && $post_data['tax_cert']!='NO'){
+        $totals = WC()->cart->get_totals();
+        $totals['total'] -= $totals['total_tax'];
+        $total['total_tax'] = 0;
+        WC()->cart->set_totals($totals);
+        WC()->cart->set_shipping_tax(0);
+        WC()->cart->set_shipping_taxes([]);
+    }
+}
+
+
 add_action('init', 'runOnInit', 10, 0);
 function runOnInit() { 
     // if($_GET['xero'] == '1') {
@@ -568,6 +637,7 @@ function runOnInit() {
 
     //     $response = $contact_manager->get_all_contacts();
 
+    //     // var_dump($response->Contacts);
 
     //     header('Content-type: text/xml');
     //     header('Content-Disposition: attachment; filename="text.xml"');
@@ -575,4 +645,10 @@ function runOnInit() {
     //     echo $response;
     //     exit('');
     // }
+
+    if (is_user_logged_in()) {
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+        add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25 );
+    }
 }
+

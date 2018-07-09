@@ -89,7 +89,7 @@ $product_image_class_string = implode( ' ', $product_image_classes );
 					$gallery = '';
 				}
 
-				echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a href="%s" class="woocommerce-main-image zoom" title="%s" data-rel="prettyPhoto' . $gallery . '" data-title="%s" data-desc="%s">%s</a>', $image_link, $image_caption, $image_title, $image_caption, $image ), $post->ID );
+				echo apply_filters( 'woocommerce_single_product_image_html', sprintf( '<a class="woocommerce-main-image zoom" title="%s" data-title="%s" data-desc="%s">%s</a>', $image_caption, $image_title, $image_caption, $image ), $post->ID );
 
 			} else {
 

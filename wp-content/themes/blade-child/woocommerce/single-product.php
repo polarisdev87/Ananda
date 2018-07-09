@@ -45,7 +45,30 @@ get_header( 'shop' ); ?>
 			<?php wc_get_template_part( 'content', 'single-product' ); ?>
 
 		<?php endwhile; // end of the loop. ?>
-
+		
+		<style type="text/css">
+			button.mfp-arrow, .mfp-title, .mfp-counter {
+				color: #000 !important;
+			}
+			.mfp-figure figure {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 0 100px;
+			}
+			.mfp-bottom-bar {
+				position: relative !important;
+				margin-top: 0 !important;
+			}
+			.mfp-title {
+				max-width: 450px;
+			}
+			img.mfp-img {
+				max-width: 60% !important;
+				margin-right: 1rem !important;
+				object-fit: contain;
+			}
+		</style>
 	<?php
 		/**
 		 * woocommerce_after_main_content hook

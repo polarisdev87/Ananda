@@ -86,7 +86,7 @@ var deviceDoubleTap =  true;
 			$( ".product .images .thumbnails a").on( 'mouseenter', function(event) {
 				var imageLargeUrl = $(this).attr('href') + '?timestamp=' + cache_dateTime.getTime();
 				var cachedUrl = imageLargeUrl + '?timestamp=' + cache_dateTime.getTime();
-				$(this).parents('.images').find('.grve-product-image .woocommerce-main-image').attr('href', imageLargeUrl).html('<img src="' + imageLargeUrl + '" class="attachment-shop_single size-shop_single wp-post-image" data-large_image="' + imageLargeUrl + '" />');
+				$(this).parents('.images').find('.grve-product-image .woocommerce-main-image')/*.attr('href', imageLargeUrl).attr('data-title', $(this).attr('data-title')).attr('data-desc', $(this).attr('data-desc'))*/.html('<img src="' + imageLargeUrl + '" class="attachment-shop_single size-shop_single wp-post-image" data-large_image="' + imageLargeUrl + '" />')//.easyZoom();
 				// $(this).parents('.images').find('.grve-product-image .woocommerce-main-image img').attr('src', imageLargeUrl).attr('data-large_image', imageLargeUrl);
 
 				if ( $(this).parents('.images').find('.grve-product-image.easyzoom').length ) {
@@ -1644,7 +1644,7 @@ var deviceDoubleTap =  true;
 			});
 			$('.grve-gallery-popup, .grve-post-gallery-popup').each(function() {
 				$(this).magnificPopup({
-					delegate: 'a',
+					delegate: 'a:not(.woocommerce-main-image)',
 					type: 'image',
 					preloader: false,
 					fixedBgPos: true,

@@ -209,3 +209,9 @@ abbr.required {
     margin-left: 0;
     margin-right: 0;
 }
+
+.woocommerce div.product p.price {
+    margin-top: 15px;
+    font-size: 2.25em;
+    font-weight: bold;
+}

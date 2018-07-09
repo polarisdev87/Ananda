@@ -1,36 +1,7 @@
 <?php
 /**
- * Template Name: Products Page
+ * Template Name: Events Page
  */
-
-
-// Get all customer orders
-$customer_orders = get_posts( array(
-    'numberposts' => -1,
-    'meta_key'    => '_customer_user',
-    'meta_value'  => get_current_user_id(),
-    'post_type'   => wc_get_order_types(),
-    'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
-) );
-
-$loyal_count = 1;
-
-if ( count( $customer_orders ) >= $loyal_count ) {
-	header("Location: /reorders");
-} else {
-
-	$user_state = get_user_meta( get_current_user_id(), 'billing_state', true );
-
-	if (in_array(strtoupper($user_state), ['OK', 'MS', 'KS'])) {
-		?>
-		<style type="text/css">
-			#product-section-4464, #product-section-10103 {
-				display: none;
-			}
-		</style>
-		<?php
-	}
-
 
 ?>
 <?php get_header(); ?>
@@ -66,26 +37,16 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 					</div>
 				</div>
 				<style type="text/css">
-					button.mfp-arrow, .mfp-title, .mfp-counter {
-						color: #000 !important;
-					}
-					.mfp-figure figure {
+					.grve-image-text {
 						display: flex;
 						align-items: center;
-						justify-content: center;
-						padding: 0 100px;
 					}
-					.mfp-bottom-bar {
-						position: relative !important;
-						margin-top: 0 !important;
+					.grve-image-text .grve-image {
+						flex: 1 0;
+						max-width: 30%;
 					}
-					.mfp-title {
-						max-width: 450px;
-					}
-					img.mfp-img {
-						max-width: 60% !important;
-						margin-right: 1rem !important;
-						object-fit: contain;
+					.grve-image-text .grve-content {
+
 					}
 				</style>
 				<!-- END MAIN CONTENT -->
@@ -101,4 +62,5 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 
 <?php
 	}
-}
+
+//Omit closing PHP tag to avoid accidental whitespace output errors.

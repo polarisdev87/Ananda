@@ -51,7 +51,7 @@ if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 			<div class="grve-wrapper">
 				<div class="up-sells upsells products">
 
-					<h2><?php esc_html_e( 'You may also like&hellip;', 'woocommerce' ) ?></h2>
+					<h2><?php esc_html_e( 'Related Products', 'woocommerce' ) ?></h2>
 
 					<?php woocommerce_product_loop_start(); ?>
 
@@ -77,7 +77,7 @@ if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 			<div class="grve-wrapper">
 				<div class="up-sells upsells products">
 
-					<h2><?php esc_html_e( 'You may also like&hellip;', 'woocommerce' ) ?></h2>
+					<h2><?php esc_html_e( 'Related Products', 'woocommerce' ) ?></h2>
 
 					<?php woocommerce_product_loop_start(); ?>
 
