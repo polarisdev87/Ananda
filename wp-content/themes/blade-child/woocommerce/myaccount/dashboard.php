@@ -27,16 +27,16 @@ if ($current_user->first_name || $current_user->last_name) {
 	$display_name = $current_user->first_name . ' ' . $current_user->last_name;
 }
 
-$customer_orders = wc_get_orders( array(
-    'customer_id'  => get_current_user_id(),
-    'date_created' => '>' . mktime(0, 0, 0, 1, 1),
-    // 'status' => 'completed',
-) );
+// $customer_orders = wc_get_orders( array(
+//     'customer_id'  => get_current_user_id(),
+//     'date_created' => '>' . mktime(0, 0, 0, 1, 1),
+//     // 'status' => 'completed',
+// ) );
 
-$total = 0;
-foreach ($customer_orders as $order) {
-	$total += $order->total;
-}
+// $total = 0;
+// foreach ($customer_orders as $order) {
+// 	$total += $order->total;
+// }
 
 ?>
 
@@ -50,10 +50,12 @@ foreach ($customer_orders as $order) {
 	);
 ?></p>
 
-<p>
+<?php
+/*<p>
 	Total Number of Orders (This Year): <strong><?php echo count($customer_orders); ?></strong><br/>
 	Total Amount Spent (This Year): <strong>$<?php echo $total; ?></strong>
-</p>
+</p>*/
+?>
 
 <p><?php
 	printf(

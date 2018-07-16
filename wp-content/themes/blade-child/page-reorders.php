@@ -15,20 +15,22 @@ $customer_orders = get_posts( array(
 
 $loyal_count = 1;
 
-if ( count( $customer_orders ) < $loyal_count ) {
+$user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
+
+if ( count( $customer_orders ) < $loyal_count && $user_already_bought!='1') {
 	header("Location: /products");
 } else {
 
 	$user_state = get_user_meta( get_current_user_id(), 'billing_state', true );
-
+	
 	if (in_array(strtoupper($user_state), ['OK', 'MS', 'KS'])) {
 		?>
 		<style type="text/css">
 			.product-section {
-				display: none;
+				display: none !important;
 			}
 			.product-section#product-section-10251 {
-				display: block;
+				display: block !important;
 				margin: 0 auto;
 			}
 		</style>
@@ -108,9 +110,14 @@ if ( count( $customer_orders ) < $loyal_count ) {
 							flex-direction: column;
 						}
 						.grve-image {
-						    flex: 1;
 						    display: flex;
 						    align-items: center;
+						}
+						.grve-column h3 {
+							min-height: 66px;
+						}
+						#pos-row h3 {
+							min-height: 99px;
 						}
 					}
 				</style>

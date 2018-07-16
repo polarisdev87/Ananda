@@ -61,7 +61,7 @@ $product_image_class_string = implode( ' ', $product_image_classes );
 					);
 				} else {
 					$post_thumbnail_id = get_post_thumbnail_id( $post->ID );
-					$full_size_image   = wp_get_attachment_image_src( $post_thumbnail_id, 'full' );
+					$full_size_image   = wp_get_attachment_image_src( $post_thumbnail_id, 'shop_single' );
 					$attributes = array(
 						'title' => $image_title,
 						'alt'	=> $image_title,

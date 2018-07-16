@@ -137,6 +137,8 @@ if ( version_compare( WC_VERSION, '3.0', '<' ) ) {
 
 		<?php foreach ( $checkout->get_checkout_fields( 'order' ) as $key => $field ) : ?>
 
+			<?php if ($key !== 'order_comments') continue;  ?>
+
 			<?php woocommerce_form_field( $key, $field, $checkout->get_value( $key ) ); ?>
 
 		<?php endforeach; ?>

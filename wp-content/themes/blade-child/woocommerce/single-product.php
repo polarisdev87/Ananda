@@ -62,11 +62,24 @@ get_header( 'shop' ); ?>
 			}
 			.mfp-title {
 				max-width: 450px;
+				font-size: 26px;
+				line-height: 1.7;
+			}
+			.mfp-figure small {
+				font-size: 14px !important;
+				line-height: 1.5 !important;
+				color: #4a4a4a;
 			}
 			img.mfp-img {
 				max-width: 60% !important;
 				margin-right: 1rem !important;
 				object-fit: contain;
+			}
+			.woocommerce-product-details__short-description {
+				margin-bottom: 30px;
+			}
+			.woocommerce div.product p.price {
+				color: #000;
 			}
 		</style>
 	<?php

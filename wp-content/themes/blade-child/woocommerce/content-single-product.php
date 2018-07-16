@@ -32,7 +32,16 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 <!-- Chris -->
 <style type="text/css">
 #grve-modal-overlay, .mfp-bg, #grve-loader-overflow {
-    background-color: rgba(255,255,255,0.95);
+    background-color: rgba(255,255,255,1);
+}
+#product-10226.product-type-grouped .price, #product-10226.product-type-grouped form.cart table {
+	display: none;
+}
+#product-10103.product-type-grouped .price, #product-10103.product-type-grouped form.cart table {
+	display: none;
+}
+#product-4464.product-type-grouped .price, #product-4464.product-type-grouped form.cart table {
+	display: none;
 }
 </style>
 <?php
@@ -48,6 +57,13 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 	 	return;
 	 }
 
+	if (get_the_ID() == '10226') {
+	 	add_filter( 'woocommerce_quantity_input_args', 'custom_quantity', 10, 2 );
+		function custom_quantity( $args, $product ) {
+		    $args['input_value'] = 16;
+		    return $args;
+		}
+	}
 ?>
 <div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -98,4 +114,43 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 	
 </div><!-- #product-<?php the_ID(); ?> -->
 
-<?php do_action( 'woocommerce_after_single_product' );
+<?php do_action( 'woocommerce_after_single_product' ); ?>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		// THC Free default quantity for grouped product
+		if (jQuery('#product-10226').length > 0) {
+			jQuery('#product-10226 button[type=submit]').attr('disabled', 'disabled');
+			setTimeout(function() {
+				jQuery('#product-10226 .qty[name="quantity[10251]"]').val(16);
+				jQuery('#product-10226 button[type=submit]').attr('disabled', '').removeAttr('disabled');
+			}, 1500);
+		}
+		// Counter Top Point of Sale Acrylic Display
+		if (jQuery('#product-10103').length > 0) {
+			jQuery('#product-10103 button[type=submit]').attr('disabled', 'disabled');
+			setTimeout(function() {
+				jQuery('#product-10103 .qty[name="quantity[9204]"]').val(12);
+				jQuery('#product-10103 .qty[name="quantity[9205]"]').val(12);
+				jQuery('#product-10103 .qty[name="quantity[9206]"]').val(8);
+				jQuery('#product-10103 .qty[name="quantity[9197]"]').val(8);
+				jQuery('#product-10103 .qty[name="quantity[9208]"]').val(16);
+				jQuery('#product-10103 button[type=submit]').attr('disabled', '').removeAttr('disabled');
+			}, 1500);
+		}
+		// Vertical Point of Sale Display
+		if (jQuery('#product-4464').length > 0) {
+			jQuery('#product-4464 button[type=submit]').attr('disabled', 'disabled');
+			setTimeout(function() {
+				jQuery('#product-4464 .qty[name="quantity[9204]"]').val(12);
+				jQuery('#product-4464 .qty[name="quantity[9205]"]').val(12);
+				jQuery('#product-4464 .qty[name="quantity[9206]"]').val(8);
+				jQuery('#product-4464 .qty[name="quantity[9197]"]').val(8);
+				jQuery('#product-4464 .qty[name="quantity[9208]"]').val(16);
+				jQuery('#product-4464 button[type=submit]').attr('disabled', '').removeAttr('disabled');
+			}, 1500);
+		}
+
+		// jQuery("input.qty").attr("readonly","readonly");
+	});
+</script>

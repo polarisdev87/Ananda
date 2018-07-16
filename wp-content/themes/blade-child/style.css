@@ -112,7 +112,7 @@ abbr.required {
   color: red;
 }
 
-.product-type-grouped #grve-product-feature-image {
+/*.product-type-grouped #grve-product-feature-image {
     display: none;
 }
 
@@ -131,7 +131,7 @@ abbr.required {
 
 .product-type-grouped #grve-entry-summary .product-image {
     min-width: 100px;
-}
+}*/
 
 #grve-related-products {
     display: none;
@@ -161,11 +161,15 @@ abbr.required {
 
 .woocommerce div.product div#grve-product-feature-image .thumbnails {
     flex: 0 0 80px;
+    /*display: flex;*/
+    /*flex-wrap: wrap;*/
 }
 
 .woocommerce div.product div#grve-product-feature-image .thumbnails a {
     margin-bottom: 1em;
+    /*margin-right: 1em;*/
     display: block;
+    /*flex: 0 0 80px;*/
 }
 
 .woocommerce table.cart td.product-remove {
@@ -214,4 +218,8 @@ abbr.required {
     margin-top: 15px;
     font-size: 2.25em;
     font-weight: bold;
+}
+
+.woocommerce-inservice-fields {
+    margin-top: 70px;
 }

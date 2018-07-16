@@ -38,7 +38,7 @@ if ( function_exists( 'wc_get_checkout_url' ) ) {
 }
 ?>
 
-<form name="checkout" method="post" class="checkout woocommerce-checkout" action="<?php echo esc_url( $get_checkout_url ); ?>" enctype="multipart/form-data">
+<form name="checkout" method="post" class="checkout woocommerce-checkout" id="woocommerce-checkout-form" action="<?php echo esc_url( $get_checkout_url ); ?>" enctype="multipart/form-data">
 
 	<?php if ( sizeof( $checkout->checkout_fields ) > 0 ) : ?>
 
@@ -54,7 +54,7 @@ if ( function_exists( 'wc_get_checkout_url' ) ) {
 				<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
 
 			</div>
-			<div class="grve-column grve-column-1-3 grve-tablet-column-1-2 grve-tablet-sm-column-1">
+			<div id="checkout-order-review-container" class="grve-order-review-content grve-column grve-column-1-3 grve-tablet-column-1-2 grve-tablet-sm-column-1">
 				<h3 id="order_review_heading"><?php esc_html_e( 'Your order', 'woocommerce' ); ?></h3>
 
 					<?php do_action( 'woocommerce_checkout_before_order_review' ); ?>

@@ -320,7 +320,8 @@ function blade_grve_print_header_title( $mode = 'page') {
 		$header_reversed = isset( $header_data['reversed'] ) ? $header_data['reversed'] : '';
 
 		if ( is_page( 'my-account' ) && is_user_logged_in() ) {
-			$header_description = 'Manage your account below.';
+			// $header_description = 'Manage your account below.';
+			$header_description = '';
 		}
 
 		$grve_woo_shop = blade_grve_is_woo_shop();

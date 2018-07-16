@@ -15,7 +15,9 @@ $customer_orders = get_posts( array(
 
 $loyal_count = 1;
 
-if ( count( $customer_orders ) >= $loyal_count ) {
+$user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
+
+if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') {
 	header("Location: /reorders");
 } else {
 
@@ -81,6 +83,13 @@ if ( count( $customer_orders ) >= $loyal_count ) {
 					}
 					.mfp-title {
 						max-width: 450px;
+						font-size: 26px;
+						line-height: 1.7;
+					}
+					.mfp-figure small {
+						font-size: 14px !important;
+						line-height: 1.5 !important;
+						color: #4a4a4a;
 					}
 					img.mfp-img {
 						max-width: 60% !important;
