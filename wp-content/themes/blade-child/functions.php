@@ -70,7 +70,11 @@ function wooc_validate_extra_register_fields( $errors, $username, $email ) {
     } else if (strlen($_POST['npi_id']) !== 10) {
         $errors->add( 'npi_id_error', __( 'NPI # is invalid!', 'woocommerce' ) );
     } else {
-        $npi_response = json_decode(file_get_contents('https://npiregistry.cms.hhs.gov/api/?number=' . $_POST['npi_id']));
+        $ch = curl_init('https://npiregistry.cms.hhs.gov/api/?number=' . $_POST['npi_id']);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $npi_response = curl_exec($ch);
+        curl_close($ch);
+        $npi_response = json_decode($npi_response);
         if (!isset($npi_response->result_count) || ($npi_response->result_count === 0)) {
             $errors->add( 'npi_id_error', __( 'This NPI # (' . $_POST['npi_id'] . ') does not exist!', 'woocommerce' ) );
         }
@@ -547,15 +551,13 @@ function restrictly_get_current_user_role() {
     }
 }
 
-if (is_admin()) {
-    if (restrictly_get_current_user_role() === 'pharmacy_manager') {
-        // if (!wp_doing_ajax() && (strpos($_GET['page'], 'agile') === false && $_GET['post_type']!=='shop_order')) {
-        //     wp_redirect('/wp-admin/admin.php?page=agile-dashboard');
-        // }
-         // else {
 
-        if (!wp_doing_ajax()) {
-?>
+add_action('admin_head', 'role_based_menu_list');
+
+function role_based_menu_list() {
+    $user = wp_get_current_user();
+    if ( !wp_doing_ajax() && in_array( 'pharmacy_manager', (array) $user->roles ) ) {
+        ?>
             <style type="text/css">
                 #adminmenu>li {
                     display: none;
@@ -571,16 +573,15 @@ if (is_admin()) {
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(3),
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(6),
                 #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(1),
-                #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(2) {
+                #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(2),
+                #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(4) {
                     display: block;
                 }
                 #wp-admin-bar-comments, #wp-admin-bar-new-content, #wp-admin-bar-kinsta-cache, #wp-admin-bar-purge-cdn, #wp-admin-bar-edit-profile, #wp-admin-bar-user-info {
                     display: none;
                 }
             </style>
-
-<?php
-        }
+        <?php
     }
 }
 
@@ -667,135 +668,141 @@ function checkout_additional_sections() {
     echo '</div>';
 }
 
-// add_action('woocommerce_after_checkout_form', 'checkout_order_review_floating');
-function checkout_order_review_floating() {
-
-    // Get all customer orders
-    $customer_orders = get_posts( array(
-        'numberposts' => -1,
-        'meta_key'    => '_customer_user',
-        'meta_value'  => get_current_user_id(),
-        'post_type'   => wc_get_order_types(),
-        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
-    ) );
-
-    $loyal_count = 1;
-    if ( count( $customer_orders ) >= $loyal_count ) return;
-
-    ?>
-        <script type="text/javascript">
-            jQuery(document).ready(function() {
-                setTimeout(function() {
-                    // When the user scrolls the page, execute myFunction 
-                    window.onscroll = function() {orderReviewSticky()};
-
-                    // Get the header
-                    // var box = jQuery('#checkout-order-review-container'); //document.getElementById("checkout-order-review-container");
-
-                    // Get the offset position of the navbar
-                    var offset = jQuery('#checkout-order-review-container').offset();
-                    var width = jQuery('#checkout-order-review-container').outerWidth();
-                    var sticky = offset.top - 100;//798 - 100; //header.offsetTop; // 798 : from top to current div, 100 : offset with css
-
-                    // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-                    function orderReviewSticky() {
-                        if (window.pageYOffset > sticky) {
-                            jQuery('#checkout-order-review-container').addClass("sticky").css('left', offset.left).css('width', width);
-                        } else {
-                            jQuery('#checkout-order-review-container').removeClass("sticky").removeAttr('style');
-                        }
-                    }
-                }, 1000);
-            });
-        </script>
-
-        <style type="text/css">
-
-            @media only screen and (min-width: 960px) {
-                #checkout-order-review-container.sticky {
-                    position: fixed;
-                    top: 100px;
-                    /*right: 0px;*/
-                }
-
-                #grve-footer {
-                    z-index: 4;
-                }
-            }
-        </style>
-
-    <?php
-}
-
 
 
 add_action ( 'woocommerce_checkout_after_customer_details', 'woocommerce_update_cart_ajax_by_tax_cert');
 function woocommerce_update_cart_ajax_by_tax_cert() {
+
 ?>
-    <!-- <div id="certcapture_form"></div> -->
-    <!-- <script src="https://app.certcapture.com/gencert2/js?cid=82590&key=3Y8i6qngdaRLFY7t"></script> -->
+
+    <script src="https://app.certcapture.com/gencert2/js?cid=82587&key=GcJMnfB0CnYMoG5R"></script>
     <script type="text/javascript">
-
-        /* certcapture init */
-        // GenCert.init(document.getElementById("certcapture_form"), {               
-        // // GenCert.init(document.getElementById("woocommerce-checkout-form"), {               
-
-        //   // The token and zone must set to start the process!
-
-        //     // token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEwNTM5MSwiaXNzIjoiaHR0cDovL2FwaS5jZXJ0Y2FwdHVyZS5jb20vdjIvYXV0aC9nZXQtdG9rZW4iLCJpYXQiOjE1MzE3MDUyODQsImV4cCI6MTUzMTcwODg4NCwibmJmIjoxNTMxNzA1Mjg0LCJqdGkiOiIyRUk1cTNtY05UN1ZCRjVEIn0.i7MMZI8VuXiTX-GrF5WsBTEsTAqZ1U-mUJMPoW-7wk4',
-        //     ship_zone: 'California',
-
-        //     onCertSuccess: function() {
-
-        //       alert('Certificate successfully generated with id:' + GenCert.certificateIds);
-
-        //       // window.location = '/home';
-
-        //     },
-
-        //     onCancel: function() {
-
-        //       // window.location = '/home';
-
-        //     }
-        // });
-
-        //     GenCert.setCustomerNumber('CustomerTestGencert4'); // create customer
-
-        //     customer = new Object();
-
-        //     customer.name = 'TEST NAME';
-
-        //     customer.address1 = '1300 EAST CENTRAL';
-
-        //     customer.city = 'San Francisco';
-
-        //     customer.state = 'California';
-
-        //     customer.country = 'United States';
-
-        //     customer.phone = '555-555-5555';
-
-        //     customer.fax = '555-555-5555';
-
-        //     customer.zip = '89890';
-
-        //     GenCert.setCustomerData(customer);
-
-        //     GenCert.setShipZone('California');
-
-        //     GenCert.show();
-
         jQuery(document).ready(function() {
             jQuery('#tax_cert').change(function() {
                 jQuery('body').trigger('update_checkout');
+                if (jQuery(this).val() === 'YES') {
+                    jQuery('#cert_capture_form').show();
+                } else {
+                    jQuery('#cert_capture_form').hide();
+                }
             });
             jQuery('body').on('update_checkout', function() {
                 jQuery('.checkout_notice').remove();
             });
         });
     </script>
+    <style type="text/css">
+        .woocommerce-SavedPaymentMethods-saveNew {
+            display: none !important;
+        }
+    </style>
+
+    <div id="cert_capture_form" style="display: none;">
+    </div>
 <?php
+}
+
+add_action( 'woocommerce_review_order_after_submit', 'custom_review_order_after_submit' );
+function custom_review_order_after_submit() {
+    if (is_ajax() && !empty( $_POST['post_data'] ) ) {
+        parse_str( $_POST['post_data'], $post_data );
+    }else {
+        $post_data = $_POST;
+    }
+    if(!empty($post_data['tax_cert'])) {
+        if ($post_data['tax_cert']!='NO') {
+
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, "https://api.certcapture.com/v2/auth/get-token");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+            curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+            curl_setopt($ch, CURLOPT_POST, TRUE);
+
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+              "x-client-id: 82587",
+              "Authorization: Basic " . base64_encode('anandap_test:AnandaProfessional2018'),
+              "x-customer-primary-key: customer_number",
+            ));
+
+            $response = curl_exec($ch);
+            curl_close($ch);
+
+            $token_response = json_decode($response);
+
+            $token = $token_response->response->token;
+
+            $npi_id = get_user_meta(get_current_user_id(), 'npi_id', true); // cert capture - customer number
+
+            ?>
+                <script type="text/javascript">jQuery('#place_order').attr('disabled', 'disabled');</script>
+
+                <script type="text/javascript">
+
+                    GenCert.init(document.getElementById("cert_capture_form"), {               
+
+                      // The token and zone must set to start the process!
+
+                        token: '<?php echo $token; ?>',
+                        // debug: true,
+                        edit_purchaser: true,
+                        hide_sig: true,
+                        upload_only: true,
+                        submit_to_stack: true,
+
+                        onCertSuccess: function() {
+
+                          alert('Certificate successfully generated with id:' + GenCert.certificateIds);
+
+                          // window.location = '/home';
+
+                        },
+
+                        onInit: function() {
+                            console.log('certcapture form inited');
+                        },
+
+                        onCancel: function() {
+
+                            console.log('cert capture form cancelled');
+
+                          // window.location = '/home';
+
+                        }
+                    }, 82587, 'GcJMnfB0CnYMoG5R');
+
+         
+
+                    GenCert.setCustomerNumber('<?php echo $npi_id; ?>'); // create customer
+
+                    var customer = new Object();
+
+                    customer.name = '<?php echo $post_data['shipping_first_name'] . ' ' . $post_data['shipping_last_name']; ?>';
+
+                    customer.address1 = '<?php echo $post_data['shipping_address_1']; ?>';
+
+                    customer.city = '<?php echo $post_data['shipping_city']; ?>';
+
+                    // customer.state = 'California';
+                    // customer.state = '<?php echo $post_data['shipping_state']; ?>';
+
+                    // customer.country = 'United States';
+                    // customer.country = '<?php echo $post_data['shipping_country']; ?>';
+
+                    customer.phone = '<?php echo $post_data['shipping_phone'] !== '' ? $post_data['shipping_phone'] : $post_data['billing_phone']; ?>';
+
+                    customer.zip = '<?php echo $post_data['shipping_postcode']; ?>';
+
+                    GenCert.setCustomerData(customer);
+
+                    GenCert.setShipZone('<?php echo $post_data['shipping_state']; ?>');
+
+                    GenCert.show();
+                </script>
+            <?php
+        }
+    }
 }
 
 
@@ -806,72 +813,73 @@ function custom_wc_after_calculate_totals() {
     }else {
         $post_data = $_POST;
     }
-    if(!empty($post_data['tax_cert']) && $post_data['tax_cert']!='NO'){
-        // $totals = WC()->cart->get_totals();
-        // $totals['total'] -= $totals['total_tax'];
-        // $total['total_tax'] = 0;
-        // WC()->cart->set_totals($totals);
-        // WC()->cart->set_shipping_tax(0);
-        // WC()->cart->set_shipping_taxes([]);
+    if(!empty($post_data['tax_cert'])) {
+        if ($post_data['tax_cert']!='NO') {
+            // $totals = WC()->cart->get_totals();
+            // $totals['total'] -= $totals['total_tax'];
+            // $total['total_tax'] = 0;
+            // WC()->cart->set_totals($totals);
+            // WC()->cart->set_shipping_tax(0);
+            // WC()->cart->set_shipping_taxes([]);
+            // WC()->cart->set_cart_contents_tax(0);
+            // WC()->cart->set_cart_contents_taxes([]);
+            
+        } else {
+            // do_action( 'woocommerce_cart_reset', WC()->cart, false );
+        }
     }
 }
 
+add_filter( 'woocommerce_product_tax_class', 'custom_wc_zero_tax_for_certificate' );
+function custom_wc_zero_tax_for_certificate( $tax_class, $product) {
+    if (is_ajax() && !empty( $_POST['post_data'] ) ) {
+        parse_str( $_POST['post_data'], $post_data );
+    }else {
+        $post_data = $_POST;
+    }
+    if(!empty($post_data['tax_cert'])) {
+        if ($post_data['tax_cert']!='NO') {
+            $tax_class = 'Zero Rate';
+        } else {
+            // do_action( 'woocommerce_cart_reset', WC()->cart, false );
+        }
+    }
+    return $tax_class;
+}
 
-/*
+function exclude_orders_filter_recipient( $recipient, $order ){
 
-// customize cart product validation for SALVE product 
+    $customer_orders = get_posts( array(
+        'numberposts' => -1,
+        'meta_key'    => '_customer_user',
+        'meta_value'  => get_current_user_id(),
+        'post_type'   => wc_get_order_types(),
+        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
+    ) );
 
-// function validate_all_cart_contents()
-// {
-// //     echo 'validating...';
-//     $notices = WC()->session->get('wc_notices', array());
+    $loyal_count = 1;
+    $user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
 
-//     global $woocommerce;
+    if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') {
 
-//     $items = $woocommerce->cart->get_cart();
+        $recipient = explode(',', $recipient);
+        $new_recipient = [];
+        foreach($recipient as $val) {
+            if ($val != 'orders@anandaprofessional.com') {
+                $new_recipient[] = $val;
+            }
+        }
+        $recipient = implode(',', $new_recipient);
+    }
 
-//     foreach($items as $item => $values) {
-//         // check salve quantity - group of 6
-//         if ($values['product_id'] === 9208) {
-//             // var_dump($values);
-//         }
-//     }
+    return $recipient;
+}
+add_filter( 'woocommerce_email_recipient_new_order', 'exclude_orders_filter_recipient', 10, 2 );
 
-//     foreach( $notices['error'] as $key => &$notice){
-//         // var_dump($noice);
-//         if( strpos( $notice, 'in groups of' ) !== false){
-
-//             // $cart
-
-
-//             // unset( $notices['error'][$key] );
-//             break;
-//         }
-//     }
-
-//     WC()->session->set('wc_notices', $notices);
-// }
-// add_action('woocommerce_before_single_product','remove_added_to_cart_notice',1);
-// add_action('woocommerce_shortcode_before_product_cat_loop','remove_added_to_cart_notice',1);
-// add_action('woocommerce_check_cart_items','validate_all_cart_contents');
-
-// function customize_step_for_certain_product( $step, $product ) {
-//     // if ( empty( $errors ) ) {
-//     //     return;
-//     // }
-
-//     var_dump($step, $product);
-//     return $step;
-// }
-// add_filter('woocommerce_quantity_input_step', 'customize_step_for_certain_product', 20);
-
-// validation done for SALVE product
-
-*/
 
 // https://t.yctin.com/en/excel/to-php-array/
 // $customers_array = array(
-//     0 => array('address_1' => '325 S Main St', 'address_2' => '', 'city' => 'Fortville', 'state' => 'IN', 'zip' => '46040', 'phone' => '317 485-5555', 'npi' => '1598158016', 'email' => 'eric@garstrx.com'),
+//     0 => array('address_1' => '212 MILLWELL DR', 'address_2' => 'SUITE A', 'city' => 'MARYLAND HEIGHTS', 'state' => 'MO', 'zip' => '63043-2512', 'phone' => '314-727-8787', 'npi' => '1790061596', 'email' => 'Mgraumenz@Legacydrug.com'),
 // );
 /*
 $customers_array = array(
@@ -1416,36 +1424,38 @@ function runOnInit() {
 
     
     // if ($_GET['customers'] == '1') {
-        // $cnt = 0;
-        // global $customers_array;
-        // foreach($customers_array as $customer) {
-        //     $user_id = wp_insert_user([
-        //         'user_login' => $customer['email'],
-        //         'user_pass' => strtolower($customer['email']),
-        //         'user_email' => $customer['email']
-        //     ]);
-        //     if (!is_wp_error($user_id)) {
-        //         update_user_meta( $user_id, 'already_bought', '1' );
-        //         update_user_meta( $user_id, 'has_salesforce_checked', '1');
-        //         update_user_meta( $user_id, 'npi_id', sanitize_text_field( $customer['npi'] ) );
-        //         update_user_meta( $user_id, 'billing_address_1', sanitize_text_field( $customer['address_1'] ));
-        //         update_user_meta( $user_id, 'billing_address_2', sanitize_text_field( $customer['address_2'] ));
-        //         update_user_meta( $user_id, 'billing_city', sanitize_text_field( $customer['city'] ));
-        //         update_user_meta( $user_id, 'billing_state', sanitize_text_field( $customer['state'] ));
-        //         update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $customer['phone'] ));
-        //         update_user_meta( $user_id, 'billing_postcode', sanitize_text_field( $customer['zip'] ));
-        //         update_user_meta( $user_id, 'billing_country', 'US');
-        //         echo 'user_created: '. $user_id . ' : '. $customer['email'] . '<br/>';
-        //         $cnt ++;
-        //     } else {
-        //         echo 'user_failed: '. $customer['email'] . '<br/>';
-        //     }
-        // }
-        // exit('total created: '. $cnt);
-
-                // update_user_meta( 21, 'already_bought', '1' );
-                // update_user_meta( 21, 'has_salesforce_checked', '1');
-                // exit('test: ok');
+    //     $cnt = 0;
+    //     global $customers_array;
+    //     foreach($customers_array as $customer) {
+    //         $user_id = wp_insert_user([
+    //             'user_login' => $customer['email'],
+    //             'user_pass' => strtolower($customer['email']),
+    //             'user_email' => $customer['email']
+    //         ]);
+    //         var_dump( 'User: ' . $customer['email'] . ' / ' . strtolower($customer['email']));
+    //         if (!is_wp_error($user_id)) {
+    //             update_user_meta( $user_id, 'already_bought', '1' );
+    //             update_user_meta( $user_id, 'has_salesforce_checked', '1');
+    //             update_user_meta( $user_id, 'npi_id', sanitize_text_field( $customer['npi'] ) );
+    //             update_user_meta( $user_id, 'billing_address_1', sanitize_text_field( $customer['address_1'] ));
+    //             update_user_meta( $user_id, 'billing_address_2', sanitize_text_field( $customer['address_2'] ));
+    //             update_user_meta( $user_id, 'billing_city', sanitize_text_field( $customer['city'] ));
+    //             update_user_meta( $user_id, 'billing_state', sanitize_text_field( $customer['state'] ));
+    //             update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $customer['phone'] ));
+    //             update_user_meta( $user_id, 'billing_postcode', sanitize_text_field( $customer['zip'] ));
+    //             update_user_meta( $user_id, 'billing_country', 'US');
+    //             echo 'user_created: '. $user_id . ' : '. $customer['email'] . '<br/>';
+    //             $cnt ++;
+    //         } else {
+    //             echo 'user_failed: '. $customer['email'] . '<br/>';
+    //         }
+    //     }
+    //     exit('total created: '. $cnt);
+    // }
+    // if ($_GET['customers'] == '1') {
+    //     update_user_meta( 736, 'already_bought', '1' );
+    //     update_user_meta( 736, 'has_salesforce_checked', '1');
+    //     exit('test: ok');
     // }
     
 

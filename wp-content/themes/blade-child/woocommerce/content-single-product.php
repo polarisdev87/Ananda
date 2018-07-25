@@ -34,6 +34,7 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 #grve-modal-overlay, .mfp-bg, #grve-loader-overflow {
     background-color: rgba(255,255,255,1);
 }
+/*
 #product-10226.product-type-grouped .price, #product-10226.product-type-grouped form.cart table {
 	display: none;
 }
@@ -43,6 +44,7 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 #product-4464.product-type-grouped .price, #product-4464.product-type-grouped form.cart table {
 	display: none;
 }
+*/
 </style>
 <?php
 	/**
@@ -57,13 +59,13 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 	 	return;
 	 }
 
-	if (get_the_ID() == '10226') {
-	 	add_filter( 'woocommerce_quantity_input_args', 'custom_quantity', 10, 2 );
-		function custom_quantity( $args, $product ) {
-		    $args['input_value'] = 16;
-		    return $args;
-		}
-	}
+	// if (get_the_ID() == '10226') {
+	//  	add_filter( 'woocommerce_quantity_input_args', 'custom_quantity', 10, 2 );
+	// 	function custom_quantity( $args, $product ) {
+	// 	    $args['input_value'] = 16;
+	// 	    return $args;
+	// 	}
+	// }
 ?>
 <div id="product-<?php the_ID(); ?>" <?php post_class(); ?>>
 
@@ -118,6 +120,8 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 
 <script type="text/javascript">
 	jQuery(document).ready(function() {
+		/*
+
 		// THC Free default quantity for grouped product
 		if (jQuery('#product-10226').length > 0) {
 			jQuery('#product-10226 button[type=submit]').attr('disabled', 'disabled');
@@ -150,6 +154,7 @@ add_action( 'woocommerce_single_product_summary', 'blade_grve_woo_single_title',
 				jQuery('#product-4464 button[type=submit]').attr('disabled', '').removeAttr('disabled');
 			}, 1500);
 		}
+		*/
 
 		// jQuery("input.qty").attr("readonly","readonly");
 	});

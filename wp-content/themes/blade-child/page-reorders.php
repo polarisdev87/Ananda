@@ -121,6 +121,11 @@ if ( count( $customer_orders ) < $loyal_count && $user_already_bought!='1') {
 						}
 					}
 				</style>
+				<script type="text/javascript">
+					jQuery('.out_of_stock').click(function() {
+						alert('Ananda Professional 600 mg Tinctures is temporarily out of stock and will be shipped at no cost on July 27.');
+					});
+				</script>
 				<!-- END MAIN CONTENT -->
 
 				<?php blade_grve_set_current_view( 'page' ); ?>
