@@ -334,6 +334,28 @@ function add_loginout_link( $items, $args ) {
     return $items;
 }
 
+
+
+
+function is_reorder() {
+    $customer_orders = get_posts( array(
+        'numberposts' => -1,
+        'meta_key'    => '_customer_user',
+        'meta_value'  => get_current_user_id(),
+        'post_type'   => wc_get_order_types(),
+        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
+    ) );
+
+    $loyal_count = 1;
+    $user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
+
+    return count( $customer_orders ) >= $loyal_count || $user_already_bought=='1';
+}
+
+
+
+
+
 if( !is_admin() )
 {
     // Function to check starting char of a string
@@ -601,17 +623,7 @@ add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields_rep
 function custom_override_checkout_fields_rep_name( $fields ) {
 
     // Get all customer orders
-    $customer_orders = get_posts( array(
-        'numberposts' => -1,
-        'meta_key'    => '_customer_user',
-        'meta_value'  => get_current_user_id(),
-        'post_type'   => wc_get_order_types(),
-        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
-    ) );
-
-    $loyal_count = 1;
-    $user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
-    if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') {
+    if (is_reorder()) {
         unset($fields['billing']['rep_name']);
     }
 
@@ -628,18 +640,7 @@ function custom_override_additional_fields( $fields ) {
 
 add_action('woocommerce_checkout_after_customer_details','checkout_additional_sections');
 function checkout_additional_sections() {
-    $customer_orders = get_posts( array(
-        'numberposts' => -1,
-        'meta_key'    => '_customer_user',
-        'meta_value'  => get_current_user_id(),
-        'post_type'   => wc_get_order_types(),
-        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
-    ) );
-
-    $loyal_count = 1;
-    $user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
-
-    if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') return;
+    if (is_reorder()) return;
 
     echo '<div class="woocommerce-inservice-fields">';
         echo '<h3 id="order_review_heading">'. __( 'In Service', 'woocommerce' ).'</h3>';
@@ -675,7 +676,8 @@ function woocommerce_update_cart_ajax_by_tax_cert() {
 
 ?>
 
-    <script src="https://app.certcapture.com/gencert2/js?cid=82587&key=GcJMnfB0CnYMoG5R"></script>
+    <!-- <script src="https://app.certcapture.com/gencert2/js?cid=82587&key=GcJMnfB0CnYMoG5R"></script> -->
+    <script src="https://app.certcapture.com/gencert2/js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
             jQuery('#tax_cert').change(function() {
@@ -849,19 +851,11 @@ function custom_wc_zero_tax_for_certificate( $tax_class, $product) {
 
 function exclude_orders_filter_recipient( $recipient, $order ){
 
-    $customer_orders = get_posts( array(
-        'numberposts' => -1,
-        'meta_key'    => '_customer_user',
-        'meta_value'  => get_current_user_id(),
-        'post_type'   => wc_get_order_types(),
-        'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
-    ) );
+    if ($order->get_payment_method() === 'cheque' ) {
+        return $recipient;
+    }
 
-    $loyal_count = 1;
-    $user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
-
-    if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') {
-
+    if (is_reorder()) {
         $recipient = explode(',', $recipient);
         $new_recipient = [];
         foreach($recipient as $val) {
@@ -876,6 +870,21 @@ function exclude_orders_filter_recipient( $recipient, $order ){
 }
 add_filter( 'woocommerce_email_recipient_new_order', 'exclude_orders_filter_recipient', 10, 2 );
 
+
+add_filter( 'woocommerce_coupon_get_discount_amount', 'alter_shop_coupon_data', 20, 5 );
+function alter_shop_coupon_data( $round, $discounting_amount, $cart_item, $single, $coupon ){
+
+    // Related coupons codes to be defined in this array (you can set many)
+    $coupon_codes = array('tcg', 'care');
+
+    if ( $coupon->is_type('percent') && in_array( $coupon->get_code(), $coupon_codes ) ) {
+        if (is_reorder()) {
+            $discount = (float) $coupon->get_amount() * ( 0.5 * $discounting_amount / 100 );
+            $round = round( min( $discount, $discounting_amount ), wc_get_rounding_precision() );
+        }
+    }
+    return $round;
+}
 
 // https://t.yctin.com/en/excel/to-php-array/
 // $customers_array = array(

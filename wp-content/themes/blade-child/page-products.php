@@ -96,6 +96,13 @@ if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') {
 						margin-right: 1rem !important;
 						object-fit: contain;
 					}
+
+					@media only screen and (max-width: 768px) {
+						.woocommerce div.product div#grve-product-feature-image .thumbnails {
+							max-height: 400px;
+							overflow-y: auto;
+						}
+					}
 				</style>
 				<!-- END MAIN CONTENT -->
 
