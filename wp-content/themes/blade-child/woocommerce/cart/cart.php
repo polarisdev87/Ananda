@@ -79,7 +79,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 									}
 
 									// Meta data
-									echo WC()->cart->get_item_data( $cart_item );
+									echo wc_get_formatted_cart_item_data( $cart_item );
 
 									// Backorder notification
 									if ( $_product->backorders_require_notification() && $_product->is_on_backorder( $cart_item['quantity'] ) ) {
@@ -126,7 +126,7 @@ do_action( 'woocommerce_before_cart' ); ?>
 								<?php
 									echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
 										'<a href="%s" class="remove" title="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
-										esc_url( WC()->cart->get_remove_url( $cart_item_key ) ),
+										esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 										esc_attr__( 'Remove this item', 'woocommerce' ),
 										esc_attr( $product_id ),
 										esc_attr( $_product->get_sku() )

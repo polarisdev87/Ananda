@@ -50,7 +50,7 @@ if ( function_exists( 'wc_get_checkout_url' ) ) {
 							</a>
 							<div class="cart-item-content">
 								<a class="grve-link-text" href="<?php echo esc_url( get_permalink( $product_id ) ); ?>"><?php echo wp_kses_post($product_name); ?></a>
-								<?php echo WC()->cart->get_item_data( $cart_item ); ?>
+								<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
 								<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
 							</div>
 						</li>

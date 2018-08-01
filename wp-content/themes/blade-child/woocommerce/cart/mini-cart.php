@@ -55,7 +55,7 @@ if ( function_exists( 'wc_get_checkout_url' ) ) {
 						<?php
 						echo apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
 							'<a href="%s" class="remove remove_from_cart_button" title="%s" data-product_id="%s" data-cart_item_key="%s" data-product_sku="%s"><i class="grve-icon grve-icon-close-sm"></i></a>',
-							esc_url( WC()->cart->get_remove_url( $cart_item_key ) ),
+							esc_url( wc_get_cart_remove_url( $cart_item_key ) ),
 							esc_attr__( 'Remove this item', 'woocommerce' ),
 							esc_attr( $product_id ),
 							esc_attr( $cart_item_key ),
@@ -69,7 +69,7 @@ if ( function_exists( 'wc_get_checkout_url' ) ) {
 								<?php echo str_replace( array( 'http:', 'https:' ), '', $thumbnail ) . $product_name . '&nbsp;'; ?>
 							</a>
 						<?php endif; ?>
-						<?php echo WC()->cart->get_item_data( $cart_item ); ?>
+						<?php echo wc_get_formatted_cart_item_data( $cart_item ); ?>
 
 						<?php echo apply_filters( 'woocommerce_widget_cart_item_quantity', '<span class="quantity">' . sprintf( '%s &times; %s', $cart_item['quantity'], $product_price ) . '</span>', $cart_item, $cart_item_key ); ?>
 					</li>

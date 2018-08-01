@@ -627,6 +627,11 @@ function custom_override_checkout_fields_rep_name( $fields ) {
         unset($fields['billing']['rep_name']);
     }
 
+    // $limited_list = ['CA', 'FL', 'PA', 'KY'];
+    // if (!in_array(WC()->customer->get_shipping_state(), $limited_list)) {
+    //     unset($fields['billing']['tax_cert']);
+    // }
+
     return $fields;
 }
 
@@ -673,13 +678,25 @@ function checkout_additional_sections() {
 
 add_action ( 'woocommerce_checkout_after_customer_details', 'woocommerce_update_cart_ajax_by_tax_cert');
 function woocommerce_update_cart_ajax_by_tax_cert() {
-
 ?>
-
-    <!-- <script src="https://app.certcapture.com/gencert2/js?cid=82587&key=GcJMnfB0CnYMoG5R"></script> -->
     <script src="https://app.certcapture.com/gencert2/js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
+            jQuery('#tax_cert_field').hide();
+            function update_tax_cert_field(search_state) {
+                var found = ['CA', 'FL', 'PA', 'KY'].find(function (el) {
+                    return el == search_state;
+                });
+                if (found) {
+                    jQuery('#tax_cert_field').show();
+                } else {
+                    jQuery('#tax_cert_field').hide();
+                }
+            }
+            update_tax_cert_field(jQuery('#billing_state').val());
+            jQuery('#billing_state').change(function() {
+                update_tax_cert_field(jQuery(this).val());
+            });
             jQuery('#tax_cert').change(function() {
                 jQuery('body').trigger('update_checkout');
                 if (jQuery(this).val() === 'YES') {
@@ -698,10 +715,47 @@ function woocommerce_update_cart_ajax_by_tax_cert() {
             display: none !important;
         }
     </style>
-
-    <div id="cert_capture_form" style="display: none;">
-    </div>
+    <div id="cert_capture_form" style="display: none;"></div>
 <?php
+}
+
+/* Test */
+$certcapture_client_id = '82587';
+$certcapture_client_key = 'GcJMnfB0CnYMoG5R';
+// $certcapture_username = 'anandap_test';
+// $certcapture_password = 'AnandaProfessional2018';
+$certcapture_username = 'lance032017@gmail.com';
+$certcapture_password = 'AnandaProfessional@2018';
+/* PROD */
+// $certcapture_client_id = '82590';
+// $certcapture_client_key = '3Y8i6qngdaRLFY7t';
+// $certcapture_username = 'anandap';
+// $certcapture_password = 'AnandaProfessional2018';
+
+function curl_certcapture($url, $customer_number, $post = false) {
+    global $certcapture_client_id, $certcapture_client_key, $certcapture_username, $certcapture_password;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_HEADER, FALSE);
+
+    if ($post) {
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+    }
+
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+        "x-client-id: " . $certcapture_client_id,
+        "Authorization: Basic " . base64_encode($certcapture_username . ':' . $certcapture_password),
+        "x-customer-number: " . $customer_number,
+        "x-customer-primary-key: customer_number",
+    ));
+
+    $response = curl_exec($ch);
+    curl_close($ch);
+
+    return json_decode($response);
 }
 
 add_action( 'woocommerce_review_order_after_submit', 'custom_review_order_after_submit' );
@@ -711,98 +765,90 @@ function custom_review_order_after_submit() {
     }else {
         $post_data = $_POST;
     }
+
+    /*if (in_array($post_data['shipping_state'], ['CA', 'FL', 'PA', 'KY'])) {
+        ?><script type="text/javascript">jQuery('#tax_cert_field').show();</script><?php
+    }*/
+
     if(!empty($post_data['tax_cert'])) {
         if ($post_data['tax_cert']!='NO') {
 
-            $ch = curl_init();
-
-            curl_setopt($ch, CURLOPT_URL, "https://api.certcapture.com/v2/auth/get-token");
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-            curl_setopt($ch, CURLOPT_HEADER, FALSE);
-
-            curl_setopt($ch, CURLOPT_POST, TRUE);
-
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-              "x-client-id: 82587",
-              "Authorization: Basic " . base64_encode('anandap_test:AnandaProfessional2018'),
-              "x-customer-primary-key: customer_number",
-            ));
-
-            $response = curl_exec($ch);
-            curl_close($ch);
-
-            $token_response = json_decode($response);
-
-            $token = $token_response->response->token;
+            global $certcapture_client_id, $certcapture_client_key, $certcapture_username, $certcapture_password;
 
             $npi_id = get_user_meta(get_current_user_id(), 'npi_id', true); // cert capture - customer number
 
-            ?>
-                <script type="text/javascript">jQuery('#place_order').attr('disabled', 'disabled');</script>
+            $states = ['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming'];
 
-                <script type="text/javascript">
 
-                    GenCert.init(document.getElementById("cert_capture_form"), {               
+            $token_response = curl_certcapture("https://api.certcapture.com/v2/auth/get-token", $npi_id, true);
+            $token = $token_response->response->token;
 
-                      // The token and zone must set to start the process!
+            $customer_data = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id, $npi_id);
+            $customer_certificates = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id . "/certificates", $npi_id);
 
-                        token: '<?php echo $token; ?>',
-                        // debug: true,
-                        edit_purchaser: true,
-                        hide_sig: true,
-                        upload_only: true,
-                        submit_to_stack: true,
+            // $exposures_zones = curl_certcapture("https://api.certcapture.com/v2/exposure-zones", $npi_id);
+            // $customer_exposures = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id . "/exposure-zones", $npi_id);
 
-                        onCertSuccess: function() {
 
-                          alert('Certificate successfully generated with id:' + GenCert.certificateIds);
+            // $exposure_exist = false;
 
-                          // window.location = '/home';
+            // if ($customer_data->state) {
+            //     foreach ($exposures_zones->data as $exposure) {
+            //         if (!$exposure->state) continue;
+            //         if ($exposure->state->id == $customer_data->state->id) {
 
-                        },
+            //             foreach ($customer_exposures as $customer_exposure) {
+            //                 if ($customer_exposure->id == $exposure->id) {
+            //                     $exposure_exist = true;
+            //                     break;
+            //                 }
+            //             }
+            //             break;
+            //         }
+            //     }
+            // }
 
-                        onInit: function() {
-                            console.log('certcapture form inited');
-                        },
+            if (count($customer_certificates) == 0) {
+                ?>
+                    <script type="text/javascript">
+                        jQuery('#place_order').attr('disabled', 'disabled');
+                        alert('Please complete Tax form below');
+                    </script>
+                    <script type="text/javascript">
+                        GenCert.init(document.getElementById("cert_capture_form"), {
+                            // The token and zone must set to start the process!
+                            token: '<?php echo $token; ?>',
+                            // debug: true,
+                            edit_purchaser: true,
+                            // hide_sig: true,
+                            fill_only: true,
+                            // upload_only: true,
+                            // submit_to_stack: true,
 
-                        onCancel: function() {
+                            onCertSuccess: function() {
+                                console.log('Certificate successfully generated with id:' + GenCert.certificateIds);
+                                jQuery('#place_order').attr('disabled', '').removeAttr('disabled');
+                                GenCert.hide();
+                                alert('Please proceed with your order');
+                            },
+                        }, '<?php echo $certcapture_client_id; ?>', '<?php echo $certcapture_client_key; ?>');
 
-                            console.log('cert capture form cancelled');
-
-                          // window.location = '/home';
-
-                        }
-                    }, 82587, 'GcJMnfB0CnYMoG5R');
-
-         
-
-                    GenCert.setCustomerNumber('<?php echo $npi_id; ?>'); // create customer
-
-                    var customer = new Object();
-
-                    customer.name = '<?php echo $post_data['shipping_first_name'] . ' ' . $post_data['shipping_last_name']; ?>';
-
-                    customer.address1 = '<?php echo $post_data['shipping_address_1']; ?>';
-
-                    customer.city = '<?php echo $post_data['shipping_city']; ?>';
-
-                    // customer.state = 'California';
-                    // customer.state = '<?php echo $post_data['shipping_state']; ?>';
-
-                    // customer.country = 'United States';
-                    // customer.country = '<?php echo $post_data['shipping_country']; ?>';
-
-                    customer.phone = '<?php echo $post_data['shipping_phone'] !== '' ? $post_data['shipping_phone'] : $post_data['billing_phone']; ?>';
-
-                    customer.zip = '<?php echo $post_data['shipping_postcode']; ?>';
-
-                    GenCert.setCustomerData(customer);
-
-                    GenCert.setShipZone('<?php echo $post_data['shipping_state']; ?>');
-
-                    GenCert.show();
-                </script>
-            <?php
+                        GenCert.setCustomerNumber('<?php echo $npi_id; ?>'); // create customer
+                        var customer = new Object();
+                        customer.name = '<?php echo $post_data['billing_first_name'] . ' ' . $post_data['billing_last_name']; ?>';
+                        customer.address1 = '<?php echo $post_data['billing_address_1']; ?>';
+                        customer.city = '<?php echo $post_data['billing_city']; ?>';
+                        customer.state = '<?php echo $states[$post_data['billing_state']]; ?>';
+                        customer.country = 'United States';
+                        // customer.country = '<?php echo $post_data['billing_country']; ?>';
+                        customer.phone = '<?php echo $post_data['billing_phone']; ?>';
+                        customer.zip = '<?php echo $post_data['billing_postcode']; ?>';
+                        GenCert.setCustomerData(customer);
+                        GenCert.setShipZone('<?php echo $states[$post_data['billing_state']]; ?>');
+                        GenCert.show();
+                    </script>
+                <?php
+            }
         }
     }
 }
@@ -832,7 +878,7 @@ function custom_wc_after_calculate_totals() {
     }
 }
 
-add_filter( 'woocommerce_product_tax_class', 'custom_wc_zero_tax_for_certificate' );
+add_filter( 'woocommerce_product_get_tax_class', 'custom_wc_zero_tax_for_certificate', 10, 3);
 function custom_wc_zero_tax_for_certificate( $tax_class, $product) {
     if (is_ajax() && !empty( $_POST['post_data'] ) ) {
         parse_str( $_POST['post_data'], $post_data );
@@ -849,26 +895,28 @@ function custom_wc_zero_tax_for_certificate( $tax_class, $product) {
     return $tax_class;
 }
 
-function exclude_orders_filter_recipient( $recipient, $order ){
+if( !is_admin() ) {
+    function exclude_orders_filter_recipient( $recipient, $order ){
 
-    if ($order->get_payment_method() === 'cheque' ) {
+        if ($order->get_payment_method() === 'cheque' ) {
+            return $recipient;
+        }
+
+        if (is_reorder()) {
+            $recipient = explode(',', $recipient);
+            $new_recipient = [];
+            foreach($recipient as $val) {
+                if ($val != 'orders@anandaprofessional.com') {
+                    $new_recipient[] = $val;
+                }
+            }
+            $recipient = implode(',', $new_recipient);
+        }
+
         return $recipient;
     }
-
-    if (is_reorder()) {
-        $recipient = explode(',', $recipient);
-        $new_recipient = [];
-        foreach($recipient as $val) {
-            if ($val != 'orders@anandaprofessional.com') {
-                $new_recipient[] = $val;
-            }
-        }
-        $recipient = implode(',', $new_recipient);
-    }
-
-    return $recipient;
+    add_filter( 'woocommerce_email_recipient_new_order', 'exclude_orders_filter_recipient', 10, 2 );
 }
-add_filter( 'woocommerce_email_recipient_new_order', 'exclude_orders_filter_recipient', 10, 2 );
 
 
 add_filter( 'woocommerce_coupon_get_discount_amount', 'alter_shop_coupon_data', 20, 5 );
