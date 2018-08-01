@@ -584,7 +584,7 @@ function role_based_menu_list() {
                 #adminmenu>li {
                     display: none;
                 }
-                #adminmenu>.toplevel_page_asl-plugin, #adminmenu>.toplevel_page_woocommerce {
+                #adminmenu>.toplevel_page_asl-plugin, #adminmenu>.toplevel_page_woocommerce, #adminmenu>.menu-icon-users {
                     display: block;
                 }
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li, #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li {
@@ -596,7 +596,9 @@ function role_based_menu_list() {
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(6),
                 #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(1),
                 #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(2),
-                #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(4) {
+                #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(4),
+                #adminmenu>.menu-icon-users>ul.wp-submenu>li:nth-child(1),
+                #adminmenu>.menu-icon-users>ul.wp-submenu>li:nth-child(2) {
                     display: block;
                 }
                 #wp-admin-bar-comments, #wp-admin-bar-new-content, #wp-admin-bar-kinsta-cache, #wp-admin-bar-purge-cdn, #wp-admin-bar-edit-profile, #wp-admin-bar-user-info {
