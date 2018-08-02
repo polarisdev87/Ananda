@@ -11,6 +11,7 @@ class WC_XR_Contact {
 	private $first_name = '';
 	private $last_name = '';
 	private $email_address = '';
+	private $account_number = '';
 	private $addresses = array();
 	private $phones = array();
 
@@ -85,6 +86,20 @@ class WC_XR_Contact {
 	}
 
 	/**
+	 * @return string
+	 */
+	public function get_account_number() {
+		return apply_filters( 'woocommerce_xero_contact_account_number', $this->account_number, $this );
+	}
+
+	/**
+	 * @param string $account_number
+	 */
+	public function set_account_number( $account_number ) {
+		$this->account_number = htmlspecialchars( $account_number );
+	}
+
+	/**
 	 * @return array
 	 */
 	public function get_addresses() {
@@ -149,6 +164,9 @@ class WC_XR_Contact {
 
 		// EmailAddress
 		$xml .= '<EmailAddress>' . $this->get_email_address() . '</EmailAddress>';
+
+		// AccountNumber
+		$xml .= '<AccountNumber>' . $this->get_account_number() . '</AccountNumber>';
 
 		// Addresses
 		$addresses = $this->get_addresses();

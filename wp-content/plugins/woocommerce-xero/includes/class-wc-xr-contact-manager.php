@@ -173,6 +173,9 @@ class WC_XR_Contact_Manager {
 		$contact_id = $this->get_id_by_email( $billing_email );
 		$contact_id_only = null;
 
+		$user_id = $order->get_user_id();
+		$account_number = $user_id ? get_user_meta($user_id, 'npi_id', true) : ''; // NPI Number
+
 		// See if a previous contact exists
 		if ( ! empty ( $contact_id ) ) {
 			$contact->set_id( $contact_id );
@@ -190,6 +193,9 @@ class WC_XR_Contact_Manager {
 
 		// Set email address
 		$contact->set_email_address( $billing_email );
+
+		// Set account_number
+		$contact->set_account_number( $account_number );
 
 		// Set address
 		$contact->set_addresses( array( $this->get_address_by_order( $order ) ) );
