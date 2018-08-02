@@ -22,7 +22,8 @@ class WC_MS_Front {
 		// cleanup
 		add_action( 'wp_logout', array( $this->wcms, 'clear_session' ) );
 
-		add_action( 'plugins_loaded', array( $this, 'load_account_addresses' ) );
+		// add_action( 'plugins_loaded', array( $this, 'load_account_addresses' ) );
+		add_action( 'init', array( $this, 'load_account_addresses' ) );
 
 		// inline script
 		add_action( 'wp_footer', array( $this, 'inline_scripts' ) );
