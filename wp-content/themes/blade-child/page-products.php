@@ -98,10 +98,22 @@ if ( count( $customer_orders ) >= $loyal_count || $user_already_bought=='1') {
 					}
 
 					@media only screen and (max-width: 768px) {
-						.woocommerce div.product div#grve-product-feature-image .thumbnails {
+						/*.woocommerce div.product div#grve-product-feature-image .thumbnails {
 							max-height: 400px;
-							overflow-y: auto;
+							padding-right: 7px;
+
+							overflow-y: scroll;
+			  				-webkit-overflow-scrolling: touch;
+			  			}
+						.woocommerce div.product div#grve-product-feature-image .thumbnails::-webkit-scrollbar {
+							background-color: #d9d9d9;
+							width: 7px;
+							border-radius: 4px;
 						}
+						.woocommerce div.product div#grve-product-feature-image .thumbnails::-webkit-scrollbar-thumb {
+							background-color: #7d7d7d;
+							border-radius: 4px;
+						}*/
 					}
 				</style>
 				<!-- END MAIN CONTENT -->
