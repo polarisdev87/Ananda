@@ -43,12 +43,12 @@ class WC_XR_Invoice_Manager {
 	 *
 	 * @return bool
 	 */
-	public function send_invoice( $order_id ) {
+	public function send_invoice( $order_id, $is_manual = false ) {
 
 		// Get the order
 		$order = wc_get_order( $order_id );
 
-		if ($order->get_payment_method() === 'cheque' ) {
+		if ($order->get_payment_method() === 'cheque' && !$is_manual ) {
 			$order->add_order_note( __( "Ignore sending invoice to xero because payment method is ACH") );
 			return false;
 		}

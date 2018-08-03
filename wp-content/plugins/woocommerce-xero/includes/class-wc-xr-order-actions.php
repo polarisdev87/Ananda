@@ -67,7 +67,7 @@ class WC_XR_Order_Actions {
 
 		// Send Invoice
 		$order_id = version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id();
-		$invoice_manager->send_invoice( $order_id );
+		$invoice_manager->send_invoice( $order_id, true );
 
 		return true;
 	}
