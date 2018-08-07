@@ -947,6 +947,45 @@ if (!is_admin() && !wc_memberships_is_user_active_member( get_current_user_id(),
     // var_dump ($GLOBALS['wcms']->front->load_account_addresses);
 }
 
+
+add_action( 'woocommerce_cart_calculate_fees','shipping_method_discount', 20, 1 );
+function shipping_method_discount( $cart_object ) {
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
+
+    // HERE Define your targeted shipping method ID
+    $payment_method = 'cheque';
+
+    // The percent to apply
+    $percent = 2; // 15%
+
+    $cart_total = $cart_object->subtotal_ex_tax;
+    $chosen_payment_method = WC()->session->get('chosen_payment_method');
+
+    if( $payment_method == $chosen_payment_method ){
+        $label_text = __( "Shipping discount " . $percent ."%" );
+        // Calculation
+        $discount = number_format(($cart_total / 100) * $percent, 2);
+        // Add the discount
+        $cart_object->add_fee( $label_text, -$discount, false );
+    }
+}
+
+add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
+function refresh_payment_methods(){
+    // jQuery code
+    ?>
+    <script type="text/javascript">
+        (function($){
+            $( 'form.checkout' ).on( 'change', 'input[name^="payment_method"]', function() {
+                $('body').trigger('update_checkout');
+            });
+        })(jQuery);
+    </script>
+    <?php
+}
+
+
 // https://t.yctin.com/en/excel/to-php-array/
 // $customers_array = array(
 //     0 => array('address_1' => '212 MILLWELL DR', 'address_2' => 'SUITE A', 'city' => 'MARYLAND HEIGHTS', 'state' => 'MO', 'zip' => '63043-2512', 'phone' => '314-727-8787', 'npi' => '1790061596', 'email' => 'Mgraumenz@Legacydrug.com'),
@@ -1003,9 +1042,12 @@ function runOnInit() {
     //     }
     //     exit('total created: '. $cnt);
     // }
+
+    //To be run anandaprofessional.com/?customers=1 after update
+    //This code block is use to enable reorder
     // if ($_GET['customers'] == '1') {
-    //     update_user_meta( 85, 'already_bought', '1' );
-    //     update_user_meta( 85, 'has_salesforce_checked', '1');
+    //     update_user_meta( 292, 'already_bought', '1' );
+    //     update_user_meta( 292, 'has_salesforce_checked', '1');
     //     exit('test: ok');
     // }
 
