@@ -160,7 +160,7 @@ class WC_XR_Contact_Manager {
 
 		$billing_company    = ucwords(strtolower($old_wc ? $order->billing_company : $order->get_billing_company()));
 		$billing_first_name = ucwords(strtolower($old_wc ? $order->billing_first_name : $order->get_billing_first_name()));
-		$billing_last_name  = ucwords(strtolower($old_wc ? $order->billing_last_name : $order->get_billing_last_name()))
+		$billing_last_name  = ucwords(strtolower($old_wc ? $order->billing_last_name : $order->get_billing_last_name()));
 
 		// Set Invoice name
 		if ( strlen( $billing_company ) > 0 ) {

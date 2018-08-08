@@ -1046,8 +1046,8 @@ function runOnInit() {
     //To be run anandaprofessional.com/?customers=1 after update
     //This code block is use to enable reorder
     // if ($_GET['customers'] == '1') {
-    //     update_user_meta( 292, 'already_bought', '1' );
-    //     update_user_meta( 292, 'has_salesforce_checked', '1');
+    //     update_user_meta( 115, 'already_bought', '1' );
+    //     update_user_meta( 115, 'has_salesforce_checked', '1');
     //     exit('test: ok');
     // }
 
