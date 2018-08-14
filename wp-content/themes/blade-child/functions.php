@@ -1024,7 +1024,7 @@ function woocommerce_form_field_hidden( $field, $key, $args ){
     $field = '
         <p class="form-row address-field validate-required" id="'.esc_attr($key).'_field" data-priority="90">
             <label for="'.esc_attr($key).'" class="">'.esc_attr($args['label']).'&nbsp;'.($args['required']?'<abbr class="required" title="required">*</abbr>':'').'</label>
-            <span class="woocommerce-input-wrapper"><strong>'.get_user_meta(get_current_user_id(), $key, true).'</strong><input type="hidden" name="'.esc_attr($key).'" id="'.esc_attr($key).'" value="'.get_user_meta(get_current_user_id()).'" autocomplete="'.esc_attr($args['autocomplete']).'" class="" readonly="readonly"></span>
+            <span class="woocommerce-input-wrapper"><strong class="'.esc_attr($key).'">'.get_user_meta(get_current_user_id(), $key, true).'</strong><input type="hidden" name="'.esc_attr($key).'" id="'.esc_attr($key).'" value="'.get_user_meta(get_current_user_id()).'" autocomplete="'.esc_attr($args['autocomplete']).'" class="" readonly="readonly"></span>
         </p>
     ';
     return $field;

@@ -515,6 +515,7 @@ jQuery(document).ready(function($) {
 
                 if ( $(".woocommerce-shipping-fields #"+ prop).length ) {
                     $(".woocommerce-shipping-fields #"+ prop).val( data[prop] );
+                    $(".woocommerce-shipping-fields ."+ prop).text( data[prop] );
                 }
 
                 if ( $( '.wcms-address-form .shipping_address #' + prop ).length ) {
