@@ -51,6 +51,15 @@ function wooc_extra_register_fields() {
     <input type="text" class="input-text" name="npi_id" id="reg_npi_id" value="<?php if ( ! empty( $_POST['npi_id'] ) ) esc_attr_e( $_POST['npi_id'] ); ?>" />
     </p>
 
+    <p class="form-row form-row-wide">
+        <label class="label" for="distributor">Do you have multiple stores? <abbr class="required" title="required">*</abbr></label>
+        <div class="inline-group">
+            <label class="radio"><input type="radio" name="distributor" value="0" checked /> <i>No</i></label>
+            <label class="radio"><input type="radio" name="distributor" value="1" /> <i>Yes</i></label>
+        </div>
+        <div>&nbsp;</div>
+    </p>
+
     <?php
 }
 add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields' );
@@ -95,7 +104,30 @@ function wooc_save_extra_register_fields( $customer_id ) {
         // WooCommerce billing first name.
         update_user_meta( $customer_id, 'npi_id', sanitize_text_field( $_POST['npi_id'] ) );
     }
-  
+
+    if ( isset($_POST['distributor']) && $_POST['distributor'] == 1) {
+
+        // bail if Memberships isn't active
+        if ( ! function_exists( 'wc_memberships' ) ) {
+            return;
+        }
+
+        $plan = wc_memberships_get_membership_plan('distributor');
+
+        if (!$plan) return;
+
+        $args = array(
+            'plan_id' => $plan->id,
+            'user_id' => $customer_id,
+        );
+
+        wc_memberships_create_user_membership( $args );
+
+        // Optional: get the new membership and add a note so we know how this was registered.
+        $user_membership = wc_memberships_get_user_membership( $customer_id, $args['plan_id'] );
+        $user_membership->add_note( 'Membership access granted automatically from registration.' );
+        
+    }
 }
 add_action( 'woocommerce_created_customer', 'wooc_save_extra_register_fields' );
 
