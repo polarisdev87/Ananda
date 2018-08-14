@@ -722,19 +722,19 @@ function woocommerce_update_cart_ajax_by_tax_cert() {
 }
 
 /* Test */
-$certcapture_client_id = '82587';
-$certcapture_client_key = 'GcJMnfB0CnYMoG5R';
+// $certcapture_client_id = '82587';
+// $certcapture_client_key = 'GcJMnfB0CnYMoG5R';
 // $certcapture_username = 'anandap_test';
 // $certcapture_password = 'AnandaProfessional2018';
 $certcapture_username = 'lance032017@gmail.com';
 $certcapture_password = 'AnandaProfessional@2018';
 /* PROD */
-// $certcapture_client_id = '82590';
-// $certcapture_client_key = '3Y8i6qngdaRLFY7t';
+$certcapture_client_id = '82590';
+$certcapture_client_key = '3Y8i6qngdaRLFY7t';
 // $certcapture_username = 'anandap';
 // $certcapture_password = 'AnandaProfessional2018';
 
-function curl_certcapture($url, $customer_number, $post = false) {
+function curl_certcapture($url, $customer_number, $post = false, $postData = '') {
     global $certcapture_client_id, $certcapture_client_key, $certcapture_username, $certcapture_password;
 
     $ch = curl_init();
@@ -745,6 +745,7 @@ function curl_certcapture($url, $customer_number, $post = false) {
 
     if ($post) {
         curl_setopt($ch, CURLOPT_POST, TRUE);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
     }
 
     curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -752,6 +753,7 @@ function curl_certcapture($url, $customer_number, $post = false) {
         "Authorization: Basic " . base64_encode($certcapture_username . ':' . $certcapture_password),
         "x-customer-number: " . $customer_number,
         "x-customer-primary-key: customer_number",
+        "Content-Type: application/x-www-form-urlencoded",
     ));
 
     $response = curl_exec($ch);
@@ -786,6 +788,9 @@ function custom_review_order_after_submit() {
             $token = $token_response->response->token;
 
             $customer_data = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id, $npi_id);
+            if (isset($customer_data->success) && $customer_data->success === false) {
+
+            }
             $customer_certificates = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id . "/certificates", $npi_id);
 
             // $exposures_zones = curl_certcapture("https://api.certcapture.com/v2/exposure-zones", $npi_id);
@@ -985,6 +990,46 @@ function refresh_payment_methods(){
     <?php
 }
 
+/* locking down the company fields for checkout page */
+function custom_woocommerce_billing_fields( $fields ){
+    if ( !is_checkout() ) return $fields; 
+    $url_param_fields = array(
+        'company',
+    );
+    foreach( $url_param_fields as $param ){
+        $billing_key = 'billing_' . $param;
+        if ( array_key_exists( $billing_key, $fields) ) {
+            $fields[$billing_key]['type'] = 'hidden'; // let's change the type of this to hidden.
+        }
+    }
+    return $fields;
+}
+add_filter( 'woocommerce_billing_fields', 'custom_woocommerce_billing_fields' );
+function custom_woocommerce_shipping_fields( $fields ){
+    if ( !is_checkout() ) return $fields; 
+    $url_param_fields = array(
+        'company',
+    );
+    foreach( $url_param_fields as $param ){
+        $shipping_key = 'shipping_' . $param;
+        if ( array_key_exists( $shipping_key, $fields) ) {
+            $fields[$shipping_key]['type'] = 'hidden'; // let's change the type of this to hidden.
+        }
+    }
+    return $fields;
+}
+add_filter( 'woocommerce_shipping_fields', 'custom_woocommerce_shipping_fields' );
+
+function woocommerce_form_field_hidden( $field, $key, $args ){
+    $field = '
+        <p class="form-row address-field validate-required" id="'.esc_attr($key).'_field" data-priority="90">
+            <label for="'.esc_attr($key).'" class="">'.esc_attr($args['label']).'&nbsp;'.($args['required']?'<abbr class="required" title="required">*</abbr>':'').'</label>
+            <span class="woocommerce-input-wrapper"><strong>'.get_user_meta(get_current_user_id(), $key, true).'</strong><input type="hidden" name="'.esc_attr($key).'" id="'.esc_attr($key).'" value="'.get_user_meta(get_current_user_id()).'" autocomplete="'.esc_attr($args['autocomplete']).'" class="" readonly="readonly"></span>
+        </p>
+    ';
+    return $field;
+}
+add_filter( 'woocommerce_form_field_hidden', 'woocommerce_form_field_hidden', 10, 3 );
 
 // https://t.yctin.com/en/excel/to-php-array/
 // $customers_array = array(
