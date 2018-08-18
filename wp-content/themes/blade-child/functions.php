@@ -126,7 +126,7 @@ function wooc_save_extra_register_fields( $customer_id ) {
         // Optional: get the new membership and add a note so we know how this was registered.
         $user_membership = wc_memberships_get_user_membership( $customer_id, $args['plan_id'] );
         $user_membership->add_note( 'Membership access granted automatically from registration.' );
-        
+
     }
 }
 add_action( 'woocommerce_created_customer', 'wooc_save_extra_register_fields' );
@@ -815,37 +815,29 @@ function custom_review_order_after_submit() {
 
             $states = ['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming'];
 
-
             $token_response = curl_certcapture("https://api.certcapture.com/v2/auth/get-token", $npi_id, true);
             $token = $token_response->response->token;
 
             $customer_data = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id, $npi_id);
             if (isset($customer_data->success) && $customer_data->success === false) {
-
+                $data = addslashes(urldecode(http_build_query([
+                    'customer_number' => $npi_id,
+                    'alternate_id' => $npi_id,
+                    'name' => $post_data['billing_company'],
+                    'attn_name' => $post_data['billing_first_name'] . ' ' . $post_data['billing_last_name'],
+                    'contact_name' => $post_data['billing_first_name'] . ' ' . $post_data['billing_last_name'],
+                    'address_line1' => $post_data['billing_address_1'],
+                    'address_line2' => '',
+                    'city' => $post_data['billing_city'],
+                    'zip' => $post_data['billing_postcode'],
+                    'phone_number' => $post_data['billing_phone'],
+                    'email_address' => $post_data['billing_email'],
+                    'country' => ['name' => 'United States'],
+                    'state' => ['name' => $states[$post_data['billing_state']]],
+                ])));
+                $response_customer_created = curl_certcapture("https://api.certcapture.com/v2/customers", $npi_id, true, $data);
             }
             $customer_certificates = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id . "/certificates", $npi_id);
-
-            // $exposures_zones = curl_certcapture("https://api.certcapture.com/v2/exposure-zones", $npi_id);
-            // $customer_exposures = curl_certcapture("https://api.certcapture.com/v2/customers/" . $npi_id . "/exposure-zones", $npi_id);
-
-
-            // $exposure_exist = false;
-
-            // if ($customer_data->state) {
-            //     foreach ($exposures_zones->data as $exposure) {
-            //         if (!$exposure->state) continue;
-            //         if ($exposure->state->id == $customer_data->state->id) {
-
-            //             foreach ($customer_exposures as $customer_exposure) {
-            //                 if ($customer_exposure->id == $exposure->id) {
-            //                     $exposure_exist = true;
-            //                     break;
-            //                 }
-            //             }
-            //             break;
-            //         }
-            //     }
-            // }
 
             if (count($customer_certificates) == 0) {
                 ?>
@@ -1056,7 +1048,7 @@ function woocommerce_form_field_hidden( $field, $key, $args ){
     $field = '
         <p class="form-row address-field validate-required" id="'.esc_attr($key).'_field" data-priority="90">
             <label for="'.esc_attr($key).'" class="">'.esc_attr($args['label']).'&nbsp;'.($args['required']?'<abbr class="required" title="required">*</abbr>':'').'</label>
-            <span class="woocommerce-input-wrapper"><strong class="'.esc_attr($key).'">'.get_user_meta(get_current_user_id(), $key, true).'</strong><input type="hidden" name="'.esc_attr($key).'" id="'.esc_attr($key).'" value="'.get_user_meta(get_current_user_id()).'" autocomplete="'.esc_attr($args['autocomplete']).'" class="" readonly="readonly"></span>
+            <span class="woocommerce-input-wrapper"><strong class="'.esc_attr($key).'">'.get_user_meta(get_current_user_id(), $key, true).'</strong><input type="hidden" name="'.esc_attr($key).'" id="'.esc_attr($key).'" value="'.get_user_meta(get_current_user_id(), $key, true).'" autocomplete="'.esc_attr($args['autocomplete']).'" class="" readonly="readonly"></span>
         </p>
     ';
     return $field;
