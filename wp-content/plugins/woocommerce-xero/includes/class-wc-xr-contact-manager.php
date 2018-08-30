@@ -20,47 +20,67 @@ class WC_XR_Contact_Manager {
 		$this->settings = $settings;
 	}
 
-	public function get_all_contacts() {
-		$request = new WC_XR_Request_Contact($this->settings);
+	public function get_contact_by_id($uid = '') {
+		$request = new WC_XR_Request_Contact_History($this->settings, $uid, false);
+
+		try {
+			$request->do_request();
+			$xml_response = $request->get_response_body_xml();
+		} catch(Exception $e) {
+			$xml_response = null;
+		}
+
+		return $xml_response;
+	}
+
+	public function get_all_contacts($page_no = 0) {
+		$request = new WC_XR_Request_Contact($this->settings, null, $page_no);
 
 		$request->do_request();
 		$xml_response = $request->get_response_body_xml();
 
-		$start = 2500;
-		$end = 2600;
+		return $xml_response;
 
-		$ind = -1;
+		// $request = new WC_XR_Request_Contact($this->settings);
 
-		foreach ($xml_response->Contacts->children() as $key => $contact) {
-			$ind ++;
-			if ($ind < $start || $ind > $end) continue;
+		// $request->do_request();
+		// $xml_response = $request->get_response_body_xml();
 
-			$historyRequest = new WC_XR_Request_Contact_History($this->settings, $contact->ContactID);
-			$historyRequest->do_request();
-			$history_response = $historyRequest->get_response_body_xml();
-			// var_dump($history_response);
-			foreach ($history_response->HistoryRecords as $historyRecord) {
-				if ($historyRecord->HistoryRecord->Changes == 'Created') {
-					$contact->addChild('ContactOwnerName', htmlspecialchars($historyRecord->HistoryRecord->User));
-					break;
-				}
-			}
+		// $start = 2500;
+		// $end = 2600;
 
-			if (!$contact->FirstName || !$contact->LastName ) {
-				$parts = explode(' ', $contact->Name);
-				$lastname = array_pop($parts);
-				$firstname = implode(' ', $parts);
+		// $ind = -1;
 
-				$contact->addChild('FirstName', htmlspecialchars($firstname));
-				$contact->addChild('LastName', htmlspecialchars($lastname));
-			}
+		// foreach ($xml_response->Contacts->children() as $key => $contact) {
+		// 	$ind ++;
+		// 	if ($ind < $start || $ind > $end) continue;
 
-			// $ind++;
-			// var_dump($history_response);
-		}
+		// 	$historyRequest = new WC_XR_Request_Contact_History($this->settings, $contact->ContactID);
+		// 	$historyRequest->do_request();
+		// 	$history_response = $historyRequest->get_response_body_xml();
+		// 	// var_dump($history_response);
+		// 	foreach ($history_response->HistoryRecords as $historyRecord) {
+		// 		if ($historyRecord->HistoryRecord->Changes == 'Created') {
+		// 			$contact->addChild('ContactOwnerName', htmlspecialchars($historyRecord->HistoryRecord->User));
+		// 			break;
+		// 		}
+		// 	}
 
-		// return '';
-		return $xml_response->asXML();
+		// 	if (!$contact->FirstName || !$contact->LastName ) {
+		// 		$parts = explode(' ', $contact->Name);
+		// 		$lastname = array_pop($parts);
+		// 		$firstname = implode(' ', $parts);
+
+		// 		$contact->addChild('FirstName', htmlspecialchars($firstname));
+		// 		$contact->addChild('LastName', htmlspecialchars($lastname));
+		// 	}
+
+		// 	// $ind++;
+		// 	// var_dump($history_response);
+		// }
+
+		// // return '';
+		// return $xml_response->asXML();
 		// echo($xml_response->asXML());
 		// return '';
 		// return $history_response;

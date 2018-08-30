@@ -257,7 +257,7 @@ add_action( 'woocommerce_review_order_before_cart_contents', 'show_checkout_noti
   
 function show_checkout_notice() {
     global $woocommerce;
-    $msg_states = array( 'OK', 'MS', 'KS' );
+    $msg_states = array( 'OK', 'MS', 'KS', 'OH' );
 
     $items = $woocommerce->cart->get_cart();
 
@@ -1060,79 +1060,141 @@ add_filter( 'woocommerce_form_field_hidden', 'woocommerce_form_field_hidden', 10
 //     0 => array('address_1' => '212 MILLWELL DR', 'address_2' => 'SUITE A', 'city' => 'MARYLAND HEIGHTS', 'state' => 'MO', 'zip' => '63043-2512', 'phone' => '314-727-8787', 'npi' => '1790061596', 'email' => 'Mgraumenz@Legacydrug.com'),
 // );
 
+
 add_action('init', 'runOnInit', 10, 0);
 function runOnInit() {
+    
+    if (isset($_GET['salesforce'])) {
+        require_once('includes/SalesforceSDK.php');
+        $salesforce = new SalesforceSDK();
+    }
 
     remove_action( 'woocommerce_before_checkout_form', array( $GLOBALS['wcms']->checkout, 'before_checkout_form' ) );
+
     /*
-    if($_GET['xero'] == '1') {
-
-        $contact_manager = new WC_XR_Contact_Manager(new WC_XR_Settings());
-
-        $response = $contact_manager->get_all_contacts();
-
-        // var_dump($response->Contacts);
-
-        header('Content-type: text/xml');
-        header('Content-Disposition: attachment; filename="text.xml"');
-
-        echo $response;
-        exit('');
+    if ($_GET['customers'] == '1') {
+        $cnt = 0;
+        global $customers_array;
+        foreach($customers_array as $customer) {
+            $user_id = wp_insert_user([
+                'user_login' => $customer['email'],
+                'user_pass' => strtolower($customer['email']),
+                'user_email' => $customer['email']
+            ]);
+            var_dump( 'User: ' . $customer['email'] . ' / ' . strtolower($customer['email']));
+            if (!is_wp_error($user_id)) {
+                update_user_meta( $user_id, 'already_bought', '1' );
+                update_user_meta( $user_id, 'has_salesforce_checked', '1');
+                update_user_meta( $user_id, 'npi_id', sanitize_text_field( $customer['npi'] ) );
+                update_user_meta( $user_id, 'billing_address_1', sanitize_text_field( $customer['address_1'] ));
+                update_user_meta( $user_id, 'billing_address_2', sanitize_text_field( $customer['address_2'] ));
+                update_user_meta( $user_id, 'billing_city', sanitize_text_field( $customer['city'] ));
+                update_user_meta( $user_id, 'billing_state', sanitize_text_field( $customer['state'] ));
+                update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $customer['phone'] ));
+                update_user_meta( $user_id, 'billing_postcode', sanitize_text_field( $customer['zip'] ));
+                update_user_meta( $user_id, 'billing_country', 'US');
+                echo 'user_created: '. $user_id . ' : '. $customer['email'] . '<br/>';
+                $cnt ++;
+            } else {
+                echo 'user_failed: '. $customer['email'] . '<br/>';
+            }
+        }
+        exit('total created: '. $cnt);
     }
     */
 
-    
-    // if ($_GET['customers'] == '1') {
-    //     $cnt = 0;
-    //     global $customers_array;
-    //     foreach($customers_array as $customer) {
-    //         $user_id = wp_insert_user([
-    //             'user_login' => $customer['email'],
-    //             'user_pass' => strtolower($customer['email']),
-    //             'user_email' => $customer['email']
-    //         ]);
-    //         var_dump( 'User: ' . $customer['email'] . ' / ' . strtolower($customer['email']));
-    //         if (!is_wp_error($user_id)) {
-    //             update_user_meta( $user_id, 'already_bought', '1' );
-    //             update_user_meta( $user_id, 'has_salesforce_checked', '1');
-    //             update_user_meta( $user_id, 'npi_id', sanitize_text_field( $customer['npi'] ) );
-    //             update_user_meta( $user_id, 'billing_address_1', sanitize_text_field( $customer['address_1'] ));
-    //             update_user_meta( $user_id, 'billing_address_2', sanitize_text_field( $customer['address_2'] ));
-    //             update_user_meta( $user_id, 'billing_city', sanitize_text_field( $customer['city'] ));
-    //             update_user_meta( $user_id, 'billing_state', sanitize_text_field( $customer['state'] ));
-    //             update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $customer['phone'] ));
-    //             update_user_meta( $user_id, 'billing_postcode', sanitize_text_field( $customer['zip'] ));
-    //             update_user_meta( $user_id, 'billing_country', 'US');
-    //             echo 'user_created: '. $user_id . ' : '. $customer['email'] . '<br/>';
-    //             $cnt ++;
-    //         } else {
-    //             echo 'user_failed: '. $customer['email'] . '<br/>';
-    //         }
-    //     }
-    //     exit('total created: '. $cnt);
-    // }
+    /*
+        // To be run anandaprofessional.com/?customers=1 after update
+        // This code block is use to enable reorder
+    if ($_GET['customers'] == '1') {
+        update_user_meta( 247, 'already_bought', '1' );
+        update_user_meta( 247, 'has_salesforce_checked', '1');
+        exit('test: ok');
+    }
+    */
 
-    //To be run anandaprofessional.com/?customers=1 after update
-    //This code block is use to enable reorder
-    // if ($_GET['customers'] == '1') {
-    //     update_user_meta( 115, 'already_bought', '1' );
-    //     update_user_meta( 115, 'has_salesforce_checked', '1');
-    //     exit('test: ok');
-    // }
+    /*
+    if ($_GET['customers'] == '1') {
+        $customer_emails = ['prescriptionpharmacy@outlook.com'];
+        foreach($customer_emails as $customer_email) {
+            $user = get_user_by('email', $customer_email);
+            echo $customer_email . '____________';
+            if ($user) {
+                echo $user->ID . '<br/>';
+                update_user_meta( $user->ID, 'already_bought', '1' );
+                update_user_meta( $user->ID, 'has_salesforce_checked', '1');
+            } else {
+                echo 'not exist' . '<br/>';
+            }
+        }
+        echo 'DONE';
+        exit ('');
+    }
+    */
 
-    // if ($_GET['customers'] == '1') {
-    //     $customer_emails = ['Achilles@acerxpharmacy.com','add.drug@gmail.com','acarepharmacy@gmail.com','affordablepharmacyservices@gmail.com','kim@cumberlandrx.com','musiceye@aol.com','troy.allen@amerimedpharmacy.com','pgordon@yahoo.com','Anclotepharma@gmail.com','jbarnettejr@yahoo.com','andyspharmacy@gmail.com','annapolispharmacy@professionalpharmacygroup.com','jbarnettejr@yahoo.com','apothecare2@bbtel.com','apothecare2@bbtel.com','apothecare2@bbtel.com','apothecare2@bbtel.com','jeff@appledrugs.com','staff@apthorprx.com','rphmchugh@gmail.com','arnoldpharmacy@professionalpharmacygroup.com','arrowpharmacy@gmail.com','mpmcneill@aphhc.net','audubonpharmacy@mw.twcbc.com','avalonchemists@gmail.com','bbpharmacy@gmail.com','baldwinwoods@intrstar.net','charlie@bassettsmarket.com','bewell7800@gmail.com','beemansrx@aol.com','dhbelew@belewdrugs.com','dhbelew@belewdrugs.com','dhbelew@belewdrugs.com','dhbelew@belewdrugs.com','bereadrug@yahoo.com','sheryl@bestvaluedrug.com','info@beverlyhillsapothecary.com','josephspharmacy@gmail.com','pharmacy@blackoakrx.com','grussell@bluegrasspharmacy.com','pharmacy@boalsburgapothecary.com','btoygtoy@hotmail.com','boltons2inc@yahoo.com','c.vallone@bradleyhealthservices.net','Brandonpharmacy@gmail.com','jesse@brashearspharmacy.com','jesse@brashearspharmacy.com','brasstown@gmail.com','info@breakfreepharmacy.com','brighampharmacy@gmail.com','aaron@brodielanepharmacy.com','buntingfamilypharmacy@verizon.net','pharmacy@bushyrunrx.comcastbiz.net','katie@buttdrugs.com','RxpGC2@gmail.com','bypassrx4@gmail.com','Bypassrx@gmail.com','springsrx@verizon.net','rachelmaleski@yahoo.com','pantherhealthllc@gmail.com','kdowning@capefearpharmacy.com','aaron@mycapitalpharmacy.com','scott@capstonecompounding.com','care1pharmacy@att.net','caremart@gmail.com','wanda@carmichaeldrugs.com','carolinalforestpharmacy@gmail.com','aroeder@caycespharmacy.com','cds10pharmacybg@gmail.com','mk@cedrapharmacy.com','mk@cedrapharmacy.com','ccpharmacist@gmail.com','clinicpharmacycc@yahoo.com','centurymedicinesetown@gmail.com','centurymedicinesetown@gmail.com','kmiller@certacare.com','chambersrxllc@yahoo.com','guswalters@chancydrugs.com','guswalters@chancydrugs.com','guswalters@chancydrugs.com','rphmchugh@gmail.com','Matt@cheekandscott.com','eric@cheekandscott.com','jayb@cheekandscott.com','Chelsearoyalcarepharmacy@gmail.com','info@genericstogo.com','claibornerx@gmail.com','clarkcountypharmacy@gmail.com','admin@clinicpharmacy.net','amanda.leach@gmail.com','dhagedorn@coastalmedicine.com','craig_ouellette@yahoo.com','colonialdrugs155@gmail.com','colonialdrugs155@gmail.com','narrowsrx@verizon.net','columbuslocalpharmacy@gmail.com','faust.corina.l@gmail.com','keyesb@prodigy.net','cathy@compoundcarerx.com','marktimmermann58@gmail.com','info@condopharmacy.com','tamara536@comcast.net','cooksrx@aol.com','cooperdrugs@yahoo.com','ketsi1127@gmail.com','corner-drugstore@hotmail.com','cornerpharmkatherine@aol.com','gtcollins@gmail.com','cowandrugs@yahoo.com','coxspharmacy#5@gmail.com','rkragel@crescentdrugs.com','willdouglas@crimsoncarerx.com','megspharmacy@yahoo.com','schoen@crosbysdrugs.com','amanda.leach@gmail.com','kim@cumberlandrx.com','ghada@curemedpharmacy.com','curlewpharmacy@gmail.com','alcostarx@gmail.com','jeff@custommed.com','pharmacy@customplusrx.com','rx@danscare.com','rphmchugh@gmail.com','rphmchugh@gmail.com','darienrx437@gmail.com','nlbdavis@yahoo.com','deleonpharmacy@gmail.com','delrayshorepharmacy@gmail.com','colonialdrugs155@gmail.com','tom@depietropharmacy.com','rameshrx@gmail.com','sshep2@comcast.net','dilloncommunitypharmacy@hotmail.com','dixiepharmacy2@gmail.com','rick@palmbeachcompounding.com','annette.127@bellsouth.net','dougspharm@aol.com','blanemgt@att.net','kurt@drazizrx.com','info@dsdpharmacy.org','dunlopllc@gmail.com','ralphsrx3@gmail.com','monaghattas@me.com','arica702@hotmail.com','eaglehighlandpharmacy@yahoo.com','carms0989@gmail.com','shaukatyousaf69@gmail.com','info@echopharmacy.com','bradenton@myeckerds.com','jenna@edgertonpharmacy.com','stewart@eltoropharmacy.com','bryant.randy76@gmail.com','lindsey@ellapharmacy.com','ellicottcitypharmacy@gmail.com','shanebuie@elydrugs.biz','empirepharmacy@professionalpharmacygroup.com','contact@enhealthmatters.com','etownpharmacy@gmail.com','familycarepharmacy@yahoo.com','license@familypharmacy.org','familyrx335@yahoo.com','pamelsa@prtc.net','salecreekpharmacy@gmail.com','folserx2@bellsouth.net','retail@fwcustomrx.com','Hikingdawg@gmail.com','fountainvalleyrx@outlook.com','jamiefranklinrx@gmail.com','franklinpharmacy@gmail.com','dpskahlon@gmail.com','gallowaysands@atmc.net','gallowaysands2@bizec.rr.com','garstrx@gmail.com','rphmchugh@gmail.com','smithcooney@gattirx.com','gaughns@gmail.com','parag@doserx.com','ejschoett@yahoo.com','jbarnettejr@yahoo.com','mail@getrxhelp.com','scottb@bradenmed.com','bjzaslow@gladwynepharmacy.com','robertoliver@glasgowrx.com','glotzbachpharmacy@gmail.com','elsalam@goldenhealthpharmacy.com','pharmr@bellsouth.net','info@grangerpharmacy.com','katy@granitedrug.com','michele@grantspasspharmacy.com','anthony@grattanspharmacy.com','greenspharmacy@bellsouth.net','info@mygreenleafrx.com','john_gentry@bellsouth.net','jeffbonjo@aol.com','greenwoodrx@gmail.com','groveharborpharmacy@gmail.com','gulfpharmacy@yahoo.com','hsl@handspharmacy.com','paula@hallettsvillepharmacy.com','parag@doserx.com','hannibalpharmacy@gmail.com','gavin@mooresvillepharmacy.com','dickersonjbd@yahoo.com','drghussin@yahoo.com','jbarnettejr@yahoo.com','heidi@herbstpharmacy.com','nando16@comcast.net','herrindrug@yahoo.com','hibbittsland@gmail.com','Hidenwoodrx@verizon.net','hilltoppharm818@gmail.com','hinespharmacy@hotmail.com','hinespharmacy@gmail.com','hnrpharmacy@gmail.com','ryerx23@yahoo.com','holdenpharmacy@gmail.com','singram@kih.net','john@hooksrx.com','hrxpharmacy@gmail.com','astefanis@hydedrugstore.com','hyderx@hotmail.com','familyvaluepharmacy@gmail.com','aaly@ippindy.com','irwinspharmacy@gmail.com','nwhitch@hotmail.com','jacksonstreetdrug@gmail.com','hjamesds@yahoo.com','jeffsrx@comcast.net','dwilliams@jeffersondrug.com','michaeljds@hotmail.com','compounding@jiffyrx.com','info@genericstogo.com','golden.becky@gmail.com','karemorepharmacy@hotmail.com','cory.lehano@gmail.com','kayspharmacy@gmail.com','brad@kbpharmacy.com','deberah-keaveny@gmail.com','marty@kellyspharmacyinc.com','marty@kellyspharmacyinc.com','kentpharmacymilford@gmail.com','youlzik@gmail.com','kingpharmacy@live.com','scott.king@king-pharmacy.com','sshep2@comcast.net','eknightj@gmail.com','knoxpharmacy@gmail.com','kkmuleshoe@gmail.com','rahulpatel@lmpharmacy.com','lafayettepharmacy@gmail.com','mypharmacist@lakecountrypharmacy.com','jonathan.grider@uky.edu','larry@lakewylierx.com','lakelanddrug.ga@gmail.com','laketownpharmacy@gmail.com','pete@lakeviewpharmacy.com','achoezirim@gmail.com','afields20@hotmail.com','kelleyrwalters@gmail.com','nathan@lawrencedrug.com','lawrencepharmacy1@yahoo.com','info@lennysrichfieldpharmacy.com','keithvance@lewisvilledrug.com','linmasdrugs@embarqmail.com','Jeff@LintonRx.com','lintonsqpharmacy@bellsouth.net','livewellutica@gmail.com','livingstonRX1@gmail.com','logospaharmacy@verizon.net','lbcrx@nyrph.com','info@longislandapothecary.com','longleyspharmacy@gmail.com','fred@lowrydrug.com','analia@lukespharmacy.com','ldhostetler@frontier.com','rickpenn@sbcglobal.net','jon@macspharmacy.com','mymsd@icloud.com','jean@mymspax.com','mfpharmacy@yahoo.com','linkrx@aol.com','mathesrx@aol.com','mccayspharmacy@gmail.com','blake@markethubco.com','jbarnettejr@yahoo.com','jbarnettejr@yahoo.com','jbarnettejr@yahoo.com','medicarerx3@gmail.com','medicarx@gmail.com','medicarx@gmail.com','vannhealthcare@glasgow-ky.com','medrx@aol.com','raumi_joseph@hotmail.com','jerryhf@verizon.net','medicap8160@gmail.com','8400@medicap.com','kbarbrey@gmail.com','drokosz@medicenterpharmacy.com','knewton@medicenterpharmacy.com','lgetchius@medicenterpharmacy.com','bgalli@medicenterpharmacy.com','rxpharmgrl@gmail.com','1503@medicineshoppe.com','eblackrph@gmail.com','0062@medicineshoppe.com','1198@medicineshoppe.com','vendor@medozrx.com','medpark@professionalpharmacygroup.com','medtimerx@gmail.com','jamey@metcalfedrugs.com','michelle@michellespharmacy.com','ranrph@aol.com','john@midtownpharmacyexpress.com','ykadibhai7@gmail.com','mikeyarworth@yahoo.com','info@mineraldrug.com','dshultz@minnichspharmacy.com','brandi@moosepharmacy.com','james@moosepharmacy.com','whit@moosepharmacy.com','kyle@moosepharmacy.com','remypharm@gmail.com','bubrx@aol.com','oshoheiber@mydrsrx.com','nations54@nationsmedicines.com','jim@nationalrx.com','Not provided','newamsterdamdrugmart@gmail.com','newnanpharmacy@numail.org','jbarnettejr@yahoo.com','nimohrx@gmail.com','roles@norlandrx.com','northcenturypharmacy@duo-county.com','Rob@MyNucare.com','parag@doserx.com','info@oceanchemist.net','okiesrx@bellsouth.net','shanebecker@oldtownpharmacy.com','oldetownerx@aol.com','s_hoffman9614@yahoo.com','organicrxjuice@gmail.com','aortiz@ortizpharmacy.com','jbarnettejr@yahoo.com','owensborofamilypharmacy@gmail.com','support@pandmpharmacy.com','pharmacy@palmrxs.com','drsmali34@gmail.com','pharmacist@paolipharmacy.com','leslie@paris-apothecary.com','sjhopple@comcast.net','barbrx@parkerpharmacy.com','parksidepharmacyinc@gmail.com','paul@parkwaypharm.net','mdcrx@aol.com','pastpharm@aol.com','vpatel6239@gmail.com','kpsmith@patricksquare-rx.com','paroldan@aol.com','boydennisjr@mypaylessdrugs.com','jenutpharmd@hotmail.com','pharma1mckinney@gmail.com','sradpay@pharmacarehawaii.com','tim@pctn.net','info@pharmacycaresolutions.com','bberry@rxplusinc.com','vancekiser@yahoo.com','rphmchugh@gmail.com','gvassie@gmail.com','plantationpharmacy@yahoo.com','plantationpharmacy@yahoo.com','plazadrugoflondon@gmail.com','plsi@drug.sdcoxmail.com','plsi@drug.sdcoxmail.com','poolerpharmacy@gmail.com','portpharm@gmail.com','lcurtis@portagepharmacy.com','mistinnett@aol.com','powhatandrug@gmail.com','snyderitaville@charter.net','rxlabloretta@gmail.com','prescriptionshopandrews@gmail.com','jorge@prestonspharmacy.com','anthonybertola@primarycarepharmacysvcs.com','kourtneychic@verizon.net','dawn@professionalpharmacy.com','professionalpharmacy@embarqmail.com','vinod@prosperitypharmacy.com','puremeridian@gmail.com','cory.lehano@gmail.com','amye.rmp@gmail.com','rannpharmacy@yahoo.com','patrick.redipharmacy@gmail.com','info@genericstogo.com','reedscompounding@gmial.com','t.k@karnaby.com','info@remingtondrug.com','samibahta@yahoo.com','james.rickett@yahoo.com','risonpharmacy@gmail.com','lori@rivergatepharmacy.com','chudek@riverpointrx.com','retailrvp@gmail.com','roarksrx@highland.net','rthenrypharmacy@aol.com','communitydrug@bellsouth.net','watts@acsalaska.net','mkleinrph@aol.com','rossdruginc@gmail.com','ahmed@rxclinicpharmacy.com','salpharmacyrx@gmail.com','tjsrx@comcast.net','pgordon@yahoo.com','phillipsebrell@sanatogapharmacy.com','mikesands@sandsrx.com','sarasotaapothecary@gmail.com','sarasotadiscountpharmacy@gmail.com','savcorx@gmail.com','saveritepharmacy@sbcglobal.net','dan@scalespharmacy.com','sealypharmacy@gmail.com','edthomasrx@gmail.com','barrettpharmd@gmail.com','seymourpharmacy@gmail.com','shakamak.pharmacy@gmail.com','shawnpharmacy@hotmail.com','sheeleysdruginc@aol.com','jason.underwood@shelbyvillepharmacist.com','mlsnodgrass@sheldonsrx.com','ksheldon@sheldonsrx.com','ksheldon@sheldonsrx.com','ksheldon@sheldonsrx.com','shipshewanapharmacy@yahoo.com','david@sierrafamilyrx.com','sierrasanantonio@gmail.com','silverhtpharm@outlook.com','smalltownrx@gmail.com','smithbrothersdrugs@gmail.com','smithfamilypharmacy@gmail.com','smithspharmacy@comcast.net','jamesmonty2@gmail.com','jbarnettejr@yahoo.com','dunlaptim@hotmail.com','pharmacy@southforkpharmacy.com','sdavenport1177@gmail.com','springfielddrugs@hotmail.com','doug@stanleyrx.com','starcare17@gmail.com','stephaniesdownhomepharm@hotmail.com','jbarnettejr@yahoo.com','stonespharmacy@frontiernet.net','lafayettepharmacy@gmail.com','leigh@strawberryhillspharmacy.com','ishan.trivedi@gmai.com','sunrisevillagerx@gmail.com','polkcitysunshinepharmacy@gmail.com','dalilabu@aol.com','sussexpharmacylongneck@gmail.com','staff@sweetgrasspharmacy.com','lisa@tegacaypharmacy.com','thechemistshop@gmail.com','scsrx@aol.com','0952@medicineshoppe.com','watts@acsalaska.net','daltonjl@fairpoint.net','1675@medicineshoppe.com','2016@medicineshoppe.com','msp.usvi@gmail.com','mgdown2@gmail.com','shushmapatel@aol.com','theprescriptionshoppe37188@gmail.com','andrew@thirdaveapothecary.com','billjr@thompsonpharmacy.com','dmiller@mythriftdrugs.com','julie@thriftymedplus.com','christi.robinson14@gmail.com','troy.allen@amerimedpharmacy.com','shanebecker@oldtownpharmacy.com','jpnixon@me.com','tyler@tomahawkpharmacy.com','rlcmanagement@hotmail.com','ablasio@verizon.net','trevor@topekapharmacy.net','zaverrx@gmail.com','wfg98@aol.com','garympeck@gmail.com','kirteshpatel@gmail.com','turtlebaychemist@aol.com','usavewayne@gmail.com','edwins-2@hotmail.com','kim@unionavenuerx.com','treich6110@gmail.com','drpam@consultingwithdrpam.com','universalpharmacy@hotmail.com','uplandrx46989@gmail.com','jbarnettejr@yahoo.com','Arthur.presser@huhs.edu','laurivt@valporx.com','viennadrug@aol.com','rxalol@verizon.net','pavilionelm@yahoo.com','camilla@volunteerpharmacy.com','nathan@vytospharmacy.com','leigh@strawberryhillspharmacy.com','tbruner@ameritech.net','wavelandpharmacy@hotmail.com','rxinvest@aol.com','justin_webber@sbcglobal.net','welcomefamilypharmacy@gmail.com','info@westgordonpharmacy.com','jbarnettejr@yahoo.com','mediservrx@gmail.com','taylor.peoples@anandaprofessional.com','fharper@frontiernet.net','ella1finance@gmail.com','westsidepharmacy255@yahoo.com','claire@wheelercompounding.com','flip@whitleydrugs.com','odokhalil@yahoo.com','chadh@wbhcp.com','chadh@wbhcp.com','sarac@wbhcp.com','twtaylor@williamsburgdrug.com','twtaylor@williamsburgdrug.com','wilmontpharmacy@gmail.com','jbarnettejr@yahoo.com','elliotzan@aol.com','savmordrug@yahoo.com','sarac@wbhcp.com','jbarnettejr@yahoo.com','woodburnpharmacy@bellsouth.net','yatespharmacy@gmail.com','jyoung@myyoungspharmacy.com','zacgvillephcy@gmail.com','jeffsedelmyer@gmail.com'];
-    //     foreach($customer_emails as $customer_email) {
-    //         $user = get_user_by('email', $customer_email);
-    //         if ($user) {
-    //             echo $user->ID . '<br/>';
-    //             update_user_meta( $user->ID, 'already_bought', '1' );
-    //             update_user_meta( $user->ID, 'has_salesforce_checked', '1');
-    //         }
-    //     }
-    //     echo 'DONE';
-    //     exit ('');
-    // }
+    if ($_GET['salesforce'] == 'token') {
+
+        $token = $salesforce->get_token();
+
+        var_dump($token);
+
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'describe') {
+
+        $response = $salesforce->describe($_GET['table']);
+
+        var_dump($response);
+
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'get_invoice') {
+
+        $response = $salesforce->get_invoice_by_id($_GET['ID']);
+
+        var_dump($response);
+
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'data') {
+
+        $salesforce->get_all_invoices();
+
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'create_contact') {
+
+        $response = $salesforce->get_account_from_external_xero_contact_id($_GET['ID']);
+        // $response = $salesforce->get_account_from_external_xero_contact_id('test');
+
+        var_dump($response);
+
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'get_contact') {
+        $response = $salesforce->get_contact_by_id($_GET['ID']);
+        var_dump($response);
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'migrate_contacts') {
+
+        $salesforce->migrate_contacts();
+
+        exit('');
+    }
+
+    if ($_GET['salesforce'] == 'initial') {
+
+        $salesforce->migrate_invoices();
+
+        exit('');
+    }
     
 
     if (is_user_logged_in()) {
