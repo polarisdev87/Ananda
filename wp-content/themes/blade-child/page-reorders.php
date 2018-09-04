@@ -5,19 +5,7 @@
 
 
 // Get all customer orders
-$customer_orders = get_posts( array(
-    'numberposts' => -1,
-    'meta_key'    => '_customer_user',
-    'meta_value'  => get_current_user_id(),
-    'post_type'   => wc_get_order_types(),
-    'post_status' => 'wc-completed', // array_keys( wc_get_order_statuses() ),
-) );
-
-$loyal_count = 1;
-
-$user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
-
-if ( count( $customer_orders ) < $loyal_count && $user_already_bought!='1') {
+if (!is_reorder()) {
 	header("Location: /products");
 } else {
 

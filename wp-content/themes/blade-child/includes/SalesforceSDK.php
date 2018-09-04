@@ -24,9 +24,21 @@ class SalesforceSDK {
     private $base_url = "https://anandahemp.my.salesforce.com/services/data/";
 	
 
+	/* sandbox - partial */
+
+	// private $yourInstance = 'na40';
+	// private $client_id = '3MVG9CEn_O3jvv0yFWfRjWvZ00r7kMm3yAL3JcQiAzgXDz3NzelQl0jEfe3GTrAsUQuBOJc9hxjeLR1DHOoj8';
+	// private $client_secret = '1892914933810725936';
+	// private $username = 'lance032017@gmail.com.partial';
+	// private $password = 'Developer@2018tfYBERgFz8YwOHhJAGLRqoJc';
+	// private $contact_field_id = 'Unique_Import_Id__c';
+ //    private $base_url = "https://anandahemp--partial.lightning.force.com/services/data/";
+	
+
 
     // private $base_url = "https://anandahemp.my.salesforce.com/services/data/";
     private $token_url = "https://login.salesforce.com/services/oauth2/token";
+    private $sandbox_token_url = "https://test.salesforce.com/services/oauth2/token";
 
     private $auth = null;
 
@@ -107,6 +119,10 @@ class SalesforceSDK {
 
 	}
 
+	public function get_auth() {
+		return $this->auth;
+	}
+
 	public function get_token() {
 		return isset($this->auth->access_token) ? $this->auth->access_token : '';
 	}
@@ -123,14 +139,16 @@ class SalesforceSDK {
         return $response;
 	}
 
-	public function get_all_invoices() {
+	public function get_all_invoices($startsWith = '') {
 
         $invoice_manager = new WC_XR_Invoice_Manager(new WC_XR_Settings());
+
+        $all_invoices = [];
 
         $page_no = 1;
 
         do {
-            $response = $invoice_manager->get_all_invoices($page_no);
+            $response = $invoice_manager->get_all_invoices($startsWith, $page_no);
             $invoices_wrapper = $response->Invoices;
             $invoices = $invoices_wrapper->Invoice ?: [];
 
@@ -139,15 +157,18 @@ class SalesforceSDK {
             if (count($invoices) > 0) {
                 // $invoices = $invoices_wrapper->Invoice;
 
-                foreach($invoices as $invoice) {
-                    var_dump($invoice);
-                }
+                // foreach($invoices as $invoice) {
+                // 	$all_invoices[] = $invoice;
+                //     // var_dump($invoice);
+                // }
                 // var_dump ($invoices_wrapper);
             }
 
             $page_no++;
         } while(count($invoices) > 0);
 
+        // return $all_invoices;
+        return $page_no;
 	}
 
 	public function get_contact_by_id($xero_contact_id) {
@@ -157,6 +178,22 @@ class SalesforceSDK {
 		$response = $contact_manager->get_contact_by_id($xero_contact_id);
 
 		return $response;
+	}
+
+	public function get_all_accounts() {
+
+		$response = $this->do_request('v20.0/query/?q=SELECT+id,name,NPI_Number__c,Unique_Import_Id__c+from+Account');
+
+		return array_map(function ($account) {
+			return [
+				'Id' => $account->Id,
+				'Name' => $account->Name,
+				'NPI_Number__c' => $account->NPI_Number__c,
+				'Unique_Import_Id__c' => $account->Unique_Import_Id__c,
+			];
+		}, $response->records);
+
+		return $response->records;
 	}
 
 	public function get_account_from_external_xero_contact_id($xero_contact_id = 'BLANK_ID') {
@@ -237,7 +274,67 @@ class SalesforceSDK {
 
 	}
 
-	public function migrate_invoices() {
+	public function create_account_from_xero_contact_id($xero_contact_id = '') {
+		if (!$xero_contact_id) return null;
+
+        $response = $this->get_contact_by_id($xero_contact_id);
+
+        if (!$response) return null;
+
+        $contact = $response->Contacts->Contact[0];
+
+        foreach ($contact->Phones->Phone as $phone) {
+        	if ((string)$phone->PhoneType == 'DEFAULT') {
+        		$phone_number = (string)$phone->PhoneAreaCode . (string)$phone->PhoneNumber;
+        	}
+        }
+        foreach ($contact->Addresses->Address as $item) {
+        	if ((string)$item->AddressType == 'POBOX') {
+        		$address = $item;
+        	}
+        }
+
+        $data = [
+			'Unique_Import_Id__c' => $xero_contact_id,
+			'Name' => (string)$contact->Name,
+			'Type' => 'Customer',
+			'Subtype__c' => 'Pharmacy',
+			'Phone' => $phone_number ?: '',
+			'BillingStreet' => (string)$address->AddressLine1,
+			'BillingCity' => (string)$address->City,
+			'BillingState' => (string)$address->Region,
+			'BillingPostalCode' => (string)$address->PostalCode,
+			'BillingCountry' => (string)$address->Country,
+			'ShippingStreet' => (string)$address->AddressLine1,
+			'ShippingState' => (string)$address->City,
+			'ShippingCity' => (string)$address->Region,
+			'ShippingPostalCode' => (string)$address->PostalCode,
+			'ShippingCountry' => (string)$address->Country,
+			'NPI_Number__c' => (string)$contact->AccountNumber,
+			'Brand__c' => 'Ananda Professional',
+        ];
+
+        $response = $this->do_request('v20.0/sobjects/Account/', ['post' => true, 'postData' => $data]);
+
+        if ($response->success == true) {
+        	return [
+        		'Id' => (string)$response->id,
+        		'Unique_Import_Id__c' => $xero_contact_id,
+        	];
+        } else {
+        	return null;
+        }
+	}
+
+	public function migrate_invoices($startsWith = '') {
+
+		$accounts = $this->get_all_accounts();
+		foreach ($accounts as $key => $item) {
+			if ($item['NPI_Number__c'] == '0000000000') {
+				$dummy_account = $item;
+				break;
+			}
+		}
 
         $invoice_manager = new WC_XR_Invoice_Manager(new WC_XR_Settings());
 
@@ -252,21 +349,25 @@ class SalesforceSDK {
         $line_item_ref_no = 1;
         $tracking_category_ref_no = 1;
 
-        $accounts_from_ext = [];
+        // $accounts_from_ext = [];
 
         do {
-            $response = $invoice_manager->get_all_invoices($page_no);
+            $response = $invoice_manager->get_all_invoices($startsWith, $page_no);
             $invoices_wrapper = $response->Invoices;
+            $invoices = $invoices_wrapper->Invoice ?: [];
 
-            var_dump('current page________________' . $page_no . '______' . count($invoices_wrapper));
+	        $this->printTime();
+            echo ('___________ current page________________' . $page_no . '______' . count($invoices_wrapper) . '_______' . count($invoices));
 
-            if (count($invoices_wrapper) > 0) {
-                foreach ($invoices_wrapper->Invoice as $invoice) {
+            // echo ' _______________ current page________________' . $page_no . '______' . count($invoices_wrapper) . '<br/>';
+
+            if (count($invoices) > 0) {
+                foreach ($invoices as $invoice) {
 
                 	// var_dump($invoice);
 
                 	$ext_id = (string)$invoice->Contact->ContactID;
-                	if (!isset($accounts_from_ext[$ext_id])) {
+                	/*if (!isset($accounts_from_ext[$ext_id])) {
                 		$account = $this->get_account_from_external_xero_contact_id($ext_id);
                 		if ($account) {
                 			$accounts_from_ext[$ext_id] = $account;
@@ -276,25 +377,58 @@ class SalesforceSDK {
                 		}
                 	} else {
                 		$account = $accounts_from_ext[$ext_id];
+                	}*/
+                	$account = null;
+                	foreach ($accounts as $key => $item) {
+                		if ($item['Unique_Import_Id__c'] == $ext_id) {
+                			$account = $item;
+                			break;
+                		}
+                	}
+                	if (!$account) {
+                		if ( strpos((string)$invoice->InvoiceNumber, 'WP-') === 0) {
+                			$account = $this->create_account_from_xero_contact_id($ext_id);
+	        				$this->printTime();
+                			if ($account) {
+                				// echo ' ____________ created account with ' . $ext_id . ' from invoice___' . (string)$invoice->InvoiceNumber . '<br/>';
+                				$accounts[] = $account;
+                			} else {
+                				// echo ' _____________ failed to create account with invoice' . (string)$invoice->InvoiceNumber . ' due to ' . $ext_id . '<br/>';
+                				continue;
+                			}
+                		} else {
+            				// echo ' _____________ skipping relationship invoice___' . (string)$invoice->InvoiceNumber . ' due to ' . $ext_id . '<br/>';
+            				if ($dummy_account) {
+            					$account = $dummy_account;
+            				} else {
+            					// echo '_______found no dummy account for ' . (string)$invoice->InvoiceNumber . '<br/>';
+            					continue;
+            				}
+            				// continue;
+            			}
+                	} else {
+
+                		// echo '_______________ found relevant account for ' . (string)$invoice->InvoiceNumber . '<br/>';
                 	}
 
                 	// var_dump($account);
 
-                	if (!$account->Id) {
-                		var_dump('______________ Relevant Account not existing ___________');
-                		continue;
+                	$branding_theme = '';
+                	if ((string)$invoice->BrandingThemeID == 'c862879a-49c7-40a8-ba05-0dd14a18813f') {
+                		$branding_theme = 'Ananda Hemp';
+                	} else if ((string)$invoice->BrandingThemeID == 'd415c810-ccc3-4e10-b6ae-4c7cd17030e8') {
+                		$branding_theme = 'Ananda Professional';
                 	}
-                	var_dump('_______________ Relevant Account existing___________');
 
 					$invoice_record = [
 			            'attributes' => [
-			                'type' => 'Xero_Invoice__c',
-			                'referenceId' => 'REF__INVOICE_' . $invoice_ref_no++ . '_' . (string)$invoice->InvoiceNumber
+			                'type' => 'Ananda_Invoice__c',
+			                'referenceId' => 'REF__INVOICE_' . $invoice_ref_no++ . '_' . (string)$invoice->InvoiceNumber . '___' . (string)$invoice->InvoiceID
 			            ],
 			            'AmountCredited__c' => (string)$invoice->AmountCredited,
 			            'AmountDue__c' => (string)$invoice->AmountDue,
 			            'AmountPaid__c' => (string)$invoice->AmountPaid,
-			            'BrandingTheme__c' => 'Ananda Professional',//(string)$invoice->BrandingThemeID,
+			            'BrandingTheme__c' => $branding_theme, //(string)$invoice->BrandingThemeID,
 			            'Date__c' => (string)$invoice->Date,
 			            'DueDate__c' => (string)$invoice->DueDate,
 			            'FullyPaidOnDate__c' => (string)$invoice->FullyPaidOnDate,
@@ -305,8 +439,9 @@ class SalesforceSDK {
 			            'Total__c' => (float)$invoice->Total,
 			            'TotalDiscount__c' => (string)$invoice->TotalDiscount,
 			            'TotalTax__c' => (string)$invoice->TotalTax,
+			            'Type__c' => (string)$invoice->Type,
 			            // 'AccountNumber__c' => $account->AccountNumber ?: '',
-			            'Unique_Import_Id__c' => $account->Id ?: '',
+			            'Account_ID__c' => $account['Id'] ?: '',
 			            'Xero_Invoice_ID__c' => (string)$invoice->InvoiceID,
 			        ];
 
@@ -318,7 +453,7 @@ class SalesforceSDK {
 			            foreach($line_items_wrapper->LineItem as $line_item) {
 			                $line_item_record = [
 			                    'attributes' => [
-			                        'type' => 'Xero_Invoice_Item__c',
+			                        'type' => 'Ananda_Invoice_LineItem__c',
 			                        'referenceId' => 'REF__LINE_ITEM_' . $line_item_ref_no++ . '_' . (string)$line_item->LineItemID,
 			                    ],
 			                    'AccountCode__c' => (string)$line_item->AccountCode,
@@ -342,7 +477,7 @@ class SalesforceSDK {
 			                    foreach ($tracking_categories_wrapper->TrackingCategory as $tracking_category) {
 			                        $tracking_categories_data['records'][] = [
 			                            'attributes' => [
-			                                'type' => 'Xero_Invoice_Item_Tracking_Category__c',
+			                                'type' => 'Ananda_Invoice_TrackingCategory__c',
 			                                'referenceId' => 'REF__TRACKING_CATGEGORY_' . $tracking_category_ref_no++ . '_' . (string)$tracking_category->TrackingCategoryID,
 			                            ],
 			                            'Name__c' => (string)$tracking_category->Name,
@@ -351,18 +486,18 @@ class SalesforceSDK {
 			                        ];
 			                    }
 
-			                    $line_item_record['Xero_Invoice_Item_Tracking_Category__r'] = $tracking_categories_data;
+			                    $line_item_record['Ananda_Invoice_TrackingCategories__r'] = $tracking_categories_data;
 			                }
 
 			                $line_items_data['records'][] = $line_item_record;
 			            }
-			            $invoice_record['Xero_Invoice_Items__r'] = $line_items_data;
+			            $invoice_record['Ananda_Invoice_LineItems__r'] = $line_items_data;
 			        }
 
                     $invoices_data['records'][] = $invoice_record;
 
-                    if (count($invoices_data['records']) > 5) {
-                    	$this->handle_submit_invoices_data_queue($invoices_data);
+                    if (count($invoices_data['records']) > 6) {
+                    	$this->handle_submit_records_data_queue($invoices_data, 'Ananda_Invoice__c');
                     	$invoices_data['records'] = [];
 				    }
 
@@ -371,11 +506,11 @@ class SalesforceSDK {
             }
 
             $page_no++;
-        } while(count($invoices_wrapper) > 0);
+        } while(count($invoices) > 0);
 
         // exit('ddd');
 
-        $this->handle_submit_invoices_data_queue($invoices_data);
+        $this->handle_submit_records_data_queue($invoices_data, 'Ananda_Invoice__c');
 
         // $response = curl_salesforce($line_item_records_url, $token, true, $line_items_data);
         // var_dump('___________________Line Items Records Result___________________');
@@ -383,29 +518,45 @@ class SalesforceSDK {
 
 	}
 
-	public function handle_submit_invoices_data_queue($invoices_data) {
-		// var_dump($invoices_data);
+	public function printTime() {
+		echo '<span style="color: #f30">'. date('Y-m-d H:i:s') .'</span>';
+	}
 
-		while (count($invoices_data['records']) > 0) {
-	        $response = $this->do_request('v34.0/composite/tree/Xero_Invoice__c/', ['post' => true, 'postData' => $invoices_data]);
+	public function handle_submit_records_data_queue($records_data, $table) {
+		// var_dump($records_data);
+
+		while (count($records_data['records']) > 0) {
+	        $response = $this->do_request('v34.0/composite/tree/'. $table .'/', ['post' => true, 'postData' => $records_data]);
 	        if ($response->hasErrors) {
 	        	$error_refIds = [];
 	        	foreach ($response->results as $error) {
 	        		$error_refIds[] = (string)$error->referenceId;
-	        		var_dump('Error occured _____________________ on ' . (string)$error->referenceId . '___and skip it');
-	        		var_dump($error);
+	        		// $this->printTime();
+	        		// echo '_______________ Error occured _____________________ on ' . (string)$error->referenceId . '___and skip it <br/>';
+	        		if ((string)$error->errors[0]->statusCode!='DUPLICATE_VALUE') {
+		        		// echo '<pre>', var_dump($error), '</pre>';
+		        		// echo '<br/>';
+		        	}
 	        	}
 
-	        	foreach ($invoices_data['records'] as $key => $record) {
+	        	foreach ($records_data['records'] as $key => $record) {
 	        		if (in_array($record['attributes']['referenceId'], $error_refIds)) {
-	        			unset($invoices_data['records'][$key]);
+	        			unset($records_data['records'][$key]);
 	        		}
 	        	}
+
+				$records_data = array_map('array_values', $records_data);
 	        } else {
-	        	var_dump('_________________ INVOICE SUBMIT RESULT ___________________');
-	        	var_dump($invoices_data);
-	        	var_dump($response);
-	        	$invoices_data['records'] = [];
+	        	$this->printTime();
+	        	echo '_________________ RECORD SUBMIT RESULT (' . count($records_data['records']) .  ') ___________________ <br/>';
+	        	// var_dump($records_data);
+	        	// echo '<pre>', var_dump($response), '</pre>';
+	        	// echo '<br/>';
+	        	// if (is_array($response) && $response[0]->errorCode) {
+	        	// 	echo '<pre>', var_dump($records_data), '</pre>';
+	        	// 	echo '<br/>';
+	        	// }
+	        	$records_data['records'] = [];
 	        }
 	    }
 	}
@@ -455,5 +606,70 @@ class SalesforceSDK {
         // var_dump('___________________Contact Records Result___________________');
         // var_dump($response);
 
+	}
+
+
+	public function get_all_stores() {
+		global $wpdb;
+		$ASL_PREFIX = ASL_PREFIX;
+		$bound = '';
+		$clause = '';
+   		$country_field = " {$ASL_PREFIX}countries.`country`,";
+   		$extra_sql = "LEFT JOIN {$ASL_PREFIX}countries ON s.`country` = {$ASL_PREFIX}countries.id";
+
+		$query   = "SELECT s.`id`, `title`,  `description`, `street`,  `city`,  `state`, `postal_code`, {$country_field} `lat`,`lng`,`phone`,  `fax`,`email`,`website`,`logo_id`,{$ASL_PREFIX}storelogos.`path`,`marker_id`,`description_2`,`open_hours`, `ordr`,
+					group_concat(category_id) as categories FROM {$ASL_PREFIX}stores as s 
+					LEFT JOIN {$ASL_PREFIX}storelogos ON logo_id = {$ASL_PREFIX}storelogos.id
+					LEFT JOIN {$ASL_PREFIX}stores_categories ON s.`id` = {$ASL_PREFIX}stores_categories.store_id
+					$extra_sql
+					WHERE (is_disabled is NULL || is_disabled = 0) AND (`lat` != '' AND `lng` != '') {$bound} {$clause}
+					GROUP BY s.`id` ORDER BY `title` ";
+
+
+		$all_results = $wpdb->get_results($query);
+
+		return $all_results;
+	}
+
+	public function migrate_stores() {
+		$stores = $this->get_all_stores();
+
+		$stores_data = [
+			'records' => []
+		];
+
+		$referenceId = 1;
+
+		foreach ($stores as $key => $store) {
+			$store_record = [
+				'attributes' => [
+					'type' => 'PharmacyStore__c',
+					'referenceId' => 'Store_REF_' . $referenceId++ . '_' . $store->id,
+				],
+				'Title__c' => $store->title,
+				'Description__c' => $store->description,
+				'Phone__c' => $store->phone,
+				'Fax__c' => $store->fax,
+				'Email__c' => $store->email,
+				'Street__c' => $store->street,
+				'City__c' => $store->city,
+				'State__c' => $store->state,
+				'PostalCode__c' => $store->postal_code,
+				'Country__c' => $store->country,
+				'Lat__c' => $store->lat,
+				'Long__c' => $store->lng,
+				'StoreID__c' => $store->id,
+			];
+			$stores_data['records'][] = $store_record;
+
+			if (count($stores_data['records']) > 100) {
+				$this->handle_submit_records_data_queue($stores_data, 'PharmacyStore__c');
+				$stores_data['records'] = [];
+			}
+		}
+
+        $this->handle_submit_records_data_queue($stores_data, 'PharmacyStore__c');
+
+	    // return $response;
 	}
 }

@@ -381,7 +381,7 @@ function is_reorder() {
     $loyal_count = 1;
     $user_already_bought = get_user_meta(get_current_user_id(), 'already_bought', true);
 
-    return count( $customer_orders ) >= $loyal_count || $user_already_bought=='1';
+    return is_user_logged_in() && (count( $customer_orders ) >= $loyal_count || $user_already_bought=='1');
 }
 
 
@@ -1064,11 +1064,6 @@ add_filter( 'woocommerce_form_field_hidden', 'woocommerce_form_field_hidden', 10
 add_action('init', 'runOnInit', 10, 0);
 function runOnInit() {
     
-    if (isset($_GET['salesforce'])) {
-        require_once('includes/SalesforceSDK.php');
-        $salesforce = new SalesforceSDK();
-    }
-
     remove_action( 'woocommerce_before_checkout_form', array( $GLOBALS['wcms']->checkout, 'before_checkout_form' ) );
 
     /*
@@ -1107,11 +1102,43 @@ function runOnInit() {
         // To be run anandaprofessional.com/?customers=1 after update
         // This code block is use to enable reorder
     if ($_GET['customers'] == '1') {
-        update_user_meta( 247, 'already_bought', '1' );
-        update_user_meta( 247, 'has_salesforce_checked', '1');
+        update_user_meta( 832, 'already_bought', '1' );
+        update_user_meta( 832, 'has_salesforce_checked', '1');
         exit('test: ok');
     }
     */
+
+    if (isset($_GET['customers'])) {
+        echo '<div style="width: 100%; height: 100%; position: relative; margin: 0; display: flex; align-items: center; justify-content: center; flex-direction: column;">';
+        if (isset($_POST['submit']) && $_POST['submit'] == 'Enable') {
+            $user = get_user_by('email', $_POST['email']);
+            if ($user) {
+                update_user_meta( $user->ID, 'already_bought', '1' );
+                update_user_meta( $user->ID, 'has_salesforce_checked', '1');
+                ?>
+                    <div style="margin-bottom: 18px; color: green; font-size: 13px;">Successfully add "Reorder" ability to the use with this email &lt; <?php echo $_POST['email'] ?> &gt;</div>
+                <?php
+            } else {
+                ?>
+                    <div style="margin-bottom: 18px; color: red; font-size: 13px;">User with this email &lt; <?php echo $_POST['email'] ?> &gt; does not exist</div>
+                <?php
+            }
+        }
+        if($_GET['customers'] == 'enable_reorder') {
+            ?>
+                <form action="/?customers=enable_reorder" method="post">
+                    <fieldset style="padding: 25px; margin-top: 12px;" >
+                        <legend>Enable Reorder Feature</legend>
+                        <span>Eneter email address: </span><input type="email" name="email" size="35" required />
+                        <input type="submit" name="submit" value="Enable" />
+                    </fieldset>
+                </form>
+            <?php
+        }
+        echo '</div>';
+        exit('');
+    }
+    
 
     /*
     if ($_GET['customers'] == '1') {
@@ -1132,66 +1159,64 @@ function runOnInit() {
     }
     */
 
-    if ($_GET['salesforce'] == 'token') {
+    if (isset($_GET['salesforce'])) {
+        require_once('includes/SalesforceSDK.php');
+        $salesforce = new SalesforceSDK();
 
-        $token = $salesforce->get_token();
-
-        var_dump($token);
-
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'describe') {
-
-        $response = $salesforce->describe($_GET['table']);
-
-        var_dump($response);
-
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'get_invoice') {
-
-        $response = $salesforce->get_invoice_by_id($_GET['ID']);
-
-        var_dump($response);
-
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'data') {
-
-        $salesforce->get_all_invoices();
-
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'create_contact') {
-
-        $response = $salesforce->get_account_from_external_xero_contact_id($_GET['ID']);
-        // $response = $salesforce->get_account_from_external_xero_contact_id('test');
-
-        var_dump($response);
-
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'get_contact') {
-        $response = $salesforce->get_contact_by_id($_GET['ID']);
-        var_dump($response);
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'migrate_contacts') {
-
-        $salesforce->migrate_contacts();
-
-        exit('');
-    }
-
-    if ($_GET['salesforce'] == 'initial') {
-
-        $salesforce->migrate_invoices();
+        switch ($_GET['salesforce']) {
+            case 'auth':
+                $auth = $salesforce->get_auth();
+                var_dump($auth);
+                break;
+            case 'token':
+                $token = $salesforce->get_token();
+                var_dump($token);
+                break;
+            case 'describe':
+                $response = $salesforce->describe($_GET['table']);
+                var_dump($response);
+                break;
+            case 'get_invoice':
+                $response = $salesforce->get_invoice_by_id($_GET['ID']);
+                var_dump($response);
+                break;
+            case 'get_invoices':
+                $invoices = $salesforce->get_all_invoices('');
+                var_dump($invoices);
+                break;
+            case 'create_contact':
+                $response = $salesforce->get_account_from_external_xero_contact_id($_GET['ID']);
+                var_dump($response);
+                break;
+            case 'get_contact':
+                $response = $salesforce->get_contact_by_id($_GET['ID']);
+                var_dump($response);
+                break;
+            case 'migrate_contacts':
+                $salesforce->migrate_contacts();
+                break;
+            case 'migrate_invoices':
+                $salesforce->migrate_invoices($_GET['ID'] ?: '');
+                break;
+            case 'get_accounts':
+                $response = $salesforce->get_all_accounts();
+                var_dump($response);
+                break;
+            case 'get_stores':
+                $response = $salesforce->get_all_stores();
+                var_dump($response);
+                break;
+            case 'migrate_stores':
+                $salesforce->migrate_stores();
+                break;
+            case 'add_new_store':
+                echo 'add_new_store done';
+                var_dump($_POST);
+                break;
+            default:
+                var_dump('no actions');
+                break;
+        }
 
         exit('');
     }

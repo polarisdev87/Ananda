@@ -22,15 +22,15 @@ class WC_XR_Invoice_Manager {
 
 	public function get_invoice_by_id($id = '') {
 		$request = new WC_XR_Request_Invoice_Single($this->settings, $id);
-		
+
 		$request->do_request();
 		$xml_response = $request->get_response_body_xml();
 
 		return $xml_response;
 	}
 
-	public function get_all_invoices($page_no = 0) {
-		$request = new WC_XR_Request_Invoice_Get($this->settings, $page_no);
+	public function get_all_invoices($startsWith = '', $page_no = 0) {
+		$request = new WC_XR_Request_Invoice_Get($this->settings, $startsWith, $page_no);
 
 		$request->do_request();
 		$xml_response = $request->get_response_body_xml();

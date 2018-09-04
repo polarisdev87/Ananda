@@ -6,14 +6,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 class WC_XR_Request_Invoice_Get extends WC_XR_Request {
 
-	public function __construct( WC_XR_Settings $settings, $page_no = 0 ) {
+	public function __construct( WC_XR_Settings $settings, $startsWith = '', $page_no = 0 ) {
 		parent::__construct( $settings );
 
 		// Set Endpoint
 		$this->set_method( 'GET' );
 		$this->set_endpoint( 'Invoices' );
 
-		$query = ['where' => 'InvoiceNumber!=null&&InvoiceNumber.StartsWith("WP-")'];
+		$query = [];
+
+		if ($startsWith) {
+			$query['where'] = 'InvoiceNumber!=null&&InvoiceNumber.StartsWith("'. $startsWith . '")';
+		}
 
 		if ($page_no > 0) {
 			$query['page'] = $page_no;
