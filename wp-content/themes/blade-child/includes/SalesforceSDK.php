@@ -672,4 +672,93 @@ class SalesforceSDK {
 
 	    // return $response;
 	}
+
+	public function add_new_store($data) {
+		$api_key = 'AIzaSyAYNYAu6Mkub12FRnGWDwYXP2aLff-rTaw';
+
+        $address = $data['Street'] . ', ' . $data['City'] . ', ' . $data['State'] . ' ' . $data['PostalCode']; // Google HQ
+        $prepAddr = urlencode($address);
+        $geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false&key=' . $api_key);
+        $output = json_decode($geocode);
+        if ($output->status == 'OK') {
+	        $latitude = $output->results[0]->geometry->location->lat;
+	        $longitude = $output->results[0]->geometry->location->lng;
+	    } else {
+	    	$latitude = $data['Lat'];
+	    	$longitude = $data['Long'];
+	    }
+	    // var_dump($output);
+
+	    global $wpdb;
+	    $formatted = [
+	    	'title' 		=> $data['Title'] != 'null' ? $data['Title'] : '',
+	    	'description' 	=> $data['Description'] != 'null' ? $data['Description'] : '',
+	    	'street' 		=> $data['Street'] != 'null' ? $data['Street'] : '',
+	    	'city' 			=> $data['City'] != 'null' ? $data['City'] : '',
+	    	'state' 		=> $data['State'] != 'null' ? $data['State'] : '',
+	    	'postal_code' 	=> $data['PostalCode'] != 'null' ? $data['PostalCode'] : '',
+	    	'country' 		=> 223, //United States
+	    	'lat' 			=> $latitude != 'null' ? $latitude : null,
+	    	'lng' 			=> $longitude != 'null' ? $longitude : null,
+	    	'phone' 		=> $data['Phone'] != 'null' ? $data['Phone'] : '',
+	    	'fax' 			=> $data['Fax'] != 'null' ? $data['Fax'] : '',
+	    	'email' 		=> $data['Email'] != 'null' ? $data['Email'] : '',
+	    	'open_hours' 	=> '{"mon":"0","tue":"0","wed":"0","thu":"0","fri":"0","sat":"0","sun":"0"}',
+	    ];
+	    if ($wpdb->insert(ASL_PREFIX.'stores', $formatted)) {
+	    	$storeID = $wpdb->insert_id;
+	    	return $storeID . '|' . $latitude . '|' . $longitude;
+	    } else {
+	    	return '';
+	    }
+	}
+
+	public function edit_store($data) {
+		$api_key = 'AIzaSyAYNYAu6Mkub12FRnGWDwYXP2aLff-rTaw';
+
+        $address = $data['Street'] . ', ' . $data['City'] . ', ' . $data['State'] . ' ' . $data['PostalCode']; // Google HQ
+        $prepAddr = urlencode($address);
+        $geocode = file_get_contents('https://maps.google.com/maps/api/geocode/json?address='.$prepAddr.'&sensor=false&key=' . $api_key);
+        $output = json_decode($geocode);
+        if ($output->status == 'OK') {
+	        $latitude = $output->results[0]->geometry->location->lat;
+	        $longitude = $output->results[0]->geometry->location->lng;
+	    } else {
+	    	$latitude = $data['Lat'];
+	    	$longitude = $data['Long'];
+	    }
+	    // var_dump($output);
+
+	    global $wpdb;
+	    $formatted = [
+	    	'title' 		=> $data['Title'] != 'null' ? $data['Title'] : '',
+	    	'description' 	=> $data['Description'] != 'null' ? $data['Description'] : '',
+	    	'street' 		=> $data['Street'] != 'null' ? $data['Street'] : '',
+	    	'city' 			=> $data['City'] != 'null' ? $data['City'] : '',
+	    	'state' 		=> $data['State'] != 'null' ? $data['State'] : '',
+	    	'postal_code' 	=> $data['PostalCode'] != 'null' ? $data['PostalCode'] : '',
+	    	// 'country' 		=> 223, //United States
+	    	'lat' 			=> $latitude != 'null' ? $latitude : null,
+	    	'lng' 			=> $longitude != 'null' ? $longitude : null,
+	    	'phone' 		=> $data['Phone'] != 'null' ? $data['Phone'] : '',
+	    	'fax' 			=> $data['Fax'] != 'null' ? $data['Fax'] : '',
+	    	'email' 		=> $data['Email'] != 'null' ? $data['Email'] : '',
+	    	// 'open_hours' 	=> '{"mon":"0","tue":"0","wed":"0","thu":"0","fri":"0","sat":"0","sun":"0"}',
+	    ];
+	    if ($wpdb->update(ASL_PREFIX.'stores', $formatted, ['id' => $data['StoreID']])) {
+	    	$storeID = $data['StoreID'];
+	    	return $storeID . '|' . $latitude . '|' . $longitude;
+	    } else {
+	    	return '';
+	    }
+	}
+
+	public function delete_stores($storeIDs) {
+		if ($storeIDs) {
+			global $wpdb;
+			$wpdb->query('delete from ' . ASL_PREFIX.'stores' . ' where id in (' . $storeIDs . ')');
+			return 'Successfully removed stores with IDs of '. $storeIDs;
+		}
+		return 'Nothing deleted';
+	}
 }

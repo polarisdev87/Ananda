@@ -976,7 +976,22 @@ if (!is_admin() && !wc_memberships_is_user_active_member( get_current_user_id(),
     // var_dump ($GLOBALS['wcms']->front->load_account_addresses);
 }
 
+// define the woocommerce_get_discounted_price callback 
+function filter_woocommerce_get_discounted_price( $price, $values, $instance ) { 
+    // make filter magic happen here... 
+    $chosen_payment_method = WC()->session->get('chosen_payment_method');
+    $payment_method = 'cheque';
+    $percent = 2; // 15%
+    if( $payment_method == $chosen_payment_method ){
+        return $price - ($price / 100 * $percent);
+    }
+    return $price; 
+}; 
+         
+// add the filter 
+add_filter( 'woocommerce_get_discounted_price', 'filter_woocommerce_get_discounted_price', 10, 3 ); 
 
+/*
 add_action( 'woocommerce_cart_calculate_fees','shipping_method_discount', 20, 1 );
 function shipping_method_discount( $cart_object ) {
 
@@ -992,13 +1007,18 @@ function shipping_method_discount( $cart_object ) {
     $chosen_payment_method = WC()->session->get('chosen_payment_method');
 
     if( $payment_method == $chosen_payment_method ){
+        
         $label_text = __( "Shipping discount " . $percent ."%" );
         // Calculation
         $discount = number_format(($cart_total / 100) * $percent, 2);
         // Add the discount
         $cart_object->add_fee( $label_text, -$discount, false );
+        
+
+        // $cart_object->add_discount( 'ach' );
     }
 }
+*/
 
 add_action( 'woocommerce_review_order_before_payment', 'refresh_payment_methods' );
 function refresh_payment_methods(){
@@ -1013,6 +1033,27 @@ function refresh_payment_methods(){
     </script>
     <?php
 }
+
+function add_ach_discount_message() {
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) ) return;
+    global $woocommerce;
+    $cart_object = $woocommerce->cart;
+
+    $chosen_payment_method = WC()->session->get('chosen_payment_method');
+    $payment_method = 'cheque';
+    $percent = 2; // 15%
+    if( $payment_method == $chosen_payment_method ){
+        $cart_total = $cart_object->subtotal_ex_tax;
+        ?>
+            <tr class="cart-discount">
+                <th>Shipping discount 2%</th>
+                <td><?php echo wc_price(-($cart_total / 100) * $percent); ?></td>
+            </tr>
+        <?php
+    }
+}
+// add_action( 'woocommerce_cart_totals_before_order_total', 'add_ach_discount_message');
+add_action( 'woocommerce_review_order_before_order_total', 'add_ach_discount_message');
 
 /* locking down the company fields for checkout page */
 function custom_woocommerce_billing_fields( $fields ){
@@ -1210,8 +1251,25 @@ function runOnInit() {
                 $salesforce->migrate_stores();
                 break;
             case 'add_new_store':
-                echo 'add_new_store done';
-                var_dump($_POST);
+                // $dummy = [
+                //     'Title' => 'Test',
+                //     'Description' => '',
+                //     'Street' => '100 Lancaster St',
+                //     'City' => 'Stanford',
+                //     'State' => 'KY',
+                //     'PostalCode' => '40484',
+                //     'Country' => 'United States',
+                // ];
+                $response = $salesforce->add_new_store($_REQUEST);
+                echo $response;
+                break;
+            case 'edit_store':
+                $response = $salesforce->edit_store($_REQUEST);
+                echo $response;
+                break;
+            case 'delete_stores':
+                $response = $salesforce->delete_stores($_REQUEST['storeIDs']);
+                echo $response;
                 break;
             default:
                 var_dump('no actions');
