@@ -254,30 +254,51 @@ function add_membership_only_links( $items, $args ) {
 }
 
 add_action( 'woocommerce_review_order_before_cart_contents', 'show_checkout_notice', 12 );
-  
-function show_checkout_notice() {
+
+function check_if_valid_states() {
     global $woocommerce;
-    $msg_states = array( 'OK', 'MS', 'KS', 'OH' );
+    $msg_states_thc = array( 'OK', 'MS', 'KS' );
+    // var_dump(WC()->customer->get_shipping_state());
+    $msg_states_all = array( 'OH', 'SD', 'ID', 'NE', 'IA', 'WV', 'AL', 'PR' );
 
     $items = $woocommerce->cart->get_cart();
 
     // 10226 - THC Free POS
     // 10251 - THC Free Ticture
-    $product_notice = false;
+    $product_thc = false;
     foreach($items as $item => $values) { 
         $product_id = $values['product_id'];
-        if ($product_id != 10251 && $product_id != 10226) {
-            $product_notice = true;
+        // var_dump($product_id);
+        if ($product_id == '10251' || $product_id == '10226') {
+            $product_thc = true;
             break;
         }
     }
-
-    if( $product_notice && in_array( WC()->customer->get_shipping_state(), $msg_states ) ) { 
+    // var_dump($product_thc);
+    if( in_array( WC()->customer->get_shipping_state(), $msg_states_all ) || ($product_thc && in_array( WC()->customer->get_shipping_state(), $msg_states_thc )) ) {
+        return false;
+    }
+    return true;
+}
+  
+function show_checkout_notice() {
+    if ( !check_if_valid_states() ) {
 ?>
     <p class="checkout_notice" style="color:red">Thank you for your interest in Ananda Professional.  Although Ananda Professional CBD products are federally legal in all states, due to regulations which exist in your state concerning hemp-derived CBD, we have chosen not to sell our products in your state at this time.  Legislation regarding hemp-derived CBD constantly evolves and we welcome the opportunity to follow up with you once the laws are favorable in your state.</p>
 <?php
     }
 }
+
+// add_action('woocommerce_checkout_cart_items', 'checkout_cart_items_to_confirm_valid_states');
+add_action('woocommerce_checkout_process', 'checkout_cart_items_to_confirm_valid_states');
+
+function checkout_cart_items_to_confirm_valid_states() {
+    if ( !check_if_valid_states() ) {
+        wc_add_notice( 'Invalid state', 'error');
+    }
+}
+
+
 
 add_filter( 'wc_product_sku_enabled', 'filter_wc_product_sku_enabled', 10, 1 ); 
 function filter_wc_product_sku_enabled($true) {
@@ -741,6 +762,7 @@ function woocommerce_update_cart_ajax_by_tax_cert() {
             });
             jQuery('body').on('update_checkout', function() {
                 jQuery('.checkout_notice').remove();
+                jQuery('.grve-woo-error').remove();
             });
         });
     </script>
