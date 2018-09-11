@@ -1247,12 +1247,20 @@ function runOnInit() {
                 $invoices = $salesforce->get_all_invoices('');
                 var_dump($invoices);
                 break;
+            case 'get_salesforce_invoices':
+                $invoices = $salesforce->get_all_salesforce_invoices('WP-');
+                var_dump($invoices);
+                break;
             case 'create_contact':
                 $response = $salesforce->get_account_from_external_xero_contact_id($_GET['ID']);
                 var_dump($response);
                 break;
             case 'get_contact':
                 $response = $salesforce->get_contact_by_id($_GET['ID']);
+                var_dump($response);
+                break;
+            case 'get_contact_by_email':
+                $response = $salesforce->get_contact_by_email($_GET['email']);
                 var_dump($response);
                 break;
             case 'migrate_contacts':

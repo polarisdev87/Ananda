@@ -180,6 +180,15 @@ class SalesforceSDK {
 		return $response;
 	}
 
+	public function get_contact_by_email($email) {
+
+        $contact_manager = new WC_XR_Contact_Manager(new WC_XR_Settings());
+
+		$response = $contact_manager->get_id_by_email($email);
+
+		return $response;
+	}
+
 	public function get_all_accounts() {
 
 		$response = $this->do_request('v20.0/query/?q=SELECT+id,name,NPI_Number__c,Unique_Import_Id__c+from+Account');
@@ -324,6 +333,10 @@ class SalesforceSDK {
         } else {
         	return null;
         }
+	}
+
+	public function get_all_salesforce_invoices($startsWith = '') {
+		return '';
 	}
 
 	public function migrate_invoices($startsWith = '') {

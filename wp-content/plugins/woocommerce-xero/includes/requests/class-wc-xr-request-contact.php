@@ -14,7 +14,8 @@ class WC_XR_Request_Contact extends WC_XR_Request {
 
 		$query = [];
 		if ($email) {
-			$query['where'] = 'EmailAddress=="' . $email . '"';
+			$query['where'] = 'EmailAddress.ToLower()=="' . strtolower($email) . '"';
+			// $query['where'] = 'EmailAddress!=null&&EmailAddress.StartsWith("'. $email . '")';
 		}
 
 		if ($page > 0) {
