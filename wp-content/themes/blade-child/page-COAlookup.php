@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Template Name: COA Lookup Tool
  */
@@ -70,7 +70,7 @@
 				}else{
 					$('#lookup-error').text('');
 					var url = batches[index].attachment_url;
-					var win = window.open(url, '_blank');
+					var win = window.open(url + '?v=' + (new Date().getTime()), '_blank');
   			 		win.focus();
 				}
 

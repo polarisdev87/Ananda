@@ -223,3 +223,10 @@ abbr.required {
 .woocommerce-inservice-fields {
     margin-top: 70px;
 }
+
+#asl-storelocator.asl-p-cont.asl-bg-6 .Num_of_store {
+    display: none !important;
+}
+#asl-storelocator.asl-p-cont.asl-bg-6 #panel.storelocator-panel {
+    margin-top: 0 !important;
+}

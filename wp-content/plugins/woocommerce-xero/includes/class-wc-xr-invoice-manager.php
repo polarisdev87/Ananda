@@ -29,8 +29,8 @@ class WC_XR_Invoice_Manager {
 		return $xml_response;
 	}
 
-	public function get_all_invoices($startsWith = '', $page_no = 0) {
-		$request = new WC_XR_Request_Invoice_Get($this->settings, $startsWith, $page_no);
+	public function get_all_invoices($startsWith = '', $page_no = 0, $year = false) {
+		$request = new WC_XR_Request_Invoice_Get($this->settings, $startsWith, $page_no, $year);
 
 		$request->do_request();
 		$xml_response = $request->get_response_body_xml();
@@ -200,6 +200,31 @@ class WC_XR_Invoice_Manager {
 
 		// Return invoice
 		return $invoice;
+	}
+
+
+	public function createSalesforceInvoice() {
+
+		// // Contact Manager
+		// $contact_manager = new WC_XR_Contact_Manager( $this->settings );
+
+		// // Create invoice
+		// $invoice = new WC_XR_Invoice(
+		// 	$this->settings,
+		// 	$contact_manager->get_contact_by_order( $order ),
+		// 	$order_ymd,
+		// 	$order_ymd,
+		// 	ltrim( $order->get_order_number(), '#' ),
+		// 	$line_item_manager->build_line_items( $order ),
+		// 	$order_currency,
+		// 	round( $cart_tax + $shipping_tax, 2 ),
+		// 	$order_total
+		// );
+
+		// $invoice->set_order( $order );
+
+		// // Return invoice
+		// return $invoice;
 	}
 
 }

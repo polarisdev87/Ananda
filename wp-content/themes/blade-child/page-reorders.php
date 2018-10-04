@@ -9,9 +9,10 @@ if (!is_reorder()) {
 	header("Location: /products");
 } else {
 
-	$user_state = get_user_meta( get_current_user_id(), 'billing_state', true );
+	$user_billing_state = get_user_meta( get_current_user_id(), 'billing_state', true );
+	$user_shipping_state = get_user_meta( get_current_user_id(), 'shipping_state', true );
 	
-	if (in_array(strtoupper($user_state), ['OK', 'MS', 'KS'])) {
+	if (in_array(strtoupper($user_billing_state), ['OK', 'MS', 'KS']) || in_array(strtoupper($user_shipping_state), ['OK', 'MS', 'KS'])) {
 		?>
 		<style type="text/css">
 			.product-section {

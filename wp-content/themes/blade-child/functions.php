@@ -12,6 +12,19 @@ add_action( 'after_setup_theme', 'grve_blade_child_theme_setup' );
 
 add_filter( 'wpcf7_validate_configuration', '__return_false' );
 
+function woocommerce_shipstation_export_custom_field_3($meta_key) {
+    return 'shipstation_note';
+}
+add_filter( 'woocommerce_shipstation_export_custom_field_3', 'woocommerce_shipstation_export_custom_field_3');
+
+add_action( 'woocommerce_new_order', 'create_fpn_note_for_wc_order',  1, 1  );
+function create_fpn_note_for_wc_order($order_id) {
+    if (is_user_logged_in() && !is_reorder()) {
+        update_post_meta($order_id, 'shipstation_note', 'This is first FPN order.');
+        $order = wc_get_order($order_id);
+        $order->add_product(wc_get_product(11532), 1, ['subtotal' => 0, 'total' => 0]);
+    }
+}
 //Omit closing PHP tag to avoid accidental whitespace output errors.
 
 
@@ -43,13 +56,18 @@ echo '<a href="/my-account/" class="grve-btn grve-btn-medium grve-square grve-bg
 /**
  * Add new register fields for WooCommerce registration.
  */
-function wooc_extra_register_fields() {
+function wooc_extra_register_fields_npi() {
     ?>
 
     <p class="form-row form-row-wide">
     <label for="reg_npi_id"><?php _e( 'NPI #', 'woocommerce' ); ?> <abbr class="required" title="required">*</abbr></label>
     <input type="text" class="input-text" name="npi_id" id="reg_npi_id" value="<?php if ( ! empty( $_POST['npi_id'] ) ) esc_attr_e( $_POST['npi_id'] ); ?>" />
     </p>
+
+    <?php
+}
+function wooc_extra_register_fields_multistore() {
+    ?>
 
     <p class="form-row form-row-wide">
         <label class="label" for="distributor">Do you have multiple stores? <abbr class="required" title="required">*</abbr></label>
@@ -62,7 +80,8 @@ function wooc_extra_register_fields() {
 
     <?php
 }
-add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields' );
+add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields_npi' );
+add_action( 'woocommerce_register_form_start', 'wooc_extra_register_fields_multistore' );
 
 /**
  * Validate the extra register fields.
@@ -127,6 +146,11 @@ function wooc_save_extra_register_fields( $customer_id ) {
         $user_membership = wc_memberships_get_user_membership( $customer_id, $args['plan_id'] );
         $user_membership->add_note( 'Membership access granted automatically from registration.' );
 
+    }
+
+    if ( isset( $_POST['fpn'] ) && $_PSOT['fpn'] == 1) {
+        $user = new WP_User( $customer_id );
+        $user->add_role('fpn');
     }
 }
 add_action( 'woocommerce_created_customer', 'wooc_save_extra_register_fields' );
@@ -275,7 +299,7 @@ function check_if_valid_states() {
         }
     }
     // var_dump($product_thc);
-    if( in_array( WC()->customer->get_shipping_state(), $msg_states_all ) || ($product_thc && in_array( WC()->customer->get_shipping_state(), $msg_states_thc )) ) {
+    if( in_array( WC()->customer->get_shipping_state(), $msg_states_all ) || in_array( WC()->customer->get_billing_state(), $msg_states_all ) || (!$product_thc && in_array( WC()->customer->get_shipping_state(), $msg_states_thc )) || (!$product_thc && in_array( WC()->customer->get_billing_state(), $msg_states_thc )) ) {
         return false;
     }
     return true;
@@ -643,10 +667,10 @@ function role_based_menu_list() {
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li, #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li {
                     display: none;
                 }
-                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(1),
+                /*#adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(1),
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(2),
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(3),
-                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(6),
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(6),*/
                 #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(1),
                 #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(2),
                 #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li:nth-child(4),
@@ -785,6 +809,8 @@ $certcapture_password = 'AnandaProfessional@2018';
 /* PROD */
 $certcapture_client_id = '82590';
 $certcapture_client_key = '3Y8i6qngdaRLFY7t';
+// $certcapture_client_id = '82190';  // new Ananda Hemp Ecomm credentials
+// $certcapture_client_key = 'JRBPBrwrXFPFYhCT';
 // $certcapture_username = 'anandap';
 // $certcapture_password = 'AnandaProfessional2018';
 
@@ -1068,7 +1094,7 @@ function add_ach_discount_message() {
         $cart_total = $cart_object->subtotal_ex_tax;
         ?>
             <tr class="cart-discount">
-                <th>Shipping discount 2%</th>
+                <th>ACH discount 2%</th>
                 <td><?php echo wc_price(-($cart_total / 100) * $percent); ?></td>
             </tr>
         <?php
@@ -1224,7 +1250,7 @@ function runOnInit() {
 
     if (isset($_GET['salesforce'])) {
         require_once('includes/SalesforceSDK.php');
-        $salesforce = new SalesforceSDK();
+        $salesforce = new SalesforceSDK(isset($_GET['env']) && $_GET['env']=='sandbox', isset($_GET['debug']) && $_GET['debug']==1);
 
         switch ($_GET['salesforce']) {
             case 'auth':
@@ -1244,15 +1270,19 @@ function runOnInit() {
                 var_dump($response);
                 break;
             case 'get_invoices':
-                $invoices = $salesforce->get_all_invoices('');
+                $invoices = $salesforce->get_all_invoices('WP-', 2018);
                 var_dump($invoices);
                 break;
             case 'get_salesforce_invoices':
-                $invoices = $salesforce->get_all_salesforce_invoices('WP-');
+                $invoices = $salesforce->get_all_salesforce_invoices('W');
                 var_dump($invoices);
                 break;
             case 'create_contact':
                 $response = $salesforce->get_account_from_external_xero_contact_id($_GET['ID']);
+                var_dump($response);
+                break;
+            case 'create_account_from_xero_contact_id':
+                $response = $salesforce->create_account_from_xero_contact_id($_GET['ID']);
                 var_dump($response);
                 break;
             case 'get_contact':
@@ -1269,6 +1299,14 @@ function runOnInit() {
             case 'migrate_invoices':
                 $salesforce->migrate_invoices($_GET['ID'] ?: '');
                 break;
+            case 'update_invoices':
+                $salesforce->migrate_invoices('WP-', '2018');
+                $salesforce->migrate_invoices('INV-', '2018');
+                $salesforce->migrate_invoices('CN-', '2018');
+                break;
+            case 'create_invoice_from_quote':
+                $salesforce->create_invoice_from_quote($_GET['ID'] ?: '');
+                break;
             case 'get_accounts':
                 $response = $salesforce->get_all_accounts();
                 var_dump($response);
@@ -1280,7 +1318,7 @@ function runOnInit() {
             case 'migrate_stores':
                 $salesforce->migrate_stores();
                 break;
-            case 'add_new_store':
+            case 'optin_store':
                 // $dummy = [
                 //     'Title' => 'Test',
                 //     'Description' => '',
@@ -1290,16 +1328,39 @@ function runOnInit() {
                 //     'PostalCode' => '40484',
                 //     'Country' => 'United States',
                 // ];
-                $response = $salesforce->add_new_store($_REQUEST);
-                echo $response;
+                $response = $salesforce->upsert_store_with_salesforce($_REQUEST);
+                echo '<script type="text/javascript">window.close();</script>';
+                // echo $response;
                 break;
-            case 'edit_store':
-                $response = $salesforce->edit_store($_REQUEST);
-                echo $response;
+            case 'optout_store':
+                $response = $salesforce->delete_store($_REQUEST);
+                echo '<script type="text/javascript">window.close();</script>';
+                // echo $response;
                 break;
-            case 'delete_stores':
-                $response = $salesforce->delete_stores($_REQUEST['storeIDs']);
-                echo $response;
+
+            case 'update_accounts':
+                $salesforce->update_accounts();
+                break;
+            case 'update_account_test':
+                $salesforce->update_account_test();
+                break;
+            case 'drop_invalid_accounts':
+                $salesforce->drop_invalid_accounts();
+                break;
+            case 'pull_xero_contacts_in_table_format':
+                $salesforce->pull_xero_contacts_in_table_format();
+                break;
+            case 'update_xero_contacts_name':
+                $salesforce->update_xero_contacts_name();
+                break;
+            case 'update_salesforce_accounts_name':
+                $salesforce->update_salesforce_accounts_name();
+                break;
+            case 'reset_salesforce_store_id':
+                $salesforce->reset_salesforce_store_id();
+                break;
+            case 'recover_xero_contacts':
+                $salesforce->recover_xero_contacts();
                 break;
             default:
                 var_dump('no actions');
@@ -1315,4 +1376,46 @@ function runOnInit() {
         add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25 );
     }
 }
+
+
+
+if (! wp_next_scheduled ( 'salesforce_invoice_migration_hook' )) {
+    wp_schedule_event(time(), 'hourly', 'salesforce_invoice_migration_hook');
+}
+
+add_action('salesforce_invoice_migration_hook', 'salesforce_invoice_migration_exec');
+function salesforce_invoice_migration_exec() {
+    require_once('includes/SalesforceSDK.php');
+    $salesforce = new SalesforceSDK();
+    $salesforce->migrate_invoices('WP-', '2018');
+    $salesforce->migrate_invoices('INV-', '2018');
+    $salesforce->migrate_invoices('CN-', '2018');
+}
+
+
+
+if (! wp_next_scheduled ( 'salesforce_account_name_npi_hook' )) {
+    wp_schedule_event(time(), 'hourly', 'salesforce_account_name_npi_hook');
+}
+
+add_action('salesforce_account_name_npi_hook', 'salesforce_account_name_npi_exec');
+function salesforce_account_name_npi_exec() {
+    require_once('includes/SalesforceSDK.php');
+    // $salesforce = new SalesforceSDK();
+    // $salesforce->update_salesforce_accounts_name();
+}
+
+
+
+if (! wp_next_scheduled ( 'salesforce_billing_address_update_hook' )) {
+    wp_schedule_event(time(), 'quarterdaily', 'salesforce_billing_address_update_hook');
+}
+
+add_action('salesforce_billing_address_update_hook', 'salesforce_billing_address_update_exec');
+function salesforce_billing_address_update_exec() {
+    require_once('includes/SalesforceSDK.php');
+    // $salesforce = new SalesforceSDK();
+    // $salesforce->update_accounts();
+}
+
 

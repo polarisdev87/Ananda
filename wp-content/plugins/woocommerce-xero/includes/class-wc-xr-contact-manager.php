@@ -33,6 +33,15 @@ class WC_XR_Contact_Manager {
 		return $xml_response;
 	}
 
+	public function get_all_contacts_with_npi($page_no = 0) {
+		$request = new WC_XR_Request_Contact($this->settings, null, $page_no, '', true);
+
+		$request->do_request();
+		$xml_response = $request->get_response_body_xml();
+
+		return $xml_response;
+	}
+
 	public function get_all_contacts($page_no = 0) {
 		$request = new WC_XR_Request_Contact($this->settings, null, $page_no);
 
@@ -84,6 +93,52 @@ class WC_XR_Contact_Manager {
 		// echo($xml_response->asXML());
 		// return '';
 		// return $history_response;
+	}
+
+	public function recover_contact($contact_id, $contact_name) {
+		$historyRequest = new WC_XR_Request_Contact_History($this->settings, $contact_id);
+		$historyRequest->do_request();
+		$history_response = $historyRequest->get_response_body_xml();
+		// echo '<pre>', var_dump($history_response), '</pre>';
+
+		$patch = new WC_XR_Contact();
+		$patch->set_id( $contact_id );
+		$patch->set_name( $contact_name );
+
+		$flag = false;
+
+		foreach ($history_response->HistoryRecords->HistoryRecord as $record) {
+			if (strtotime($record->DateUTC) < strtotime('2018-09-19')) continue;
+			if ($record->User != 'System Generated' || $record->Changes != 'Edited' || !$record->Details) continue;
+
+			preg_match("/Primary contact person's email address changed from (.*) to (.*)./", $record->Details, $output);
+			if (count($output) == 3 && $output[2] == 'no value') {
+				// primary email 
+				$patch->set_email_address( $output[1] );
+				$flag = true;
+				continue;
+			}
+
+			preg_match("/Account number changed from (.*) to (.*)./", $record->Details, $output);
+			if (count($output) == 3 && $output[2] == 'no value') {
+				// account number
+				$patch->set_account_number( $output[1] );
+				$flag = true;
+				continue;
+			}
+
+			// echo '<pre>', var_dump($record), '</pre>';
+		}
+
+		sleep(2);
+
+		if ($flag) {
+			$contact_request_update = new WC_XR_Request_Update_Contact( $this->settings, $contact_id, $patch );
+			$contact_request_update->do_request();
+			echo $patch->get_email_address(), ':', $patch->get_account_number(), '<br/>';
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -167,6 +222,34 @@ class WC_XR_Contact_Manager {
 		return null;
 	}
 
+	public function get_id_by_npi( $npi ) {
+
+		if ( ! $npi ) {
+			return null;
+		}
+
+		$contact_request = new WC_XR_Request_Contact( $this->settings, '', 0, $npi );
+
+		$transient_key = 'wc_xero_contact_id_' . md5( $npi );
+		if ( get_transient( $transient_key ) ) {
+			return get_transient( $transient_key );
+		}
+		$contact_request->do_request();
+		$xml_response = $contact_request->get_response_body_xml();
+
+		if ( 'OK' == $xml_response->Status
+		     && ! empty( $xml_response->Contacts )
+		     && $xml_response->Contacts->Contact->ContactID->__toString() ) {
+
+				$contact_id  = $xml_response->Contacts->Contact->ContactID->__toString();
+				set_transient( $transient_key, $contact_id, 31 * DAY_IN_SECONDS );
+				return $contact_id;
+
+		}
+
+		return null;
+	}
+
 	/**
 	 * @param WC_Order $order
 	 *
@@ -195,6 +278,21 @@ class WC_XR_Contact_Manager {
 
 		$user_id = $order->get_user_id();
 		$account_number = $user_id ? get_user_meta($user_id, 'npi_id', true) : ''; // NPI Number
+		// if ($account_number) {
+	 //        $ch = curl_init('https://npiregistry.cms.hhs.gov/api/?number=' . $account_number);
+	 //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	 //        $npi_response = curl_exec($ch);
+	 //        curl_close($ch);
+	 //        $npi_response = json_decode($npi_response);
+	 //        if (isset($npi_response->result_count) && $npi_response->result_count > 0) {
+	 //        	$org = $npi_response->results[0];
+	 //        	if (count($org->other_names) > 0 && $org->other_names[0]->organization_name) {
+	 //        		$invoice_name = $org->other_names[0]->organization_name;
+	 //        	} else {
+	 //        		$invoice_name = $org->basic->organization_name;
+	 //        	}
+	 //        }
+		// }
 
 		// See if a previous contact exists
 		if ( ! empty ( $contact_id ) ) {
