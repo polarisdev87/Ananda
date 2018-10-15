@@ -1543,4 +1543,32 @@ class SalesforceSDK {
         } while(count($contacts) > 0);
 
 	}
+
+	public function check_missing_xero_invoices() {
+		$args = array(
+		    'limit' => -1,
+		);
+		$orders = wc_get_orders($args);
+
+		echo '<table border=1><thead><tr><th>Order ID</th><th>Created</th><th>Status</th><th>Xero ID</th><th>Customer</th><th>Billing</th><th>Shipping</th></tr></thead><tbody>';
+
+		foreach($orders as $order) {
+			echo '<tr>';
+			echo '<td>'. $order->get_id() .'</td>';
+			echo '<td>'. date('Y-m-d H:i:s', strtotime($order->get_date_created())) .'</td>';
+			echo '<td>'. $order->get_status() .'</td>';
+			echo '<td>'. $order->get_meta('_xero_invoice_id') .'</td>';
+			if (method_exists($order, 'get_customer_id')) {
+				$customer = new WC_Customer($order->get_customer_id());
+				echo '<td>'. $customer->get_first_name() . ' ' . $customer->get_last_name() . '(' . $customer->get_username() . ') - ' . $customer->get_email() .'</td>';
+				echo '<td>'. $customer->get_billing_company() .'</td>';
+				echo '<td>'. $customer->get_shipping_company() .'</td>';
+			} else {
+				echo '<td></td><td></td><td></td>';
+			}
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
 }

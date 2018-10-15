@@ -17,14 +17,60 @@ function woocommerce_shipstation_export_custom_field_3($meta_key) {
 }
 add_filter( 'woocommerce_shipstation_export_custom_field_3', 'woocommerce_shipstation_export_custom_field_3');
 
+
+function is_user_has_role( $role, $user_id = null ) {
+    if ( is_numeric( $user_id ) ) {
+        $user = get_userdata( $user_id );
+    }
+    else {
+        $user = wp_get_current_user();
+    }
+    if ( !empty( $user ) ) {
+        return in_array( $role, (array) $user->roles );
+    }
+    else
+    {
+        return false;
+    }
+}
+
 add_action( 'woocommerce_new_order', 'create_fpn_note_for_wc_order',  1, 1  );
 function create_fpn_note_for_wc_order($order_id) {
-    if (is_user_logged_in() && !is_reorder()) {
+    if (is_user_logged_in() && !is_reorder() && is_user_has_role('fpn')) {
         update_post_meta($order_id, 'shipstation_note', 'This is first FPN order.');
         $order = wc_get_order($order_id);
         $order->add_product(wc_get_product(11532), 1, ['subtotal' => 0, 'total' => 0]);
     }
 }
+
+
+// add_action( 'woocommerce_new_order', 'update_order_if_is_on_behalf_of_customer',  1, 1  );
+// function update_order_if_is_on_behalf_of_customer($order_id) {
+//     if (is_user_logged_in()) {
+//         $flag = false;
+//         foreach ($_COOKIE as $key => $value) {
+//             if(strpos($key, 'wordpress_user_sw_') !== false) $flag = true;
+//             if(strpos($key, 'wordpress_user_sw_olduser_') !== false) $flag = true;
+//         }
+//         if (!$flag) return;
+//         update_post_meta($order_id, '_placed_on_behalf_of_customer', '1');
+//         exit('');
+//     }
+// }
+
+add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2);
+function before_checkout_create_order( $order, $data ) {
+    if (is_user_logged_in()) {
+        $flag = false;
+        foreach ($_COOKIE as $key => $value) {
+            if(strpos($key, 'wordpress_user_sw_') !== false) $flag = true;
+            if(strpos($key, 'wordpress_user_sw_olduser_') !== false) $flag = true;
+        }
+        if (!$flag) return;
+        $order->update_meta_data( '_placed_on_behalf_of_customer', '1' );
+    }
+}
+
 //Omit closing PHP tag to avoid accidental whitespace output errors.
 
 
@@ -372,20 +418,68 @@ show_admin_bar(false);
 
 
 
-function wpb_woo_my_account_order() {
-    $myorder = array(
+function wpb_woo_my_account_items() {
+    $items = [
         'dashboard'          => __( 'Dashboard', 'woocommerce' ),
         'orders'             => __( 'Orders', 'woocommerce' ),
         'edit-address'       => __( 'Addresses', 'woocommerce' ),
         'edit-account'       => __( 'Manage account', 'woocommerce' ),
-        // 'my-custom-endpoint' => __( 'My Stuff', 'woocommerce' ),
         // 'downloads'          => __( 'Download MP4s', 'woocommerce' ),
         // 'payment-methods'    => __( 'Payment Methods', 'woocommerce' ),
-        'customer-logout'    => __( 'Logout', 'woocommerce' ),
-    );
-    return $myorder;
+    ];
+
+    $user = wp_get_current_user();
+    if ( !wp_doing_ajax() && in_array( 'pharmacy_manager', (array) $user->roles ) ) {
+        $items['login-as-customer'] = __( 'Login as customer', 'woocommerce' );
+    }
+
+    $items['customer-logout'] = __( 'Logout', 'woocommerce' );
+    return $items;
 }
-add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_order' );
+add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_items' );
+
+function anandap_add_endpoint() {
+    add_rewrite_endpoint( 'login-as-customer', EP_PAGES );
+}
+add_action( 'init', 'anandap_add_endpoint' );
+
+function anandap_login_as_customer_endpoint_content() {
+    $customer_args = [ 'role' => 'customer' ];
+    $customers = get_users($customer_args);
+
+    $user_switching = user_switching::get_instance();
+    ?>
+        <h4>Login as:</h4>
+        <table class="customers_list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>NPI</th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php foreach($customers as $customer) {
+
+                $display_name = $customer->display_name;
+                if ($customer->first_name || $customer->last_name) {
+                    $display_name = $customer->first_name . ' ' . $customer->last_name;
+                }
+                $switch_link = $user_switching->maybe_switch_url($customer);
+                ?>
+                <tr>
+                    <td><a href="<?php echo $switch_link ? $switch_link : '#'; ?>"><?php echo $display_name; ?></a></td>
+                    <td><?php echo $customer->user_email; ?></td>
+                    <td><?php echo $customer->npi_id; ?></td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+
+    <?php
+}
+add_action( 'woocommerce_account_login-as-customer_endpoint', 'anandap_login_as_customer_endpoint_content' );
+
 
 add_filter('woocommerce_save_account_details_required_fields', 'wc_save_account_details_required_fields' );
 function wc_save_account_details_required_fields( $required_fields ){
@@ -661,7 +755,7 @@ function role_based_menu_list() {
                 #adminmenu>li {
                     display: none;
                 }
-                #adminmenu>.toplevel_page_asl-plugin, #adminmenu>.toplevel_page_woocommerce, #adminmenu>.menu-icon-users {
+                /*#adminmenu>.toplevel_page_asl-plugin, */#adminmenu>.toplevel_page_woocommerce, #adminmenu>.menu-icon-users {
                     display: block;
                 }
                 #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li, #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li {
@@ -842,6 +936,12 @@ function curl_certcapture($url, $customer_number, $post = false, $postData = '')
     return json_decode($response);
 }
 
+function get_full_state_name($state) {
+    $states = ['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming'];
+
+    return $states[$state];
+}
+
 add_action( 'woocommerce_review_order_after_submit', 'custom_review_order_after_submit' );
 function custom_review_order_after_submit() {
     if (is_ajax() && !empty( $_POST['post_data'] ) ) {
@@ -861,7 +961,6 @@ function custom_review_order_after_submit() {
 
             $npi_id = get_user_meta(get_current_user_id(), 'npi_id', true); // cert capture - customer number
 
-            $states = ['AL' => 'Alabama', 'AK' => 'Alaska', 'AZ' => 'Arizona', 'AR' => 'Arkansas', 'CA' => 'California', 'CO' => 'Colorado', 'CT' => 'Connecticut', 'DE' => 'Delaware', 'FL' => 'Florida', 'GA' => 'Georgia', 'HI' => 'Hawaii', 'ID' => 'Idaho', 'IL' => 'Illinois', 'IN' => 'Indiana', 'IA' => 'Iowa', 'KS' => 'Kansas', 'KY' => 'Kentucky', 'LA' => 'Louisiana', 'ME' => 'Maine', 'MD' => 'Maryland', 'MA' => 'Massachusetts', 'MI' => 'Michigan', 'MN' => 'Minnesota', 'MS' => 'Mississippi', 'MO' => 'Missouri', 'MT' => 'Montana', 'NE' => 'Nebraska', 'NV' => 'Nevada', 'NH' => 'New Hampshire', 'NJ' => 'New Jersey', 'NM' => 'New Mexico', 'NY' => 'New York', 'NC' => 'North Carolina', 'ND' => 'North Dakota', 'OH' => 'Ohio', 'OK' => 'Oklahoma', 'OR' => 'Oregon', 'PA' => 'Pennsylvania', 'RI' => 'Rhode Island', 'SC' => 'South Carolina', 'SD' => 'South Dakota', 'TN' => 'Tennessee', 'TX' => 'Texas', 'UT' => 'Utah', 'VT' => 'Vermont', 'VA' => 'Virginia', 'WA' => 'Washington', 'WV' => 'West Virginia', 'WI' => 'Wisconsin', 'WY' => 'Wyoming'];
 
             $token_response = curl_certcapture("https://api.certcapture.com/v2/auth/get-token", $npi_id, true);
             $token = $token_response->response->token;
@@ -881,7 +980,7 @@ function custom_review_order_after_submit() {
                     'phone_number' => $post_data['billing_phone'],
                     'email_address' => $post_data['billing_email'],
                     'country' => ['name' => 'United States'],
-                    'state' => ['name' => $states[$post_data['billing_state']]],
+                    'state' => ['name' => get_full_state_name($post_data['billing_state'])],
                 ])));
                 $response_customer_created = curl_certcapture("https://api.certcapture.com/v2/customers", $npi_id, true, $data);
             }
@@ -917,13 +1016,13 @@ function custom_review_order_after_submit() {
                         customer.name = '<?php echo $post_data['billing_first_name'] . ' ' . $post_data['billing_last_name']; ?>';
                         customer.address1 = '<?php echo $post_data['billing_address_1']; ?>';
                         customer.city = '<?php echo $post_data['billing_city']; ?>';
-                        customer.state = '<?php echo $states[$post_data['billing_state']]; ?>';
+                        customer.state = '<?php echo get_full_state_name($post_data['billing_state']); ?>';
                         customer.country = 'United States';
                         // customer.country = '<?php echo $post_data['billing_country']; ?>';
                         customer.phone = '<?php echo $post_data['billing_phone']; ?>';
                         customer.zip = '<?php echo $post_data['billing_postcode']; ?>';
                         GenCert.setCustomerData(customer);
-                        GenCert.setShipZone('<?php echo $states[$post_data['billing_state']]; ?>');
+                        GenCert.setShipZone('<?php echo get_full_state_name($post_data['billing_state']); ?>');
                         GenCert.show();
                     </script>
                 <?php
@@ -966,7 +1065,9 @@ function custom_wc_zero_tax_for_certificate( $tax_class, $product) {
     }
     if(!empty($post_data['tax_cert'])) {
         if ($post_data['tax_cert']!='NO') {
-            $tax_class = 'Zero Rate';
+            if (!in_array($product->get_id(), [11525, 11526, 12100, 12102, 12106, 12107])) {
+                $tax_class = 'Zero Rate';
+            }
         } else {
             // do_action( 'woocommerce_cart_reset', WC()->cart, false );
         }
@@ -1031,7 +1132,7 @@ function filter_woocommerce_get_discounted_price( $price, $values, $instance ) {
     $payment_method = 'cheque';
     $percent = 2; // 15%
     if( $payment_method == $chosen_payment_method ){
-        return $price - ($price / 100 * $percent);
+        return $price - ($values['line_subtotal'] / 100 * $percent);
     }
     return $price; 
 }; 
@@ -1362,11 +1463,42 @@ function runOnInit() {
             case 'recover_xero_contacts':
                 $salesforce->recover_xero_contacts();
                 break;
+            case 'check_missing_xero_invoices':
+                $salesforce->check_missing_xero_invoices();
+                break;
             default:
                 var_dump('no actions');
                 break;
         }
 
+        exit('');
+    }
+
+    if (isset($_GET['action_name'])) {
+        switch ($_GET['action_name']) {
+            case 'subscribe_red_states':
+                update_user_meta( $_POST['customer_id'], 'subscribe_red_states', '1' );
+                echo 'subscribe_red_states - updated for #' . $_POST['customer_id'];
+                break;
+            case 'show_red_states_subscribers':
+                $users = get_users(['meta_key' => 'subscribe_red_states', 'meta_value' => '1']);
+                echo '<table border=1 width="100%"><thead><tr><th>Company</th><th>Contact Name</th><th>Address</th><th>Email</th><th>Registered</th></tr></thead><tbody>';
+                foreach ($users as $user) {
+                    $customer = new WC_Customer($user->data->ID);
+                    echo '<tr>';
+                    echo '<td>'. $customer->get_billing_company() .'</td>';
+                    echo '<td>'. $customer->get_first_name() . ' ' . $customer->get_last_name() . '(' . $customer->get_username() . ')</td>';
+                    echo '<td>'. $customer->get_shipping_address() . ', ' . $customer->get_shipping_city() . ', ' . $customer->get_shipping_state() . ' ' . $customer->get_shipping_postcode() .'</td>';
+                    echo '<td>'. $customer->get_email() .'</td>';
+                    echo '<td>'. $user->data->user_registered .'</td>';
+                    echo '</tr>';
+                }
+                echo '</tbody></table>';
+                break;
+            default:
+                echo 'no action';
+                break;
+        }
         exit('');
     }
     

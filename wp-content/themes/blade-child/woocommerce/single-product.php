@@ -78,9 +78,6 @@ get_header( 'shop' ); ?>
 			.woocommerce-product-details__short-description {
 				margin-bottom: 30px;
 			}
-			.woocommerce div.product p.price {
-				color: #000;
-			}
 		</style>
 	<?php
 		/**

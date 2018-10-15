@@ -230,3 +230,7 @@ abbr.required {
 #asl-storelocator.asl-p-cont.asl-bg-6 #panel.storelocator-panel {
     margin-top: 0 !important;
 }
+
+.woocommerce div.product p.price {
+    color: #000;
+}
