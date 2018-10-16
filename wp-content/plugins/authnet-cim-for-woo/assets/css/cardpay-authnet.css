@@ -1,0 +1,43 @@
+.credit_cards img {
+	display: inline;
+	vertical-align: middle;
+}
+.credit_cards tr td {
+	text-align: left !important;
+}
+#credit-card {
+	width: 50%;
+}
+.add-card-heading {
+	display: none;
+}
+.edit-card-heading {
+	display: none;
+}
+.authnet-credit-card {
+	display: none;
+}
+.cc-form-cancel {
+	float: right;
+	color: red;
+}
+.make-default {
+	display: none;
+}
+.authnet-success-message {
+	display: none;
+}
+.authnet-error-message {
+	display: none;
+}
+select.wc-credit-card-form-token {
+	padding:.6180469716em;
+	background-color:#f2f2f2;
+	color:#43454b;
+	outline:0;
+	border:0;
+	border-radius:2px;
+	box-sizing:border-box;
+	font-weight:400;
+	box-shadow:inset 0 1px 1px rgba(0,0,0,.125)
+}

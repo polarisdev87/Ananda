@@ -1,0 +1,387 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Authorize.Net CIM for WooCommerce 1.0.0\n"
+"POT-Creation-Date: 2015-11-13 12:49-0800\n"
+"PO-Revision-Date: 2015-11-13 12:50-0800\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_x;_n\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: includes/class-wc-cardpay-authnet-api.php:314
+msgid "cURL Error: "
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-credit-cards.php:71
+#: includes/class-wc-cardpay-authnet-credit-cards.php:98
+#: includes/class-wc-cardpay-authnet-gateway.php:362
+#, php-format
+msgid "Token %s &ndash; %s"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-credit-cards.php:71
+#: includes/class-wc-cardpay-authnet-credit-cards.php:98
+#: includes/class-wc-cardpay-authnet-gateway.php:362
+msgid "%b %d, %Y @ %I:%M %p"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:86
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:156
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:257
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:407
+msgid "Payment was declined - please try another card."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:222
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:373
+msgid "Customer not found"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:238
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:389
+#: includes/class-wc-cardpay-authnet-gateway.php:251
+#, php-format
+msgid ""
+"Authorize.Net payment %s for %s. Transaction ID: %s.\n"
+"\n"
+" <strong>AVS Response:</strong> %s.\n"
+"\n"
+" <strong>CVV2 Response:</strong> %s."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:255
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:405
+msgid "Authorize.Net payment declined"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway-addons.php:273
+#, php-format
+msgid "Authorize.Net Transaction Failed (%s)"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:58
+msgid ""
+"TEST MODE ENABLED. Use test card number 4111111111111111 with any 3-digit "
+"CVC and a future expiration date."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:75
+#, php-format
+msgid ""
+"Authorize.Net error: The API Login ID is required. <a href=\"%s\">Click here "
+"to update your Authorize.Net settings.</a>"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:81
+#, php-format
+msgid ""
+"Authorize.Net error: The Transaction Key is required. <a href=\"%s\">Click "
+"here to update your Authorize.Net settings.</a>"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:87
+#, php-format
+msgid ""
+"Authorize.Net is enabled, but the <a href=\"%s\">force SSL option</a> is "
+"disabled; your checkout may not be secure! Please enable SSL and ensure your "
+"server has a valid SSL certificate."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:119
+msgid "Enable/Disable"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:120
+msgid "Enable Authorize.Net"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:126
+msgid "Title"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:128
+msgid "This controls the title which the user sees during checkout."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:129
+msgid "Credit Card"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:133
+msgid "Use Sandbox"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:134
+msgid "Enable sandbox mode - live payments will not be taken if enabled."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:140
+msgid "API Login ID"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:142
+msgid ""
+"Contact sales at (866) 502-8910 if you have not received your API Login ID. "
+"Not required for Sandbox mode."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:146
+msgid "Transaction Key"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:148
+msgid ""
+"Contact sales at (866) 502-8910 if you have not received your Transaction "
+"Key. Not required for Sandbox mode."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:152
+msgid "Transaction Type"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:162
+msgid "Auto Capture"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:163
+msgid ""
+"Automatically attempt to capture transactions that are processed as "
+"Authorize Only when order is marked complete."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:169
+msgid "Allow Stored Cards"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:170
+msgid ""
+"Allow logged in customers to save credit card profiles to use for future "
+"purchases"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:176
+msgid "Accepted Cards"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:180
+msgid "Select the card types to accept."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:277
+#: includes/class-wc-cardpay-authnet-gateway.php:280
+msgid "Payment error: "
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:303
+#, php-format
+msgid "Authorize.Net refund completed for %s. Refund ID: %s"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:307
+msgid "Refund error: "
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:309
+msgid "Refund error: Please try again."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:341
+#, php-format
+msgid "Authorize.Net auto capture completed for %s. Capture ID: %s"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:344
+msgid ""
+"Authorize.Net auto capture failed. Log into your gateway to manually process "
+"the capture."
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:402
+msgid "Card Number"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:406
+msgid "Expiry (MM/YY)"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:410
+msgid "Card Code"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:421
+msgid "Save card for future use?"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:432
+msgid "Add new card"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:436
+msgid "Payment Information"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:485
+msgid "Street Address: Match -- First 5 Digits of ZIP: No Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:486
+msgid ""
+"Address not provided for AVS check or street address match, postal code "
+"could not be verified"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:487
+msgid "AVS Error"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:488
+msgid "Non U.S. Card Issuing Bank"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:489
+msgid "Street Address: No Match -- First 5 Digits of ZIP: No Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:490
+msgid "AVS not applicable for this transaction"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:491
+msgid "Retry, System Is Unavailable"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:492
+msgid "AVS Not Supported by Card Issuing Bank"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:493
+msgid "Address Information For This Cardholder Is Unavailable"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:494
+msgid "Street Address: No Match -- All 9 Digits of ZIP: Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:495
+msgid "Street Address: Match -- All 9 Digits of ZIP: Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:496
+msgid "Street Address: Match - First 5 Digits of ZIP: Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:497
+msgid "Street Address: No Match - First 5 Digits of ZIP: Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:515
+msgid "CVV2/CVC2 Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:516
+msgid "CVV2 / CVC2 No Match"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:517
+msgid "Not Processed"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:518
+msgid "Merchant Has Indicated that CVV2 / CVC2 is not present on card"
+msgstr ""
+
+#: includes/class-wc-cardpay-authnet-gateway.php:519
+msgid "Issuer is not certified and/or has not provided visa encryption keys"
+msgstr ""
+
+#: templates/credit-cards-table.php:4 templates/credit-cards.php:7
+msgid "Card Details"
+msgstr ""
+
+#: templates/credit-cards-table.php:5 templates/credit-cards.php:8
+msgid "Expires"
+msgstr ""
+
+#: templates/credit-cards-table.php:27 templates/credit-cards.php:30
+#, php-format
+msgid "%s ending in %s %s"
+msgstr ""
+
+#: templates/credit-cards-table.php:29 templates/credit-cards.php:32
+#, php-format
+msgid "%s/%s"
+msgstr ""
+
+#: templates/credit-cards-table.php:31 templates/credit-cards.php:34
+#, php-format
+msgid "Edit %s ending in %s"
+msgstr ""
+
+#: templates/credit-cards-table.php:31 templates/credit-cards.php:34
+#, php-format
+msgid "%s / %s"
+msgstr ""
+
+#: templates/credit-cards-table.php:31 templates/credit-cards.php:34
+msgid "Edit"
+msgstr ""
+
+#: templates/credit-cards-table.php:32 templates/credit-cards.php:35
+msgid "Delete"
+msgstr ""
+
+#: templates/credit-cards.php:1
+msgid "My Credit Cards"
+msgstr ""
+
+#: templates/credit-cards.php:2
+msgid "Your request has been successfully processed."
+msgstr ""
+
+#: templates/credit-cards.php:3
+msgid "There was an error processing your request."
+msgstr ""
+
+#: templates/credit-cards.php:42
+msgid "Add New Card"
+msgstr ""
+
+#: templates/credit-cards.php:44
+msgid "Add Credit Card"
+msgstr ""
+
+#: templates/credit-cards.php:52
+msgid "Card Number "
+msgstr ""
+
+#: templates/credit-cards.php:56
+msgid "Expiry (MM/YY) "
+msgstr ""
+
+#: templates/credit-cards.php:60
+msgid "Card Code "
+msgstr ""
+
+#: templates/credit-cards.php:64
+msgid "Make Default? "
+msgstr ""
+
+#: templates/credit-cards.php:69
+msgid "Cancel "
+msgstr ""
+
+#: woocommerce-cardpay-authnet.php:65
+msgid "Settings"
+msgstr ""
+
+#: woocommerce-cardpay-authnet.php:133
+msgid "Credit Cards"
+msgstr ""

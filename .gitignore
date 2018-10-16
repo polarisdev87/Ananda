@@ -79,6 +79,7 @@ Thumbs.db
 # track these mu-plugins, plugins, and themes
 # add your own entries here
 !wp-content/plugins/anandap-core/
+!wp-content/plugins/authnet-cim-for-woo/
 !wp-content/plugins/woo-checkout-field-editor-pro/
 !wp-content/plugins/woocommerce-xero/
 !wp-content/plugins/woocommerce-shipstation/
