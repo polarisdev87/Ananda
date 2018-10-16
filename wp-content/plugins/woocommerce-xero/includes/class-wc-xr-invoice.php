@@ -152,6 +152,11 @@ class WC_XR_Invoice {
 		// Load invoice prefix
 		$prefix = trim( $this->settings->get_option( 'invoice_prefix' ) );
 
+		$order = $this->get_order();
+		if ($order->get_meta('_placed_on_behalf_of_customer') == '1') {
+			$prefix = 'AE-';
+		}
+
 		// Set invoice number
 		$invoice_number = $this->invoice_number;
 

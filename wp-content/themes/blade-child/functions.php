@@ -58,16 +58,28 @@ function create_fpn_note_for_wc_order($order_id) {
 //     }
 // }
 
+function is_user_switched() {
+    $flag = false;
+    if (is_user_logged_in()) {
+        foreach ($_COOKIE as $key => $value) {
+            if(strpos($key, 'wordpress_user_sw_') !== false) {
+                $flag = true;
+                break;
+            }
+        }
+    }
+    return $flag;
+}
+
 add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 20, 2);
 function before_checkout_create_order( $order, $data ) {
-    if (is_user_logged_in()) {
-        $flag = false;
-        foreach ($_COOKIE as $key => $value) {
-            if(strpos($key, 'wordpress_user_sw_') !== false) $flag = true;
-            if(strpos($key, 'wordpress_user_sw_olduser_') !== false) $flag = true;
-        }
-        if (!$flag) return;
+    if (is_user_switched()) {
         $order->update_meta_data( '_placed_on_behalf_of_customer', '1' );
+        
+        $old_user = user_switching::get_old_user();
+        if ( $old_user instanceof WP_User ) {
+            $order->update_meta_data( '_placed_on_behalf_of_customer_by', $old_user->ID );
+        }
     }
 }
 
@@ -84,18 +96,18 @@ function before_checkout_create_order( $order, $data ) {
 add_action('init', 'crosby_hide_price_add_cart_not_logged_in');
  
 function crosby_hide_price_add_cart_not_logged_in() { 
-if ( !is_user_logged_in() ) {       
- remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
- remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
- remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
- remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );  
- add_action( 'woocommerce_single_product_summary', 'crosby_print_login_to_see', 31 );
- add_action( 'woocommerce_after_shop_loop_item', 'crosby_print_login_to_see', 11 );
-}
+    if ( !is_user_logged_in() ) {       
+        remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_add_to_cart', 10 );
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
+        remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
+        remove_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_template_loop_price', 10 );  
+        add_action( 'woocommerce_single_product_summary', 'crosby_print_login_to_see', 31 );
+        add_action( 'woocommerce_after_shop_loop_item', 'crosby_print_login_to_see', 11 );
+    }
 }
  
 function crosby_print_login_to_see() {
-echo '<a href="/my-account/" class="grve-btn grve-btn-medium grve-square grve-bg-black grve-bg-hover-black grve-btn-line">' . __('Click for pricing', 'theme_name') . '</a>';
+    echo '<a href="/my-account/" class="grve-btn grve-btn-medium grve-square grve-bg-black grve-bg-hover-black grve-btn-line">' . __('Click for pricing', 'theme_name') . '</a>';
 }
 
 
@@ -417,6 +429,11 @@ add_action( 'init' , 'wptp_add_tags_to_attachments' );
 show_admin_bar(false);
 
 
+function is_user_switchable() {
+    $user = wp_get_current_user();
+    return !wp_doing_ajax() && $user && in_array( 'pharmacy_manager', (array) $user->roles );
+}
+
 
 function wpb_woo_my_account_items() {
     $items = [
@@ -428,8 +445,7 @@ function wpb_woo_my_account_items() {
         // 'payment-methods'    => __( 'Payment Methods', 'woocommerce' ),
     ];
 
-    $user = wp_get_current_user();
-    if ( !wp_doing_ajax() && in_array( 'pharmacy_manager', (array) $user->roles ) ) {
+    if(is_user_switchable()) {
         $items['login-as-customer'] = __( 'Login as customer', 'woocommerce' );
     }
 
@@ -441,7 +457,9 @@ add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_items' );
 function anandap_add_endpoint() {
     add_rewrite_endpoint( 'login-as-customer', EP_PAGES );
 }
-add_action( 'init', 'anandap_add_endpoint' );
+if(is_user_switchable()) {
+    add_action( 'init', 'anandap_add_endpoint' );
+}
 
 function anandap_login_as_customer_endpoint_content() {
     $customer_args = [ 'role' => 'customer' ];
@@ -449,10 +467,34 @@ function anandap_login_as_customer_endpoint_content() {
 
     $user_switching = user_switching::get_instance();
     ?>
-        <h4>Login as:</h4>
+        <style type="text/css">
+            .customers_list {}
+            .customers_list tbody {
+                font-size: 0.9em;
+            }
+            .customers_list td {
+                word-break: break-all;
+            }
+            .customers_list tbody tr.displayNone {
+                display: none;
+            }
+            .customer_search_box {
+                display: flex;
+                align-items: center;
+                margin-bottom: 1em;
+            }
+            .customer_search_box span {
+                margin-right: 1em;
+            }
+            #search_customer {
+                margin-bottom: 0 !important;
+            }
+        </style>
+        <div class="customer_search_box"><span>Search: </span><input type="text" id="search_customer" placeholder="Search by Company, Name, Email, NPI ..." /></div>
         <table class="customers_list">
             <thead>
                 <tr>
+                    <th>Company</th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>NPI</th>
@@ -467,15 +509,32 @@ function anandap_login_as_customer_endpoint_content() {
                 }
                 $switch_link = $user_switching->maybe_switch_url($customer);
                 ?>
-                <tr>
+                <tr class="displayNone">
+                    <td><?php echo $customer->billing_company; ?></td>
                     <td><a href="<?php echo $switch_link ? $switch_link : '#'; ?>"><?php echo $display_name; ?></a></td>
-                    <td><?php echo $customer->user_email; ?></td>
+                    <td style=""><?php echo $customer->user_email; ?></td>
                     <td><?php echo $customer->npi_id; ?></td>
                 </tr>
             <?php } ?>
             </tbody>
         </table>
-
+        <script type="text/javascript">
+            jQuery(document).ready(function() {
+                var textInput = document.getElementById('search_customer');
+                var timeout = null;
+                var all_customers = jQuery('.customers_list tbody tr');
+                textInput.onkeyup = function (e) {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(function () {
+                        var keyword = textInput.value;
+                        all_customers.addClass('displayNone').filter(function (item) {
+                            if (!keyword) return false;
+                            return jQuery(this).text().toLowerCase().includes(keyword.toLowerCase());
+                        }).removeClass('displayNone');
+                    }, 500);
+                };
+            });
+        </script>
     <?php
 }
 add_action( 'woocommerce_account_login-as-customer_endpoint', 'anandap_login_as_customer_endpoint_content' );
@@ -491,11 +550,18 @@ add_filter( 'wp_nav_menu_items', 'add_loginout_link', 10, 2 );
 function add_loginout_link( $items, $args ) {
     if ($args->theme_location == 'grve_header_nav') {
         if (is_user_logged_in()) {
+
             $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children"><a href="/my-account"><span class="grve-item">My Account</span></a><ul class="sub-menu">
                     <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/orders/"><span class="grve-item">Orders</span></a></li>
                     <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/edit-address/"><span class="grve-item">Addresses</span></a></li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/edit-account/"><span class="grve-item">Manage Account</span></a></li>
-                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . wp_logout_url( home_url() ) . '"><span class="grve-item">Logout</span></a></li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/edit-account/"><span class="grve-item">Manage Account</span></a></li>';
+
+            $user = wp_get_current_user();
+            if ( !wp_doing_ajax() && in_array( 'pharmacy_manager', (array) $user->roles ) ) {
+                $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account/login-as-customer/"><span class="grve-item">Login as Customer</span></a></li>';
+            }
+
+            $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="' . wp_logout_url( home_url() ) . '"><span class="grve-item">Logout</span></a></li>
                 </ul></li>';
         } else {
             $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account"><span class="grve-item">Register</span></a></li>';
