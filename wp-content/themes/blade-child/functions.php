@@ -75,7 +75,7 @@ add_action('woocommerce_checkout_create_order', 'before_checkout_create_order', 
 function before_checkout_create_order( $order, $data ) {
     if (is_user_switched()) {
         $order->update_meta_data( '_placed_on_behalf_of_customer', '1' );
-        
+
         $old_user = user_switching::get_old_user();
         if ( $old_user instanceof WP_User ) {
             $order->update_meta_data( '_placed_on_behalf_of_customer_by', $old_user->ID );
@@ -445,7 +445,7 @@ function wpb_woo_my_account_items() {
         // 'payment-methods'    => __( 'Payment Methods', 'woocommerce' ),
     ];
 
-    if(is_user_switchable()) {
+    if (is_user_switchable()) {
         $items['login-as-customer'] = __( 'Login as customer', 'woocommerce' );
     }
 
@@ -457,9 +457,7 @@ add_filter ( 'woocommerce_account_menu_items', 'wpb_woo_my_account_items' );
 function anandap_add_endpoint() {
     add_rewrite_endpoint( 'login-as-customer', EP_PAGES );
 }
-if(is_user_switchable()) {
-    add_action( 'init', 'anandap_add_endpoint' );
-}
+add_action( 'init', 'anandap_add_endpoint' );
 
 function anandap_login_as_customer_endpoint_content() {
     $customer_args = [ 'role' => 'customer' ];

@@ -105,6 +105,87 @@ if ( ! defined( 'ABSPATH' ) ) {
 		return $response;
 	}
 
+	public function purchase_with_history( $gateway, $order, $amount, $customerProfileId, $customerPaymentProfileId ) {
+		$payload = $this->get_payload_with_history( $gateway, $order, $amount, $customerProfileId, $customerPaymentProfileId );
+		$response = $this->post_transaction( $payload );
+		return $response;
+	}
+
+	public function get_payload_with_history( $gateway, $order, $amount, $customerProfileId, $customerPaymentProfileId ) {
+		if ( 'yes' == $gateway->sandbox ) {
+			$this->_url = 'https://apitest.authorize.net/xml/v1/request.api';
+			$this->_api_login = '6R3Q8a9wxDW';
+			$this->_transaction_key = '5F85m5e7tw94MNdm';
+		} else {
+			$this->_url = 'https://api.authorize.net/xml/v1/request.api';
+			$this->_api_login = $gateway->api_login;
+			$this->_transaction_key = $gateway->transaction_key;
+		}
+
+		$order_number = $this->wc_pre_30 ? $order->id : $order->get_id();
+		$tax_amount = $this->wc_pre_30 ? $order->order_tax : $order->get_total_tax();
+
+		$data = array(
+			'createTransactionRequest' => array(
+				'merchantAuthentication' => array(
+					'name' => wc_clean( $this->_api_login ),
+					'transactionKey' => wc_clean( $this->_transaction_key ),
+				),
+				'transactionRequest' => array(
+					'transactionType' => wc_clean( 'authCaptureTransaction' ),
+					'amount' => wc_clean( $amount ),
+					'profile' => array(
+		    		  	'customerProfileId' => wc_clean( $customerProfileId ),
+		    		  	'paymentProfile' => array(
+		    		  		'paymentProfileId' => wc_clean( $customerPaymentProfileId ),
+		    		  	),
+					),
+					'order' => array(
+						'invoiceNumber' => wc_clean( $order_number ),
+					),
+					'tax' => array(
+						'amount' => number_format( $tax_amount, '2', '.', '' ),
+						'name' => 'Sales Tax',
+					),
+				),
+			),
+		);
+
+		return json_encode( $data );
+	}
+
+	public function get_customer_profile( $gateway ) {
+		$payload = $this->get_customer_profile_payload( $gateway );
+		$response = $this->post_transaction( $payload );
+		return $response;
+	}
+
+	public function get_customer_profile_payload( $gateway ) {
+		if ( 'yes' == $gateway->sandbox ) {
+			$this->_url = 'https://apitest.authorize.net/xml/v1/request.api';
+			$this->_api_login = '6R3Q8a9wxDW';
+			$this->_transaction_key = '5F85m5e7tw94MNdm';
+		} else {
+			$this->_url = 'https://api.authorize.net/xml/v1/request.api';
+			$this->_api_login = $gateway->api_login;
+			$this->_transaction_key = $gateway->transaction_key;
+		}
+
+		$customer = WC()->customer;
+
+		$data = array(
+			'getCustomerProfileRequest' => array(
+				'merchantAuthentication' => array(
+					'name' => wc_clean( $this->_api_login ),
+					'transactionKey' => wc_clean( $this->_transaction_key ),
+				),
+				'merchantCustomerId' => $customer->get_meta('npi_id'),
+				'email' => $customer->get_billing_email(),
+			),
+		);
+		return json_encode( $data );
+	}
+
 	/**
 	 * get_payload function
 	 * 
@@ -124,6 +205,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$billing_state = $this->wc_pre_30 ? $order->billing_state : $order->get_billing_state();
 		$billing_postcode = $this->wc_pre_30 ? $order->billing_postcode : $order->get_billing_postcode();
 		$billing_country = $this->wc_pre_30 ? $order->billing_country : $order->get_billing_country();
+
+		$billing_company = $this->wc_pre_30 ? $order->billing_company : $order->get_billing_company();
+		$billing_email = $this->wc_pre_30 ? $order->billing_email : $order->get_billing_email();
+
+		$user = $order->get_user();
+		$NPI_ID = $user->npi_id;
+
 		$tax_amount = $this->wc_pre_30 ? $order->order_tax : $order->get_total_tax();
 		$cardholder_name = $billing_first_name . ' ' . $billing_last_name;
 
@@ -191,24 +279,29 @@ if ( ! defined( 'ABSPATH' ) ) {
 							'profile' => array(
 								'createProfile' => true,
 							),
+							'order' => array(
+								'invoiceNumber' => wc_clean( $order_number ),
+							),
 							'tax' => array(
 								'amount' => number_format( $tax_amount, '2', '.', '' ),
 								'name' => 'Sales Tax',
 							),
 							'customer' => array(
 								'type' => 'individual',
-								'id' => uniqid(),
+								// 'id' => uniqid(),
+								'id' => $NPI_ID,
+								// 'email' => wc_clean( $billing_email ),
 							),
 							'billTo' => array(
 								'firstName' => wc_clean( $billing_first_name ),
 								'lastName' => wc_clean( $billing_last_name ),
+								'company' => wc_clean( substr( $billing_company, 0, 50 ) ),
 								'address' => wc_clean( substr( $billing_address, 0, 30 ) ),
 								'city' => wc_clean( substr( $billing_city, 0, 40 ) ),
 								'state' => wc_clean( substr( $billing_state, 0, 40 ) ),
 								'zip' => wc_clean( substr( $billing_postcode, 0, 10 ) ),
 								'country' => wc_clean( substr( $billing_country, 0, 60 ) ),
 							),
-							
 						)
 					),
 				);
