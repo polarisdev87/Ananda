@@ -115,8 +115,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 		if ( 'yes' == $gateway->sandbox ) {
 			$this->_url = 'https://apitest.authorize.net/xml/v1/request.api';
-			$this->_api_login = '57Uqk3stH8';
-			$this->_transaction_key = '8yy229eR9S643mSz';
+			$this->_api_login = '6R3Q8a9wxDW';
+			$this->_transaction_key = '5F85m5e7tw94MNdm';
 		} else {
 			$this->_url = 'https://api.authorize.net/xml/v1/request.api';
 			$this->_api_login = $gateway->api_login;
@@ -249,8 +249,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	public function get_token_payload( $gateway ) {
 		if ( 'yes' == $gateway->sandbox ) {
 			$this->_url = 'https://apitest.authorize.net/xml/v1/request.api';
-			$this->_api_login = '57Uqk3stH8';
-			$this->_transaction_key = '8yy229eR9S643mSz';
+			$this->_api_login = '6R3Q8a9wxDW';
+			$this->_transaction_key = '5F85m5e7tw94MNdm';
 		} else {
 			$this->_url = 'https://api.authorize.net/xml/v1/request.api';
 			$this->_api_login = $gateway->api_login;
