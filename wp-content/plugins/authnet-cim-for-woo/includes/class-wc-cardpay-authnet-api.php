@@ -123,7 +123,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		$billing_city = $this->wc_pre_30 ? $order->billing_city : $order->get_billing_city();
 		$billing_state = $this->wc_pre_30 ? $order->billing_state : $order->get_billing_state();
 		$billing_postcode = $this->wc_pre_30 ? $order->billing_postcode : $order->get_billing_postcode();
-		$billing_country = $this->wc_pre_30 ? $order-billing_country : $order->get_billing_country();
+		$billing_country = $this->wc_pre_30 ? $order->billing_country : $order->get_billing_country();
 		$tax_amount = $this->wc_pre_30 ? $order->order_tax : $order->get_total_tax();
 		$cardholder_name = $billing_first_name . ' ' . $billing_last_name;
 
