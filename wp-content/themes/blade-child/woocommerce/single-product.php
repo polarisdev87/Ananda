@@ -78,6 +78,9 @@ get_header( 'shop' ); ?>
 			.woocommerce-product-details__short-description {
 				margin-bottom: 30px;
 			}
+			.up-sells .slick-arrow {
+				display: none !important;
+			}
 		</style>
 	<?php
 		/**
@@ -119,6 +122,21 @@ get_header( 'shop' ); ?>
 			do_action( 'grve_woocommerce_after_single_product_summary_sections' );
 		?>
 	</div>
+
+	<script type="text/javascript">
+		jQuery(document).ready(function() {
+			jQuery('.up-sells.products .products').slick({
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				infinite: true,
+				autoplay: true,
+				autoplaySpeed: 2000,
+				// arrows: false,
+				responsive: "unslick",
+			});
+		});
+	</script>
+
 	<?php
 		/**
 		 * woocommerce_sidebar hook

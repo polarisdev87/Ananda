@@ -1615,3 +1615,10 @@ function salesforce_billing_address_update_exec() {
 }
 
 
+add_action( 'wp_enqueue_scripts', 'anandap_frontend_scripts' );
+function anandap_frontend_scripts() {
+    $grve_ver = BLADE_GRVE_THEME_MAJOR_VERSION . '.' . BLADE_GRVE_THEME_MINOR_VERSION . '.' . BLADE_GRVE_THEME_HOTFIX_VERSION;
+    wp_enqueue_style( 'anandap-slick-carousel-css', get_template_directory_uri() . '/css/slick.css', array(), esc_attr( $grve_ver ) );
+    // wp_enqueue_style( 'anandap-slick-carousel-theme-css', get_template_directory_uri() . '/css/slick-theme.css', array(), esc_attr( $grve_ver ) );
+    wp_enqueue_script( 'anandap-slick-carousel-js', get_template_directory_uri() . '/js/slick.min.js', array( 'jquery' ), esc_attr( $grve_ver ), true );
+}
