@@ -1622,3 +1622,22 @@ function anandap_frontend_scripts() {
     // wp_enqueue_style( 'anandap-slick-carousel-theme-css', get_template_directory_uri() . '/css/slick-theme.css', array(), esc_attr( $grve_ver ) );
     wp_enqueue_script( 'anandap-slick-carousel-js', get_template_directory_uri() . '/js/slick.min.js', array( 'jquery' ), esc_attr( $grve_ver ), true );
 }
+
+function my_custom_wc_free_shipping_notice() {
+    if ( ! is_cart() ) {
+        return;
+    }
+
+    $cart_total = WC()->cart->get_displayed_subtotal();
+    if ( WC()->cart->display_prices_including_tax() ) {
+        $cart_total = round( $cart_total - ( WC()->cart->get_discount_total() + WC()->cart->get_discount_tax() ), wc_get_price_decimals() );
+    } else {
+        $cart_total = round( $cart_total - WC()->cart->get_discount_total(), wc_get_price_decimals() );
+    }
+    $min_amount = 500;
+    if ( !empty( $min_amount ) && $cart_total < $min_amount ) {
+        $remaining = $min_amount - $cart_total;
+        wc_add_notice( sprintf( 'Add %s more to get free shipping!', wc_price( $remaining ) ) );
+    }
+}
+add_action( 'wp', 'my_custom_wc_free_shipping_notice' );
