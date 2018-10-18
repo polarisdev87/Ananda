@@ -1468,6 +1468,7 @@ function runOnInit() {
                 $salesforce->migrate_invoices('WP-', '2018');
                 $salesforce->migrate_invoices('INV-', '2018');
                 $salesforce->migrate_invoices('CN-', '2018');
+                $salesforce->migrate_invoices('AE-', '2018');
                 break;
             case 'create_invoice_from_quote':
                 $salesforce->create_invoice_from_quote($_GET['ID'] ?: '');
@@ -1575,8 +1576,17 @@ function runOnInit() {
 
 
 
+add_filter( 'cron_schedules', 'schedule_salesforce_migration_interval' ); 
+function schedule_salesforce_migration_interval( $schedules ) {
+    $schedules['salesforce_migration_interval'] = array(
+        'interval' => 60 * 60 * 2, // seconds
+        'display'  => esc_html__( 'Every 2 Hours' ),
+    );
+    return $schedules;
+}
+
 if (! wp_next_scheduled ( 'salesforce_invoice_migration_hook' )) {
-    wp_schedule_event(time(), 'hourly', 'salesforce_invoice_migration_hook');
+    wp_schedule_event(time(), 'salesforce_migration_interval', 'salesforce_invoice_migration_hook');
 }
 
 add_action('salesforce_invoice_migration_hook', 'salesforce_invoice_migration_exec');
@@ -1586,6 +1596,7 @@ function salesforce_invoice_migration_exec() {
     $salesforce->migrate_invoices('WP-', '2018');
     $salesforce->migrate_invoices('INV-', '2018');
     $salesforce->migrate_invoices('CN-', '2018');
+    $salesforce->migrate_invoices('AE-', '2018');
 }
 
 

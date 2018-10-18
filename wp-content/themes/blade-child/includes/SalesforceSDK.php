@@ -516,6 +516,7 @@ class SalesforceSDK {
                 		if ( strpos((string)$invoice->InvoiceNumber, 'WP-') === 0 
                 			|| strpos((string)$invoice->InvoiceNumber, 'INV-') === 0
                 			|| strpos((string)$invoice->InvoiceNumber, 'CN-') === 0
+                			|| strpos((string)$invoice->InvoiceNumber, 'AE-') === 0
                 		) {
                 			$account = $this->create_account_from_xero_contact_id($ext_id);
                 			if ($account) {
