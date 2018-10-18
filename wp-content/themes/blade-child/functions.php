@@ -1435,11 +1435,11 @@ function runOnInit() {
                 var_dump($response);
                 break;
             case 'get_invoices':
-                $invoices = $salesforce->get_all_invoices('WP-', 2018);
+                $invoices = $salesforce->get_all_invoices('AE-', 2018);
                 var_dump($invoices);
                 break;
             case 'get_salesforce_invoices':
-                $invoices = $salesforce->get_all_salesforce_invoices('W');
+                $invoices = $salesforce->get_all_salesforce_invoices('AE-');
                 var_dump($invoices);
                 break;
             case 'create_contact':
@@ -1503,7 +1503,11 @@ function runOnInit() {
                 echo '<script type="text/javascript">window.close();</script>';
                 // echo $response;
                 break;
-
+            case 'confirm_payment':
+                $response = $salesforce->confirm_payment($_REQUEST);
+                echo '<script type="text/javascript">window.close();</script>';
+                // echo $response;
+                break;
             case 'update_accounts':
                 $salesforce->update_accounts();
                 break;

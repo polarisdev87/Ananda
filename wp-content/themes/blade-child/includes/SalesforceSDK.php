@@ -174,18 +174,18 @@ class SalesforceSDK {
             if (count($invoices) > 0) {
                 // $invoices = $invoices_wrapper->Invoice;
 
-                // foreach($invoices as $invoice) {
-                // 	$all_invoices[] = $invoice;
+                foreach($invoices as $invoice) {
+                	$all_invoices[] = $invoice;
                 //     // var_dump($invoice);
-                // }
+                }
                 // var_dump ($invoices_wrapper);
             }
 
             $page_no++;
         } while(count($invoices) > 0);
 
-        // return $all_invoices;
-        return $page_no;
+        return $all_invoices;
+        // return $page_no;
 	}
 
 	public function get_contact_by_id($xero_contact_id) {
@@ -582,7 +582,7 @@ class SalesforceSDK {
 
 		        	$invoice_key = array_search((string)$invoice->InvoiceID, array_column($salesforce_invoices, 'Xero_Invoice_ID__c'));
 
-			        if ($invoice_key) {
+			        if ($invoice_key !== false) {
 
 			        	echo 'found from salesforce invoices list ' . (string)$invoice->InvoiceNumber . ' ----- ' . $invoice_key . ' ------ (should update existing one) ';
 
@@ -1159,6 +1159,30 @@ class SalesforceSDK {
 			return 'Successfully removed stores with NPI of '. $data['NPI'];
 		}
 		return 'Nothing deleted';
+	}
+
+	public function confirm_payment($data) {
+		if (!$data['ID']) return 'Nothing found';
+		if ($data['ID']) {
+			// echo $data['ID'];
+			$args = explode('-', $data['ID']);
+
+			if (count($args) != 2) return 'Invalid Order ID';
+
+			$order_id = $args[1];
+			$order = wc_get_order($order_id);
+
+			if ($order->get_payment_method() != 'cheque') return 'This is not an order with ACH Payment Option.';
+
+			if ($order->get_status() != 'on-hold') return 'This order has been modified before';
+
+			$result = $order->set_status( 'wc-processing', 'Manually confirmed by Salesforce', true );
+			// var_dump($result);
+			$order->save();
+
+			return 'Successfully confirmed payment for ' . $data['ID'];
+		}
+		return 'Nothing confirmed';
 	}
 
 	public function create_invoice_from_quote($quote_id) {
