@@ -1659,3 +1659,14 @@ function my_custom_wc_free_shipping_notice() {
     }
 }
 add_action( 'wp', 'my_custom_wc_free_shipping_notice' );
+
+
+add_action( 'wp_head', 'hide_marketing_materials' );
+function hide_marketing_materials() {
+    if (is_reorder()) return;
+    ?>
+        <style type="text/css">
+            #menu-item-11530 { display: none }
+        </style>
+    <?php
+}
