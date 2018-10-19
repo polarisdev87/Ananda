@@ -273,11 +273,18 @@ class WC_XR_Contact_Manager {
 		}
 
 		$billing_email = $old_wc ? $order->billing_email : $order->get_billing_email();
-		$contact_id = $this->get_id_by_email( $billing_email );
-		$contact_id_only = null;
 
 		$user_id = $order->get_user_id();
 		$account_number = $user_id ? get_user_meta($user_id, 'npi_id', true) : ''; // NPI Number
+
+		$contact_id = $this->get_id_by_npi( $account_number );
+
+		if ( empty ( $contact_id ) ) {
+			$contact_id = $this->get_id_by_email( $billing_email );
+		}
+
+		$contact_id_only = null;
+
 		// if ($account_number) {
 	 //        $ch = curl_init('https://npiregistry.cms.hhs.gov/api/?number=' . $account_number);
 	 //        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
