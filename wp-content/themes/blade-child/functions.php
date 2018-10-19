@@ -1191,6 +1191,9 @@ if (!is_admin() && !wc_memberships_is_user_active_member( get_current_user_id(),
 
 // define the woocommerce_get_discounted_price callback 
 function filter_woocommerce_get_discounted_price( $price, $values, $instance ) { 
+    if (is_cart()) {
+        return $price;
+    }
     // make filter magic happen here... 
     $chosen_payment_method = WC()->session->get('chosen_payment_method');
     $payment_method = 'cheque';
@@ -1652,7 +1655,7 @@ function my_custom_wc_free_shipping_notice() {
     $min_amount = 500;
     if ( !empty( $min_amount ) && $cart_total < $min_amount ) {
         $remaining = $min_amount - $cart_total;
-        wc_add_notice( sprintf( 'Add %s more to get free shipping!', wc_price( $remaining ) ) );
+        wc_add_notice( sprintf( '<div class="free-shipping-notice">Add %s more to get free shipping!</div>', wc_price( $remaining ) ) );
     }
 }
 add_action( 'wp', 'my_custom_wc_free_shipping_notice' );

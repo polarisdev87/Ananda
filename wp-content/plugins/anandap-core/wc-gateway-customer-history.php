@@ -40,7 +40,7 @@ function wc_customer_history_gateway_init() {
 			$this->id                 = 'customer_history_gateway';
 			$this->icon               = apply_filters('woocommerce_customer_history_icon', '');
 			$this->has_fields         = false;
-			$this->method_title       = __( 'Customer History', 'wc-gateway-customer-history' );
+			$this->method_title       = __( 'Charge Customer', 'wc-gateway-customer-history' );
 			$this->method_description = __( 'Look for existing customers on Authorize.net', 'wc-gateway-customer-history' );
 		  
 			// Load the settings.
@@ -88,7 +88,7 @@ function wc_customer_history_gateway_init() {
 					'title'       => __( 'Title', 'wc-gateway-customer-history' ),
 					'type'        => 'text',
 					'description' => __( 'This controls the title for the payment method the customer sees during checkout.', 'wc-gateway-customer-history' ),
-					'default'     => __( 'Customer History', 'wc-gateway-customer-history' ),
+					'default'     => __( 'Charge Customer', 'wc-gateway-customer-history' ),
 					'desc_tip'    => true,
 				),
 				
