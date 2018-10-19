@@ -86,7 +86,7 @@ class WC_XR_Order_Actions {
 
 		// Send Payment
 		$order_id = version_compare( WC_VERSION, '3.0', '<' ) ? $order->id : $order->get_id();
-		$payment_manager->send_payment( $order_id );
+		$payment_manager->send_payment( $order_id, true );
 
 		return true;
 	}

@@ -38,7 +38,7 @@ class WC_XR_Payment_Manager {
 	 *
 	 * @return bool
 	 */
-	public function send_payment( $order_id ) {
+	public function send_payment( $order_id, $is_manual = false ) {
 
 		$old_wc = version_compare( WC_VERSION, '3.0', '<' );
 
@@ -87,6 +87,23 @@ class WC_XR_Payment_Manager {
 				// Add order note
 				$order->add_order_note( __( 'Xero Payment created.  ', 'wc-xero' ) .
 				                        ' Payment ID: ' . (string) $xml_response->Payments->Payment[0]->PaymentID );
+
+				if (!$is_manual) {
+
+					$invoice_email_request = new WC_XR_Request_Invoice_Email( $this->settings, $invoice_id );
+
+					// Do the request
+					$invoice_email_request->do_request();
+
+					// Parse XML Response
+					// $invoice_email_xml_response = $invoice_email_request->get_response_body_xml();
+
+					// Check response status
+					// if ( 'OK' == $invoice_email_xml_response->Status ) {
+						$order->add_order_note( __( 'Xero Invoice has been sent to customer', 'wc-xero' ) );
+					// }
+
+				}
 
 			} else { // XML reponse is not OK
 

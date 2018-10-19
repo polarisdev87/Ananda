@@ -1036,7 +1036,7 @@ class SalesforceSDK {
 	    // var_dump($output);
 
 	    $formatted = [
-	    	'title' 		=> $data['PreferredName'] != 'null' ? $data['PreferredName'] : '',
+	    	'title' 		=> stripslashes($data['PreferredName'] != 'null' ? $data['PreferredName'] : ''),
 	    	'description' 	=> $data['NPI'],
 	    	'street' 		=> $data['ShippingStreet'] != 'null' ? $data['ShippingStreet'] : '',
 	    	'city' 			=> $data['ShippingCity'] != 'null' ? $data['ShippingCity'] : '',
