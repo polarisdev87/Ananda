@@ -813,7 +813,7 @@ add_action('admin_head', 'role_based_menu_list');
 
 function role_based_menu_list() {
     $user = wp_get_current_user();
-    if ( !wp_doing_ajax() && in_array( 'pharmacy_manager', (array) $user->roles ) ) {
+    if ( !wp_doing_ajax() && in_array( 'pharmacy_manager', (array) $user->roles ) && !in_array('administrator', (array)$user->roles) ) {
         ?>
             <style type="text/css">
                 #adminmenu>li {
@@ -822,7 +822,7 @@ function role_based_menu_list() {
                 /*#adminmenu>.toplevel_page_asl-plugin, */#adminmenu>.toplevel_page_woocommerce, #adminmenu>.menu-icon-users {
                     display: block;
                 }
-                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li, #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li {
+                #adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li, #adminmenu>.toplevel_page_woocommerce>ul.wp-submenu>li,  #adminmenu>.menu-icon-users>ul.wp-submenu>li {
                     display: none;
                 }
                 /*#adminmenu>.toplevel_page_asl-plugin>ul.wp-submenu>li:nth-child(1),
@@ -1420,43 +1420,43 @@ function runOnInit() {
         switch ($_GET['salesforce']) {
             case 'auth':
                 $auth = $salesforce->get_auth();
-                var_dump($auth);
+                echo '<pre>', var_dump($auth), '</pre>';
                 break;
             case 'token':
                 $token = $salesforce->get_token();
-                var_dump($token);
+                echo '<pre>', var_dump($token), '</pre>';
                 break;
             case 'describe':
                 $response = $salesforce->describe($_GET['table']);
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'get_invoice':
                 $response = $salesforce->get_invoice_by_id($_GET['ID']);
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'get_invoices':
                 $invoices = $salesforce->get_all_invoices('AE-', 2018);
-                var_dump($invoices);
+                echo '<pre>', var_dump($invoices), '</pre>';
                 break;
             case 'get_salesforce_invoices':
                 $invoices = $salesforce->get_all_salesforce_invoices('AE-');
-                var_dump($invoices);
+                echo '<pre>', var_dump($invoices), '</pre>';
                 break;
             case 'create_contact':
                 $response = $salesforce->get_account_from_external_xero_contact_id($_GET['ID']);
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'create_account_from_xero_contact_id':
                 $response = $salesforce->create_account_from_xero_contact_id($_GET['ID']);
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'get_contact':
                 $response = $salesforce->get_contact_by_id($_GET['ID']);
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'get_contact_by_email':
                 $response = $salesforce->get_contact_by_email($_GET['email']);
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'migrate_contacts':
                 $salesforce->migrate_contacts();
@@ -1475,11 +1475,11 @@ function runOnInit() {
                 break;
             case 'get_accounts':
                 $response = $salesforce->get_all_accounts();
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'get_stores':
                 $response = $salesforce->get_all_stores();
-                var_dump($response);
+                echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'migrate_stores':
                 $salesforce->migrate_stores();
@@ -1590,7 +1590,7 @@ function schedule_salesforce_migration_interval( $schedules ) {
 }
 
 if (! wp_next_scheduled ( 'salesforce_invoice_migration_hook' )) {
-    wp_schedule_event(time(), 'salesforce_migration_interval', 'salesforce_invoice_migration_hook');
+    wp_schedule_event(time(), 'hourly', 'salesforce_invoice_migration_hook');
 }
 
 add_action('salesforce_invoice_migration_hook', 'salesforce_invoice_migration_exec');

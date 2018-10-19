@@ -358,6 +358,18 @@ class SalesforceSDK {
 			'Brand__c' => 'Ananda Professional',
         ];
 
+        $contactData = [
+        	'AccountId' => '',
+        	'FirstName' => (string)$contact->FirstName,
+        	'LastName' => (string)$contact->LastName,
+			'Phone' => $phone_number ?: '',
+			'Email' => (string)$contact->EmailAddress,
+			'MailingStreet' => (string)$address->AddressLine1,
+			'MailingCity' => (string)$address->City,
+			'MailingState' => (string)$address->Region,
+			'MailingPostalCode' => (string)$address->PostalCode,
+        ];
+
         if ($this->debug) echo '<pre>', var_dump($data), '</pre>';
 
         $response = $this->do_request('/services/data/v43.0/sobjects/Account/', ['post' => true, 'postData' => $data]);
@@ -365,6 +377,9 @@ class SalesforceSDK {
         if ($this->debug) echo '<pre>', var_dump($response), '</pre>';
 
         if ($response->success == true) {
+        	$contactData['AccountId'] = (string)$response->id;
+        	$contact_response = $this->do_request('/services/data/v43.0/sobjects/Contact/', ['post' => true, 'postData' => $contactData]);
+        	// echo '<pre>', var_dump($contact_response), '</pre>';
         	return [
         		'Id' => (string)$response->id,
 				'Name' => (string)$contact->Name,
@@ -387,6 +402,8 @@ class SalesforceSDK {
         if ($this->debug) echo '<pre>', var_dump($response), '</pre>';
 
         if ($response->success == true) {
+        	// $contactData['AccountId'] = (string)$response->id;
+        	// patch contact
         	return [
         		'Id' => (string)$response->id,
 				'Name' => (string)$contact->Name,
