@@ -1189,6 +1189,8 @@ class SalesforceSDK {
 			$order_id = $args[1];
 			$order = wc_get_order($order_id);
 
+			if (!$order) return 'Order is not available';
+
 			if ($order->get_payment_method() != 'cheque') return 'This is not an order with ACH Payment Option.';
 
 			if ($order->get_status() != 'on-hold') return 'This order has been modified before';
@@ -1196,6 +1198,11 @@ class SalesforceSDK {
 			$result = $order->set_status( 'wc-processing', 'Manually confirmed by Salesforce', true );
 			// var_dump($result);
 			$order->save();
+
+			$updateData = [
+				'SubmissionStatusTrigger__c' => '1'
+			];
+        	$response = $this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/' . (string)$data['ID'], ['post' => true, 'postData' => $updateData, 'patch' => true]);
 
 			return 'Successfully confirmed payment for ' . $data['ID'];
 		}
@@ -1612,5 +1619,13 @@ class SalesforceSDK {
 		}
 
 		echo '</tbody></table>';
+	}
+
+	public function update_tracking_number($order_id, $tracking_number) {
+		$updateData = [
+			'Tracking_Number__c' => $tracking_number
+		];
+    	$this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/AE-' . $order_id, ['post' => true, 'postData' => $updateData, 'patch' => true]);
+    	$this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/WP-' . $order_id, ['post' => true, 'postData' => $updateData, 'patch' => true]);
 	}
 }

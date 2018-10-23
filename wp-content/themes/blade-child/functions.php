@@ -1441,7 +1441,6 @@ function runOnInit() {
     */
 
     if (isset($_GET['salesforce'])) {
-        require_once('includes/SalesforceSDK.php');
         $salesforce = new SalesforceSDK(isset($_GET['env']) && $_GET['env']=='sandbox', isset($_GET['debug']) && $_GET['debug']==1);
 
         switch ($_GET['salesforce']) {
@@ -1622,7 +1621,6 @@ if (! wp_next_scheduled ( 'salesforce_invoice_migration_hook' )) {
 
 add_action('salesforce_invoice_migration_hook', 'salesforce_invoice_migration_exec');
 function salesforce_invoice_migration_exec() {
-    require_once('includes/SalesforceSDK.php');
     $salesforce = new SalesforceSDK();
     $salesforce->migrate_invoices('WP-', '2018');
     $salesforce->migrate_invoices('INV-', '2018');
@@ -1638,7 +1636,6 @@ if (! wp_next_scheduled ( 'salesforce_account_name_npi_hook' )) {
 
 add_action('salesforce_account_name_npi_hook', 'salesforce_account_name_npi_exec');
 function salesforce_account_name_npi_exec() {
-    require_once('includes/SalesforceSDK.php');
     // $salesforce = new SalesforceSDK();
     // $salesforce->update_salesforce_accounts_name();
 }
@@ -1651,7 +1648,6 @@ if (! wp_next_scheduled ( 'salesforce_billing_address_update_hook' )) {
 
 add_action('salesforce_billing_address_update_hook', 'salesforce_billing_address_update_exec');
 function salesforce_billing_address_update_exec() {
-    require_once('includes/SalesforceSDK.php');
     // $salesforce = new SalesforceSDK();
     // $salesforce->update_accounts();
 }
@@ -1693,4 +1689,10 @@ function hide_marketing_materials() {
             #menu-item-11530 { display: none }
         </style>
     <?php
+}
+
+add_filter( 'woocommerce_email_styles', 'anandap_woocommerce_email_styles' );
+function anandap_woocommerce_email_styles( $css ) {
+    $css .= ".customer-new-template #template_header_image img {height: 40px;} .customer-new-template #header_wrapper h1 {color:white; text-align:center;}";
+    return $css;
 }

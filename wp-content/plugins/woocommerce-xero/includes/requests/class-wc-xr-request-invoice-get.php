@@ -24,7 +24,11 @@ class WC_XR_Request_Invoice_Get extends WC_XR_Request {
 		}
 
 		if ($year) {
-			$query['where'] = (isset($query['where']) ? ($query['where'] . '&&') : '') . 'Date >= DateTime('. date('Y,n,d', strtotime('-2 months')) .')&&Date<DateTime('. $year .',12,31)';
+			if ($year == date('Y')) {
+				$query['where'] = (isset($query['where']) ? ($query['where'] . '&&') : '') . 'Date >= DateTime('. date('Y,n,d', strtotime('-6 months')) .')&&Date<DateTime('. $year .',12,31)';
+			} else {
+				$query['where'] = (isset($query['where']) ? ($query['where'] . '&&') : '') . 'Date >= DateTime(' . $year . ',1,1)&&Date<DateTime(' . $year . ',12,31)';
+			}
 		}
 
 		$this->set_query( $query );

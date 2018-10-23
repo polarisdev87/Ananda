@@ -90,6 +90,8 @@ class WC_XR_Payment_Manager {
 
 				if (!$is_manual) {
 
+					/*
+
 					$invoice_email_request = new WC_XR_Request_Invoice_Email( $this->settings, $invoice_id );
 
 					// Do the request
@@ -102,6 +104,8 @@ class WC_XR_Payment_Manager {
 					// if ( 'OK' == $invoice_email_xml_response->Status ) {
 						$order->add_order_note( __( 'Xero Invoice has been sent to customer', 'wc-xero' ) );
 					// }
+
+					*/
 
 				}
 
