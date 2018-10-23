@@ -239,3 +239,25 @@ abbr.required {
     font-size: 16px
     font-weight: bold;
 }
+
+#grve-main-menu .grve-wrapper > ul > li > .switched-onto {
+    display: flex;
+    flex-direction: column;
+    color: #56565a;
+    align-items: center;
+    justify-content: center;
+    padding-left: 25px;
+    height: 90px;
+}
+
+#grve-main-menu .grve-wrapper > ul > li > .switched-onto span {
+    font-weight: bold;
+}
+
+#grve-main-menu .grve-wrapper > ul > li > .switched-onto span:first-child {
+    font-weight: normal;
+}
+
+#grve-header.grve-sticky-header.grve-shrink #grve-main-menu .grve-wrapper > ul > li > .switched-onto {
+    height: 60px;
+}

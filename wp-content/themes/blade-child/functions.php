@@ -565,6 +565,11 @@ function add_loginout_link( $items, $args ) {
             $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/my-account"><span class="grve-item">Register</span></a></li>';
         }
         $items .= '<li id="menu-item-8499" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8499"><a href="https://anandaprofessional.com/contact/"><span class="grve-item">Contact</span></a></li>';
+
+        if (is_user_switched()) {
+            $customer = new WC_Customer(get_current_user_id());
+            $items .= '<li class="menu-item menu-item-type-post_type menu-item-object-page"><div class="switched-onto"><span>Logged in as:</span><span style="font-weight: bold;">' . $customer->get_first_name() . ' ' . $customer->get_last_name() . '</span><span style="font-weight: bold;">' . $customer->get_email() . '</span></div></li>';
+        }
     }
     return $items;
 }
@@ -916,6 +921,23 @@ function checkout_additional_sections() {
 add_action ( 'woocommerce_checkout_after_customer_details', 'woocommerce_update_cart_ajax_by_tax_cert');
 function woocommerce_update_cart_ajax_by_tax_cert() {
 ?>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('body').on('update_checkout', function() {
+                jQuery('.checkout_notice').remove();
+                jQuery('.grve-woo-error').remove();
+            });
+        });
+    </script>
+    <style type="text/css">
+        .woocommerce-SavedPaymentMethods-saveNew {
+            display: none !important;
+        }
+    </style>
+    <div id="cert_capture_form" style="display: none;"></div>
+<?php
+    if (!is_user_switched()) {
+?>
     <script src="https://app.certcapture.com/gencert2/js"></script>
     <script type="text/javascript">
         jQuery(document).ready(function() {
@@ -942,19 +964,19 @@ function woocommerce_update_cart_ajax_by_tax_cert() {
                     jQuery('#cert_capture_form').hide();
                 }
             });
-            jQuery('body').on('update_checkout', function() {
-                jQuery('.checkout_notice').remove();
-                jQuery('.grve-woo-error').remove();
-            });
         });
     </script>
-    <style type="text/css">
-        .woocommerce-SavedPaymentMethods-saveNew {
-            display: none !important;
-        }
-    </style>
-    <div id="cert_capture_form" style="display: none;"></div>
 <?php
+    } else {
+?>
+    <script type="text/javascript">
+        jQuery(document).ready(function() {
+            jQuery('#tax_cert').val('YES');
+            jQuery('#tax_cert_field').hide();
+        });
+    </script>
+<?php
+    }
 }
 
 /* Test */
@@ -1020,6 +1042,8 @@ function custom_review_order_after_submit() {
 
     if(!empty($post_data['tax_cert'])) {
         if ($post_data['tax_cert']!='NO') {
+
+            if (is_user_switched()) return;
 
             global $certcapture_client_id, $certcapture_client_key, $certcapture_username, $certcapture_password;
 
