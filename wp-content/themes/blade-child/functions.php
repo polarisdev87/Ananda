@@ -1461,11 +1461,11 @@ function runOnInit() {
                 echo '<pre>', var_dump($response), '</pre>';
                 break;
             case 'get_invoices':
-                $invoices = $salesforce->get_all_invoices('AE-', 2018);
+                $invoices = $salesforce->get_all_invoices('INV-', 2017);
                 echo '<pre>', var_dump($invoices), '</pre>';
                 break;
             case 'get_salesforce_invoices':
-                $invoices = $salesforce->get_all_salesforce_invoices('AE-');
+                $invoices = $salesforce->get_all_salesforce_invoices($_GET['ID']);
                 echo '<pre>', var_dump($invoices), '</pre>';
                 break;
             case 'create_contact':
@@ -1491,10 +1491,10 @@ function runOnInit() {
                 $salesforce->migrate_invoices($_GET['ID'] ?: '');
                 break;
             case 'update_invoices':
-                $salesforce->migrate_invoices('WP-', '2018');
-                $salesforce->migrate_invoices('INV-', '2018');
-                $salesforce->migrate_invoices('CN-', '2018');
-                $salesforce->migrate_invoices('AE-', '2018');
+                $salesforce->migrate_invoices('', '2018');
+                // $salesforce->migrate_invoices('INV-', '2017');
+                // $salesforce->migrate_invoices('CN-', '2017');
+                // $salesforce->migrate_invoices('AE-', '2017');
                 break;
             case 'create_invoice_from_quote':
                 $salesforce->create_invoice_from_quote($_GET['ID'] ?: '');

@@ -699,7 +699,7 @@ class SalesforceSDK {
 
         // exit('ddd');
 
-		if ($update && count($invoices_patch_data['records']) > 0) {
+		if (count($invoices_patch_data['records']) > 0) {
 			$this->printTime();
 			echo ' _________ doing patch updates for updated invoices ( ' . count($invoices_patch_data['records']) . ')' . '<br/>';
 			// echo '<pre>', var_dump($invoices_patch_data), '</pre>';
