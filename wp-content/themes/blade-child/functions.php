@@ -1555,11 +1555,11 @@ function runOnInit() {
             case 'reset_salesforce_store_id':
                 $salesforce->reset_salesforce_store_id();
                 break;
-            case 'recover_xero_contacts':
-                $salesforce->recover_xero_contacts();
-                break;
             case 'check_missing_xero_invoices':
                 $salesforce->check_missing_xero_invoices();
+                break;
+            case 'migrate_trackings':
+                $salesforce->migrate_trackings();
                 break;
             default:
                 var_dump('no actions');
