@@ -206,9 +206,17 @@ function wooc_save_extra_register_fields( $customer_id ) {
 
     }
 
-    if ( isset( $_POST['fpn'] ) && $_PSOT['fpn'] == 1) {
+    if ( isset( $_POST['fpn'] ) && $_POST['fpn'] == 1) {
         $user = new WP_User( $customer_id );
         $user->add_role('fpn');
+    }
+    if ( isset( $_POST['cpc'] ) && $_POST['cpc'] == 1) {
+        $user = new WP_User( $customer_id );
+        $user->add_role('cpc');
+    }
+    if ( isset( $_POST['tcg'] ) && $_POST['tcg'] == 1) {
+        $user = new WP_User( $customer_id );
+        $user->add_role('tcg');
     }
 }
 add_action( 'woocommerce_created_customer', 'wooc_save_extra_register_fields' );
@@ -1218,16 +1226,34 @@ function filter_woocommerce_get_discounted_price( $price, $values, $instance ) {
     if (is_cart()) {
         return $price;
     }
-    // make filter magic happen here... 
+
+    $discount_amounts= [];
+
+    // ach discount - 2%
     $chosen_payment_method = WC()->session->get('chosen_payment_method');
     $payment_method = 'cheque';
-    $percent = 2; // 15%
     if( $payment_method == $chosen_payment_method ){
-        return $price - ($values['line_subtotal'] / 100 * $percent);
+        $percent = 2; // for ach discount
+        $discount_amounts[] = $values['line_subtotal'] / 100 * $percent;
     }
-    return $price; 
-}; 
-         
+
+    // tcg, cpc discount - 10% initial, 5% reorder
+    if (is_user_has_role('tcg') || is_user_has_role('cpc')) {
+        if (!is_reorder()) {
+            $discount_amounts[] = $values['line_subtotal'] / 100 * 10;
+        } else {
+            $discount_amounts[] = $values['line_subtotal'] / 100 * 5;
+        }
+    }
+
+    $total_discount = 0;
+    foreach ($discount_amounts as $discount) {
+        $total_discount += $discount;
+    }
+
+    return $price - $total_discount;
+};
+
 // add the filter 
 add_filter( 'woocommerce_get_discounted_price', 'filter_woocommerce_get_discounted_price', 10, 3 ); 
 
@@ -1281,13 +1307,47 @@ function add_ach_discount_message() {
 
     $chosen_payment_method = WC()->session->get('chosen_payment_method');
     $payment_method = 'cheque';
-    $percent = 2; // 15%
     if( $payment_method == $chosen_payment_method ){
+        $percent = 2; // 15%
         $cart_total = $cart_object->subtotal_ex_tax;
         ?>
             <tr class="cart-discount">
                 <th>ACH discount 2%</th>
                 <td><?php echo wc_price(-($cart_total / 100) * $percent); ?></td>
+            </tr>
+        <?php
+    }
+
+    if (is_user_has_role('tcg') && !is_reorder()) {
+        ?>
+            <tr class="cart-discount">
+                <th>TCG Initial 10%</th>
+                <td><?php echo wc_price(-($cart_total / 100) * 10); ?></td>
+            </tr>
+        <?php
+    }
+    if (is_user_has_role('cpc') && !is_reorder()) {
+        ?>
+            <tr class="cart-discount">
+                <th>CPC Initial 10%</th>
+                <td><?php echo wc_price(-($cart_total / 100) * 10); ?></td>
+            </tr>
+        <?php
+    }
+
+    if (is_user_has_role('tcg') && is_reorder()) {
+        ?>
+            <tr class="cart-discount">
+                <th>TCG Reorder 5%</th>
+                <td><?php echo wc_price(-($cart_total / 100) * 5); ?></td>
+            </tr>
+        <?php
+    }
+    if (is_user_has_role('cpc') && is_reorder()) {
+        ?>
+            <tr class="cart-discount">
+                <th>CPC Reorder 5%</th>
+                <td><?php echo wc_price(-($cart_total / 100) * 5); ?></td>
             </tr>
         <?php
     }
@@ -1336,58 +1396,11 @@ function woocommerce_form_field_hidden( $field, $key, $args ){
 }
 add_filter( 'woocommerce_form_field_hidden', 'woocommerce_form_field_hidden', 10, 3 );
 
-// https://t.yctin.com/en/excel/to-php-array/
-// $customers_array = array(
-//     0 => array('address_1' => '212 MILLWELL DR', 'address_2' => 'SUITE A', 'city' => 'MARYLAND HEIGHTS', 'state' => 'MO', 'zip' => '63043-2512', 'phone' => '314-727-8787', 'npi' => '1790061596', 'email' => 'Mgraumenz@Legacydrug.com'),
-// );
-
 
 add_action('init', 'runOnInit', 10, 0);
 function runOnInit() {
     
     remove_action( 'woocommerce_before_checkout_form', array( $GLOBALS['wcms']->checkout, 'before_checkout_form' ) );
-
-    /*
-    if ($_GET['customers'] == '1') {
-        $cnt = 0;
-        global $customers_array;
-        foreach($customers_array as $customer) {
-            $user_id = wp_insert_user([
-                'user_login' => $customer['email'],
-                'user_pass' => strtolower($customer['email']),
-                'user_email' => $customer['email']
-            ]);
-            var_dump( 'User: ' . $customer['email'] . ' / ' . strtolower($customer['email']));
-            if (!is_wp_error($user_id)) {
-                update_user_meta( $user_id, 'already_bought', '1' );
-                update_user_meta( $user_id, 'has_salesforce_checked', '1');
-                update_user_meta( $user_id, 'npi_id', sanitize_text_field( $customer['npi'] ) );
-                update_user_meta( $user_id, 'billing_address_1', sanitize_text_field( $customer['address_1'] ));
-                update_user_meta( $user_id, 'billing_address_2', sanitize_text_field( $customer['address_2'] ));
-                update_user_meta( $user_id, 'billing_city', sanitize_text_field( $customer['city'] ));
-                update_user_meta( $user_id, 'billing_state', sanitize_text_field( $customer['state'] ));
-                update_user_meta( $user_id, 'billing_phone', sanitize_text_field( $customer['phone'] ));
-                update_user_meta( $user_id, 'billing_postcode', sanitize_text_field( $customer['zip'] ));
-                update_user_meta( $user_id, 'billing_country', 'US');
-                echo 'user_created: '. $user_id . ' : '. $customer['email'] . '<br/>';
-                $cnt ++;
-            } else {
-                echo 'user_failed: '. $customer['email'] . '<br/>';
-            }
-        }
-        exit('total created: '. $cnt);
-    }
-    */
-
-    /*
-        // To be run anandaprofessional.com/?customers=1 after update
-        // This code block is use to enable reorder
-    if ($_GET['customers'] == '1') {
-        update_user_meta( 832, 'already_bought', '1' );
-        update_user_meta( 832, 'has_salesforce_checked', '1');
-        exit('test: ok');
-    }
-    */
 
     if (isset($_GET['customers'])) {
         echo '<div style="width: 100%; height: 100%; position: relative; margin: 0; display: flex; align-items: center; justify-content: center; flex-direction: column;">';
@@ -1410,7 +1423,7 @@ function runOnInit() {
                 <form action="/?customers=enable_reorder" method="post">
                     <fieldset style="padding: 25px; margin-top: 12px;" >
                         <legend>Enable Reorder Feature</legend>
-                        <span>Eneter email address: </span><input type="email" name="email" size="35" required />
+                        <span>Enter email address: </span><input type="email" name="email" size="35" required />
                         <input type="submit" name="submit" value="Enable" />
                     </fieldset>
                 </form>
@@ -1419,26 +1432,6 @@ function runOnInit() {
         echo '</div>';
         exit('');
     }
-    
-
-    /*
-    if ($_GET['customers'] == '1') {
-        $customer_emails = ['prescriptionpharmacy@outlook.com'];
-        foreach($customer_emails as $customer_email) {
-            $user = get_user_by('email', $customer_email);
-            echo $customer_email . '____________';
-            if ($user) {
-                echo $user->ID . '<br/>';
-                update_user_meta( $user->ID, 'already_bought', '1' );
-                update_user_meta( $user->ID, 'has_salesforce_checked', '1');
-            } else {
-                echo 'not exist' . '<br/>';
-            }
-        }
-        echo 'DONE';
-        exit ('');
-    }
-    */
 
     if (isset($_GET['salesforce'])) {
         $salesforce = new SalesforceSDK(isset($_GET['env']) && $_GET['env']=='sandbox', isset($_GET['debug']) && $_GET['debug']==1);
@@ -1511,15 +1504,6 @@ function runOnInit() {
                 $salesforce->migrate_stores();
                 break;
             case 'optin_store':
-                // $dummy = [
-                //     'Title' => 'Test',
-                //     'Description' => '',
-                //     'Street' => '100 Lancaster St',
-                //     'City' => 'Stanford',
-                //     'State' => 'KY',
-                //     'PostalCode' => '40484',
-                //     'Country' => 'United States',
-                // ];
                 $response = $salesforce->upsert_store_with_salesforce($_REQUEST);
                 echo '<script type="text/javascript">window.close();</script>';
                 // echo $response;
