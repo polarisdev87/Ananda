@@ -314,18 +314,23 @@ class SalesforceSDK {
 
 	}
 
-	public function create_account_from_xero_contact_id($xero_contact_id = '') {
+	public function create_account_from_xero_contact_id($xero_contact_id = '', $branding_theme = '') {
 		if (!$xero_contact_id) return null;
 
         $response = $this->get_contact_by_id($xero_contact_id);
 
-        if ($this->debug) echo '<pre>', var_dump($response), '</pre>';
+        if ($this->debug) {
+        	// echo '<pre>', var_dump($response), '</pre>';
+        }
 
         if (!$response) return null;
 
         $contact = $response->Contacts->Contact[0];
 
-        if ($this->debug) echo '<pre>', var_dump($contact), '</pre>';
+        if ($this->debug) {
+        	echo '<span style="color: #f30">** xero contact api response **</span></br>';
+        	echo '<pre>', var_dump($contact), '</pre>';
+        }
 
         foreach ($contact->Phones->Phone as $phone) {
         	if ((string)$phone->PhoneType == 'DEFAULT') {
@@ -355,7 +360,7 @@ class SalesforceSDK {
 			'ShippingPostalCode' => (string)$address->PostalCode,
 			'ShippingCountry' => (string)$address->Country,
 			'NPI_Number__c' => (string)$contact->AccountNumber,
-			'Brand__c' => 'Ananda Professional',
+			'Brand__c' => $branding_theme ?: (string)$contact->BrandingTheme->Name,
         ];
 
         $contactData = [
@@ -370,11 +375,17 @@ class SalesforceSDK {
 			'MailingPostalCode' => (string)$address->PostalCode,
         ];
 
-        if ($this->debug) echo '<pre>', var_dump($data), '</pre>';
+        if ($this->debug) {
+        	echo '<span style="color: #f30">** data to be inserted through salesforce api **</span></br>';
+        	echo '<pre>', var_dump($data), '</pre>';
+        }
 
         $response = $this->do_request('/services/data/v43.0/sobjects/Account/', ['post' => true, 'postData' => $data]);
 
-        if ($this->debug) echo '<pre>', var_dump($response), '</pre>';
+        if ($this->debug) {
+        	echo '<span style="color: #f30">** salesforce api response: insert new account **</span></br>';
+        	echo '<pre>', var_dump($response), '</pre>';
+        }
 
         if ($response->success == true) {
         	$contactData['AccountId'] = (string)$response->id;
@@ -388,18 +399,26 @@ class SalesforceSDK {
         	];
         }
 
-        if ($this->debug) var_dump($data['NPI_Number__c']);
+        if ($this->debug) {
+        	echo '<span style="color: #f30">** NPI Number used for new account creation **</span></br>';
+        	echo '<pre>', var_dump($data['NPI_Number__c']), '</pre>';
+        }
 
         if (!$data['NPI_Number__c']) return null;
 
         unset($data['NPI_Number__c']);
 
-        if ($this->debug) echo '<pre>', var_dump($data), '</pre>';
-        if ($this->debug) var_dump((string)$contact->AccountNumber);
+        if ($this->debug) {
+        	echo '<span style="color: #f30">** data to be upserted through salesforce api **</span></br>';
+        	echo '<pre>', var_dump($data), '</pre>';
+        }
 
         $response = $this->do_request('/services/data/v20.0/sobjects/Account/NPI_Number__c/' . (string)$contact->AccountNumber, ['post' => true, 'postData' => $data, 'patch' => true]);
 
-        if ($this->debug) echo '<pre>', var_dump($response), '</pre>';
+        if ($this->debug) {
+        	echo '<span style="color: #f30">** salesforce api response: update existing account based on NPI **</span></br>';
+        	echo '<pre>', var_dump($response), '</pre>';
+        }
 
         if ($response->success == true) {
         	// $contactData['AccountId'] = (string)$response->id;
@@ -412,6 +431,21 @@ class SalesforceSDK {
         	];
         } else {
         	$response = $this->do_request('/services/data/v20.0/sobjects/Account/NPI_Number__c/' . (string)$contact->AccountNumber);
+
+        	if ($this->debug) {
+        		echo '<span style="color: #f30">** salesforce api response: get existing account based on NPI **</span></br>';
+        		echo '<pre>', var_dump($response), '</pre>';
+        	}
+
+        	if (!$response->Id) {
+        		$response = $this->do_request('/services/data/v20.0/sobjects/Account/Unique_Import_Id__c/' . $xero_contact_id);
+        	}
+
+        	if ($this->debug) {
+        		echo '<span style="color: #f30">** salesforce api response: get existing account based on Unique_Import_Id__c (Xero Contact Id) **</span></br>';
+        		echo '<pre>', var_dump($response), '</pre>';
+        	}
+
         	if ($response->Id) {
 	        	return [
 	        		'Id' => (string)$response->Id,
@@ -425,25 +459,23 @@ class SalesforceSDK {
         }
 	}
 
-	public function get_all_salesforce_invoices($startsWith = '') {
+	public function get_all_salesforce_invoices($startsWith = '', $fields = ['Id', 'InvoiceNumber__c', 'Account_ID__c', 'Xero_Invoice_ID__c', 'UpdatedDateUTC__c']) {
 
 		$results = [];
 
 		if ($startsWith) {
-			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT Id, InvoiceNumber__c, Account_ID__c, Xero_Invoice_ID__c, UpdatedDateUTC__c FROM Ananda_Invoice__c WHERE InvoiceNumber__c LIKE \'' . $startsWith . '%\'');
+			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT ' . implode(', ', $fields) . ' FROM Ananda_Invoice__c WHERE InvoiceNumber__c LIKE \'' . $startsWith . '%\'');
 		} else {
-			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT Id, InvoiceNumber__c, Account_ID__c, Xero_Invoice_ID__c, UpdatedDateUTC__c FROM Ananda_Invoice__c');
+			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT ' . implode(', ', $fields) . ' FROM Ananda_Invoice__c');
 		}
 
 		while ($response = $this->do_request($url)) {
-			$results = array_merge($results, array_map(function($el) {
-				return [
-					'Id'				 => $el->Id,
-					'Account_ID__c'		 => $el->Account_ID__c,
-					'Xero_Invoice_ID__c' => $el->Xero_Invoice_ID__c,
-					'InvoiceNumber__c'	 => $el->InvoiceNumber__c,
-					'UpdatedDateUTC__c'	 => $el->UpdatedDateUTC__c,
-				];
+			$results = array_merge($results, array_map(function($el) use ($fields) {
+				$item = [];
+				foreach ($fields as $key) {
+					$item[$key] = $el->$key;
+				}
+				return $item;
 			}, $response->records));
 			if (!$response->done && $response->nextRecordsUrl) {
 				$url = $response->nextRecordsUrl;
@@ -509,6 +541,14 @@ class SalesforceSDK {
                 	// var_dump($invoice);
 
                 	$ext_id = (string)$invoice->Contact->ContactID;
+
+                	$branding_theme = '';
+                	if ((string)$invoice->BrandingThemeID == 'c862879a-49c7-40a8-ba05-0dd14a18813f') {
+                		$branding_theme = 'Ananda Hemp';
+                	} else if ((string)$invoice->BrandingThemeID == 'd415c810-ccc3-4e10-b6ae-4c7cd17030e8') {
+                		$branding_theme = 'Ananda Professional';
+                	}
+
                 	/*if (!isset($accounts_from_ext[$ext_id])) {
                 		$account = $this->get_account_from_external_xero_contact_id($ext_id);
                 		if ($account) {
@@ -535,7 +575,7 @@ class SalesforceSDK {
                 			|| strpos((string)$invoice->InvoiceNumber, 'CN-') === 0
                 			|| strpos((string)$invoice->InvoiceNumber, 'AE-') === 0
                 		) {
-                			$account = $this->create_account_from_xero_contact_id($ext_id);
+                			$account = $this->create_account_from_xero_contact_id($ext_id, $branding_theme);
                 			if ($account) {
                 				echo ' ____________ created account with ' . $ext_id . ' from invoice ___' . (string)$invoice->InvoiceNumber . '<br/>';
                 				$accounts[] = $account;
@@ -563,13 +603,6 @@ class SalesforceSDK {
                 	}
 
                 	// var_dump($account);
-
-                	$branding_theme = '';
-                	if ((string)$invoice->BrandingThemeID == 'c862879a-49c7-40a8-ba05-0dd14a18813f') {
-                		$branding_theme = 'Ananda Hemp';
-                	} else if ((string)$invoice->BrandingThemeID == 'd415c810-ccc3-4e10-b6ae-4c7cd17030e8') {
-                		$branding_theme = 'Ananda Professional';
-                	}
 
 					$invoice_record = [
 			            'attributes' => [
@@ -1547,7 +1580,7 @@ class SalesforceSDK {
 				echo '<td>'. $customer->get_billing_company() .'</td>';
 				echo '<td>'. $customer->get_shipping_company() .'</td>';
 			} else {
-				echo '<td></td><td></td><td></td>';
+				echo '<td colspan="3"></td>';
 			}
 			echo '</tr>';
 		}
@@ -1730,4 +1763,87 @@ class SalesforceSDK {
         	$invoices_patch_data['records'] = [];
 	    }
 	}
+	public function migrate_branding() {
+		$accounts = $this->get_all_accounts(['Id', 'Name', 'Brand__c']);
+		$salesforce_invoices = $this->get_all_salesforce_invoices('', ['Id', 'Account_ID__c', 'BrandingTheme__c', 'InvoiceNumber__c']);
+
+        $patch_data = [
+        	'allOrNone' => false,
+        	'records' => [],
+        ];
+
+        foreach($accounts as $account) {
+        	$found = false;
+        	foreach ($salesforce_invoices as $invoice) {
+        		if ($invoice['Account_ID__c'] == $account['Id'] && $invoice['BrandingTheme__c'] !== $account['Brand__c']) {
+        			$found = $invoice['BrandingTheme__c'] ?: '';
+        			echo 'Account with Brand "'. $account['Brand__c'] .'" named "'. $account['Name'] .'" will be updated with "'. $found .'" ('.$invoice['InvoiceNumber__c'].'). <br/>';
+        			break;
+        		}
+        	}
+        	if ($found === false) continue;
+    		$account_record = [
+	            'attributes' => [
+	                'type' => 'Account',
+	            ],
+				'id' => $account['Id'],
+				'Brand__c' => $found,
+    		];
+    		$patch_data['records'][] = $account_record;
+            if (count($patch_data['records']) > 99) {
+				$this->printTime();
+				echo ' _________ doing patch updates for accounts ( ' . count($patch_data['records']) . ')' . '<br/>';
+				// echo '<pre>', var_dump($patch_data), '</pre>';
+				$response = $this->do_request('/services/data/v44.0/composite/sobjects', ['post' => true, 'postData' => $patch_data, 'patch' => true]);
+				// var_dump($response);
+            	$patch_data['records'] = [];
+		    }
+        }
+        if (count($patch_data['records']) > 0) {
+			$this->printTime();
+			echo ' _________ doing patch updates for accounts ( ' . count($patch_data['records']) . ')' . '<br/>';
+			// echo '<pre>', var_dump($patch_data), '</pre>';
+			$response = $this->do_request('/services/data/v43.0/composite/sobjects', ['post' => true, 'postData' => $patch_data, 'patch' => true]);
+			// var_dump($response);
+        	$patch_data['records'] = [];
+	    }
+	}
+
+	public function check_fpn_orders() {
+		$args = array(
+		    'limit' => -1,
+		);
+		$orders = wc_get_orders($args);
+
+		echo '<table border=1><thead><tr><th>Order ID</th><th>Created</th><th>Status</th><th>Xero ID</th><th>Customer</th><th>Billing</th><th>Shipping</th><th>Total</th></tr></thead><tbody>';
+
+		foreach($orders as $order) {
+			if ($order->get_status() == 'cancelled') continue;
+			// $shipstation_note = get_post_meta($order->get_id(), 'shipstation_note', true);
+			// if (!$shipstation_note) continue;
+			$customer = null;
+			if (method_exists($order, 'get_customer_id')) {
+				if (!is_user_has_role('fpn', $order->get_customer_id())) continue;
+				$customer = new WC_Customer($order->get_customer_id());
+			} else {
+				continue;
+			}
+
+			echo '<tr' . ($order->get_status()=='on-hold' ? ' style="color: red;"' : '') . '>';
+			echo '<td>'. $order->get_id() .'</td>';
+			echo '<td>'. date('Y-m-d H:i:s', strtotime($order->get_date_created())) .'</td>';
+			echo '<td>'. $order->get_status() .'</td>';
+			echo '<td>'. $order->get_meta('_xero_invoice_id') .'</td>';
+
+			echo '<td>'. $customer->get_first_name() . ' ' . $customer->get_last_name() . '(' . $customer->get_username() . ' - ' . $customer->get_id() . ') - ' . $customer->get_email() .'</td>';
+			echo '<td>'. $customer->get_billing_company() .' - '. $customer->get_billing_city() .', '. $customer->get_billing_state() .'</td>';
+			echo '<td>'. $customer->get_shipping_company() .' - '. $customer->get_shipping_city() .', '. $customer->get_shipping_state() .'</td>';
+
+			echo '<td>'. $order->get_formatted_order_total() . '</td>';
+			echo '</tr>';
+		}
+
+		echo '</tbody></table>';
+	}
+
 }

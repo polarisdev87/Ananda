@@ -153,6 +153,18 @@ class WC_XR_Invoice {
 		$prefix = trim( $this->settings->get_option( 'invoice_prefix' ) );
 
 		$order = $this->get_order();
+
+		$customer_id = $order->get_customer_id();
+		if (is_user_has_role('fpn', $customer_id)) {
+			$prefix = 'FPN-';
+		}
+		if (is_user_has_role('cpc', $customer_id)) {
+			$prefix = 'CPC-';
+		}
+		if (is_user_has_role('tcg', $customer_id)) {
+			$prefix = 'TCG-';
+		}
+
 		if ($order->get_meta('_placed_on_behalf_of_customer') == '1') {
 			$prefix = 'AE-';
 		}

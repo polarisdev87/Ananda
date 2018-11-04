@@ -152,7 +152,7 @@ if (is_reorder()) {
 						text-transform: none;
 					}
 				</style>
-				<?php if (!check_if_valid_states()) {
+				<?php if (!check_if_valid_states() && false) {
                     $customer = new WC_Customer(get_current_user_id()); ?>
 					<div class="invalid_state_popup_overlay"></div>
 					<div class="invalid_state_popup">

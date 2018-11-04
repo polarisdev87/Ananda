@@ -26,6 +26,16 @@ if (!is_reorder()) {
 		<?php
 	}
 
+	if (!is_reorder_pets()) {
+		?>
+		<style type="text/css">
+			.product-section#product-section-13148 {
+				display: none !important;
+			}
+		</style>
+		<?php
+	}
+
 ?>
 <?php get_header(); ?>
 
@@ -162,7 +172,7 @@ if (!is_reorder()) {
 						alert('Ananda Professional 600 mg Tinctures is temporarily out of stock and will be shipped at no cost on July 27.');
 					});
 				</script>
-				<?php if (!check_if_valid_states()) { 
+				<?php if (!check_if_valid_states() && false) { 
                     $customer = new WC_Customer(get_current_user_id()); ?>
 					<div class="invalid_state_popup_overlay"></div>
 					<div class="invalid_state_popup">

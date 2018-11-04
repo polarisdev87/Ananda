@@ -43,6 +43,20 @@ function create_fpn_note_for_wc_order($order_id) {
     }
 }
 
+add_action( 'woocommerce_new_order', 'update_user_if_first_bought_pets',  111, 1  );
+function update_user_if_first_bought_pets($order_id) {
+    global $woocommerce;
+    $items = $woocommerce->cart->get_cart();
+    if (!is_reorder_pets()) {
+        foreach( $items as $item_id => $item_product ) {
+            if ($item_product['product_id'] == '13147') { // ananda pets pos display
+                update_user_meta(get_current_user_id(), 'already_bought_pets', '1');
+                break;
+            }
+        }
+    }
+}
+
 
 // add_action( 'woocommerce_new_order', 'update_order_if_is_on_behalf_of_customer',  1, 1  );
 // function update_order_if_is_on_behalf_of_customer($order_id) {
@@ -600,7 +614,10 @@ function is_reorder() {
     return is_user_logged_in() && (count( $customer_orders ) >= $loyal_count || $user_already_bought=='1');
 }
 
-
+function is_reorder_pets() {
+    $user_already_bought_pets = get_user_meta(get_current_user_id(), 'already_bought_pets', true);
+    return is_user_logged_in() && $user_already_bought_pets=='1';
+}
 
 
 
@@ -1409,6 +1426,13 @@ function runOnInit() {
             if ($user) {
                 update_user_meta( $user->ID, 'already_bought', '1' );
                 update_user_meta( $user->ID, 'has_salesforce_checked', '1');
+
+                $to = 'lance032017@gmail.com';
+                $subject = 'Reorder enabled notification';
+                $body = 'Customer with this email - ' . $_POST['email'] . ' has been enabled to do reorder at ' . date('Y-m-d H:i:s');
+                $headers = ['Content-Type: text/html; charset=UTF-8'];
+                wp_mail( $to, $subject, $body, $headers );
+
                 ?>
                     <div style="margin-bottom: 18px; color: green; font-size: 13px;">Successfully add "Reorder" ability to the use with this email &lt; <?php echo $_POST['email'] ?> &gt;</div>
                 <?php
@@ -1542,8 +1566,14 @@ function runOnInit() {
             case 'check_missing_xero_invoices':
                 $salesforce->check_missing_xero_invoices();
                 break;
+            case 'check_fpn_orders':
+                $salesforce->check_fpn_orders();
+                break;
             case 'migrate_trackings':
                 $salesforce->migrate_trackings();
+                break;
+            case 'migrate_branding':
+                $salesforce->migrate_branding();
                 break;
             default:
                 var_dump('no actions');
@@ -1610,6 +1640,9 @@ function salesforce_invoice_migration_exec() {
     $salesforce->migrate_invoices('INV-', '2018');
     $salesforce->migrate_invoices('CN-', '2018');
     $salesforce->migrate_invoices('AE-', '2018');
+    $salesforce->migrate_invoices('FPN-', '2018');
+    $salesforce->migrate_invoices('TCG-', '2018');
+    $salesforce->migrate_invoices('CPC-', '2018');
 }
 
 

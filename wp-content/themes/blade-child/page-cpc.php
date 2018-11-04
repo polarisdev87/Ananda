@@ -37,7 +37,7 @@
 	<div class="u-column1 col-2">
 
 		<h2><?php _e( 'Register', 'woocommerce' ); ?></h2>
-		<p>FOR NEW CUSTOMERS - with CPC Model</p>
+		<p>FOR NEW CUSTOMERS</p>
 
 		<form method="post" class="register">
 
