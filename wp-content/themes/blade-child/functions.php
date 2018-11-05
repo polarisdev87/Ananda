@@ -6,7 +6,7 @@
  */
  
 function grve_blade_child_theme_setup() {
-	
+
 }
 add_action( 'after_setup_theme', 'grve_blade_child_theme_setup' );
 
@@ -411,10 +411,10 @@ function check_pets_purchase_if_valid() {
             $has_pos = true;
         }
     }
-    if ( is_reorder_pets() || ( $has_pets && ( is_reorder() || $has_pos ) ) ) {
-        return true;
+    if (!is_reorder_pets() && $has_pets && !is_reorder() && !$has_pos) {
+        return false;
     }
-    return false;
+    return true;
 }
 
 function checkout_cart_items_to_confirm_valid_states() {
@@ -435,9 +435,9 @@ function filter_wc_product_sku_enabled($true) {
 
 function ananda_get_coa_attachments() {
 
-	$files = [];
-	
-	$query = new WP_Query( array(
+    $files = [];
+    
+    $query = new WP_Query( array(
         'post_type' => 'attachment',
         'posts_per_page' => -1,
         'oderby' => 'meta_value_num',
@@ -454,14 +454,14 @@ function ananda_get_coa_attachments() {
     ));
     
     foreach ( $query->posts as $post ) {
-    	$files[] =  [
-    					"attachment_url"  => $post->guid,
-    					"batch"           => $post->post_title,
+        $files[] =  [
+                        "attachment_url"  => $post->guid,
+                        "batch"           => $post->post_title,
                         "attachment_page" => get_attachment_link($post->ID)
-    				];
+                    ];
     }
 
-   	return $files;
+    return $files;
 
 }
 
@@ -906,6 +906,24 @@ function wc_login_redirect( $redirect_to ) {
      return $redirect_to;
 }
 
+/* ************* tag - ship to different */
+// add_filter( 'woocommerce_ship_to_different_address_checked', 'customer_ship_to_different_address_checked' );
+// function customer_ship_to_different_address_checked() {
+//     if (is_user_logged_in()) {
+//         $customer = new WC_Customer(get_current_user_id());
+//         $shipping_data = $customer->get_shipping();
+//         $set_flag = false;
+//         foreach ($shipping_data as $key => $value) {
+//             if ($value) {
+//                 $set_flag = true;
+//                 break;
+//             }
+//         }
+//         return $set_flag;
+//     } else {
+//         return false;
+//     }
+// }
 
 // Hook in
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields_rep_name', 10 );
@@ -1396,11 +1414,24 @@ function add_ach_discount_message() {
 // add_action( 'woocommerce_cart_totals_before_order_total', 'add_ach_discount_message');
 add_action( 'woocommerce_review_order_before_order_total', 'add_ach_discount_message');
 
+
+/* ************* tag - ship to different */
+
 /* locking down the company fields for checkout page */
 function custom_woocommerce_billing_fields( $fields ){
     if ( !is_checkout() ) return $fields; 
     $url_param_fields = array(
         'company',
+        // 'first_name',
+        // 'last_name',
+        // 'address_1',
+        // 'address_2',
+        // 'city',
+        // 'state',
+        // 'postcode',
+        // 'state',
+        // 'phone',
+        // 'email',
     );
     foreach( $url_param_fields as $param ){
         $billing_key = 'billing_' . $param;
@@ -1411,10 +1442,21 @@ function custom_woocommerce_billing_fields( $fields ){
     return $fields;
 }
 add_filter( 'woocommerce_billing_fields', 'custom_woocommerce_billing_fields' );
+
 function custom_woocommerce_shipping_fields( $fields ){
     if ( !is_checkout() ) return $fields; 
     $url_param_fields = array(
         'company',
+        // 'first_name',
+        // 'last_name',
+        // 'address_1',
+        // 'address_2',
+        // 'city',
+        // 'state',
+        // 'postcode',
+        // 'state',
+        // 'phone',
+        // 'email',
     );
     foreach( $url_param_fields as $param ){
         $shipping_key = 'shipping_' . $param;
@@ -1424,11 +1466,25 @@ function custom_woocommerce_shipping_fields( $fields ){
     }
     return $fields;
 }
-add_filter( 'woocommerce_shipping_fields', 'custom_woocommerce_shipping_fields' );
+add_filter( 'woocommerce_shipping_fields', 'custom_woocommerce_shipping_fields', 100 );
+
+function hide_state_select() {
+    ?>
+    <style type="text/css">
+        .state_select {
+            /*display: none;*/
+        }
+        .woocommerce-billing-fields .form-row label, .woocommerce-shipping-fields .form-row label {
+            /*font-weight: normal !important;*/
+        }
+    </style>
+    <?php
+}
+add_action( 'woocommerce_after_checkout_form', 'hide_state_select' );
 
 function woocommerce_form_field_hidden( $field, $key, $args ){
     $field = '
-        <p class="form-row address-field validate-required" id="'.esc_attr($key).'_field" data-priority="90">
+        <p class="form-row '. implode(' ', $args['class']) .' address-field validate-required" id="'.esc_attr($key).'_field" data-priority="90">
             <label for="'.esc_attr($key).'" class="">'.esc_attr($args['label']).'&nbsp;'.($args['required']?'<abbr class="required" title="required">*</abbr>':'').'</label>
             <span class="woocommerce-input-wrapper"><strong class="'.esc_attr($key).'">'.get_user_meta(get_current_user_id(), $key, true).'</strong><input type="hidden" name="'.esc_attr($key).'" id="'.esc_attr($key).'" value="'.get_user_meta(get_current_user_id(), $key, true).'" autocomplete="'.esc_attr($args['autocomplete']).'" class="" readonly="readonly"></span>
         </p>
@@ -1640,7 +1696,7 @@ function runOnInit() {
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
         add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25 );
     }
-    
+
 }
 
 

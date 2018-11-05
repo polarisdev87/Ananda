@@ -185,7 +185,7 @@ class WC_MS_Checkout {
                 <p id="ms_shipping_addresses_field" class="form-row form-row-wide ms-addresses-field">
                     <label class=""><?php _e('Stored Addresses', 'wc_shipping_multiple_address'); ?></label>
                     <select class="" id="ms_addresses">
-                        <option value=""><?php _e('Select an address to use...', 'wc_shipping_multiple_address'); ?></option>
+                        <!-- <option value=""><?php _e('Select an address to use...', 'wc_shipping_multiple_address'); ?></option> -->
                         <?php
                         foreach ( $addresses as $key => $address ) {
                             $formatted_address = $address['shipping_first_name'] .' '. $address['shipping_last_name'] .', '. $address['shipping_address_1'] .', '. $address['shipping_city'];

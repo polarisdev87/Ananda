@@ -55,6 +55,8 @@ Thumbs.db
 *.tar
 *.zip
 
+wp-content/themes/blade-child/functions_backup*
+
 # -------------------------
 # BEGIN Whitelisted Files
 # -------------------------
