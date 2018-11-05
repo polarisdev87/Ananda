@@ -906,24 +906,23 @@ function wc_login_redirect( $redirect_to ) {
      return $redirect_to;
 }
 
-/* ************* tag - ship to different */
-// add_filter( 'woocommerce_ship_to_different_address_checked', 'customer_ship_to_different_address_checked' );
-// function customer_ship_to_different_address_checked() {
-//     if (is_user_logged_in()) {
-//         $customer = new WC_Customer(get_current_user_id());
-//         $shipping_data = $customer->get_shipping();
-//         $set_flag = false;
-//         foreach ($shipping_data as $key => $value) {
-//             if ($value) {
-//                 $set_flag = true;
-//                 break;
-//             }
-//         }
-//         return $set_flag;
-//     } else {
-//         return false;
-//     }
-// }
+add_filter( 'woocommerce_ship_to_different_address_checked', 'customer_ship_to_different_address_checked' );
+function customer_ship_to_different_address_checked() {
+    if (is_user_logged_in()) {
+        $customer = new WC_Customer(get_current_user_id());
+        $shipping_data = $customer->get_shipping();
+        $set_flag = false;
+        foreach ($shipping_data as $key => $value) {
+            if ($value) {
+                $set_flag = true;
+                break;
+            }
+        }
+        return $set_flag;
+    } else {
+        return false;
+    }
+}
 
 // Hook in
 add_filter( 'woocommerce_checkout_fields' , 'custom_override_checkout_fields_rep_name', 10 );
@@ -1414,24 +1413,21 @@ function add_ach_discount_message() {
 // add_action( 'woocommerce_cart_totals_before_order_total', 'add_ach_discount_message');
 add_action( 'woocommerce_review_order_before_order_total', 'add_ach_discount_message');
 
-
-/* ************* tag - ship to different */
-
 /* locking down the company fields for checkout page */
 function custom_woocommerce_billing_fields( $fields ){
     if ( !is_checkout() ) return $fields; 
     $url_param_fields = array(
         'company',
-        // 'first_name',
-        // 'last_name',
-        // 'address_1',
-        // 'address_2',
-        // 'city',
-        // 'state',
-        // 'postcode',
-        // 'state',
-        // 'phone',
-        // 'email',
+        'first_name',
+        'last_name',
+        'address_1',
+        'address_2',
+        'city',
+        'state',
+        'postcode',
+        'state',
+        'phone',
+        'email',
     );
     foreach( $url_param_fields as $param ){
         $billing_key = 'billing_' . $param;
@@ -1447,16 +1443,16 @@ function custom_woocommerce_shipping_fields( $fields ){
     if ( !is_checkout() ) return $fields; 
     $url_param_fields = array(
         'company',
-        // 'first_name',
-        // 'last_name',
-        // 'address_1',
-        // 'address_2',
-        // 'city',
-        // 'state',
-        // 'postcode',
-        // 'state',
-        // 'phone',
-        // 'email',
+        'first_name',
+        'last_name',
+        'address_1',
+        'address_2',
+        'city',
+        'state',
+        'postcode',
+        'state',
+        'phone',
+        'email',
     );
     foreach( $url_param_fields as $param ){
         $shipping_key = 'shipping_' . $param;
@@ -1472,7 +1468,7 @@ function hide_state_select() {
     ?>
     <style type="text/css">
         .state_select {
-            /*display: none;*/
+            display: none;
         }
         .woocommerce-billing-fields .form-row label, .woocommerce-shipping-fields .form-row label {
             /*font-weight: normal !important;*/
@@ -1481,6 +1477,13 @@ function hide_state_select() {
     <?php
 }
 add_action( 'woocommerce_after_checkout_form', 'hide_state_select' );
+
+function show_edit_address_link() {
+    ?>
+    <a href="/my-account/edit-address">Click here to update address</a><br/><br/>
+    <?php
+}
+add_action( 'woocommerce_before_checkout_form', 'show_edit_address_link' );
 
 function woocommerce_form_field_hidden( $field, $key, $args ){
     $field = '
