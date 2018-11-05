@@ -29,7 +29,7 @@ if (!is_reorder()) {
 	if (!is_reorder_pets()) {
 		?>
 		<style type="text/css">
-			.product-section#product-section-13148 {
+			.product-section#product-section-13166 {
 				display: none !important;
 			}
 		</style>

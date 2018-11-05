@@ -396,9 +396,33 @@ function show_checkout_notice() {
 // add_action('woocommerce_checkout_cart_items', 'checkout_cart_items_to_confirm_valid_states');
 add_action('woocommerce_checkout_process', 'checkout_cart_items_to_confirm_valid_states');
 
+function check_pets_purchase_if_valid() {
+    global $woocommerce;
+    $items = $woocommerce->cart->get_cart();
+    $has_pets = false;
+    $has_pos = false;
+    $pos_ids = ['10226', '10103', '4464'];
+    foreach ($items as $item => $values) {
+        $product_id = $values['product_id'];
+        if ($product_id == '13147') {
+            $has_pets = true;
+        }
+        if (in_array($product_id, $pos_ids)) {
+            $has_pos = true;
+        }
+    }
+    if ( is_reorder_pets() || ( $has_pets && ( is_reorder() || $has_pos ) ) ) {
+        return true;
+    }
+    return false;
+}
+
 function checkout_cart_items_to_confirm_valid_states() {
     if ( !check_if_valid_states() ) {
         wc_add_notice( 'Invalid state', 'error');
+    }
+    if ( !check_pets_purchase_if_valid() ) {
+        wc_add_notice( 'To order an Ananda Pets point-of-sale display, your pharmacy must carry one of our full Ananda Professional displays. Please add a vertical, countertop or THC Free display to your current order.', 'error' );
     }
 }
 
@@ -1616,6 +1640,7 @@ function runOnInit() {
         remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 10 );
         add_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_price', 25 );
     }
+    
 }
 
 
@@ -1697,6 +1722,37 @@ function my_custom_wc_free_shipping_notice() {
 }
 add_action( 'wp', 'my_custom_wc_free_shipping_notice' );
 
+function notice_for_initial_pets_order() {
+    if ( ! is_cart() && ! is_checkout() ) return;
+
+    if (!is_reorder_pets() && !check_pets_purchase_if_valid()) {
+        $customer = new WC_Customer(get_current_user_id()); ?>
+        <div class="invalid_pets_popup_overlay"></div>
+        <div class="invalid_pets_popup">
+            <div class="invalid_pets_popup_close">&times;</div>
+            <div class="invalid_pets_popup_content">
+                <div class="grve-h6 invalid_pets_popup_message">
+                    Thank you for your interest in the Ananda Pets product line. To order an Ananda Pets point-of-sale display, your pharmacy must carry one of our full Ananda Professional displays. Please add a vertical, countertop or THC Free display to your current order.<br/><br/>
+                    Have a question? Reach out to us at <a href="tel:8883881119">888-388-1119</a>.
+                </div>
+            </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            jQuery('.invalid_pets_popup_overlay, .invalid_pets_popup_close').click(function() {
+                jQuery('.invalid_pets_popup_overlay').hide();
+                jQuery('.invalid_pets_popup').hide();
+            });
+            jQuery('.invalid_pets_popup_action').click(function() {
+                jQuery.post( '/?action_name=subscribe_red_states', {'customer_id': '<?php echo get_current_user_id(); ?>'});
+                jQuery('.invalid_pets_popup_overlay').hide();
+                jQuery('.invalid_pets_popup').hide();
+            })
+        </script>
+    <?php }
+}
+add_action( 'wp_footer', 'notice_for_initial_pets_order' );
+
 
 add_action( 'wp_head', 'hide_marketing_materials' );
 function hide_marketing_materials() {
@@ -1713,3 +1769,13 @@ function anandap_woocommerce_email_styles( $css ) {
     $css .= ".customer-new-template #template_header_image img {height: 40px;} .customer-new-template #header_wrapper h1 {color:white; text-align:center;}";
     return $css;
 }
+
+function hide_coupon_field_on_cart( $enabled ) {
+    if (is_cart() || is_checkout()) {
+        if (is_user_has_role('fpn') || is_user_has_role('cpc') || is_user_has_role('tcg')) {
+            $enabled = false;
+        }
+    }
+    return $enabled;
+}
+add_filter( 'woocommerce_coupons_enabled', 'hide_coupon_field_on_cart' );

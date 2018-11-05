@@ -261,3 +261,56 @@ abbr.required {
 #grve-header.grve-sticky-header.grve-shrink #grve-main-menu .grve-wrapper > ul > li > .switched-onto {
     height: 60px;
 }
+
+#grve-main-menu .grve-wrapper>ul>li ul li a:hover, #grve-main-menu .grve-wrapper>ul>li ul li.current-menu-item>a, #grve-main-menu .grve-wrapper>ul li li.current-menu-ancestor>a {
+    color: #a3b1a2 !important;
+}
+
+
+                    
+.invalid_pets_popup_overlay {
+    background-color: rgba(255,255,255,0.90);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 9998;
+}
+.invalid_pets_popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 350px;
+    background-color: #232323;
+    color: #777777;
+    z-index: 9999;
+}
+.invalid_pets_popup_close {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    font-size: 72px;
+    line-height: 1em;
+    width: 1em;
+    text-align: center;
+    cursor: pointer;
+}
+.invalid_pets_popup_content {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 38px;
+    flex-direction: column;
+}
+.invalid_pets_popup_message {
+    color: #fff !important;
+    text-transform: none !important;
+}

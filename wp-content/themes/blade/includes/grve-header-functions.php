@@ -82,6 +82,14 @@ function blade_grve_print_logo_data( $logo_id, $logo_class ) {
 	$logo_width = blade_grve_option( $logo_id, '', 'width' );
 	$logo_height = blade_grve_option( $logo_id, '', 'height' );
 
+	global $wp_query;
+	$post_id = $wp_query->post->ID;
+	if ($post_id == '13173') { // pets page
+		$logo_url = '//anandaprofessional.com/wp-content/uploads/2018/11/A_Pets_logo.png';
+		$logo_width = 558;
+		$logo_height = 171;
+	}
+
 	if ( !empty( $logo_width ) && !empty( $logo_height ) ) {
 		$logo_attributes[] = 'width="' . esc_attr( $logo_width ) . '"';
 		$logo_attributes[] = 'height="' . esc_attr( $logo_height ) . '"';
