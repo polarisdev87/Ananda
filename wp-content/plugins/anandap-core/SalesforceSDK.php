@@ -1865,4 +1865,19 @@ class SalesforceSDK {
 		echo '</tbody></table>';
 	}
 
+	public function migrate_cancelled_orders() {
+
+		$args = array(
+		    'limit' => -1,
+    		'status' => 'cancelled',
+		);
+		$orders = wc_get_orders($args);
+
+        $invoice_manager = new WC_XR_Invoice_Manager(new WC_XR_Settings());
+
+		foreach($orders as $order) {
+			$invoice_manager->void_invoice($order->get_id(), true);
+		}
+
+	}
 }

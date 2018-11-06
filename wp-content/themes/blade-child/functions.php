@@ -1660,6 +1660,9 @@ function runOnInit() {
             case 'migrate_branding':
                 $salesforce->migrate_branding();
                 break;
+            case 'migrate_cancelled_orders':
+                $salesforce->migrate_cancelled_orders();
+                break;
             default:
                 var_dump('no actions');
                 break;
