@@ -464,7 +464,15 @@ class SalesforceSDK {
 		$results = [];
 
 		if ($startsWith) {
-			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT ' . implode(', ', $fields) . ' FROM Ananda_Invoice__c WHERE InvoiceNumber__c LIKE \'' . $startsWith . '%\'');
+			$where = [];
+			if (is_array($startsWith)) {
+				foreach ($startsWith as $start) {
+					$where[] = 'InvoiceNumber__c LIKE \'' . $start . '%\'';
+				}
+			} else {
+				$where[] = 'InvoiceNumber__c LIKE \'' . $startsWith . '%\'';
+			}
+			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT ' . implode(', ', $fields) . ' FROM Ananda_Invoice__c WHERE '. implode(' OR ', $where));
 		} else {
 			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT ' . implode(', ', $fields) . ' FROM Ananda_Invoice__c');
 		}
@@ -515,220 +523,231 @@ class SalesforceSDK {
         	'records' => [],
         ];
 
-        $page_no = 1;
+        if (!is_array($startsWith)) {
+        	$startsWith = [$startsWith];
+        }
 
-        $account_ref_no = 1;
-        $invoice_ref_no = 1;
-        $line_item_ref_no = 1;
-        $tracking_category_ref_no = 1;
+        foreach ($startsWith as $startsWithKeyword) {
 
-        // $accounts_from_ext = [];
+	        $page_no = 1;
 
-        do {
-        	sleep(1);
-            $response = $invoice_manager->get_all_invoices($startsWith, $page_no, $year);
-            $invoices_wrapper = $response->Invoices;
-            $invoices = $invoices_wrapper->Invoice ?: [];
+	        $account_ref_no = 1;
+	        $invoice_ref_no = 1;
+	        $line_item_ref_no = 1;
+	        $tracking_category_ref_no = 1;
 
-	        $this->printTime();
-            echo ('___________ current page________________' . $page_no . '______' . count($invoices_wrapper) . '_______' . count($invoices) . '<br/>');
+	        // $accounts_from_ext = [];
 
-            // echo ' _______________ current page________________' . $page_no . '______' . count($invoices_wrapper) . '<br/>';
+	        do {
+	        	sleep(1);
+	            $response = $invoice_manager->get_all_invoices($startsWithKeyword, $page_no, $year);
+	            $invoices_wrapper = $response->Invoices;
+	            $invoices = $invoices_wrapper->Invoice ?: [];
 
-            if (count($invoices) > 0) {
-                foreach ($invoices as $invoice) {
+		        $this->printTime();
+	            echo ('___________ current page________________' . $page_no . '______' . count($invoices_wrapper) . '_______' . count($invoices) . '<br/>');
 
-                	// var_dump($invoice);
+	            // echo ' _______________ current page________________' . $page_no . '______' . count($invoices_wrapper) . '<br/>';
 
-                	$ext_id = (string)$invoice->Contact->ContactID;
+	            if (count($invoices) > 0) {
+	                foreach ($invoices as $invoice) {
 
-                	$branding_theme = '';
-                	if ((string)$invoice->BrandingThemeID == 'c862879a-49c7-40a8-ba05-0dd14a18813f') {
-                		$branding_theme = 'Ananda Hemp';
-                	} else if ((string)$invoice->BrandingThemeID == 'd415c810-ccc3-4e10-b6ae-4c7cd17030e8') {
-                		$branding_theme = 'Ananda Professional';
-                	}
+	                	// var_dump($invoice);
 
-                	/*if (!isset($accounts_from_ext[$ext_id])) {
-                		$account = $this->get_account_from_external_xero_contact_id($ext_id);
-                		if ($account) {
-                			$accounts_from_ext[$ext_id] = $account;
-                		} else {
-                			var_dump ('================= invalid external id ' . $ext_id . '------------------');
-                			continue ;
-                		}
-                	} else {
-                		$account = $accounts_from_ext[$ext_id];
-                	}*/
+	                	$ext_id = (string)$invoice->Contact->ContactID;
 
-                	$account = null;
+	                	$branding_theme = '';
+	                	if ((string)$invoice->BrandingThemeID == 'c862879a-49c7-40a8-ba05-0dd14a18813f') {
+	                		$branding_theme = 'Ananda Hemp';
+	                	} else if ((string)$invoice->BrandingThemeID == 'd415c810-ccc3-4e10-b6ae-4c7cd17030e8') {
+	                		$branding_theme = 'Ananda Professional';
+	                	}
 
-                	foreach ($accounts as $key => $item) {
-                		if ($item['Unique_Import_Id__c'] == $ext_id) {
-                			$account = $item;
-                			break;
-                		}
-                	}
-                	if (!$account) {
-                		if ( strpos((string)$invoice->InvoiceNumber, 'WP-') === 0 
-                			|| strpos((string)$invoice->InvoiceNumber, 'INV-') === 0
-                			|| strpos((string)$invoice->InvoiceNumber, 'CN-') === 0
-                			|| strpos((string)$invoice->InvoiceNumber, 'AE-') === 0
-                		) {
-                			$account = $this->create_account_from_xero_contact_id($ext_id, $branding_theme);
-                			if ($account) {
-                				echo ' ____________ created account with ' . $ext_id . ' from invoice ___' . (string)$invoice->InvoiceNumber . '<br/>';
-                				$accounts[] = $account;
-                			} else {
-                				echo ' _____________ failed to create account with invoice ___ ' . (string)$invoice->InvoiceNumber . ' due to ' . $ext_id . '<br/>';
+	                	/*if (!isset($accounts_from_ext[$ext_id])) {
+	                		$account = $this->get_account_from_external_xero_contact_id($ext_id);
+	                		if ($account) {
+	                			$accounts_from_ext[$ext_id] = $account;
+	                		} else {
+	                			var_dump ('================= invalid external id ' . $ext_id . '------------------');
+	                			continue ;
+	                		}
+	                	} else {
+	                		$account = $accounts_from_ext[$ext_id];
+	                	}*/
+
+	                	$account = null;
+
+	                	foreach ($accounts as $key => $item) {
+	                		if ($item['Unique_Import_Id__c'] == $ext_id) {
+	                			$account = $item;
+	                			break;
+	                		}
+	                	}
+	                	if (!$account) {
+	                		if ( strpos((string)$invoice->InvoiceNumber, 'WP-') === 0 
+	                			|| strpos((string)$invoice->InvoiceNumber, 'INV-') === 0
+	                			|| strpos((string)$invoice->InvoiceNumber, 'CN-') === 0
+	                			|| strpos((string)$invoice->InvoiceNumber, 'AE-') === 0
+	                			|| strpos((string)$invoice->InvoiceNumber, 'FPN-') === 0
+	                			|| strpos((string)$invoice->InvoiceNumber, 'TCG-') === 0
+	                			|| strpos((string)$invoice->InvoiceNumber, 'CPC-') === 0
+	                		) {
+	                			$account = $this->create_account_from_xero_contact_id($ext_id, $branding_theme);
+	                			if ($account) {
+	                				echo ' ____________ created account with ' . $ext_id . ' from invoice ___' . (string)$invoice->InvoiceNumber . '<br/>';
+	                				$accounts[] = $account;
+	                			} else {
+	                				echo ' _____________ failed to create account with invoice ___ ' . (string)$invoice->InvoiceNumber . ' due to ' . $ext_id . '<br/>';
+		            				if ($dummy_account) {
+		            					$account = $dummy_account;
+		            				} else {
+		            					// echo '_______found no dummy account for ' . (string)$invoice->InvoiceNumber . '<br/>';
+		            					continue;
+		            				}
+	                			}
+	                		} else {
+	            				echo ' _____________ skipping relationship invoice ___ ' . (string)$invoice->InvoiceNumber . ' due to ' . $ext_id . '<br/>';
 	            				if ($dummy_account) {
 	            					$account = $dummy_account;
 	            				} else {
 	            					// echo '_______found no dummy account for ' . (string)$invoice->InvoiceNumber . '<br/>';
 	            					continue;
 	            				}
-                			}
-                		} else {
-            				echo ' _____________ skipping relationship invoice ___ ' . (string)$invoice->InvoiceNumber . ' due to ' . $ext_id . '<br/>';
-            				if ($dummy_account) {
-            					$account = $dummy_account;
-            				} else {
-            					// echo '_______found no dummy account for ' . (string)$invoice->InvoiceNumber . '<br/>';
-            					continue;
-            				}
-            			}
-                	} else {
+	            			}
+	                	} else {
 
-                		// echo '_______________ found relevant account for ' . (string)$invoice->InvoiceNumber . '<br/>';
-                	}
+	                		// echo '_______________ found relevant account for ' . (string)$invoice->InvoiceNumber . '<br/>';
+	                	}
 
-                	// var_dump($account);
+	                	// var_dump($account);
 
-					$invoice_record = [
-			            'attributes' => [
-			                'type' => 'Ananda_Invoice__c',
-			                'referenceId' => 'REF__INVOICE_' . $invoice_ref_no++ . '_' . (string)$invoice->InvoiceNumber . '___' . (string)$invoice->InvoiceID
-			            ],
-			            'AmountCredited__c' => (string)$invoice->AmountCredited,
-			            'AmountDue__c' => (string)$invoice->AmountDue,
-			            'AmountPaid__c' => (string)$invoice->AmountPaid,
-			            'BrandingTheme__c' => $branding_theme, //(string)$invoice->BrandingThemeID,
-			            'Date__c' => date('Y-m-d', strtotime((string)$invoice->Date)),
-			            'DueDate__c' => date('Y-m-d', strtotime((string)$invoice->DueDate)),
-			            'FullyPaidOnDate__c' => $invoice->FullyPaidOnDate ? ((string)$invoice->FullyPaidOnDate . 'Z') : '',
-			            'InvoiceNumber__c' => (string)$invoice->InvoiceNumber,
-			            'Reference__c' => (string)$invoice->Reference,
-			            'Status__c' => (string)$invoice->Status,
-			            'SubTotal__c' => (string)$invoice->SubTotal,
-			            'Total__c' => (float)$invoice->Total,
-			            'TotalDiscount__c' => (string)$invoice->TotalDiscount,
-			            'TotalTax__c' => (string)$invoice->TotalTax,
-			            'Type__c' => (string)$invoice->Type,
-			            // 'AccountNumber__c' => $account->AccountNumber ?: '',
-			            'Account_ID__c' => $account['Id'] ?: '',
-			            'Xero_Invoice_ID__c' => (string)$invoice->InvoiceID,
-			            'UpdatedDateUTC__c' => (string)$invoice->UpdatedDateUTC,
-			        ];
-
-		        	$invoice_key = array_search((string)$invoice->InvoiceID, array_column($salesforce_invoices, 'Xero_Invoice_ID__c'));
-
-			        if ($invoice_key !== false) {
-
-			        	echo 'found from salesforce invoices list ' . (string)$invoice->InvoiceNumber . ' ----- ' . $invoice_key . ' ------ (should update existing one) ';
-
-			        	if ($salesforce_invoices[$invoice_key]['UpdatedDateUTC__c'] != (string)$invoice->UpdatedDateUTC
-			        		|| $salesforce_invoices[$invoice_key]['Account_ID__c'] != $account['Id']
-			        	) {
-
-			        		echo 'and it is modified';
-
-			        		unset($invoice_record['attributes']['referenceId']);
-
-			        		$invoice_record['id'] = $salesforce_invoices[$invoice_key]['Id'];
-
-			        		$invoices_patch_data['records'][] = $invoice_record;
-
-		                    if (count($invoices_patch_data['records']) > 150) {
-	        					$this->printTime();
-	        					echo ' _________ doing patch updates for updated invoices ( ' . count($invoices_patch_data['records']) . ')' . '<br/>';
-	        					// echo '<pre>', var_dump($invoices_patch_data), '</pre>';
-	        					$response = $this->do_request('/services/data/v43.0/composite/sobjects', ['post' => true, 'postData' => $invoices_patch_data, 'patch' => true]);
-	        					// var_dump($response);
-		                    	$invoices_patch_data['records'] = [];
-						    }
-			        	} else {
-			        		echo 'and it is not modified';
-			        	}
-
-			        	echo '<br/>';
-
-			        } else {
-
-		        		echo 'not found from salesforce invoices list ' . (string)$invoice->InvoiceID . '____' . (string)$invoice->InvoiceNumber . ' (should create new one)<br/>';
-
-				        $line_items_data = [
-				            'records' => []
+						$invoice_record = [
+				            'attributes' => [
+				                'type' => 'Ananda_Invoice__c',
+				                'referenceId' => 'REF__INVOICE_' . $invoice_ref_no++ . '_' . (string)$invoice->InvoiceNumber . '___' . (string)$invoice->InvoiceID
+				            ],
+				            'AmountCredited__c' => (string)$invoice->AmountCredited,
+				            'AmountDue__c' => (string)$invoice->AmountDue,
+				            'AmountPaid__c' => (string)$invoice->AmountPaid,
+				            'BrandingTheme__c' => $branding_theme, //(string)$invoice->BrandingThemeID,
+				            'Date__c' => date('Y-m-d', strtotime((string)$invoice->Date)),
+				            'DueDate__c' => date('Y-m-d', strtotime((string)$invoice->DueDate)),
+				            'FullyPaidOnDate__c' => $invoice->FullyPaidOnDate ? ((string)$invoice->FullyPaidOnDate . 'Z') : '',
+				            'InvoiceNumber__c' => (string)$invoice->InvoiceNumber,
+				            'Reference__c' => (string)$invoice->Reference,
+				            'Status__c' => (string)$invoice->Status,
+				            'SubTotal__c' => (string)$invoice->SubTotal,
+				            'Total__c' => (float)$invoice->Total,
+				            'TotalDiscount__c' => (string)$invoice->TotalDiscount,
+				            'TotalTax__c' => (string)$invoice->TotalTax,
+				            'Type__c' => (string)$invoice->Type,
+				            // 'AccountNumber__c' => $account->AccountNumber ?: '',
+				            'Account_ID__c' => $account['Id'] ?: '',
+				            'Xero_Invoice_ID__c' => (string)$invoice->InvoiceID,
+				            'UpdatedDateUTC__c' => (string)$invoice->UpdatedDateUTC,
 				        ];
-				        $line_items_wrapper = $invoice->LineItems;
-				        if (count($line_items_wrapper) > 0) {
-				            foreach($line_items_wrapper->LineItem as $line_item) {
-				                $line_item_record = [
-				                    'attributes' => [
-				                        'type' => 'Ananda_Invoice_LineItem__c',
-				                        'referenceId' => 'REF__LINE_ITEM_' . $line_item_ref_no++ . '_' . (string)$line_item->LineItemID,
-				                    ],
-				                    'AccountCode__c' => (string)$line_item->AccountCode,
-				                    'Description__c' => (string)$line_item->Description,
-				                    'DiscountRate__c' => (string)$line_item->DiscountRate,
-				                    'ItemCode__c' => (string)$line_item->ItemCode,
-				                    'LineAmount__c' => (string)$line_item->LineAmount,
-				                    'Quantity__c' => (string)$line_item->Quantity,
-				                    'TaxAmount__c' => (string)$line_item->TaxAmount,
-				                    'TaxType__c' => (string)$line_item->TaxType,
-				                    'UnitAmount__c' => (string)$line_item->UnitAmount,
-				                    'AccountCode__c' => (string)$line_item->AccountCode,
-				                    'Xero_Invoice_Item_ID__c' => (string)$line_item->LineItemID,
-				                ];
 
-				                $tracking_categories_data = [
-				                    'records' => []
-				                ];
-				                $tracking_categories_wrapper = $line_item->Tracking;
-				                if (count($tracking_categories_wrapper) > 0) {
-				                    foreach ($tracking_categories_wrapper->TrackingCategory as $tracking_category) {
-				                        $tracking_categories_data['records'][] = [
-				                            'attributes' => [
-				                                'type' => 'Ananda_Invoice_TrackingCategory__c',
-				                                'referenceId' => 'REF__TRACKING_CATGEGORY_' . $tracking_category_ref_no++ . '_' . (string)$tracking_category->TrackingCategoryID,
-				                            ],
-				                            'Name__c' => (string)$tracking_category->Name,
-				                            'Option__c' => (string)$tracking_category->Option,
-				                            'Tracking_Category_ID__c' => (string)$tracking_category->TrackingCategoryID,
-				                        ];
-				                    }
+			        	$invoice_key = array_search((string)$invoice->InvoiceID, array_column($salesforce_invoices, 'Xero_Invoice_ID__c'));
 
-				                    $line_item_record['Ananda_Invoice_TrackingCategories__r'] = $tracking_categories_data;
-				                }
+				        if ($invoice_key !== false) {
 
-				                $line_items_data['records'][] = $line_item_record;
-				            }
-				            $invoice_record['Ananda_Invoice_LineItems__r'] = $line_items_data;
-				        }
+				        	echo 'found from salesforce invoices list ' . (string)$invoice->InvoiceNumber . ' ----- ' . $invoice_key . ' ------ (should update existing one) ';
 
-	                    $invoices_data['records'][] = $invoice_record;
+				        	if ($salesforce_invoices[$invoice_key]['UpdatedDateUTC__c'] != (string)$invoice->UpdatedDateUTC
+				        		|| $salesforce_invoices[$invoice_key]['Account_ID__c'] != $account['Id']
+				        	) {
 
-	                    if (count($invoices_data['records']) > 6) {
-	                    	$this->handle_submit_records_data_queue($invoices_data, 'Ananda_Invoice__c');
-	                    	$invoices_data['records'] = [];
-					    }
-					}
+				        		echo 'and it is modified';
 
-                }
-                // var_dump ($invoices_wrapper->Invoice);
-            }
+				        		unset($invoice_record['attributes']['referenceId']);
 
-            $page_no++;
-        } while(count($invoices) > 0);
+				        		$invoice_record['id'] = $salesforce_invoices[$invoice_key]['Id'];
+
+				        		$invoices_patch_data['records'][] = $invoice_record;
+
+			                    if (count($invoices_patch_data['records']) > 150) {
+		        					$this->printTime();
+		        					echo ' _________ doing patch updates for updated invoices ( ' . count($invoices_patch_data['records']) . ')' . '<br/>';
+		        					// echo '<pre>', var_dump($invoices_patch_data), '</pre>';
+		        					$response = $this->do_request('/services/data/v43.0/composite/sobjects', ['post' => true, 'postData' => $invoices_patch_data, 'patch' => true]);
+		        					// var_dump($response);
+			                    	$invoices_patch_data['records'] = [];
+							    }
+				        	} else {
+				        		echo 'and it is not modified';
+				        	}
+
+				        	echo '<br/>';
+
+				        } else {
+
+			        		echo 'not found from salesforce invoices list ' . (string)$invoice->InvoiceID . '____' . (string)$invoice->InvoiceNumber . ' (should create new one)<br/>';
+
+					        $line_items_data = [
+					            'records' => []
+					        ];
+					        $line_items_wrapper = $invoice->LineItems;
+					        if (count($line_items_wrapper) > 0) {
+					            foreach($line_items_wrapper->LineItem as $line_item) {
+					                $line_item_record = [
+					                    'attributes' => [
+					                        'type' => 'Ananda_Invoice_LineItem__c',
+					                        'referenceId' => 'REF__LINE_ITEM_' . $line_item_ref_no++ . '_' . (string)$line_item->LineItemID,
+					                    ],
+					                    'AccountCode__c' => (string)$line_item->AccountCode,
+					                    'Description__c' => (string)$line_item->Description,
+					                    'DiscountRate__c' => (string)$line_item->DiscountRate,
+					                    'ItemCode__c' => (string)$line_item->ItemCode,
+					                    'LineAmount__c' => (string)$line_item->LineAmount,
+					                    'Quantity__c' => (string)$line_item->Quantity,
+					                    'TaxAmount__c' => (string)$line_item->TaxAmount,
+					                    'TaxType__c' => (string)$line_item->TaxType,
+					                    'UnitAmount__c' => (string)$line_item->UnitAmount,
+					                    'AccountCode__c' => (string)$line_item->AccountCode,
+					                    'Xero_Invoice_Item_ID__c' => (string)$line_item->LineItemID,
+					                ];
+
+					                $tracking_categories_data = [
+					                    'records' => []
+					                ];
+					                $tracking_categories_wrapper = $line_item->Tracking;
+					                if (count($tracking_categories_wrapper) > 0) {
+					                    foreach ($tracking_categories_wrapper->TrackingCategory as $tracking_category) {
+					                        $tracking_categories_data['records'][] = [
+					                            'attributes' => [
+					                                'type' => 'Ananda_Invoice_TrackingCategory__c',
+					                                'referenceId' => 'REF__TRACKING_CATGEGORY_' . $tracking_category_ref_no++ . '_' . (string)$tracking_category->TrackingCategoryID,
+					                            ],
+					                            'Name__c' => (string)$tracking_category->Name,
+					                            'Option__c' => (string)$tracking_category->Option,
+					                            'Tracking_Category_ID__c' => (string)$tracking_category->TrackingCategoryID,
+					                        ];
+					                    }
+
+					                    $line_item_record['Ananda_Invoice_TrackingCategories__r'] = $tracking_categories_data;
+					                }
+
+					                $line_items_data['records'][] = $line_item_record;
+					            }
+					            $invoice_record['Ananda_Invoice_LineItems__r'] = $line_items_data;
+					        }
+
+		                    $invoices_data['records'][] = $invoice_record;
+
+		                    if (count($invoices_data['records']) > 6) {
+		                    	$this->handle_submit_records_data_queue($invoices_data, 'Ananda_Invoice__c');
+		                    	$invoices_data['records'] = [];
+						    }
+						}
+
+	                }
+	                // var_dump ($invoices_wrapper->Invoice);
+	            }
+
+	            $page_no++;
+	        } while(count($invoices) > 0);
+
+	    } // end foreach
 
         // exit('ddd');
 

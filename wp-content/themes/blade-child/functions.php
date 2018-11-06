@@ -1593,7 +1593,7 @@ function runOnInit() {
                 $salesforce->migrate_invoices($_GET['ID'] ?: '');
                 break;
             case 'update_invoices':
-                $salesforce->migrate_invoices('', '2018');
+                $salesforce->migrate_invoices(['WP-', 'AE-'], '2018');
                 // $salesforce->migrate_invoices('INV-', '2017');
                 // $salesforce->migrate_invoices('CN-', '2017');
                 // $salesforce->migrate_invoices('AE-', '2017');
@@ -1722,13 +1722,14 @@ if (! wp_next_scheduled ( 'salesforce_invoice_migration_hook' )) {
 add_action('salesforce_invoice_migration_hook', 'salesforce_invoice_migration_exec');
 function salesforce_invoice_migration_exec() {
     $salesforce = new SalesforceSDK();
-    $salesforce->migrate_invoices('WP-', '2018');
-    $salesforce->migrate_invoices('INV-', '2018');
-    $salesforce->migrate_invoices('CN-', '2018');
-    $salesforce->migrate_invoices('AE-', '2018');
-    $salesforce->migrate_invoices('FPN-', '2018');
-    $salesforce->migrate_invoices('TCG-', '2018');
-    $salesforce->migrate_invoices('CPC-', '2018');
+    $salesforce->migrate_invoices(['WP-', 'INV-', 'CN-', 'AE-', 'FPN-', 'TCG-', 'CPC-'], '2018');
+    // $salesforce->migrate_invoices('WP-', '2018');
+    // $salesforce->migrate_invoices('INV-', '2018');
+    // $salesforce->migrate_invoices('CN-', '2018');
+    // $salesforce->migrate_invoices('AE-', '2018');
+    // $salesforce->migrate_invoices('FPN-', '2018');
+    // $salesforce->migrate_invoices('TCG-', '2018');
+    // $salesforce->migrate_invoices('CPC-', '2018');
 }
 
 

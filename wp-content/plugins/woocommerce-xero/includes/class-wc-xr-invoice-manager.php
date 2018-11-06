@@ -52,6 +52,55 @@ class WC_XR_Invoice_Manager {
 		} elseif ( 'payment_completion' === $option ) {
 			add_action( 'woocommerce_payment_complete', array( $this, 'send_invoice' ) );
 		}
+		add_action( 'woocommerce_order_status_cancelled', array( $this, 'void_invoice' ) );
+	}
+
+	/**
+	 * Voic invoice to XERO API
+	 *
+	 * @param int $order_id
+	 *
+	 * @return bool
+	 */
+
+	public function void_invoice( $order_id, $is_manual = false ) {
+
+		// Get the order
+		$order = wc_get_order( $order_id );
+
+		try {
+			// Write exception message to log
+			$logger = new WC_XR_Logger( $this->settings );
+
+			// Get the invoice
+			$invoice = $this->get_invoice_by_order( $order );
+
+			// Invoice Request
+			$void_request = new WC_XR_Request_Invoice_Void( $this->settings, $invoice->get_invoice_number() );
+
+			// Logging
+			$logger->write( 'START XERO VOID INVOICE. order_id=' . $order_id );
+
+			$void_request->do_request();
+
+			// Log response
+			$logger->write( 'XERO RESPONSE:' . "\n" . $void_request->get_response_body() );
+
+			// Add Order Note
+			$order->add_order_note( __( 'Xero Invoice Voided.  ', 'wc-xero' ) . ' Invoice ID: ' . (string) $invoice->get_invoice_number() );
+
+		} catch ( Exception $e ) {
+			// Add Exception as order note
+			$order->add_order_note( $e->getMessage() );
+
+			$logger->write( $e->getMessage() );
+
+			return false;
+		}
+
+		$logger->write( 'END XERO VOID INVOICE' );
+
+		return true;
 	}
 
 	/**
