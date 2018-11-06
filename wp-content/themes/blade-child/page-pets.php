@@ -99,7 +99,14 @@
 
 	<?php if(is_user_logged_in()) { ?>
 		<style type="text/css">
-			#coa-tool-section {
+			.hide-when-logged-in {
+				display: none;
+			}
+		</style>
+	<?php } ?>
+	<?php if(!is_user_logged_in()) { ?>
+		<style type="text/css">
+			.hide-when-not-logged-in {
 				display: none;
 			}
 		</style>

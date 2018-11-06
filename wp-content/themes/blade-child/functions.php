@@ -369,17 +369,19 @@ function check_if_valid_states() {
 
     // 10226 - THC Free POS
     // 10251 - THC Free Ticture
-    $product_thc = false;
+    $product_thc_free = false;
+    $product_non_thc_free = false;
     foreach($items as $item => $values) { 
         $product_id = $values['product_id'];
         // var_dump($product_id);
         if ($product_id == '10251' || $product_id == '10226') {
-            $product_thc = true;
-            break;
+            $product_thc_free = true;
+        } else {
+            $product_non_thc_free = true;
         }
     }
-    // var_dump($product_thc);
-    if( in_array( WC()->customer->get_shipping_state(), $msg_states_all ) || in_array( WC()->customer->get_billing_state(), $msg_states_all ) || (!$product_thc && in_array( WC()->customer->get_shipping_state(), $msg_states_thc )) || (!$product_thc && in_array( WC()->customer->get_billing_state(), $msg_states_thc )) ) {
+    // var_dump($product_thc_free);
+    if( in_array( WC()->customer->get_shipping_state(), $msg_states_all ) || in_array( WC()->customer->get_billing_state(), $msg_states_all ) || (!$product_thc_free && in_array( WC()->customer->get_shipping_state(), $msg_states_thc )) || (!$product_thc_free && in_array( WC()->customer->get_billing_state(), $msg_states_thc )) ) {
         return false;
     }
     return true;
