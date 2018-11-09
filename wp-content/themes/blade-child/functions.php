@@ -421,7 +421,7 @@ function check_pets_purchase_if_valid() {
 
 function checkout_cart_items_to_confirm_valid_states() {
     if ( !check_if_valid_states() ) {
-        wc_add_notice( 'Invalid state', 'error');
+        wc_add_notice( 'Unable to complete your order; Your state is currently restricted due to regulations concerning hemp-derived CBD', 'error');
     }
     if ( !check_pets_purchase_if_valid() ) {
         wc_add_notice( 'To order an Ananda Pets point-of-sale display, your pharmacy must carry one of our full Ananda Professional displays. Please add a vertical, countertop or THC Free display to your current order.', 'error' );
@@ -1719,7 +1719,7 @@ function schedule_salesforce_migration_interval( $schedules ) {
 }
 
 if (! wp_next_scheduled ( 'salesforce_invoice_migration_hook' )) {
-    wp_schedule_event(time(), 'hourly', 'salesforce_invoice_migration_hook');
+    wp_schedule_event(time(), 'salesforce_migration_interval', 'salesforce_invoice_migration_hook');
 }
 
 add_action('salesforce_invoice_migration_hook', 'salesforce_invoice_migration_exec');

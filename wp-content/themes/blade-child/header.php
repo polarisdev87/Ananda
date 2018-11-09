@@ -152,6 +152,11 @@
 	?>
 
 	<body id="grve-body" <?php body_class( $grve_theme_layout ); ?>>
+		<style type="text/css">
+			.need-to-remove {
+			    display: none;
+			}
+		</style>		
 		<?php do_action( 'blade_grve_body_top' ); ?>
 		<?php if ( blade_grve_check_theme_loader_visibility() ) { ?>
 		<!-- LOADER -->

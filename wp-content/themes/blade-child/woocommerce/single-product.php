@@ -27,7 +27,13 @@ add_action( 'grve_woocommerce_after_single_product_summary_sections', 'woocommer
 add_action( 'grve_woocommerce_after_single_product_summary_sections', 'woocommerce_output_related_products', 20 );
 
 
-get_header( 'shop' ); ?>
+get_header( 'shop' ); 
+
+if (in_array(get_the_id(), ['13147', '13148'])) {
+	echo do_shortcode('[rev_slider alias="pre-order-pets-pos"]');
+}
+
+?>
 
 
 	<?php
@@ -80,6 +86,9 @@ get_header( 'shop' ); ?>
 			}
 			.up-sells .slick-arrow {
 				display: none !important;
+			}
+			.need-to-remove {
+				display: none;
 			}
 		</style>
 	<?php
@@ -134,6 +143,12 @@ get_header( 'shop' ); ?>
 				// arrows: false,
 				responsive: "unslick",
 			});
+
+			<?php if (is_user_logged_in()) { ?>
+				jQuery('.need-to-remove').removeClass('need-to-remove');
+			<?php } else { ?>
+				jQuery('.need-to-remove').remove();
+			<?php } ?>
 		});
 	</script>
 

@@ -111,6 +111,11 @@
 			}
 		</style>
 	<?php } ?>
+	<style type="text/css">
+		.pets-info-table td, .pets-info-table th {
+			padding: 3px 20px;
+		}
+	</style>
 
 	<?php get_footer(); ?>
 
