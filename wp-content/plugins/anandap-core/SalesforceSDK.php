@@ -459,7 +459,7 @@ class SalesforceSDK {
         }
 	}
 
-	public function get_all_salesforce_invoices($startsWith = '', $fields = ['Id', 'InvoiceNumber__c', 'Account_ID__c', 'Xero_Invoice_ID__c', 'UpdatedDateUTC__c']) {
+	public function get_all_salesforce_invoices($startsWith = '', $year = false, $fields = ['Id', 'InvoiceNumber__c', 'Account_ID__c', 'Xero_Invoice_ID__c', 'UpdatedDateUTC__c']) {
 
 		$results = [];
 
@@ -517,7 +517,7 @@ class SalesforceSDK {
 
 		$this->printTime();
 		echo ('_________ getting Invoices ____________ <br/>');
-		$salesforce_invoices = $this->get_all_salesforce_invoices($startsWith);
+		$salesforce_invoices = $this->get_all_salesforce_invoices($startsWith, $year);
         $invoices_patch_data = [
         	'allOrNone' => false,
         	'records' => [],
@@ -1785,7 +1785,7 @@ class SalesforceSDK {
 	}
 	public function migrate_branding() {
 		$accounts = $this->get_all_accounts(['Id', 'Name', 'Brand__c']);
-		$salesforce_invoices = $this->get_all_salesforce_invoices('', ['Id', 'Account_ID__c', 'BrandingTheme__c', 'InvoiceNumber__c']);
+		$salesforce_invoices = $this->get_all_salesforce_invoices('', false, ['Id', 'Account_ID__c', 'BrandingTheme__c', 'InvoiceNumber__c']);
 
         $patch_data = [
         	'allOrNone' => false,
