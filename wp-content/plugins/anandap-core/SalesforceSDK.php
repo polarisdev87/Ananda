@@ -1074,6 +1074,29 @@ class SalesforceSDK {
 		// $this->update_salesforce_account_with_storeID($data);
 	}
 
+	public function mark_pet_store($data) {
+		if (!$data['NPI']) return 'Nothing found';
+		// if ($data['storeID']) {
+		if ($data['NPI']) {
+			global $wpdb;
+
+			$store_row = $wpdb->get_row("SELECT * FROM " . ASL_PREFIX.'stores' . " where description like '%" . $data['NPI'] . "%'");
+			if (!$store_row) {
+				return 'Could not find relevant NPI number';
+			}
+			$data['StoreID'] = $store_row->id;
+
+		    $formatted = [
+		    	'is_disabled'	=> 0,
+		    	'marker_id' => 151,
+		    ];
+			$wpdb->update(ASL_PREFIX.'stores', $formatted, ['id' => $data['StoreID']]);
+			
+			return 'Successfully marked pet on stores with NPI of '. $data['NPI'];
+		}
+		return 'Nothing marked';
+	}
+
 	public function upsert_store($data) {
 		if (!$data['NPI'] || !$data['PreferredName']) { // ignore updating store locator
 			return 0;

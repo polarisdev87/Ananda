@@ -1641,6 +1641,10 @@ function runOnInit() {
                 echo '<script type="text/javascript">window.close();</script>';
                 // echo $response;
                 break;
+            case 'mark_pet_store':
+                $response = $salesforce->mark_pet_store($_REQUEST);
+                echo '<script type="text/javascript">window.close();</script>';
+                break;
             case 'confirm_payment':
                 $response = $salesforce->confirm_payment($_REQUEST);
                 echo '<script type="text/javascript">window.close();</script>';
