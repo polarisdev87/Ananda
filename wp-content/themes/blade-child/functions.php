@@ -1509,11 +1509,17 @@ function runOnInit() {
         if (isset($_POST['submit']) && $_POST['submit'] == 'Enable') {
             $user = get_user_by('email', $_POST['email']);
             if ($user) {
-                update_user_meta( $user->ID, 'already_bought', '1' );
-                update_user_meta( $user->ID, 'has_salesforce_checked', '1');
+                $type = $_POST['type'];
+
+                if ($type == 'thc') {
+                    update_user_meta( $user->ID, 'already_bought', '1' );
+                    update_user_meta( $user->ID, 'has_salesforce_checked', '1');
+                } else if ($type == 'pets') {
+                    update_user_meta( $user->ID, 'already_bought_pets', '1' );
+                }
 
                 $to = 'lance032017@gmail.com';
-                $subject = 'Reorder enabled notification';
+                $subject = 'Reorder enabled notification - for ' . $type;
                 $body = 'Customer with this email - ' . $_POST['email'] . ' has been enabled to do reorder at ' . date('Y-m-d H:i:s');
                 $headers = ['Content-Type: text/html; charset=UTF-8'];
                 wp_mail( $to, $subject, $body, $headers );
@@ -1533,6 +1539,19 @@ function runOnInit() {
                     <fieldset style="padding: 25px; margin-top: 12px;" >
                         <legend>Enable Reorder Feature</legend>
                         <span>Enter email address: </span><input type="email" name="email" size="35" required />
+                        <input type="hidden" name="type" value="thc" />
+                        <input type="submit" name="submit" value="Enable" />
+                    </fieldset>
+                </form>
+            <?php
+        }
+        if($_GET['customers'] == 'enable_pets_reorder') {
+            ?>
+                <form action="/?customers=enable_pets_reorder" method="post">
+                    <fieldset style="padding: 25px; margin-top: 12px;" >
+                        <legend>Enable Pets Reorder Feature</legend>
+                        <span>Enter email address: </span><input type="email" name="email" size="35" required />
+                        <input type="hidden" name="type" value="pets" />
                         <input type="submit" name="submit" value="Enable" />
                     </fieldset>
                 </form>
