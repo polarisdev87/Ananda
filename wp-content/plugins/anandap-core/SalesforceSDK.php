@@ -467,10 +467,10 @@ class SalesforceSDK {
 			$where = [];
 			if (is_array($startsWith)) {
 				foreach ($startsWith as $start) {
-					$where[] = 'InvoiceNumber__c LIKE \'' . $start . '%\'';
+					$where[] = "InvoiceNumber__c LIKE '" . $start . "%'";
 				}
 			} else {
-				$where[] = 'InvoiceNumber__c LIKE \'' . $startsWith . '%\'';
+				$where[] = "InvoiceNumber__c LIKE '" . $startsWith . "%'";
 			}
 			$url = '/services/data/v43.0/query/?q=' . urlencode('SELECT ' . implode(', ', $fields) . ' FROM Ananda_Invoice__c WHERE '. implode(' OR ', $where));
 		} else {
