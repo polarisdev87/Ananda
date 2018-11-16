@@ -29,9 +29,9 @@ add_action( 'grve_woocommerce_after_single_product_summary_sections', 'woocommer
 
 get_header( 'shop' ); 
 
-if (in_array(get_the_id(), ['13147', '13148'])) {
-	echo do_shortcode('[rev_slider alias="pre-order-pets-pos"]');
-}
+// if (in_array(get_the_id(), ['13147', '13148'])) {
+// 	echo do_shortcode('[rev_slider alias="pre-order-pets-pos"]');
+// }
 
 ?>
 
