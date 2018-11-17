@@ -1,0 +1,583 @@
+// Color variables (appears count calculates by raw css)
+@color0: #ffffff; 
+//@color1: #B39571;
+@color2: #cccccc; 
+@color3: #999999; 
+@color4: #000000; 
+@color5: #666666; 
+@color6: #808080; 
+@color7: #51493e; 
+@color8: #52483d; 
+@color9: #333333; 
+@color10: #d6dce2; 
+@color11: #fafafa; 
+@color12: #e1e1e1; 
+@color13: #008ad2; 
+@color14: #dddddd; 
+@color15: #c8c5b8; 
+@color16: #1e91d7; 
+
+@color1_0: #3D5B99;
+@color1_2: #EFF1F6;
+
+/*border round*/
+@color1_4: #06476D;
+
+@color1_1: #E11619;
+@color1_3: #278BBC;
+@color1_5: #ACD55D;
+@color1_6: #A8BD78;
+@color1_7: #EAAE40;
+@color1_8: #E68EC1;
+@color1_9: #B39571;
+
+
+#asl-storelocator.asl-p-cont{
+    .gm-style-iw {
+	color:@color4;
+    }
+    .infoWindow {
+        background-color: @color0;
+        background-color: @color0;
+        h3 {
+            color: @color16;
+        }
+        .features {
+            li {
+                color:@color6;
+            }
+        }
+        
+        
+        h2 {
+            color: @color4;
+        }
+    }
+    .storelocator-panel {
+        border: 1px solid @color2;
+        .resut-found {
+            background:@color0;
+            border-bottom: 1px dotted @color15;
+            color:@color8;
+        }
+        .store-list {
+            li {
+                background:@color0;
+                border-bottom: 1px dotted @color15;
+                color:@color8;
+            }
+            li.store {
+                &:hover {
+                    background: @color0;
+                    color:@color4;
+                }
+            }
+            li.highlighted {
+                background: @color0;
+                color:@color4;
+                &:hover {
+                    background: @color0;
+                    color:@color4;
+                }
+            }
+            .no-stores {
+                background-color:#EEE7E7;
+                color: @color6;
+            }
+        }
+        .directions-panel {
+            background:@color0;
+            color:@color8;
+        }
+        .directions {
+            color: blue;
+        }
+    }
+    .store-locator {
+        .agile-modal {
+            color: #706B65;
+        }
+     
+        h4 {
+            color:@color1_0;
+        }
+        .agile-modal-backdrop-in {
+            background-color: @color4;
+        }
+        button.close-directions.close[aria-label="Close"] {
+            background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+            border-radius: 5px;
+            color: #cccccc;
+        }
+    }
+    .store {
+        .features {
+            color: grey;
+        }
+        .web {
+            a {
+                color: green;
+            }
+        }
+        .action {
+            color: green;
+        }
+    }
+    
+    .half-rule {
+        border-color: @color2;
+    }
+    .half-rule-1 {
+        border-bottom: 1px solid @color14;
+    }
+}
+
+#asl-storelocator.storelocator-main {
+	#asl-map-canv {
+		background:@color0;
+	}
+	#panel {
+		background: @color0;
+	}	
+}
+
+#asl-storelocator.asl-p-cont{
+    
+    .map-canvas-outer {
+    	background: none repeat scroll 0 0 @color0;
+    	border: 1px solid @color14;
+    }
+    div.arrow-down {
+    	border-top: 25px solid @color0;
+    }
+    .loading {
+    	background-color: @color0;
+    	border: 1px solid @color2;
+    }
+    .asl-overlay {
+        h1.h1 {
+            color: @color1_0;
+        }
+    }
+    .asl-overlay-on-item {	
+        h1.h1 {
+            color: @color1_0;
+        }
+    }
+    body.search-list {
+    	background: #F8F8F8;
+    }
+    #panel {
+    	color: @color7;
+    	height: 472px;
+    	padding: 10px;
+    	.item-state {
+    		a {
+    			color: @color7;
+    	
+    			span {
+    				background:@color12;
+    				color: @color0;
+    			}
+    			&:hover {
+    				span {
+    					background-color: @color13;
+    					color: @color0;
+    				}
+    			}
+    		}
+    		span.active {
+    		}
+    		a.collapsed {
+    			span {
+    				background-color: #90CAF9;
+    				background-color: @color12;
+    				color: @color11;
+    				color: @color7;
+    			}
+    		}
+    	}
+    	.store-inner {
+    		border-bottom: 1px solid #f0eeea;
+    	}
+    }
+    .store.highlighted {
+    	.store-inner {
+    		background-color: #ffffe0;
+    	}
+    }
+    .infoBox {
+    	.categories {
+    		color: @color2;
+    	}
+    }
+
+    .btn-default {
+        background-color: @color0;
+    }
+
+    .btn-default#btn-geolocation {
+        &:hover {
+            background-color: @color1_0;
+            border-color: @color1_0;
+            color: @color0;
+        }
+    }
+
+    .chosen-container-multi {
+    	.chosen-choices {
+    		border: 1px solid @color2;
+    	}
+    }
+
+    .item {
+    	background: transparent none repeat scroll 0 0 !important;
+    	border-bottom: 1px solid @color2 !important;
+        .img-section{
+            a{
+                img{
+                    /*border: 4px solid @color1_0;
+                    border-radius: 50%;*/
+                }
+            }
+        }
+        .data-section {
+            .title-item{
+                color: @color1_0;
+            }
+            .addr-sec{
+                p{
+                }
+            }
+            .p-direction {
+                color: @color0;
+                background: @color1_0;
+            }
+        }
+    }
+
+    .wrapper-container {
+    	background: @color0;
+    	border: 1px solid @color10;
+    }
+
+    .listing-map.list-only {
+    	background: @color0;
+    	border: 1px solid @color10;
+    }
+
+    .item.highlighted {
+    	background: #EEEEEE !important;
+    }
+
+    .adropdown-menu>.active>a,  
+    .adropdown-menu>.active>a:hover,
+    .adropdown-menu>.active>a:focus{
+        background: @color1_0;
+    }
+}
+
+
+#asl-storelocator.asl-p-cont {
+    
+    .asl-map{
+
+        .search_filter.inside-map{
+            p{
+                input{
+                    color: @color1_0;                    
+                }
+                span{
+                    i{
+                        background: @color1_0;
+                        color: @color0;
+                        &:after {
+                            border-color: transparent transparent transparent @color1_0;
+                        }   
+                    }
+                }
+            }
+        }
+    }
+    .infoWindow .phone>b, 
+    .infoWindow .address ,
+    .btn-default,
+    .infoWindow .categories,
+    .panel-inner .item .addr-sec .p-title {
+        color:@color1_0;
+    }
+
+    .infoWindow a.action,
+    .infoWindow a.action.directions,
+    #panel .item-state a span,
+    #panel .item-state a:hover span,
+    button.close-directions.close[aria-label="Close"] {
+        background-color:@color1_0;
+        color: @color0;
+    }
+
+
+    .btn-default#btn-geolocation:hover, 
+    .btn-default, 
+    .panel .item .thumb-a img,
+    .panel .item {
+    	border-color:@color1_0;
+    }
+
+    .panel {
+    	.item {
+    		background: @color0 !important;
+    	}
+    }
+    .item-state {
+        .panel {
+            .item{
+                &:nth-child(2n) {
+                background: @color11 none repeat scroll 0 0 !important;
+                }
+            }
+        }    
+    }
+
+
+
+    button.close-directions.close[aria-label="Close"] {
+        background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+        color: @color2;
+    }
+
+    input#auto-complete-search {
+    	&:focus {
+    		border-color: rgba(0, 0, 0, 0.36);
+    		box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(0,0,0,0.20);
+    	}
+    }
+
+
+
+    .categories_filter {
+    	.multiselect.adropdown-toggle.style-btn.btn.btn-default {
+    		border-color: @color6;
+    		color: @color6;
+    	}
+    }
+
+    .slider-selection {
+    	background: @color1_0 none repeat scroll 0 0 !important;
+    }
+
+    .slider-track {
+    	background: @color0 none repeat scroll 0 0 !important;
+    }
+
+
+
+    .range_filter {
+        .rangeFilter {
+        	.slider.slider-horizontal {
+    			.slider-track {
+    				.slider-handle.round {
+    	                &:before {
+                            color: @color1_0;
+                        }
+    				}
+    			}
+    		}
+    	}
+    }
+
+    .Status_filter {
+    	input[type="checkbox"] {
+    		&:checked+.radio_btn {
+    			background: @color1_0 none repeat scroll 0 0;
+    		}
+    	}
+    }
+
+    .radio_btn {
+    	background: @color0 none repeat scroll 0 0;
+    	border: 1px solid @color1_0;
+    	&::before {
+    		color: @color0;
+    	}
+    }
+
+    .Status_filter {
+    	
+    	p {
+            span {
+                color: @color1_0;
+            }
+            
+    		label {
+    			color: @color3;
+    		}
+    	}
+
+    }
+
+
+    #panel.storelocator-panel {
+        border: 1px solid @color2;
+    }
+    .filter-box{
+        background: @color1_2;
+        color: @color0;
+    }
+    .round-box {
+        background-color: @color0;
+        color: #535353;
+        border: 2px solid @color1_4;
+    }
+
+    .Num_of_store , .cats-title{
+    	background: @color1_0 none repeat scroll 0 0;
+    	color: @color0;
+        span.back-button i {
+            border: 1px solid @color0;
+        }
+
+    }
+
+
+
+    ul.adropdown-menu.multiselect-container {
+
+    	.btn.btn-default.multiselect-clear-filter {
+    		border-color: @color2;
+    		color: @color3;
+    	}
+    	li {
+    		.input-group-addon {
+    			color: @color3;
+    		}
+    	}
+
+    }
+
+
+    #style_1.infoWindow {
+    	a.action {
+    		background: @color1_0 none repeat scroll 0 0;
+    		color: @color0;
+    	}
+    	.storelocator-main {
+    		.action.directions {
+    			background: @color1_0 none repeat scroll 0 0;
+    			color: @color0;
+    		}
+    	}
+    }
+
+    #style_1.infoWindow>h3 {
+    	color: @color1_0;
+    }
+
+    #style_1.infoWindow {
+        .phone>b,.address,.categories,.phone>a ,.distance,.time{
+            color: @color9;
+        }    
+    }
+
+
+    #style_2.infoWindow {
+    	h3 {
+    		background: @color1_0 none repeat scroll 0 0;
+    		color: @color0;
+    	}
+    	a.action {
+    		background: @color1_0 none repeat scroll 0 0;
+    		border-left: 1px solid @color0;
+    		color: @color0;
+    	}
+    	.storelocator-main {
+    		.action.directions {
+    			color: @color5;
+    		}
+    	}
+    }
+
+    #style_2.infoWindow .phone>b, #style_2.infoWindow .address, #style_2.infoWindow .categories, #style_2.infoWindow .phone>a, #style_2.infoWindow .distance  {
+    	color: @color9;
+    }
+
+    .infoBox>img.style_2_x {
+    	background: @color1_0 none repeat scroll 0 0;
+    }
+
+    #style_0.infoWindow {
+    	h3 {
+    		background: @color1_0 none repeat scroll 0 0;
+    		color: @color0;
+    	}
+    	a.action {
+    		background: @color1_0 none repeat scroll 0 0;
+    		border-left: 1px solid @color0;
+    		color: @color0;
+    	}
+    	.storelocator-main {
+    		.action.directions {
+    			background: @color1_0 none repeat scroll 0 0;
+    			border-left: 1px solid @color0;
+    			color: @color0;
+    		}
+    	}
+    }
+
+    #style_0.infoWindow {
+        .phone>b,
+        .address,
+        .categories,
+        .phone>a,
+        .distance{
+            color: @color9;
+        }
+    }
+
+    .infoBox > img.style_0_x {
+    	background: @color1_0 none repeat scroll 0 0;
+    }
+
+
+    .Status_filter{
+        .onoffswitch-label {
+            border: 2px solid @color1_0; border-radius: 0px;
+        }
+        .onoffswitch-inner:before {
+            background-color: @color0; color: @color9;
+        }
+        .onoffswitch-inner:after {
+            background-color: @color2; color:@color9;
+        }
+        .onoffswitch-switch {
+            background: @color1_0;
+        }
+    }
+
+
+    .col-xs-12 > a.asl_Readmore_button {
+        color: @color9;
+    }
+
+
+    .btn.btn-default.btn-submit {
+        background: @color1_0 none repeat scroll 0 0;
+        border-color: @color1_0;
+        color: @color0;
+    } 
+
+    #asl-geolocation-agile-modal{ 
+        .btn.btn-default {
+            background: @color1_0 none repeat scroll 0 0;
+            color: @color0;
+        }
+    }
+}
+
+#asl-storelocator.asl-p-cont .directions-cont .agile-modal-header h4{
+    color: @color1_0;
+}
+
+
+#asl-storelocator.asl-p-cont.asl-no-advance .filter-box{background-color:@color1_0}
+

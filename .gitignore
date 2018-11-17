@@ -87,6 +87,7 @@ wp-content/themes/blade-child/functions_backup*
 !wp-content/plugins/woocommerce-shipstation/
 !wp-content/plugins/woocommerce-shipping-multiple-addresses/
 !wp-content/plugins/woocommerce-advanced-free-shipping/
+!wp-content/plugins/store-locator-google-maps/
 !wp-content/themes/blade/
 !wp-content/themes/blade-child/
 

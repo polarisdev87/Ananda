@@ -1,0 +1,1655 @@
+#asl-storelocator * {  line-height: 1.3;  letter-spacing: normal;  text-decoration: none;}
+.asl-p-cont h1,
+.asl-p-cont h2,.asl-p-cont h3,.asl-p-cont h4,.asl-p-cont h5,.asl-p-cont h6,.asl-p-cont h7 {  padding: 0;  margin: 0;}
+.pad-0,.no-pad .col-xs-1,.no-pad .col-sm-1,.no-pad .col-md-1,.no-pad .col-lg-1,.no-pad .col-xs-2,.no-pad .col-sm-2,.no-pad .col-md-2,.no-pad .col-lg-2,.no-pad .col-xs-3,.no-pad .col-sm-3,.no-pad .col-md-3,.no-pad .col-lg-3,.no-pad .col-xs-4,.no-pad .col-sm-4,.no-pad .col-md-4,.no-pad .col-lg-4,.no-pad .col-xs-5,.no-pad .col-sm-5,.no-pad .col-md-5,.no-pad .col-lg-5,.no-pad .col-xs-6,.no-pad .col-sm-6,.no-pad .col-md-6,.no-pad .col-lg-6,.no-pad .col-xs-7,.no-pad .col-sm-7,.no-pad .col-md-7,.no-pad .col-lg-7,.no-pad .col-xs-8,.no-pad .col-sm-8,.no-pad .col-md-8,.no-pad .col-lg-8,.no-pad .col-xs-9,.no-pad .col-sm-9,.no-pad .col-md-9,.no-pad .col-lg-9,.no-pad .col-xs-10,.no-pad .col-sm-10,.no-pad .col-md-10,.no-pad .col-lg-10,.no-pad .col-xs-11,.no-pad .col-sm-11,.no-pad .col-md-11,.no-pad .col-lg-11,.no-pad .col-xs-12,.no-pad .col-sm-12,.no-pad .col-md-12,.no-pad .col-lg-12 {  padding-left: 0;  padding-right: 0;}
+#asl-storelocator.asl-p-cont .gm-style-iw .store img {  float: right;  width: 50px;}
+#asl-storelocator.asl-p-cont .infoWindow {  background-color: #ffffff;  border-radius: 0 0 5px 5px;  bottom: auto;  float: left;  font-size: 10px;  height: auto;  left: 0;  margin: auto;  padding: 5px;  right: 0;  top: 3%;  width: 300px;  width: 250px;}
+#asl-storelocator.asl-p-cont .infoWindow h3 {  float: left;  font-size: 15px;  font-size: 18px;  line-height: 1.2em;  margin: 0 !important;  padding: 7px;  padding: 7px 0;  width: 78%;}
+#asl-storelocator.asl-p-cont .infoWindow .infowindowContent {  clear: both;  display: block;  width: 100%;  display: table;  padding: 0 10px 10px;  text-align: left;}
+#asl-storelocator.asl-p-cont .infoWindow .features li {  float: left;  list-style: none outside none;  margin-right: 15px;}
+#asl-storelocator.asl-p-cont .infoWindow .phone {  margin-bottom: 5px;}
+#asl-storelocator.asl-p-cont .infoWindow .store-logo {  float: right;  height: 50px;  margin-top: 18px;  max-width: 50px;  width: auto;}
+#asl-storelocator.asl-p-cont .infoWindow .action {  display: inline-block;  font-size: 12px;  margin-bottom: 5px;  margin-right: 10px;  margin-top: 10px;}
+#asl-storelocator.asl-p-cont .infoWindow h2 {  float: left;  font-size: 17px;  line-height: 1.2em;  margin: 0 !important;  padding: 7px;  width: 90%;}
+#asl-storelocator.asl-p-cont .infoWindow .categories {  font-size: 12px;  font-weight: 700;}
+#asl-storelocator.asl-p-cont .infoWindow .address {  font-weight: 700;}
+#asl-storelocator.asl-p-cont .infoWindow a.action {  border-radius: 0;  font-size: 12px;  font-weight: 500;  margin: 0 0 0 3px !important;  padding: 3px 5px;}
+#asl-storelocator.asl-p-cont .infoWindow .glyphicon {  float: left;  height: 15px;  line-height: 1.8em;  margin: auto;  width: 17px;}
+#asl-storelocator.asl-p-cont .storelocator-panel {  border-radius: 3px;  overflow-x: hidden;  overflow: auto;}
+#asl-storelocator.asl-p-cont .storelocator-panel .resut-found {  float: left;  font-size: 16px;  font-weight: bold;  padding-bottom: 10px;  width: 100%;}
+#asl-storelocator.asl-p-cont .storelocator-panel .store-list {  margin: 0;  padding: 0;  position: relative;}
+#asl-storelocator.asl-p-cont .storelocator-panel .store-list li {  clear: both;  display: table;  padding: 10px;  width: 95%;}
+#asl-storelocator.asl-p-cont .storelocator-panel .store-list li.store:hover {  cursor: pointer;}
+#asl-storelocator.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  font-family: Tahoma;  position: absolute;  top: 0;}
+#asl-storelocator.asl-p-cont .storelocator-panel .directions-panel {  clear: both;  display: table;  font-size: 0.8em;  padding: 10px;  width: 95%;}
+#asl-storelocator.asl-p-cont .storelocator-panel .directions {  clear: both;  color: blue;  display: block;}
+#asl-storelocator.asl-p-cont .storelocator-panel .location-search {  padding: 5px;}
+#asl-storelocator.asl-p-cont .storelocator-panel .location-search input {  width: 95%;}
+#asl-storelocator.asl-p-cont .storelocator-panel .location-search h4 {  font-size: 0.8em;  margin: 0;  padding: 0;}
+#asl-storelocator.asl-p-cont .storelocator-panel .store .features {  display: none;}
+#asl-storelocator.asl-p-cont .storelocator-panel .feature-filter {  overflow: hidden;}
+#asl-storelocator.asl-p-cont .storelocator-panel .feature-filter label {  display: block;  float: left;  font-size: 0.8em;  margin: 0 0.4em;}
+#asl-storelocator.asl-p-cont .store-locator img {  max-width: none;}
+#asl-storelocator.asl-p-cont .store-locator a {  text-decoration: none;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal {  color: #706B65;  z-index: 55;  position: absolute;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal-content {  padding: 15px;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal.fade.in {  display: block;  overflow: hidden;  z-index: 3;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal-dialog {  width: 50%;  z-index: 10000;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal-header {  border: none;  padding: 0;}
+#asl-storelocator.asl-p-cont .store-locator .form-group {  margin-bottom: 10px;  display: inline-block;  width: 100%;}
+#asl-storelocator.asl-p-cont .store-locator .form-group > input {  float: right;  width: 80%;}
+#asl-storelocator.asl-p-cont .store-locator h4 {  font-size: 13px;  padding-right: 30px;  font-weight: bold;  margin-top: 0;  margin-bottom: 10px;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal-backdrop-in { top: 0;  left: 0; right: 0px; bottom: 0px; opacity: 0.5;  position: absolute;    z-index: 1040;  z-index: 1;}
+
+/*#asl-storelocator.asl-p-cont .store-locator .agile-modal-dialog.in{display: none !important;}
+#asl-storelocator.asl-p-cont .store-locator .agile-modal-backdrop-in{display: none !important}
+#asl-storelocator.asl-p-cont .asl-map .store-locator{position: relative !important;overflow: hidden !important;}
+#asl-geolocation-agile-modal{right: auto !important;bottom: auto !important;width: 0% !important;height: 0% !important;}
+body.agile-modal-open {
+    overflow: visible !important;
+}
+*/
+/*#asl-storelocator.asl-p-cont .store-locator .agile-modal-backdrop-in {  bottom: 0;  left: 0;  opacity: 0.5;  position: absolute;  right: 0;  top: 0;  z-index: 1040;  z-index: 1;}*/
+#asl-storelocator.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;  font-size: 20px;  left: auto;  line-height: 0;  margin: 0;  opacity: 1;  padding: 8px 3px;  position: absolute;  right: 0;  text-shadow: none;  top: auto;}
+#asl-storelocator.asl-p-cont .store-locator #asl-geolocation-agile-modal button.close-directions.close[aria-label="Close"] {  right: 10px;}
+#asl-storelocator.asl-p-cont .store-locator #asl-geolocation-agile-modal .agile-modal-content {  padding-bottom: 5px;}
+#asl-storelocator.asl-p-cont .store {  clear: both;  display: block;}
+#asl-storelocator.asl-p-cont .store .title {  font-size: 16px;  font-weight: bold;}
+#asl-storelocator.asl-p-cont .store .address {  display: block;  font-size: 12px;  margin-top: 0.2em;}
+#asl-storelocator.asl-p-cont .store .phone {  display: block;  font-family: tahoma;  font-size: 11px;}
+#asl-storelocator.asl-p-cont .store .store-logo {  margin-right: 5px;}
+#asl-storelocator.asl-p-cont .store .features {  color: grey;  font-size: 70%;  margin: 0;  max-width: 250px;  overflow: hidden;  padding: 0;}
+#asl-storelocator.asl-p-cont .store .features li {  display: inline;  float: left;  padding-right: 0.8em;}
+#asl-storelocator.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-p-cont .store .action {  color: green;  font-size: 0.8em;  margin-right: 0.5em;}
+#asl-storelocator.asl-p-cont .store-list .store .fields {  float: left;  font-weight: normal;  line-height: 18px;  text-align: left;}
+#asl-storelocator.asl-p-cont .store-list .store > img {  float: right;}
+#asl-storelocator.asl-p-cont form.storelocator-filter {  clear: both;  display: table;  margin-bottom: 10px;  width: 100%;}
+#asl-storelocator.asl-p-cont .storelocator-filter {  display: none !important;  width: 100%;}
+#asl-storelocator.asl-p-cont .storelocator-filter .location-search {  clear: both;  display: table;  padding: 10px 0;}
+#asl-storelocator.asl-p-cont .storelocator-filter h4 {  float: left;  font-size: 16px;  line-height: 29px;}
+#asl-storelocator.asl-p-cont .location-search > input {  font-size: 14px;  margin-left: 10px;  padding: 5px;  width: 300px;}
+#asl-storelocator.asl-p-cont .feature-filter {  clear: both;  display: none;  margin-bottom: 10px;  width: 100%;}
+#asl-storelocator.asl-p-cont .feature-filter label {  float: left;  margin-right: 70px;  padding: 5px;  width: 110px;}
+#asl-storelocator.asl-p-cont .feature-filter label input[type=checkbox] {  margin-right: 3px;}
+#asl-storelocator.asl-p-cont .store-logo {  width: 50px;}
+#asl-storelocator.asl-p-cont .rgt {  text-align: right;}
+#asl-storelocator.asl-p-cont .w100p {  position: relative;  width: 100%;}
+#asl-storelocator.asl-p-cont .half-rule {  margin: 20px auto;  width: 100%;}
+#asl-storelocator.asl-p-cont .half-rule-1 {  float: left;  margin: 10px auto;  width: 88%;}
+#asl-storelocator.asl-p-cont .calign {  text-align: center;}
+#asl-storelocator.asl-p-cont .lalign {  text-align: left;}
+#asl-storelocator.asl-p-cont .ralign {  text-align: right;}
+#asl-storelocator.asl-p-cont .hgt-32 {  height: 32px;}
+#asl-storelocator.asl-p-cont .container.no-pad {  padding: 0;}
+/*NEXT*/
+#asl-storelocator.storelocator-main {  margin: auto;  width: 95% !important;}
+#asl-storelocator.storelocator-main #asl-map-canv {  width: 100%;  height: 530px;}
+#asl-storelocator.storelocator-main #panel {  display: inline-block;  position: relative;  width: 100%;}
+#asl-storelocator.storelocator-main #panel ul {  padding-left: 0;}
+#asl-storelocator.storelocator-main #panel .email {  font-size: 13px;}
+#asl-storelocator.storelocator-main .additional-info {  font-size: 10px;}
+#asl-storelocator.storelocator-main .additional-info h4 {  font-size: 13px;  font-weight: bold;  margin-top: 5px;  margin: 0;}
+#asl-storelocator.storelocator-main .all-additional-info .additional-info {  display: none;}
+#asl-storelocator.storelocator-main .load-more {  cursor: pointer;  float: right;  font-size: 12px;  margin-right: 5px;}
+#asl-storelocator.storelocator-main .hide-more {  cursor: pointer;  display: none;  float: right;  font-size: 12px;  margin-right: 5px;}
+#asl-storelocator.storelocator-main .reveal-it .load-more {  display: none;}
+#asl-storelocator.storelocator-main .reveal-it .hide-more {  display: block;}
+#asl-storelocator.storelocator-main .reveal-it.all-additional-info .additional-info {  display: block;}
+#asl-storelocator.storelocator-main label {  font-size: 13px;}
+#asl-storelocator.storelocator-main .form-group > span {  font-size: 13px;}
+#asl-storelocator.storelocator-main .action.directions {  color: blue;  font-size: 12px;}
+#asl-storelocator.storelocator-main .rendered-directions {  float: none;  font-size: 13px;  line-height: inherit;  padding: inherit;  position: relative;}
+#asl-storelocator.storelocator-main .rendered-directions table {  width: auto;}
+#asl-storelocator.storelocator-main .action {  text-decoration: none !important;}
+#asl-storelocator.storelocator-main a {  border-bottom: medium none !important;  text-decoration: none !important;}
+#asl-storelocator.storelocator-main .item-state .item-state {  margin-top: 6px !important;}
+#asl-storelocator.storelocator-main .panel-inner li {  list-style: outside none none !important;  padding-left: 0 !important;  text-align: left !important;}
+#asl-storelocator.storelocator-main .panel-inner li:before {  border-left: none !important;}
+#asl-storelocator.storelocator-main .panel-inner ul {  padding-left: 0 !important;}
+#asl-storelocator.storelocator-main .panel-inner .panel li {  margin-bottom: 0 !important;  padding-bottom: 0;}
+#asl-storelocator.storelocator-main .panel-inner .panel li:last {  padding-bottom: 0 !important;}
+#asl-storelocator.asl-p-cont .map-canvas-outer {  padding: 5px;}
+#asl-storelocator.asl-p-cont .header-search .t-head {  padding-right: 5px;  text-align: center;}
+#asl-storelocator.asl-p-cont div.arrow-down {  border-left: 25px solid rgba(0, 0, 0, 0);  border-right: 25px solid rgba(0, 0, 0, 0);  bottom: 0;  font-size: 0;  height: 0;  line-height: 0;  margin-bottom: -10px;  margin-left: 95px;  position: absolute;  width: 0;  z-index: -1;}
+#asl-storelocator.asl-p-cont .loading {  font-size: 15px;  font-weight: bold;  left: 20%;  padding: 10px 20px;  position: absolute;  text-align: center;  top: 24%;  white-space: nowrap;  width: 60%;  z-index: 2;}
+#asl-storelocator.asl-p-cont .asl-overlay {  display: none;  height: 100%;  position: absolute;  width: 100%;  left: 0;  top: 0;  z-index: 1;}
+#asl-storelocator.asl-p-cont .asl-overlay .white {  height: 100%;  opacity: 0.5;  width: 100%;}
+#asl-storelocator.asl-p-cont .asl-overlay h1.h1 {  position: absolute;  top: 0;  color: #000;  padding: 0;  text-align: center;  width: 100%;  bottom: auto;  height: 50px;  margin: auto;  vertical-align: middle;  line-height: 1.4;  margin-top: 10px;  font-size: 15px;}
+#asl-storelocator.asl-p-cont .asl-overlay-on-item .white {  height: 100%;  opacity: 0.5;  width: 100%;}
+#asl-storelocator.asl-p-cont .asl-overlay-on-item h1.h1 {  top: 0;  color: #000;  padding: 0;  text-align: center;  width: 100%;  bottom: auto;  height: 50px;  margin: auto;  vertical-align: middle;  line-height: 1.4;  margin-top: 10px;  font-size: 15px;}
+#asl-storelocator.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-p-cont #content-test {  margin-top: 30px;}
+#asl-storelocator.asl-p-cont #asl-map-canv img {  max-width: none !important;}
+#asl-storelocator.asl-p-cont #panel {  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-p-cont #panel ul {  flist-style: none;}
+#asl-storelocator.asl-p-cont #panel .item-state {  box-shadow: none;  margin-bottom: 0;  margin-top: 8px;}
+#asl-storelocator.asl-p-cont #panel .item-state:first-child {  margin-top: 0;}
+#asl-storelocator.asl-p-cont #panel .item-state a {  text-decoration: none;}
+#asl-storelocator.asl-p-cont #panel .item-state a span.s-direction {  text-indent: 0px;}
+#asl-storelocator.asl-p-cont #panel .item-state a span {  cursor: pointer;  display: block;  font-size: 13px;  font-weight: normal !important;  padding: 7px 5px;  text-indent: 10px;  width: 100%;}
+#asl-storelocator.asl-p-cont #panel .item-state a:hover span {  font-weight: 600;}
+#asl-storelocator.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  font-weight: 600;}
+#asl-storelocator.asl-p-cont #panel .item-state ul li {  margin-left: 15px;  margin-top: 5px;}
+#asl-storelocator.asl-p-cont #panel .item-state li > div > div {  display: inline-block;  width: 100%;}
+#asl-storelocator.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;  margin-bottom: 5px;  margin-top: 5px;  padding-left: 5px;}
+#asl-storelocator.asl-p-cont #panel .store-inner:last-child {  margin-bottom: 0;}
+#asl-storelocator.asl-p-cont #panel .agile-modal-header {  padding: 0;}
+#asl-storelocator.asl-p-cont #panel .panel {  box-shadow: none;  margin-bottom: 0;}
+#asl-storelocator.asl-p-cont #panel .store {  cursor: pointer;}
+#asl-storelocator.asl-p-cont #panel .panel-inner {  height: 100%;  overflow-y: auto;}
+#asl-storelocator.asl-p-cont .t-head {  font-size: 13px;  font-weight: bold;  line-height: 32px;}
+#asl-storelocator.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-p-cont .pac-container {  z-index: 10000000;}
+#asl-storelocator.asl-p-cont .close {  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);  float: right;  padding: 0 5px;}
+#asl-storelocator.asl-p-cont .infoBox .categories {  font-size: 12px;}
+#asl-storelocator.asl-p-cont .infoBox .distance {  margin-top: 5px;}
+#asl-storelocator.asl-p-cont textarea {  min-height: 60px;  resize: none;}
+#asl-storelocator.asl-p-cont .btn-default#btn-geolocation:hover {  font-weight: 600;}
+#asl-storelocator.asl-p-cont .chosen-container-multi .chosen-choices {  border-radius: 4px;  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset;  padding: 3px 5px;}
+#asl-storelocator.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  margin-bottom: 0;  padding-bottom: 10px;  display: inline-block;  width: 100%;  padding-top: 10px;}
+#asl-storelocator.asl-p-cont .item .img-section a img {  width: 120px;  /* max-width: none; */
+  height: 120px;  display: block;}
+#asl-storelocator.asl-p-cont .item .data-section {  padding: 5px 15px !important;}
+#asl-storelocator.asl-p-cont .item .data-section .title-item {  font-size: 16px;  font-weight: 300;}
+#asl-storelocator.asl-p-cont .item .data-section .addr-sec {  margin-bottom: 10px;}
+#asl-storelocator.asl-p-cont .item .data-section .addr-sec p {  margin: 0;  font-size: 13px;  margin-bottom: 5px;  padding-left: 5px;}
+#asl-storelocator.asl-p-cont .item .data-section .addr-sec p:last-child:before {  background-position: bottom center;}
+#asl-storelocator.asl-p-cont .item .data-section .addr-sec p:before {  content: "";  display: inline-block;  width: 17px;  float: left;  margin-top: -6px;  margin-left: -26px;  height: 22px;  /*background: url('../img/lo-icon.png');*/
+  background-size: 100%;}
+#asl-storelocator.asl-p-cont .item .data-section .p-direction {  font-size: 12px;  font-weight: normal;  line-height: 1;  float: right;  border-radius: 0;  padding: 0;  width: auto;  text-indent: 0px;  margin-bottom: 0;}
+#asl-storelocator.asl-p-cont .item .data-section .p-direction .s-direction {  display: block;  padding: 8px 25px;}
+#asl-storelocator.asl-p-cont .items-all {  margin-top: 10px;}
+#asl-storelocator.asl-p-cont .item > div {  padding-left: 0;}
+#asl-storelocator.asl-p-cont .item > div:first-child {  padding-top: 0;}
+#asl-storelocator.asl-p-cont .listing-map.list-only.container .item .item-thumb {  padding-right: 0;}
+#asl-storelocator.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-p-cont .multiselect.adropdown-toggle.style-btn.btn.btn-default {  width: 130px;}
+#asl-storelocator.container.no-pad.storelocator-main.asl-p-cont {  display: block;  margin-left: auto;  margin-right: auto;  margin: auto;  max-width: 1199px !important;  padding: 0 15px;  width: 95% !important;}
+#asl-storelocator.asl-p-cont {  /*.drop_box_filter, .range_filter, .Status_filter {        float: left;        padding: 0 !important;        width: 33.33%;    }
+        */
+}
+#asl-storelocator.asl-p-cont .asl-map {  position: relative;  height: 605px;}
+#asl-storelocator.asl-p-cont .asl-map .store-locator {  height: 100%;}
+#asl-storelocator.asl-p-cont .asl-map .store-locator div#asl-map-canv {  height: 100% !important;}
+#asl-storelocator.asl-p-cont .asl-map .search_filter.inside-map {  margin: auto;  position: absolute;  top: 35px;  height: 55px;  width: 55%;  min-width: 300px;  right: 35px;  z-index: 1;}
+#asl-storelocator.asl-p-cont .asl-map .search_filter.inside-map p {  margin: auto;  height: 100%;}
+#asl-storelocator.asl-p-cont .asl-map .search_filter.inside-map p input {  border-radius: 0;  border: 0px;  box-shadow: none !important;}
+#asl-storelocator.asl-p-cont .asl-map .search_filter.inside-map p span i {  position: absolute;  height: 100%;  width: 60px;  font-size: 25px;  padding-top: 0;  line-height: 60px;  text-align: center;  left: auto;  right: -1px;  top: 0;}
+#asl-storelocator.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  content: "";  display: block;  position: absolute;  left: -10px;  margin: auto;  bottom: 0;  transform: rotate(180deg);  top: 0;  border-style: solid;  width: 0px;  height: 0px;  border-width: 10px 0px 10px 10px;  /* background: #000; */
+}
+#asl-storelocator.asl-p-cont .panel .item {  border-style: solid;  border-width: 0px ;  border: none;}
+#asl-storelocator.asl-p-cont #geolocation-agile-modal .form-group h4 {  color: #555555;  font-size: 12px;  line-height: 1.2;  margin-bottom: 0px;  margin-top: 0px;}
+#asl-storelocator.asl-p-cont #geolocation-agile-modal .form-group #btn-geolocation {  font-size: 11px;  padding: 4px 7px;}
+#asl-storelocator.asl-p-cont #geolocation-agile-modal .agile-modal-content {  padding: 15px 15px 0;}
+#asl-storelocator.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  font-size: 20px;  left: auto;  line-height: 0;  margin: 0;  opacity: 1;  padding: 9px 3px;  position: absolute;  right: 0;  text-shadow: none;  top: auto;}
+#asl-storelocator.asl-p-cont button.close-directions.close[aria-label="Close"] > span {  line-height: 0 !important;  padding: 0;}
+#asl-storelocator.asl-p-cont input#auto-complete-search {  height: 100%;}
+#asl-storelocator.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-p-cont .drop_box_filter {  padding-left: 4px !important;  padding-right: 0 !important;}
+#asl-storelocator.asl-p-cont .drop_box_filter p span {  font-size: 12px;  font-weight: normal;  position: relative;  padding-left: 0;  text-transform: capitalize;  top: -2px;}
+#asl-storelocator.asl-p-cont .drop_box_filter p span::before {  border-color: transparent transparent transparent gray;  border-style: solid;  border-width: 4px 0 4px 5px;  content: "";  visibility: hidden;  margin-left: 5px;  margin-right: 9px;  position: relative;  top: 0px;  display: none;}
+#asl-storelocator.asl-p-cont .drop_box_filter > p {  font-size: 14px;  font-weight: 800;  margin-bottom: 5px;}
+#asl-storelocator.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-width: 1px;  height: 25px;  margin-bottom: 5px;  padding: 0;  text-align: left;  top: 0;}
+#asl-storelocator.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default::after {  display: none;}
+#asl-storelocator.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default .multiselect-selected-text {  clear: none;  float: left;  font-size: 10px;  padding: 0 10px;}
+#asl-storelocator.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default b.caret {  border-width: 5px 4px 0;  bottom: 0;  clear: none;  float: right;  left: auto;  margin: auto;  position: absolute;  right: 10px;  top: 0;}
+#asl-storelocator.asl-p-cont .categories_filter .btn-group {  float: left;  height: 25px !important;  width: 130px;}
+#asl-storelocator.asl-p-cont .slider-selection {  border-radius: 0;}
+#asl-storelocator.asl-p-cont .rangeFilter > span {  display: block;  font-size: 9px;  font-weight: normal;  padding: 5px 0 0;}
+#asl-storelocator.asl-p-cont .rangeFilter > span:last-child {  line-height: 0;  padding-left: 8px;  text-align: right;}
+#asl-storelocator.asl-p-cont .rangeFilter > span:first-child {  font-size: 12px;  font-weight: normal;  line-height: 1.2;  margin-bottom: 12px;  margin-left: 0;  padding-top: 0;}
+#asl-storelocator.asl-p-cont .range_filter {  padding-left: 0;  width: 100%;  padding-top: 0px;}
+#asl-storelocator.asl-p-cont .range_filter .rangeFilter {  margin-bottom: 0;}
+#asl-storelocator.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track {  height: 8px;  max-width: inherit;  border-radius: 0;}
+#asl-storelocator.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round {  background: transparent ;  border-radius: 4px;  border: none;  box-shadow: none;  height: 20px;  margin-top: -9px;  width: 13px;}
+#asl-storelocator.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  content: "\e062";  font-family: 'Glyphicons Halflings';  padding: 0;  text-align: center;  display: block;  position: relative;  left: 0px;  top: -5px;  font-size: 20px;}
+#asl-storelocator.asl-p-cont .range_filter .rangeFilter .tooltip.top {  top: 0 !important;}
+#asl-storelocator.asl-p-cont .Status_filter p > span {  display: block;  margin-top: -1px;}
+#asl-storelocator.asl-p-cont .Status_filter p > span:first-child {  font-size: 12px;  font-weight: normal;  line-height: 1;  margin-top: 0px;  margin-bottom: 10px;}
+#asl-storelocator.asl-p-cont .radio_btn {  border-radius: 3px;  display: inline-block;  height: 16px;  width: 16px;}
+#asl-storelocator.asl-p-cont .radio_btn::before {  font-size: 14px;  left: 0;  position: absolute;  top: 0;}
+#asl-storelocator.asl-p-cont .Status_filter input[type="radio"] {  display: none;}
+#asl-storelocator.asl-p-cont .Status_filter input[type="checkbox"] {  display: none;}
+#asl-storelocator.asl-p-cont .Status_filter p {  font-size: 12px;  margin-bottom: 3px;  font-weight: normal;  line-height: 2;}
+#asl-storelocator.asl-p-cont .Status_filter p label {  font-size: 12px;  font-weight: normal;  line-height: 2;  margin: 0;  padding: 3px 0 0;}
+#asl-storelocator.asl-p-cont .Status_filter p label .radio_btn {  left: 0;  margin-right: 3px;  position: relative;  top: 3px;}
+#asl-storelocator.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn::before {  transform: scale(1);}
+#asl-storelocator.asl-p-cont .Filter_section {  background: rgba(204, 204, 204, 0.2) none repeat scroll 0 0;  margin-bottom: 3px;  padding-top: 40px;}
+#asl-storelocator.asl-p-cont #panel.storelocator-panel {  border-radius: 0;  display: block;  margin-right: 0%;  margin-top: 52px;  padding: 5px 8px;  width: auto !important;  /*padding-top: 40px;*/
+}
+#asl-storelocator.asl-p-cont .filter-box {  padding-top: 10px;  padding-bottom: 10px;  padding-left: 10px;  padding-right: 30px;}
+#asl-storelocator.asl-p-cont .categories-panel {  max-width: 100%;  background: #EFEFEF;  max-height: 100%;  overflow: auto;  padding-top: 15px;  text-align: center;  margin-top: 60px;  height: 464px;}
+#asl-storelocator.asl-p-cont .round-box {  float: none;  width: 164px;  color: #535353;  display: inline-block;  height: 165px;  border-radius: 50%;  position: relative;  margin: 5px;  text-align: center;  cursor: pointer;  padding: 15px 0;}
+#asl-storelocator.asl-p-cont .round-box .box-icon {  margin-bottom: 10px;  margin-top: 15px;}
+#asl-storelocator.asl-p-cont .round-box .box-icon span {  max-width: 55px;  height: 60px;  display: block;  margin: auto;  background-repeat: no-repeat;  background-size: 50px 50px;}
+#asl-storelocator.asl-p-cont .round-box .cat-name > span {  font-size: 14px;  display: block;  top: 57%;  position: absolute;  width: 90%;  margin-left: 5%;}
+#asl-storelocator.asl-p-cont .round-box .cat-name > span:last-child {  margin-top: 3px;  font-size: 13px;}
+#asl-storelocator.asl-p-cont .count-result {  padding-left: 0px !important;}
+#asl-storelocator.asl-p-cont .Num_of_store,#asl-storelocator.asl-p-cont .cats-title {  font-size: 10px;  font-weight: 800;  text-align: left;  left: 0;  margin: 0;  padding: 10px 13px;  position: absolute;  top: 0;  width: 100%;  z-index: 999;}
+#asl-storelocator.asl-p-cont .Num_of_store div,#asl-storelocator.asl-p-cont .cats-title div,#asl-storelocator.asl-p-cont .Num_of_store span,#asl-storelocator.asl-p-cont .cats-title span {  font-size: 18px;  font-weight: 300;}
+#asl-storelocator.asl-p-cont .Num_of_store div:nth-child(2),#asl-storelocator.asl-p-cont .cats-title div:nth-child(2),#asl-storelocator.asl-p-cont .Num_of_store span:nth-child(2),#asl-storelocator.asl-p-cont .cats-title span:nth-child(2) {  padding-left: 10px;}
+#asl-storelocator.asl-p-cont .Num_of_store span.back-button,#asl-storelocator.asl-p-cont .cats-title span.back-button {  float: right;  margin-top: 0px;  cursor: pointer;}
+#asl-storelocator.asl-p-cont .Num_of_store span.back-button i,#asl-storelocator.asl-p-cont .cats-title span.back-button i {  border-radius: 50%;  padding: 3px 0;  width: 28px;  height: 28px;  float: right;  text-align: center;  margin-top: 1%;  margin-right: 10px;  font-size: 17px;}
+#asl-storelocator.asl-p-cont .Num_of_store .icon,#asl-storelocator.asl-p-cont .cats-title .icon {display: inline-block;}
+#asl-storelocator.asl-p-cont .Num_of_store .icon img,#asl-storelocator.asl-p-cont .cats-title .icon img {  width: auto;  max-height: 40px;}
+#asl-storelocator.asl-p-cont .cats-title {  padding: 15px 13px;}
+#asl-storelocator.asl-p-cont .cats-title .icon {  width: 30px;}
+#asl-storelocator.asl-p-cont .col-xs-5.col-md-12.item-thumb {  display: table-cell;  float: none;  height: 100%;  vertical-align: bottom;  width: 100%;}
+#asl-storelocator.asl-p-cont .item > .col-md-3:nth-last-child(2) {  display: table;  height: 100px;  max-height: 100%;}
+#asl-storelocator.asl-p-cont .slider.slider-horizontal {  height: 20px;  max-width: 100%;  min-width: 100%;}
+#asl-storelocator.asl-p-cont .image_map_popup > img {  width: 100%;}
+#asl-storelocator.asl-p-cont .image_map_popup {  display: none;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container > li > a {  padding: 0;  color: inherit !important;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container > li > a label {  font-size: 10px;  font-weight: normal;  width: 100%;  margin: 0;  padding: 8px 6px;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container {  padding-top: 0;  z-index: 9999;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container .form-control.multiselect-search {  font-size: 12px;  padding: 0 5px;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container .multiselect-item.filter {  margin-right: -1px;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container li .checkbox {  overflow: hidden;  text-overflow: ellipsis;  width: 100%;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container li .form-control.multiselect-search {  height: 26px;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  font-size: 10px;  height: 25px;  padding: 0 5px;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-btn > .btn.btn-default.multiselect-clear-filter {  padding: 2px 5px 2px 9px;}
+#asl-storelocator.asl-p-cont ul.adropdown-menu.multiselect-container li.multiselect-item.filter {  padding: 3px 2px;}
+#asl-storelocator.asl-p-cont .col-xs-12.distance {  margin-top: 5px;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow {  border-radius: 10px 10px 0 0 !important;  margin: auto;  padding: 0;  z-index: 999;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow .image_map_popup > img {  border-radius: 10px 10px 0 0;  max-width: 100%;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow .image_map_popup {  display: block !important;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow .phone {  margin-bottom: 0;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow a.action {  font-size: 10px;  margin: 0 0 0 3px !important;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  border-radius: 5px;  font-size: 10px;  margin: 0 0 0 3px !important;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow div.asl-buttons {  padding-top: 20px;  text-align: center;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow > h3 {  font-size: 14px;  padding: 7px 10px 10px;}
+#asl-storelocator.asl-p-cont #style_1.infoWindow .phone > b,#asl-storelocator.asl-p-cont #style_1.infoWindow .address,#asl-storelocator.asl-p-cont #style_1.infoWindow .categories,#asl-storelocator.asl-p-cont #style_1.infoWindow .phone > a,#asl-storelocator.asl-p-cont #style_1.infoWindow .distance,#asl-storelocator.asl-p-cont #style_1.infoWindow .time {  font-size: 11px;  font-weight: normal;  line-height: 1.2;}
+#asl-storelocator.asl-p-cont .infoBox > img.style_1_x {  margin-right: 8px !important;  margin-top: 8px !important;  width: 14px;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow {  border-radius: 5px 5px 0 0;  overflow: hidden;  padding: 0;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow h3 {  display: block;  float: none;  font-size: 10px;  margin: 5px 0 0 !important;  max-width: none;  padding-bottom: 3px;  padding-left: 10px;  padding-top: 3px;  width: auto;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow .infowindowContent {  padding: 5px 10px;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow .asl-buttons {  padding-top: 5px;  text-align: center;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow a.action {  border-radius: 0;  font-size: 10px;  margin: 0 0 0 3px !important;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  background: transparent none repeat scroll 0 0;  border-radius: 0;  font-size: 10px;  margin: 0 0 0 3px !important;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow .phone {  margin-bottom: 2px;}
+#asl-storelocator.asl-p-cont #style_2.infoWindow .phone > b,#asl-storelocator.asl-p-cont #style_2.infoWindow .address,#asl-storelocator.asl-p-cont #style_2.infoWindow .categories,#asl-storelocator.asl-p-cont #style_2.infoWindow .phone > a,#asl-storelocator.asl-p-cont #style_2.infoWindow .distance {  font-size: 11px;  font-weight: normal;  line-height: 1.2;}
+#asl-storelocator.asl-p-cont .infoBox > img.style_2_x {  border-radius: 50%;  margin-right: 8px !important;  margin-top: 8px !important;  padding: 3px;  right: -18px;  top: -6px;  width: auto;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow {  border-radius: 5px 5px 0 0;  overflow: hidden;  padding: 0;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow h3 {  display: block;  float: none;  font-size: 10px;  margin: 5px 0 0 !important;  max-width: none;  padding-bottom: 3px;  padding-left: 10px;  padding-top: 3px;  width: auto;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow .infowindowContent {  padding: 10px 10px 5px;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow .asl-buttons {  padding-top: 5px;  text-align: center;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow a.action {  border-radius: 0;  float: none;  font-size: 10px;  margin: 0 !important;  width: 33.33%;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  border-radius: 0;  float: left;  font-size: 10px;  margin: 0 !important;  width: 33.33%;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow .phone {  margin-bottom: 2px;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow a.action.directions {  border-left: medium none;}
+#asl-storelocator.asl-p-cont #style_0.infoWindow .phone > b,#asl-storelocator.asl-p-cont #style_0.infoWindow .address,#asl-storelocator.asl-p-cont #style_0.infoWindow .categories,#asl-storelocator.asl-p-cont #style_0.infoWindow .phone > a,#asl-storelocator.asl-p-cont #style_0.infoWindow .distance {  font-size: 10px;  font-weight: normal;  line-height: 1.2;}
+#asl-storelocator.asl-p-cont .infoBox > img.style_0_x {  border-radius: 50%;  margin-right: 8px !important;  margin-top: 8px !important;  padding: 3px;  right: -18px;  top: -6px;  width: auto;}
+#asl-storelocator.asl-p-cont #style_0 .img_box {  display: block !important;  float: right;  width: 30%;}
+#asl-storelocator.asl-p-cont #style_0 .info-addr {  float: left;  width: 65%;}
+#asl-storelocator.asl-p-cont #style_0 .img_box > img {  width: 100%;}
+#asl-storelocator.asl-p-cont #style_0 .asl-buttons {  clear: both;  display: inline-block;  width: 100%;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch {  position: relative;  width: 80px;  -webkit-user-select: none;  -moz-user-select: none;  -ms-user-select: none;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-checkbox {  display: none;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-label {  display: block;  overflow: hidden;  cursor: pointer;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-inner {  display: block;  width: 200%;  margin-left: -100%;  transition: margin 0.3s ease-in 0s;}
+#asl-storelocator.asl-p-cont .Status_filter span.onoffswitch-switch:after {  content: "\f2d3"; font-size: 16px;  text-align: center;  display: block;  padding: 6px 0px 0px 3px;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-inner:before,#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-inner:after {  display: block;  float: left;  width: 50%;  height: 30px;  padding: 0;  line-height: 28px;  font-size: 12px;  color: white; font-weight: bold;  box-sizing: border-box;  background-clip: padding-box;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-inner:before {  content: "OPEN";  padding-left: 6px;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-inner:after {  content: "CLOSE";  padding-right: 6px;  text-align: right;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-switch {  display: block;  width: 26px;  height: 26px;  margin: 0px;  position: absolute;  top: 4px;  bottom: 0;  right: 54px;  margin-right: -4px;  transition: all 0.3s ease-in 0s;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {  margin-left: 0;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {  right: 0px;  margin-right: 4px;}
+#asl-storelocator.asl-p-cont .Status_filter .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch:after {  content: "\f14a" !important;}
+#asl-storelocator.asl-p-cont #geolocation-agile-modal.agile-modal.fade.in {  background: rgba(0, 0, 0, 0.6) none repeat scroll 0 0;}
+#asl-storelocator.asl-p-cont .agile-modal-backdrop.fade.in {  display: none;}
+#asl-storelocator.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  font-size: 11px;  line-height: 1;  margin: 0 10px;  text-transform: capitalize;  padding: 0;}
+#asl-storelocator.asl-p-cont .col-xs-12 > a.asl_Readmore_button:hover {  color: #337ab7 ;}
+#asl-storelocator.asl-p-cont .more_info {  font-size: 10px;  padding-left: 10px !important;}
+#asl-storelocator.asl-p-cont .inside.search_filter {  padding-bottom: 35px;  border: 1px solid #ccc;  display: block;  padding-left: 10px;  padding-right: 10px;  width: 99%;}
+#asl-storelocator.asl-p-cont .inside.search_filter .Num_of_store {  bottom: -2px;  left: -1px;  right: -1px;  top: auto;  width: auto;}
+#asl-storelocator.asl-p-cont .btn.btn-default.btn-submit {  border-radius: 0;  font-size: 13px;  font-weight: normal;  padding: 5px;}
+#asl-storelocator.asl-p-cont .directions-cont .agile-modal-header h4 {  margin: 0 0 10px 0px;}
+#asl-storelocator.asl-p-cont .agile-modal-header {  position: relative;}
+#asl-storelocator.asl-p-cont .agile-modal-header .close {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #ccc;  opacity: 1;  position: absolute;  top: 0px;  right: 5px;}
+#asl-storelocator.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  border-radius: 0;  font-size: 12px;  padding: 5px 10px;}
+#asl-storelocator.asl-p-cont .asl-advance-filters {  display: inline-block;  padding-left: 35px;  width: 100%;}
+#asl-storelocator.asl-p-cont #panel .item:last-child {  border-bottom: medium none !important;}
+#asl-storelocator.asl-p-cont #panel .item {  display: inline-block;  width: 100%;}
+#asl-storelocator.asl-p-cont.no-asl-filters #panel {  height: 565px;}
+#asl-storelocator.asl-p-cont.no-asl-filters .categories-panel {  height: 545px;}
+#asl-storelocator.asl-p-cont .directions-cont .agile-modal-header h4 {  font-size: 14px;}
+
+/*margin-top:42px;height:482px*/
+#asl-storelocator.asl-p-cont.asl-no-categories #panel {  margin-top: 42px;  height: 483px;}
+#asl-storelocator.asl-p-cont.no-asl-filters .filter-box {  display: none;}
+#asl-storelocator.asl-p-cont.asl-no-advance #panel.storelocator-panel {  margin-top: 41px;height: 564px}
+#asl-storelocator.asl-p-cont .filter-box {  height: 81px;}
+#asl-geolocation-agile-modal.agile-modal .agile-modal-content #asl-btn-locate {  margin-top: 3px;}
+#asl-storelocator.asl-p-cont .panel-inner .item .addr-sec .glyphicon { margin-right: 5px }
+#asl-storelocator.asl-p-cont .panel-inner .item .p-title { margin: 0 0 10px !important }
+.asl-p-cont .filter-box p{padding:0px}
+#asl-storelocator.asl-p-cont input#auto-complete-search{background-color: #fff !important}
+
+#asl-storelocator.asl-bg-0.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-0.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store-locator h4 {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-0.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-0.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-0.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-0.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .asl-overlay h1.h1 {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-0.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #cc3333;  border-color: #cc3333;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-0.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-0.asl-p-cont .item .data-section .title-item {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-0.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-0.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-0.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-0.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-0.asl-p-cont .adropdown-menu > .active > a:focus {  background: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #cc3333;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-0.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-0.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .panel-inner .item .addr-sec .glyphicon { }
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-0.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-0.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-0.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #cc3333;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-0.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-0.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-0.asl-p-cont .panel .item {  border-color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-0.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-0.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-0.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-0.asl-p-cont .slider-selection {  background: #cc3333 none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-0.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-0.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #cc3333 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-0.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-0.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-0.asl-p-cont .filter-box {  background: #542733;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-0.asl-p-cont .cats-title {  background: #cc3333 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-0.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-0.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow a.action {  background: #cc3333 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #cc3333 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow > h3 {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow h3 {  background: #cc3333 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow a.action {  background: #cc3333 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoBox > img.style_2_x {  background: #cc3333 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow h3 {  background: #cc3333 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow a.action {  background: #cc3333 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #cc3333 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-0.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .infoBox > img.style_0_x {  background: #cc3333 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #cc3333;  border-radius: 0px;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .Status_filter .onoffswitch-switch {  background: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-0.asl-p-cont .btn.btn-default.btn-submit {  background: #cc3333 none repeat scroll 0 0;  border-color: #cc3333;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #cc3333 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-0.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #cc3333;}
+#asl-storelocator.asl-bg-0.asl-p-cont.asl-no-advance .filter-box {  background-color: #cc3333;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-1.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-1.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store-locator h4 {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-1.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-1.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-1.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-1.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .asl-overlay h1.h1 {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-1.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #008fed;  border-color: #008fed;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-1.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-1.asl-p-cont .item .data-section .title-item {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-1.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-1.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-1.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-1.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-1.asl-p-cont .adropdown-menu > .active > a:focus {  background: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #008fed;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-1.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-1.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-1.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-1.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-1.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #008fed;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-1.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-1.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-1.asl-p-cont .panel .item {  border-color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-1.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-1.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-1.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-1.asl-p-cont .slider-selection {  background: #008fed none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-1.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-1.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #008fed none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-1.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-1.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-1.asl-p-cont .filter-box {  background: #2580c3;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-1.asl-p-cont .cats-title {  background: #008fed none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-1.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-1.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow a.action {  background: #008fed none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #008fed none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow > h3 {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow h3 {  background: #008fed none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow a.action {  background: #008fed none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoBox > img.style_2_x {  background: #008fed none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow h3 {  background: #008fed none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow a.action {  background: #008fed none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #008fed none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-1.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-1.asl-p-cont .infoBox > img.style_0_x {  background: #008fed none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #008fed;  border-radius: 0px;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-1.asl-p-cont .Status_filter .onoffswitch-switch {  background: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-1.asl-p-cont .btn.btn-default.btn-submit {  background: #008fed none repeat scroll 0 0;  border-color: #008fed;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #008fed none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-1.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #008fed;}
+#asl-storelocator.asl-bg-1.asl-p-cont.asl-no-advance .filter-box {  background-color: #008fed;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-2.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-2.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store-locator h4 {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-2.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-2.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-2.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-2.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .asl-overlay h1.h1 {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-2.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #93628f;  border-color: #93628f;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-2.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-2.asl-p-cont .item .data-section .title-item {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-2.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-2.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-2.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-2.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-2.asl-p-cont .adropdown-menu > .active > a:focus {  background: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #93628f;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-2.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-2.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-2.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-2.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-2.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #93628f;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-2.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-2.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-2.asl-p-cont .panel .item {  border-color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-2.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-2.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-2.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-2.asl-p-cont .slider-selection {  background: #93628f none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-2.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-2.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #93628f none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-2.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-2.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-2.asl-p-cont .filter-box {  background: #4a2849;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-2.asl-p-cont .cats-title {  background: #93628f none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-2.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-2.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow a.action {  background: #93628f none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #93628f none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow > h3 {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow h3 {  background: #93628f none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow a.action {  background: #93628f none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoBox > img.style_2_x {  background: #93628f none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow h3 {  background: #93628f none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow a.action {  background: #93628f none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #93628f none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-2.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-2.asl-p-cont .infoBox > img.style_0_x {  background: #93628f none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #93628f;  border-radius: 0px;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-2.asl-p-cont .Status_filter .onoffswitch-switch {  background: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-2.asl-p-cont .btn.btn-default.btn-submit {  background: #93628f none repeat scroll 0 0;  border-color: #93628f;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #93628f none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-2.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #93628f;}
+#asl-storelocator.asl-bg-2.asl-p-cont.asl-no-advance .filter-box {  background-color: #93628f;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-3.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-3.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store-locator h4 {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-3.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-3.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-3.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-3.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .asl-overlay h1.h1 {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-3.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #ff9800;  border-color: #ff9800;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-3.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-3.asl-p-cont .item .data-section .title-item {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-3.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-3.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-3.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-3.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-3.asl-p-cont .adropdown-menu > .active > a:focus {  background: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #ff9800;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-3.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-3.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-3.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-3.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-3.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #ff9800;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-3.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-3.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-3.asl-p-cont .panel .item {  border-color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-3.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-3.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-3.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-3.asl-p-cont .slider-selection {  background: #ff9800 none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-3.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-3.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #ff9800 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-3.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-3.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-3.asl-p-cont .filter-box {  background: #ffc107;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-3.asl-p-cont .cats-title {  background: #ff9800 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-3.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-3.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow a.action {  background: #ff9800 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #ff9800 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow > h3 {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow h3 {  background: #ff9800 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow a.action {  background: #ff9800 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoBox > img.style_2_x {  background: #ff9800 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow h3 {  background: #ff9800 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow a.action {  background: #ff9800 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #ff9800 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-3.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-3.asl-p-cont .infoBox > img.style_0_x {  background: #ff9800 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #ff9800;  border-radius: 0px;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-3.asl-p-cont .Status_filter .onoffswitch-switch {  background: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-3.asl-p-cont .btn.btn-default.btn-submit {  background: #ff9800 none repeat scroll 0 0;  border-color: #ff9800;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #ff9800 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-3.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #ff9800;}
+#asl-storelocator.asl-bg-3.asl-p-cont.asl-no-advance .filter-box {  background-color: #ff9800;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-4.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-4.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store-locator h4 {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-4.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-4.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-4.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-4.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .asl-overlay h1.h1 {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-4.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #01524b;  border-color: #01524b;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-4.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-4.asl-p-cont .item .data-section .title-item {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-4.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-4.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-4.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-4.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-4.asl-p-cont .adropdown-menu > .active > a:focus {  background: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #01524b;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-4.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-4.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-4.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-4.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-4.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #01524b;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-4.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-4.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-4.asl-p-cont .panel .item {  border-color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-4.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-4.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-4.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-4.asl-p-cont .slider-selection {  background: #01524b none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-4.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-4.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #01524b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-4.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-4.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-4.asl-p-cont .filter-box {  background: #75c9d3;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-4.asl-p-cont .cats-title {  background: #01524b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-4.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-4.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow a.action {  background: #01524b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #01524b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow > h3 {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow h3 {  background: #01524b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow a.action {  background: #01524b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoBox > img.style_2_x {  background: #01524b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow h3 {  background: #01524b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow a.action {  background: #01524b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #01524b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-4.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-4.asl-p-cont .infoBox > img.style_0_x {  background: #01524b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #01524b;  border-radius: 0px;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-4.asl-p-cont .Status_filter .onoffswitch-switch {  background: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-4.asl-p-cont .btn.btn-default.btn-submit {  background: #01524b none repeat scroll 0 0;  border-color: #01524b;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #01524b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-4.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #01524b;}
+#asl-storelocator.asl-bg-4.asl-p-cont.asl-no-advance .filter-box {  background-color: #01524b;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-5.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-5.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store-locator h4 {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-5.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-5.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-5.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-5.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .asl-overlay h1.h1 {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-5.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #ed468b;  border-color: #ed468b;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-5.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-5.asl-p-cont .item .data-section .title-item {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-5.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-5.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-5.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-5.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-5.asl-p-cont .adropdown-menu > .active > a:focus {  background: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #ed468b;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-5.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-5.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-5.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-5.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-5.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #ed468b;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-5.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-5.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-5.asl-p-cont .panel .item {  border-color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-5.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-5.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-5.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-5.asl-p-cont .slider-selection {  background: #ed468b none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-5.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-5.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #ed468b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-5.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-5.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-5.asl-p-cont .filter-box {  background: #fdcc29;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-5.asl-p-cont .cats-title {  background: #ed468b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-5.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-5.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow a.action {  background: #ed468b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #ed468b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow > h3 {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow h3 {  background: #ed468b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow a.action {  background: #ed468b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoBox > img.style_2_x {  background: #ed468b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow h3 {  background: #ed468b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow a.action {  background: #ed468b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #ed468b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-5.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-5.asl-p-cont .infoBox > img.style_0_x {  background: #ed468b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #ed468b;  border-radius: 0px;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-5.asl-p-cont .Status_filter .onoffswitch-switch {  background: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-5.asl-p-cont .btn.btn-default.btn-submit {  background: #ed468b none repeat scroll 0 0;  border-color: #ed468b;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #ed468b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-5.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #ed468b;}
+#asl-storelocator.asl-bg-5.asl-p-cont.asl-no-advance .filter-box {  background-color: #ed468b;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-6.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-6.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store-locator h4 {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-6.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-6.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-6.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-6.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .asl-overlay h1.h1 {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-6.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #d55121;  border-color: #d55121;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-6.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-6.asl-p-cont .item .data-section .title-item {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-6.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-6.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-6.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-6.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-6.asl-p-cont .adropdown-menu > .active > a:focus {  background: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #d55121;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-6.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-6.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-6.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-6.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-6.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #d55121;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-6.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-6.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-6.asl-p-cont .panel .item {  border-color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-6.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-6.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-6.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-6.asl-p-cont .slider-selection {  background: #d55121 none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-6.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-6.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #d55121 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-6.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-6.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-6.asl-p-cont .filter-box {  background: #fb9c6c;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-6.asl-p-cont .cats-title {  background: #d55121 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-6.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-6.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow a.action {  background: #d55121 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #d55121 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow > h3 {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow h3 {  background: #d55121 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow a.action {  background: #d55121 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoBox > img.style_2_x {  background: #d55121 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow h3 {  background: #d55121 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow a.action {  background: #d55121 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #d55121 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-6.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-6.asl-p-cont .infoBox > img.style_0_x {  background: #d55121 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #d55121;  border-radius: 0px;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-6.asl-p-cont .Status_filter .onoffswitch-switch {  background: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-6.asl-p-cont .btn.btn-default.btn-submit {  background: #d55121 none repeat scroll 0 0;  border-color: #d55121;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #d55121 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-6.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #d55121;}
+#asl-storelocator.asl-bg-6.asl-p-cont.asl-no-advance .filter-box {  background-color: #d55121;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-7.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-7.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store-locator h4 {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-7.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-7.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-7.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-7.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .asl-overlay h1.h1 {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-7.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #d13d94;  border-color: #d13d94;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-7.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-7.asl-p-cont .item .data-section .title-item {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-7.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-7.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-7.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-7.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-7.asl-p-cont .adropdown-menu > .active > a:focus {  background: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #d13d94;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-7.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-7.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-7.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-7.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-7.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #d13d94;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-7.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-7.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-7.asl-p-cont .panel .item {  border-color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-7.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-7.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-7.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-7.asl-p-cont .slider-selection {  background: #d13d94 none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-7.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-7.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #d13d94 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-7.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-7.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-7.asl-p-cont .filter-box {  background: #ad0066;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-7.asl-p-cont .cats-title {  background: #d13d94 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-7.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-7.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow a.action {  background: #d13d94 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #d13d94 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow > h3 {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow h3 {  background: #d13d94 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow a.action {  background: #d13d94 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoBox > img.style_2_x {  background: #d13d94 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow h3 {  background: #d13d94 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow a.action {  background: #d13d94 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #d13d94 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-7.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-7.asl-p-cont .infoBox > img.style_0_x {  background: #d13d94 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #d13d94;  border-radius: 0px;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-7.asl-p-cont .Status_filter .onoffswitch-switch {  background: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-7.asl-p-cont .btn.btn-default.btn-submit {  background: #d13d94 none repeat scroll 0 0;  border-color: #d13d94;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #d13d94 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-7.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #d13d94;}
+#asl-storelocator.asl-bg-7.asl-p-cont.asl-no-advance .filter-box {  background-color: #d13d94;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-8.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-8.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store-locator h4 {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-8.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-8.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-8.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-8.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .asl-overlay h1.h1 {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-8.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #99be3b;  border-color: #99be3b;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-8.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-8.asl-p-cont .item .data-section .title-item {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-8.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-8.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-8.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-8.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-8.asl-p-cont .adropdown-menu > .active > a:focus {  background: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #99be3b;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-8.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-8.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-8.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-8.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-8.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #99be3b;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-8.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-8.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-8.asl-p-cont .panel .item {  border-color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-8.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-8.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-8.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-8.asl-p-cont .slider-selection {  background: #99be3b none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-8.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-8.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #99be3b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-8.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-8.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-8.asl-p-cont .filter-box {  background: #01735a;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-8.asl-p-cont .cats-title {  background: #99be3b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-8.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-8.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow a.action {  background: #99be3b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #99be3b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow > h3 {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow h3 {  background: #99be3b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow a.action {  background: #99be3b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoBox > img.style_2_x {  background: #99be3b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow h3 {  background: #99be3b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow a.action {  background: #99be3b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #99be3b none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-8.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-8.asl-p-cont .infoBox > img.style_0_x {  background: #99be3b none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #99be3b;  border-radius: 0px;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-8.asl-p-cont .Status_filter .onoffswitch-switch {  background: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-8.asl-p-cont .btn.btn-default.btn-submit {  background: #99be3b none repeat scroll 0 0;  border-color: #99be3b;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #99be3b none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-8.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #99be3b;}
+#asl-storelocator.asl-bg-8.asl-p-cont.asl-no-advance .filter-box {  background-color: #99be3b;}
+
+
+/*border*/
+#asl-storelocator.asl-bg-9.asl-p-cont .gm-style-iw {  color: #000000;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow h3 {  color: #1e91d7;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow .features li {  color: #808080;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow h2 {  color: #000000;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .resut-found {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .store-list li {  background: #ffffff;  border-bottom: 1px dotted #c8c5b8;  color: #52483d;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .store-list li.store:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .store-list li.highlighted {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .store-list li.highlighted:hover {  background: #ffffff;  color: #000000;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .store-list .no-stores {  background-color: #EEE7E7;  color: #808080;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .directions-panel {  background: #ffffff;  color: #52483d;}
+#asl-storelocator.asl-bg-9.asl-p-cont .storelocator-panel .directions {  color: blue;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store-locator .agile-modal {  color: #706B65;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store-locator h4 {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store-locator .agile-modal-backdrop-in {  background-color: #000000;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store-locator button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  border-radius: 5px;  color: #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store .features {  color: grey;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store .web a {  color: green;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store .action {  color: green;}
+#asl-storelocator.asl-bg-9.asl-p-cont .half-rule {  border-color: #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .half-rule-1 {  border-bottom: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-9.storelocator-main #asl-map-canv {  background: #ffffff;}
+#asl-storelocator.asl-bg-9.storelocator-main #panel {  background: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .map-canvas-outer {  background: none repeat scroll 0 0 #ffffff;  border: 1px solid #dddddd;}
+#asl-storelocator.asl-bg-9.asl-p-cont div.arrow-down {  border-top: 25px solid #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .loading {  background-color: #ffffff;  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .asl-overlay h1.h1 {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .asl-overlay-on-item h1.h1 {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont body.search-list {  background: #F8F8F8;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel {  color: #51493e;  height: 472px;  padding: 10px;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .item-state a {  color: #51493e;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .item-state a span {  background: #e1e1e1;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .item-state a:hover span {  background-color: #008ad2;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .item-state a.collapsed span {  background-color: #90CAF9;  background-color: #e1e1e1;  color: #fafafa;  color: #51493e;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .store-inner {  border-bottom: 1px solid #f0eeea;}
+#asl-storelocator.asl-bg-9.asl-p-cont .store.highlighted .store-inner {  background-color: #ffffe0;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoBox .categories {  color: #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .btn-default {  background-color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .btn-default#btn-geolocation:hover {  background-color: #3d5b99;  border-color: #3d5b99;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .chosen-container-multi .chosen-choices {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .item {  background: transparent none repeat scroll 0 0 !important;  border-bottom: 1px solid #cccccc !important;}
+#asl-storelocator.asl-bg-9.asl-p-cont .item .img-section a img {  /*border: 4px solid @color1_0;                    border-radius: 50%;*/
+}
+#asl-storelocator.asl-bg-9.asl-p-cont .item .data-section .title-item {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .item .data-section .p-direction {  color: #ffffff;  background: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .wrapper-container {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-9.asl-p-cont .listing-map.list-only {  background: #ffffff;  border: 1px solid #d6dce2;}
+#asl-storelocator.asl-bg-9.asl-p-cont .item.highlighted {  background: #EEEEEE !important;}
+#asl-storelocator.asl-bg-9.asl-p-cont .adropdown-menu > .active > a,
+#asl-storelocator.asl-bg-9.asl-p-cont .adropdown-menu > .active > a:hover,
+#asl-storelocator.asl-bg-9.asl-p-cont .adropdown-menu > .active > a:focus {  background: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .asl-map .search_filter.inside-map p input {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .asl-map .search_filter.inside-map p span i {  background: #3d5b99;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .asl-map .search_filter.inside-map p span i:after {  border-color: transparent transparent transparent #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow .phone > b,
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow .address,
+#asl-storelocator.asl-bg-9.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow .categories,
+#asl-storelocator.asl-bg-9.asl-p-cont .panel-inner .item .addr-sec .p-title {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow a.action,
+#asl-storelocator.asl-bg-9.asl-p-cont .infoWindow a.action.directions,
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .item-state a span,
+#asl-storelocator.asl-bg-9.asl-p-cont #panel .item-state a:hover span,
+#asl-storelocator.asl-bg-9.asl-p-cont button.close-directions.close[aria-label="Close"] {  background-color: #3d5b99;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .btn-default#btn-geolocation:hover,
+#asl-storelocator.asl-bg-9.asl-p-cont .btn-default,
+#asl-storelocator.asl-bg-9.asl-p-cont .panel .item .thumb-a img,
+#asl-storelocator.asl-bg-9.asl-p-cont .panel .item {  border-color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .panel .item {  background: #ffffff !important;}
+#asl-storelocator.asl-bg-9.asl-p-cont .item-state .panel .item:nth-child(2n) {  background: #fafafa none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-9.asl-p-cont button.close-directions.close[aria-label="Close"] {  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;  color: #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont input#auto-complete-search:focus {  border-color: rgba(0, 0, 0, 0.36);  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(0, 0, 0, 0.2);}
+#asl-storelocator.asl-bg-9.asl-p-cont .categories_filter .multiselect.adropdown-toggle.style-btn.btn.btn-default {  border-color: #808080;  color: #808080;}
+#asl-storelocator.asl-bg-9.asl-p-cont .slider-selection {  background: #3d5b99 none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-9.asl-p-cont .slider-track {  background: #ffffff none repeat scroll 0 0 !important;}
+#asl-storelocator.asl-bg-9.asl-p-cont .range_filter .rangeFilter .slider.slider-horizontal .slider-track .slider-handle.round:before {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter input[type="checkbox"]:checked + .radio_btn {  background: #3d5b99 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-9.asl-p-cont .radio_btn {  background: #ffffff none repeat scroll 0 0;  border: 1px solid #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .radio_btn::before {  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter p span {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter p label {  color: #999999;}
+#asl-storelocator.asl-bg-9.asl-p-cont #panel.storelocator-panel {  border: 1px solid #cccccc;}
+#asl-storelocator.asl-bg-9.asl-p-cont .filter-box {  background: #eff1f6;  color: #3D5B99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .round-box {  background-color: #ffffff;  color: #535353;  border: 2px solid #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Num_of_store,
+#asl-storelocator.asl-bg-9.asl-p-cont .cats-title {  background: #3d5b99 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Num_of_store span.back-button i,
+#asl-storelocator.asl-bg-9.asl-p-cont .cats-title span.back-button i {  border: 1px solid #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont ul.adropdown-menu.multiselect-container .btn.btn-default.multiselect-clear-filter {  border-color: #cccccc;  color: #999999;}
+#asl-storelocator.asl-bg-9.asl-p-cont ul.adropdown-menu.multiselect-container li .input-group-addon {  color: #999999;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow a.action {  background: #3d5b99 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .storelocator-main .action.directions {  background: #3d5b99 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow > h3 {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .phone > b,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .address,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .categories,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .phone > a,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .distance,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_1.infoWindow .time {  color: #333333;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow h3 {  background: #3d5b99 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow a.action {  background: #3d5b99 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow .storelocator-main .action.directions {  color: #666666;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow .phone > b,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow .address,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow .categories,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow .phone > a,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_2.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoBox > img.style_2_x {  background: #3d5b99 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow h3 {  background: #3d5b99 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow a.action {  background: #3d5b99 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow .storelocator-main .action.directions {  background: #3d5b99 none repeat scroll 0 0;  border-left: 1px solid #ffffff;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow .phone > b,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow .address,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow .categories,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow .phone > a,
+#asl-storelocator.asl-bg-9.asl-p-cont #style_0.infoWindow .distance {  color: #333333;}
+#asl-storelocator.asl-bg-9.asl-p-cont .infoBox > img.style_0_x {  background: #3d5b99 none repeat scroll 0 0;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter .onoffswitch-label {  border: 2px solid #3d5b99;  border-radius: 0px;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter .onoffswitch-inner:before {  background-color: #ffffff;  color: #333333;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter .onoffswitch-inner:after {  background-color: #cccccc;  color: #333333;}
+#asl-storelocator.asl-bg-9.asl-p-cont .Status_filter .onoffswitch-switch {  background: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont .col-xs-12 > a.asl_Readmore_button {  color: #333333;}
+#asl-storelocator.asl-bg-9.asl-p-cont .btn.btn-default.btn-submit {  background: #3d5b99 none repeat scroll 0 0;  border-color: #3d5b99;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont #asl-geolocation-agile-modal .btn.btn-default {  background: #3d5b99 none repeat scroll 0 0;  color: #ffffff;}
+#asl-storelocator.asl-bg-9.asl-p-cont .directions-cont .agile-modal-header h4 {  color: #3d5b99;}
+#asl-storelocator.asl-bg-9.asl-p-cont.asl-no-advance .filter-box {  background-color: #3d5b99;}
+
+
+
+/*Customization for realestate*/
+#asl-storelocator.asl-realestate {}
+#asl-storelocator.asl-realestate .panel-inner{}
+#asl-storelocator.asl-realestate .panel-inner .item {padding-top: 0px; padding-bottom: 0px;}
+#asl-storelocator.asl-realestate .panel-inner .item .thumb-a{margin-top: 6px !important;display: block;}
+#asl-storelocator.asl-realestate .panel-inner .item .fa{margin-right: 5px;font-size: 12px}
+#asl-storelocator.asl-realestate .panel-inner .item-info span{margin-right:10px }
+#asl-storelocator.asl-realestate .panel-inner .item .sec-1 {margin-top: 7px}
+#asl-storelocator.asl-realestate .panel-inner .item .sec-1 p{margin-bottom: 0px}
+#asl-storelocator.asl-realestate .panel-inner .item .p-category{margin-bottom: 0px}
+#asl-storelocator.asl-realestate .panel-inner .item .p-title a{color:inherit}
+#asl-storelocator.asl-realestate .panel-inner .item .p-area{margin-bottom: 0px}
+#asl-storelocator.asl-realestate .panel-inner .item .asl-price{display: block;font-size: 15px;margin-bottom: 10px;color: red}
+#asl-storelocator.asl-realestate .Num_of_store .icon img{margin-top: -11px}
+#asl-storelocator.asl-realestate .asl-view-more{margin-top: 10px;text-align: center;}
+
+#asl-storelocator.asl-p-cont #style_0 .info-addr > div {
+    position: relative;
+    padding-left: 15px;
+}
+
+#asl-storelocator.asl-p-cont .infoWindow .glyphicon {
+    position: absolute;
+    left: 0px;
+}

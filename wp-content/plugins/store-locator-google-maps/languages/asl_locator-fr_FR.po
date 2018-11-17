@@ -1,0 +1,383 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Agile Store Locator\n"
+"POT-Creation-Date: 2017-11-21 17:47+0500\n"
+"PO-Revision-Date: 2017-11-21 17:47+0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.7\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: agile-store-locator.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: public/class-agile-store-locator-public.php:483
+#: public/class-agile-store-locator-public.php:497
+#: public/partials/template-frontend-0.php:119
+#: public/partials/template-frontend-0.php:237
+#: public/partials/template-frontend-1.php:182
+#: public/partials/template-frontend-1.php:227
+#: public/partials/template-frontend-2.php:130
+#: public/partials/template-frontend-2.php:261
+#: public/partials/template-frontend-deal.php:122
+#: public/partials/template-frontend-realestate.php:129
+msgid "Directions"
+msgstr "Directions"
+
+#: public/class-agile-store-locator-public.php:484
+msgid "Zoom Here"
+msgstr "Zoom ici"
+
+#: public/class-agile-store-locator-public.php:485
+msgid "Website"
+msgstr ""
+
+#: public/class-agile-store-locator-public.php:486
+msgid "Select Option"
+msgstr "Sélectionner une option"
+
+#: public/class-agile-store-locator-public.php:487
+msgid "Search"
+msgstr "Chercher"
+
+#: public/class-agile-store-locator-public.php:488
+msgid "All selected"
+msgstr "Tous sélectionnés"
+
+#: public/class-agile-store-locator-public.php:489
+#: public/class-agile-store-locator-public.php:502
+msgid "None"
+msgstr "Aucun"
+
+#: public/class-agile-store-locator-public.php:490
+msgid "None Selected"
+msgstr ""
+
+#: public/class-agile-store-locator-public.php:491
+msgid "selected"
+msgstr ""
+
+#: public/class-agile-store-locator-public.php:493
+msgid "Miles"
+msgstr ""
+
+#: public/class-agile-store-locator-public.php:494
+msgid "Km"
+msgstr ""
+
+#: public/class-agile-store-locator-public.php:495
+#: public/partials/template-frontend-0.php:208
+#: public/partials/template-frontend-0.php:262
+#: public/partials/template-frontend-1.php:201
+#: public/partials/template-frontend-1.php:253
+#: public/partials/template-frontend-2.php:241
+#: public/partials/template-frontend-2.php:277
+#: public/partials/template-frontend-deal.php:220
+#: public/partials/template-frontend-realestate.php:267
+msgid "Phone"
+msgstr "Téléphone"
+
+#: public/class-agile-store-locator-public.php:496
+#: public/partials/template-frontend-0.php:214
+msgid "Fax"
+msgstr ""
+
+#: public/class-agile-store-locator-public.php:498
+#: public/partials/template-frontend-0.php:241
+#: public/partials/template-frontend-0.php:274
+#: public/partials/template-frontend-1.php:231
+#: public/partials/template-frontend-1.php:265
+#: public/partials/template-frontend-2.php:238
+#: public/partials/template-frontend-2.php:289
+#: public/partials/template-frontend-realestate.php:234
+#: public/partials/template-frontend-realestate.php:279
+msgid "Distance"
+msgstr "Distance"
+
+#: public/class-agile-store-locator-public.php:499
+#: public/partials/template-frontend-0.php:247
+#: public/partials/template-frontend-1.php:237
+msgid "Read more"
+msgstr "Lire la suite"
+
+#: public/class-agile-store-locator-public.php:500
+#: public/partials/template-frontend-0.php:248
+#: public/partials/template-frontend-1.php:238
+msgid "Hide Details"
+msgstr "Cacher les détails"
+
+#: public/class-agile-store-locator-public.php:501
+msgid "Select Distance"
+msgstr "Sélectionnez Distance"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Sun"
+msgstr "dimanche"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Mon"
+msgstr "Lundi"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Tues"
+msgstr "Mardi"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Wed"
+msgstr "Mercredi"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Thur"
+msgstr "Jeudi"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Fri"
+msgstr "Vendredi"
+
+#: public/class-agile-store-locator-public.php:744
+msgid "Sat"
+msgstr "samedi"
+
+#: public/partials/template-frontend-0.php:26
+#: public/partials/template-frontend-1.php:28
+#: public/partials/template-frontend-2.php:43
+#: public/partials/template-frontend-deal.php:3
+#: public/partials/template-frontend-realestate.php:10
+msgid "OPEN"
+msgstr "OUVRIR"
+
+#: public/partials/template-frontend-0.php:27
+#: public/partials/template-frontend-1.php:29
+#: public/partials/template-frontend-2.php:44
+#: public/partials/template-frontend-deal.php:4
+#: public/partials/template-frontend-realestate.php:11
+msgid "CLOSE"
+msgstr "FERMER"
+
+#: public/partials/template-frontend-0.php:33
+#: public/partials/template-frontend-0.php:88
+#: public/partials/template-frontend-1.php:35
+#: public/partials/template-frontend-deal.php:91
+msgid "Search Location"
+msgstr "Chercher Location"
+
+#: public/partials/template-frontend-0.php:35
+#: public/partials/template-frontend-0.php:90
+#: public/partials/template-frontend-0.php:139
+#: public/partials/template-frontend-1.php:101
+#: public/partials/template-frontend-2.php:158
+msgid "Enter a Location"
+msgstr "Saisissez un lieu"
+
+#: public/partials/template-frontend-0.php:36
+#: public/partials/template-frontend-0.php:91
+#: public/partials/template-frontend-1.php:38
+#: public/partials/template-frontend-1.php:159
+#: public/partials/template-frontend-2.php:143
+#: public/partials/template-frontend-deal.php:39
+#: public/partials/template-frontend-realestate.php:142
+msgid "Current Location"
+msgstr "Localisation actuelle"
+
+#: public/partials/template-frontend-0.php:52
+#: public/partials/template-frontend-1.php:54
+#: public/partials/template-frontend-2.php:73
+#: public/partials/template-frontend-deal.php:55
+#: public/partials/template-frontend-realestate.php:72
+msgid "Distance Range"
+msgstr "Distance Range"
+
+#: public/partials/template-frontend-0.php:54
+#: public/partials/template-frontend-1.php:56
+#: public/partials/template-frontend-2.php:75
+#: public/partials/template-frontend-deal.php:57
+#: public/partials/template-frontend-realestate.php:74
+msgid "Radius"
+msgstr "Rayon"
+
+#: public/partials/template-frontend-0.php:54
+#: public/partials/template-frontend-0.php:148
+#: public/partials/template-frontend-1.php:56
+#: public/partials/template-frontend-1.php:110
+#: public/partials/template-frontend-2.php:75
+#: public/partials/template-frontend-2.php:167
+#: public/partials/template-frontend-realestate.php:74
+#: public/partials/template-frontend-realestate.php:166
+msgid "KM"
+msgstr ""
+
+#: public/partials/template-frontend-0.php:62
+#: public/partials/template-frontend-1.php:64
+#: public/partials/template-frontend-2.php:59
+#: public/partials/template-frontend-deal.php:65
+#: public/partials/template-frontend-realestate.php:58
+msgid "Status"
+msgstr "Statut"
+
+#: public/partials/template-frontend-0.php:106
+#: public/partials/template-frontend-1.php:169
+#: public/partials/template-frontend-2.php:117
+#: public/partials/template-frontend-deal.php:109
+#: public/partials/template-frontend-realestate.php:116
+msgid "Loading..."
+msgstr "Chargement..."
+
+#: public/partials/template-frontend-0.php:135
+#: public/partials/template-frontend-1.php:97
+#: public/partials/template-frontend-2.php:154
+#: public/partials/template-frontend-deal.php:138
+#: public/partials/template-frontend-realestate.php:153
+msgid "Get Your Directions"
+msgstr "Get Your Directions"
+
+#: public/partials/template-frontend-0.php:138
+#: public/partials/template-frontend-1.php:100
+#: public/partials/template-frontend-2.php:157
+#: public/partials/template-frontend-deal.php:141
+#: public/partials/template-frontend-realestate.php:156
+msgid "From"
+msgstr "De"
+
+#: public/partials/template-frontend-0.php:142
+#: public/partials/template-frontend-1.php:104
+#: public/partials/template-frontend-2.php:161
+#: public/partials/template-frontend-deal.php:145
+#: public/partials/template-frontend-realestate.php:160
+msgid "To"
+msgstr "À"
+
+#: public/partials/template-frontend-0.php:143
+#: public/partials/template-frontend-1.php:105
+#: public/partials/template-frontend-2.php:162
+#: public/partials/template-frontend-realestate.php:161
+msgid "Prepopulated Destination Address"
+msgstr ""
+
+#: public/partials/template-frontend-0.php:146
+#: public/partials/template-frontend-1.php:108
+#: public/partials/template-frontend-2.php:165
+#: public/partials/template-frontend-deal.php:149
+#: public/partials/template-frontend-realestate.php:164
+msgid "Show Distance In"
+msgstr "Afficher Distance Dans"
+
+#: public/partials/template-frontend-0.php:151
+#: public/partials/template-frontend-1.php:113
+#: public/partials/template-frontend-2.php:170
+#: public/partials/template-frontend-realestate.php:169
+msgid "Mile"
+msgstr ""
+
+#: public/partials/template-frontend-0.php:155
+#: public/partials/template-frontend-1.php:117
+#: public/partials/template-frontend-2.php:174
+#: public/partials/template-frontend-deal.php:158
+#: public/partials/template-frontend-realestate.php:173
+msgid "GET DIRECTIONS"
+msgstr "OBTENIR DES DIRECTIONS"
+
+#: public/partials/template-frontend-0.php:168
+#: public/partials/template-frontend-1.php:130
+#: public/partials/template-frontend-2.php:189
+#: public/partials/template-frontend-deal.php:171
+#: public/partials/template-frontend-realestate.php:188
+msgid "LOCATE YOUR GEOPOSITION"
+msgstr "Localisez votre géoposition"
+
+#: public/partials/template-frontend-0.php:172
+#: public/partials/template-frontend-1.php:134
+#: public/partials/template-frontend-2.php:193
+#: public/partials/template-frontend-realestate.php:192
+msgid "Your Address"
+msgstr ""
+
+#: public/partials/template-frontend-0.php:175
+#: public/partials/template-frontend-1.php:137
+#: public/partials/template-frontend-2.php:196
+#: public/partials/template-frontend-deal.php:178
+#: public/partials/template-frontend-realestate.php:195
+msgid "LOCATE"
+msgstr "Localiser"
+
+#: public/partials/template-frontend-0.php:180
+#: public/partials/template-frontend-1.php:142
+#: public/partials/template-frontend-2.php:201
+#: public/partials/template-frontend-deal.php:183
+msgid "Use my location to find the closest Service Provider near me"
+msgstr ""
+"Utiliser mon emplacement pour trouver le fournisseur de services le plus "
+"près de moi"
+
+#: public/partials/template-frontend-0.php:183
+#: public/partials/template-frontend-1.php:145
+#: public/partials/template-frontend-2.php:204
+#: public/partials/template-frontend-deal.php:186
+#: public/partials/template-frontend-realestate.php:203
+msgid "USE LOCATION"
+msgstr "UTILISATION LOCATION"
+
+#: public/partials/template-frontend-2.php:142
+msgid "Find A Store"
+msgstr "Trouver un magasin"
+
+#: public/partials/template-frontend-deal.php:36
+msgid "Search Deals"
+msgstr "Rechercher"
+
+#: public/partials/template-frontend-deal.php:38
+msgid "Enter your zip/city/state"
+msgstr ""
+
+#: public/partials/template-frontend-realestate.php:141
+msgid "Search a Location"
+msgstr "Rechercher un emplacement"
+
+#: public/partials/template-frontend-realestate.php:200
+msgid "Use my location to get nearest properties available"
+msgstr ""
+"Utilisez mon emplacement pour obtenir les propriétés les plus proches "
+"disponibles"
+
+#: public/partials/template-frontend-realestate.php:224
+msgid "View More"
+msgstr "Afficher plus"
+
+#: public/partials/template-frontend-realestate.php:246
+msgid "Visit Time"
+msgstr "Temps de visite"
+
+#. Plugin Name of the plugin/theme
+msgid "Agile Store Locator"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://agilestorelocator.com"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Agile Store Locator (Pro Version 4.1.0) is a Premium Store Finder Plugin "
+"designed to offer you immediate access to all the best stores in your local "
+"area. It enables you to find the very best stores and their location thanks "
+"to the power of Google Maps."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "AGILELOGIX"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://agilestorelocator.com/"
+msgstr ""
+
+#~ msgid "Details"
+#~ msgstr "Détail"
