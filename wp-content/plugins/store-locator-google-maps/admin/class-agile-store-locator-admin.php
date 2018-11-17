@@ -294,11 +294,11 @@ class AgileStoreLocator_Admin {
 				'country'		=> $form_data['country'],
 				'is_disabled'	=> $form_data['is_disabled'],
 				'description_2'	=> $form_data['description_2'],
-				'logo_id'		=> $form_data['logo_id'],
+				// 'logo_id'		=> $form_data['logo_id'],
 				'marker_id'		=> $form_data['marker_id'],
 				/*'start_time'	=> $form_data['start_time'],
 				'end_time'		=> $form_data['end_time'],*/
-				'logo_id'		=> $form_data['logo_id'],
+				// 'logo_id'		=> $form_data['logo_id'],
 				'open_hours'	=> $form_data['open_hours'],
 				'ordr'			=> $form_data['ordr'],
 				/*
