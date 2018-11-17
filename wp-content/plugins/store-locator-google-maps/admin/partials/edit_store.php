@@ -195,6 +195,40 @@
 									</div>
 								</div>
 							</div>
+
+							<div class="col-md-12">
+								<div class="col-md-6">
+									<input type="hidden" name="data[logo_id]" value="1" class="logoidclass"/>
+									<div class="form-group">
+						           		<label class="col-sm-3 control-label" for="chk_enabled">Logo</label>
+										<div class="col-sm-6">
+			                                <select id="ddl-asl-logos">
+			                                	<?php foreach($logos as $t):?>
+										        <option value="<?php echo $t->id?>" data-imagesrc="<?php echo ASL_URL_PATH.'public/Logo/default.png';?>" data-description="&nbsp;"><?php echo $t->name;?></option>
+											    <?php endforeach; ?>
+										    </select>
+										</div>
+										<div class="col-sm-3">
+			                                <button type="button" class="btn btn-success" data-toggle="smodal" data-target="#addimagemodel">New Logo</button>
+			                            </div>
+									</div>
+								</div>
+								<div class="col-md-6">
+									<div class="form-group">
+						           		<label class="col-sm-3 control-label" for="chk_enabled">Marker</label>
+										<div class="col-sm-6">
+			                                <select id="ddl-asl-markers">
+			                                	<?php foreach($markers as $m):?>
+										        <option value="<?php echo $m->id?>" data-imagesrc="<?php echo ASL_URL_PATH.'public/icon/default.png';?>" data-description="&nbsp;"><?php echo $m->marker_name;?></option>
+											    <?php endforeach; ?>
+										    </select>
+										</div>
+										<div class="col-sm-3">
+			                                <button type="button" class="btn btn-success" data-toggle="smodal" data-target="#addimagemodel">New</button>
+			                            </div>
+									</div>
+								</div>
+							</div>
 	                        
 	                        <div class="col-md-12">
 								<div class="col-md-6">
