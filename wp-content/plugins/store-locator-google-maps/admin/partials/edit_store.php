@@ -198,20 +198,6 @@
 
 							<div class="col-md-12">
 								<div class="col-md-6">
-									<input type="hidden" name="data[logo_id]" value="<?php echo $storelogo[0]->id ?>" class="logoidclass"/>
-									<div class="form-group">
-						           		<label class="col-sm-3 control-label" for="chk_enabled">Logo</label>
-										<div class="col-sm-6">
-			                                <select id="ddl-asl-logos">
-			                                	<?php foreach($logos as $t):?>
-										        <option value="<?php echo $t->id?>" data-imagesrc="<?php echo ASL_URL_PATH.'public/Logo/'.$t->path;?>" data-description="&nbsp;"><?php echo $t->name;?></option>
-											    <?php endforeach; ?>
-										    </select>
-										</div>
-										<div class="col-sm-3">
-			                                <button type="button" class="btn btn-success" data-toggle="smodal" data-target="#addimagemodel">New Logo</button>
-			                            </div>
-									</div>
 								</div>
 								<div class="col-md-6">
 									<div class="form-group">

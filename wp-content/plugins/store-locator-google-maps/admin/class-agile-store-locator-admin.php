@@ -2481,7 +2481,7 @@ class AgileStoreLocator_Admin {
 		
 		$store = $store[0];
 
-		$storelogo = $wpdb->get_results("SELECT * FROM ".ASL_PREFIX."storelogos WHERE id = ".$store->logo_id);
+		// $storelogo = $wpdb->get_results("SELECT * FROM ".ASL_PREFIX."storelogos WHERE id = ".$store->logo_id);
 		
 
 		//api key
