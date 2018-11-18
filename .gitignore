@@ -81,6 +81,8 @@ wp-content/themes/blade-child/functions_backup*
 # track these mu-plugins, plugins, and themes
 # add your own entries here
 !wp-content/plugins/anandap-core/
+wp-content/plugins/anandap-core/creds.php
+wp-content/plugins/anandap-core/token.php
 !wp-content/plugins/authnet-cim-for-woo/
 !wp-content/plugins/woo-checkout-field-editor-pro/
 !wp-content/plugins/woocommerce-xero/

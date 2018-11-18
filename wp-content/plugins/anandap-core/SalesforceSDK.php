@@ -1,42 +1,17 @@
 <?php
 
+require_once('creds.php');
+
 class SalesforceSDK {
-
-	/* dev */
 	
-	// private $yourInstance = 'na40';
-	// private $client_id = '3MVG9i1HRpGLXp.rr5NrL7AxCC_g5Klf.h.zxML5Lw1dRc_ndae5fLFusRS0TlcjH3XWRL3hfclENG4CkVsAm';
-	// private $client_secret = '4036959497197072492';
-	// private $username = 'lance@shubout.com';
-	// private $password = 'Developer@2018UTydBAE3P1dLSuokm6LJgmi6';
-	// private $contact_field_id = 'Unique_Import_Id__c';
- //    private $base_url = "https://na40.salesforce.com";
-	
-
-	/* production */
-	
-	private $yourInstance = 'na40';
-	private $client_id = '3MVG9CEn_O3jvv0yFWfRjWvZ00r7kMm3yAL3JcQiAzgXDz3NzelQl0jEfe3GTrAsUQuBOJc9hxjeLR1DHOoj8';
-	private $client_secret = '1892914933810725936';
-	private $username = 'lance032017@gmail.com';
-	private $password = 'Developer@2017bNcP9rufUrtVDLybXRGXLC4G';
+	private $yourInstance = 'na50';
+	private $client_id = SALESFORCE_CLIENT_ID;
+	private $client_secret = SALESFORCE_CLIENT_SECRET;
+	private $username = SALESFORCE_USERNAME;
+	private $password = SALESFORCE_PASSWORD . SALESFORCE_SECRET_TOKEN;
 	private $contact_field_id = 'Unique_Import_Id__c';
     private $base_url = "https://anandahemp.my.salesforce.com";
-	
 
-	/* sandbox - partial */
-
-	// private $yourInstance = 'na40';
-	// private $client_id = '3MVG9CEn_O3jvv0yFWfRjWvZ00r7kMm3yAL3JcQiAzgXDz3NzelQl0jEfe3GTrAsUQuBOJc9hxjeLR1DHOoj8';
-	// private $client_secret = '1892914933810725936';
-	// private $username = 'lance032017@gmail.com.partial';
-	// private $password = 'Developer@2018tfYBERgFz8YwOHhJAGLRqoJc';
-	// private $contact_field_id = 'Unique_Import_Id__c';
- //    private $base_url = "https://anandahemp--partial.lightning.force.com/services/data/";
-	
-
-
-    // private $base_url = "https://anandahemp.my.salesforce.com/services/data/";
     private $token_url = "https://login.salesforce.com/services/oauth2/token";
     private $sandbox_token_url = "https://test.salesforce.com/services/oauth2/token";
 
@@ -47,10 +22,10 @@ class SalesforceSDK {
 	public function __construct( $sandbox = false, $debug = false ) {
 		if ($sandbox) {
 			$this->yourInstance = 'CS66';
-			$this->username = 'lance032017@gmail.com.partial';
-			$this->password = 'Developer@2018FDTtGc2DMw2NndLsxBVACOhY';
+			$this->username = SANDBOX_SALESFORCE_USERNAME;
+			$this->password = SANDBOX_SALESFORCE_PASSWORD . SANDBOX_SALESFORCE_SECRET_TOKEN;
 			$this->base_url = 'https://anandahemp--partial.cs66.my.salesforce.com';
-			$this->token_url = 'https://test.salesforce.com/services/oauth2/token';
+			$this->token_url = $this->sandbox_token_url;
 		}
 
 		if ($debug) {
@@ -58,7 +33,7 @@ class SalesforceSDK {
 		}
 		// $this->set_base_url();
 		
-		$this->authenticate();
+		// $this->authenticate();
 	}
 
 	public function set_base_url() {
@@ -73,7 +48,7 @@ class SalesforceSDK {
 	public function do_request($url, $options = []) {
 
 		$is_auth = $options['is_auth'] ?: false;
-	    $token = $this->get_token();
+	    $token = $is_auth ? '' : $this->get_token();
 	    $patch = $options['patch'] ?: false;
 	    $post = $options['post'] ?: false;
 	    $postData = $options['postData'] ?: '';
@@ -123,6 +98,9 @@ class SalesforceSDK {
 
 	public function authenticate() {
 
+		$this->printTime();
+		echo 'new token requested <br/>';
+
 	    $response = $this->do_request($this->token_url, ['is_auth' => true, 'post' => true, 'postData' => http_build_query([
 	            'grant_type' => 'password',
 	            'client_id' => $this->client_id,
@@ -134,6 +112,7 @@ class SalesforceSDK {
 
 	    $this->auth = $response;
 
+	    $_SESSION['SALESFORCE_API_TOKEN'] = $this->auth->access_token ?: '';
 	}
 
 	public function get_auth() {
@@ -141,7 +120,11 @@ class SalesforceSDK {
 	}
 
 	public function get_token() {
-		return isset($this->auth->access_token) ? $this->auth->access_token : '';
+		if (!isset($_SESSION['SALESFORCE_API_TOKEN']) || $_SESSION['SALESFORCE_API_TOKEN']=='') {
+			$this->authenticate();
+		}
+		// return isset($this->auth->access_token) ? $this->auth->access_token : '';
+		return $_SESSION['SALESFORCE_API_TOKEN'];
 	}
 
 	public function describe($table) {
