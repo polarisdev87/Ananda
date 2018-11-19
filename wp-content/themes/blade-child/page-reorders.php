@@ -74,8 +74,13 @@ if (!is_reorder()) {
 						display: block !important;
 					}
 					.product-section .add_to_cart_button {
-						width: 120px;
+						width: 150px;
 						margin: 0 auto;
+					}
+					.product-section .add_to_cart_button.loading span:before {
+					    content: "\f110";
+					    font: normal normal normal 14px/1 FontAwesome;
+					    margin-right: 4px;;
 					}
 					.added_to_cart {
 						display: none !important;
