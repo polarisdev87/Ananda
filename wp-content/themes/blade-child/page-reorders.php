@@ -73,6 +73,10 @@ if (!is_reorder()) {
 					.add_to_cart_button {
 						display: block !important;
 					}
+					.product-section .add_to_cart_button {
+						width: 120px;
+						margin: 0 auto;
+					}
 					.added_to_cart {
 						display: none !important;
 					}
@@ -119,6 +123,8 @@ if (!is_reorder()) {
 							min-height: 99px;
 						}
 					}
+
+
 
 					.invalid_state_popup_overlay {
     					background-color: rgba(255,255,255,0.90);
