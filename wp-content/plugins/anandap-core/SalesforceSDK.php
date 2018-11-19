@@ -480,6 +480,8 @@ class SalesforceSDK {
 
 	public function migrate_invoices($startsWith = '', $year = false) {
 
+		$this->authenticate();
+
 		$this->printTime();
 		echo ('_________ getting Accounts __________ <br/>');
 		$accounts = $this->get_all_accounts();
@@ -510,14 +512,15 @@ class SalesforceSDK {
         	$startsWith = [$startsWith];
         }
 
+        $invoice_ref_no = 1;
+        $line_item_ref_no = 1;
+        $tracking_category_ref_no = 1;
+
         foreach ($startsWith as $startsWithKeyword) {
 
 	        $page_no = 1;
 
 	        $account_ref_no = 1;
-	        $invoice_ref_no = 1;
-	        $line_item_ref_no = 1;
-	        $tracking_category_ref_no = 1;
 
 	        // $accounts_from_ext = [];
 
@@ -678,7 +681,7 @@ class SalesforceSDK {
 					                        'referenceId' => 'REF__LINE_ITEM_' . $line_item_ref_no++ . '_' . (string)$line_item->LineItemID,
 					                    ],
 					                    'AccountCode__c' => (string)$line_item->AccountCode,
-					                    'Description__c' => (string)$line_item->Description,
+					                    'Description__c' => substr((string)$line_item->Description, 0, 250),
 					                    'DiscountRate__c' => (string)$line_item->DiscountRate,
 					                    'ItemCode__c' => (string)$line_item->ItemCode,
 					                    'LineAmount__c' => (string)$line_item->LineAmount,
@@ -1282,6 +1285,10 @@ class SalesforceSDK {
 				'SubmissionStatusTrigger__c' => '1'
 			];
         	$response = $this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/' . (string)$data['ID'], ['post' => true, 'postData' => $updateData, 'patch' => true]);
+        	if (is_array($response) && $response[0]->errorCode) {
+        		$this->authenticate();
+        		$response = $this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/' . (string)$data['ID'], ['post' => true, 'postData' => $updateData, 'patch' => true]);
+        	}
 
 			return 'Successfully confirmed payment for ' . $data['ID'];
 		}
@@ -1639,8 +1646,18 @@ class SalesforceSDK {
 		$updateData = [
 			'Tracking_Number__c' => $tracking_number
 		];
-    	$this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/AE-' . $order_id, ['post' => true, 'postData' => $updateData, 'patch' => true]);
-    	$this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/WP-' . $order_id, ['post' => true, 'postData' => $updateData, 'patch' => true]);
+
+		$order = wc_get_order( $order_id );
+
+        $invoice_manager = new WC_XR_Invoice_Manager(new WC_XR_Settings());
+        $invoice = $invoice_manager->get_invoice_by_order($order);
+        $invoice_number = $invoice->get_invoice_number();
+
+    	$response = $this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/' . $invoice_number, ['post' => true, 'postData' => $updateData, 'patch' => true]);
+    	if (is_array($response) && $response[0]->errorCode) {
+    		$this->authenticate();
+    		$response = $this->do_request('/services/data/v20.0/sobjects/Ananda_Invoice__c/InvoiceNumber__c/' . $invoice_number, ['post' => true, 'postData' => $updateData, 'patch' => true]);
+    	}
 	}
 
 	public function get_shipstation_shipments($year = false, $orderNumber = '', $pageSize = 100, $page = 1) {

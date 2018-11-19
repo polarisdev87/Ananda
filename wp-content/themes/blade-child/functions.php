@@ -773,6 +773,12 @@ if (! wp_next_scheduled ( 'salesforce_retain_customers_hook' )) {
     wp_schedule_event(time(), 'salesforce_interval', 'salesforce_retain_customers_hook');
 }
 
+add_action('salesforce_retain_customers_hook', 'salesforce_token_reset');
+function salesforce_token_reset() {
+    $salesforce = new SalesforceSDK();
+    $salesforce->authenticate();
+}
+
 add_action('salesforce_retain_customers_hook', 'salesforce_retain_customers_exec');
 function salesforce_retain_customers_exec() {
 
@@ -1562,12 +1568,35 @@ function runOnInit() {
     }
 
     if (isset($_GET['salesforce'])) {
+        $available_commands = [
+            'authenticate',
+            'token',
+            'describe',
+            'optin_store',
+            'optout_store',
+            'mark_pet_store',
+            'unmark_pet_store',
+            'confirm_payment',
+            'check_missing_xero_invoices',
+            'check_fpn_orders',
+        ];
+        if (isset($_GET['debug']) && $_GET['debug']==1) {
+            // TODO : add some more available commands to the list
+            $available_commands[] = 'ping';
+        }
+        if (!in_array($_GET['salesforce'], $available_commands)) {
+            echo 'This command is not available on production mode: ' .  $_GET['salesforce'];
+            exit('');
+        }
         $salesforce = new SalesforceSDK(isset($_GET['env']) && $_GET['env']=='sandbox', isset($_GET['debug']) && $_GET['debug']==1);
 
         switch ($_GET['salesforce']) {
             case 'auth':
                 $auth = $salesforce->get_auth();
                 echo '<pre>', var_dump($auth), '</pre>';
+                break;
+            case 'authenticate':
+                $salesforce->authenticate();
                 break;
             case 'token':
                 $token = $salesforce->get_token();
@@ -1612,7 +1641,7 @@ function runOnInit() {
                 $salesforce->migrate_invoices($_GET['ID'] ?: '');
                 break;
             case 'update_invoices':
-                $salesforce->migrate_invoices(['WP-', 'AE-'], '2018');
+                $salesforce->migrate_invoices(['WP-', 'INV-', 'CN-', 'AE-', 'FPN-', 'TCG-', 'CPC-'], '2018');
                 // $salesforce->migrate_invoices('INV-', '2017');
                 // $salesforce->migrate_invoices('CN-', '2017');
                 // $salesforce->migrate_invoices('AE-', '2017');
