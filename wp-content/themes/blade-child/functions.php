@@ -1768,8 +1768,8 @@ function runOnInit() {
 add_filter( 'cron_schedules', 'schedule_salesforce_migration_interval' ); 
 function schedule_salesforce_migration_interval( $schedules ) {
     $schedules['salesforce_migration_interval'] = array(
-        'interval' => 60 * 60 * 2, // seconds
-        'display'  => esc_html__( 'Every 2 Hours' ),
+        'interval' => 60 * 30, // seconds
+        'display'  => esc_html__( 'Every 30 minutes' ),
     );
     return $schedules;
 }
