@@ -24,7 +24,6 @@ class WC_XR_Payment_Manager {
 		// Check if we need to send payments when they're completed automatically
 		if ( 'on' === $this->settings->get_option( 'send_payments' ) ) {
 			add_action( 'woocommerce_order_status_completed', array( $this, 'send_payment' ) );
-			add_action( 'woocommerce_order_status_processing', array( $this, 'send_payment' ) );
 			add_action( 'woocommerce_payment_complete', array( $this, 'send_payment' ) );
 		} else {
 			add_action( 'woocommerce_pre_payment_complete', array( $this, 'send_payment' ), 20 );
