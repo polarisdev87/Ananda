@@ -193,6 +193,36 @@
 
 			<!-- HEADER -->
 			<header id="grve-header" class="<?php echo esc_attr( $grve_header_class_string ); ?>" data-sticky="<?php echo esc_attr( $grve_header_sticky_type ); ?>" data-sticky-height="<?php echo esc_attr( $grve_header_sticky_height ); ?>" data-devices-sticky="<?php echo esc_attr( $grve_header_sticky_devices ); ?>">
+				<div class="thanksgiving-top-bar">
+					Happy Thanksgiving! Our offices will be closed Thursday and Friday. To avoid shipping delays, please order by 2pm Eastern on Wed., Nov. 21.
+				</div>
+				<style type="text/css">
+					.thanksgiving-top-bar {
+						background: #a3b1a2;
+						color: #fff;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						position: fixed;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 40px;
+						z-index: 9999;
+    					font-family: Montserrat;
+					    font-weight: 600;
+					    font-size: 13px;
+					}
+					#grve-header {
+						height: 130px;
+					}
+					#grve-main-header {
+						top: 40px;
+					}
+					#grve-responsive-header > .grve-wrapper {
+						top: 40px;
+					}
+				</style>
 				<div class="grve-wrapper clearfix">
 
 					<!-- Header -->
