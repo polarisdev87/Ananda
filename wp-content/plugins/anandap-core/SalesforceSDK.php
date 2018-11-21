@@ -1075,6 +1075,7 @@ class SalesforceSDK {
 		    $formatted = [
 		    	'is_disabled'	=> 0,
 		    	'marker_id' => 151,
+		    	'logo_id' => 4,
 		    ];
 			$wpdb->update(ASL_PREFIX.'stores', $formatted, ['id' => $data['StoreID']]);
 			
@@ -1096,6 +1097,7 @@ class SalesforceSDK {
 
 		    $formatted = [
 		    	'marker_id' => null,
+		    	'logo_id' => null,
 		    ];
 			$wpdb->update(ASL_PREFIX.'stores', $formatted, ['id' => $data['StoreID']]);
 			
