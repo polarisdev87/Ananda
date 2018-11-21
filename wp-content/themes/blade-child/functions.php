@@ -773,12 +773,6 @@ if (! wp_next_scheduled ( 'salesforce_retain_customers_hook' )) {
     wp_schedule_event(time(), 'salesforce_interval', 'salesforce_retain_customers_hook');
 }
 
-add_action('salesforce_retain_customers_hook', 'salesforce_token_reset');
-function salesforce_token_reset() {
-    $salesforce = new SalesforceSDK();
-    $salesforce->authenticate();
-}
-
 add_action('salesforce_retain_customers_hook', 'salesforce_retain_customers_exec');
 function salesforce_retain_customers_exec() {
 
