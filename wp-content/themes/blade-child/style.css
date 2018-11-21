@@ -315,3 +315,8 @@ abbr.required {
     text-transform: none !important;
 }
 
+/* pets logo */
+#asl-storelocator.asl-p-cont .item .thumb-a img {
+    width: auto !important;
+}
+
