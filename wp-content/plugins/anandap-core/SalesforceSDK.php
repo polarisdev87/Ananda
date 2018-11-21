@@ -113,6 +113,7 @@ class SalesforceSDK {
 	    $this->auth = $response;
 
 	    $_SESSION['SALESFORCE_API_TOKEN'] = $this->auth->access_token ?: '';
+	    $_SESSION['SALESFORCE_LAST_ACTIVITY'] = time();
 	}
 
 	public function get_auth() {
@@ -120,10 +121,12 @@ class SalesforceSDK {
 	}
 
 	public function get_token() {
+		if (!isset($_SESSION['SALESFORCE_LAST_ACTIVITY']) || $_SESSION['SALESFORCE_LAST_ACTIVITY']=='' || $_SESSION['SALESFORCE_LAST_ACTIVITY'] < time() - 60 * 5) {
+			$this->authenticate();
+		}
 		if (!isset($_SESSION['SALESFORCE_API_TOKEN']) || $_SESSION['SALESFORCE_API_TOKEN']=='') {
 			$this->authenticate();
 		}
-		// return isset($this->auth->access_token) ? $this->auth->access_token : '';
 		return $_SESSION['SALESFORCE_API_TOKEN'];
 	}
 
