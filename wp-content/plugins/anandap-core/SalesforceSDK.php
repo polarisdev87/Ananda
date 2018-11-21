@@ -127,6 +127,13 @@ class SalesforceSDK {
 		return $_SESSION['SALESFORCE_API_TOKEN'];
 	}
 
+	public function reset() {
+		$old_token = $_SESSION['SALESFORCE_API_TOKEN'];
+		$_SESSION['SALESFORCE_API_TOKEN'] = '';
+		unset($_SESSION['SALESFORCE_API_TOKEN']);
+		echo 'session cleared; old token was ' . $old_token;
+	}
+
 	public function describe($table) {
 		return $this->do_request('/services/data/v20.0/sobjects/' . $table . '/describe');
 	}

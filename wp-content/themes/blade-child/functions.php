@@ -1569,9 +1569,6 @@ function runOnInit() {
 
     if (isset($_GET['salesforce'])) {
         $available_commands = [
-            'authenticate',
-            'token',
-            'describe',
             'optin_store',
             'optout_store',
             'mark_pet_store',
@@ -1583,6 +1580,10 @@ function runOnInit() {
         if (isset($_GET['debug']) && $_GET['debug']==1) {
             // TODO : add some more available commands to the list
             $available_commands[] = 'ping';
+            $available_commands[] = 'reset';
+            $available_commands[] = 'authenticate';
+            $available_commands[] = 'token';
+            $available_commands[] = 'describe';
         }
         if (!in_array($_GET['salesforce'], $available_commands)) {
             echo 'This command is not available on production mode: ' .  $_GET['salesforce'];
@@ -1601,6 +1602,9 @@ function runOnInit() {
             case 'token':
                 $token = $salesforce->get_token();
                 echo '<pre>', var_dump($token), '</pre>';
+                break;
+            case 'reset':
+                $salesforce->reset();
                 break;
             case 'describe':
                 $response = $salesforce->describe($_GET['table']);
